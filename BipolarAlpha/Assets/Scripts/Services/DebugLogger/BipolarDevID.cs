@@ -5,12 +5,11 @@ using System.Collections;
 /// Bipolar Dev ID is a utility class used by Bipolar Console to determine which developer is currently running the software.
 /// Should never be versioned to the repository.
 /// </summary>
-// #ENGANA_TODO Would make more sense that this wasn't a class but an XML file loaded by BipolarConsole. Should be implemented as such down the line.
 public class BipolarDevID
 {
   // Change these variables for your current run definitions
-  private static Devs _iAm = Devs.ENGANA;
-  private static bool _seeAll = false;
+  private const Devs _iAm = Devs.ENGANA;
+  private const bool _seeAll = false;
 
 
   //-- Acessable properties
