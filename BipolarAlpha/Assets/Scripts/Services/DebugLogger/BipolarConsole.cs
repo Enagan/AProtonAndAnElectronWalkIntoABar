@@ -14,9 +14,6 @@ public enum Devs { ENGANA, LOUSADA, HUGO, IVO, RUI }
 /// </summary>
 public class BipolarConsole
 {
-  //--- Core Functions
-  //- private Log(Devs from, string message, Object objectSource = null)
-  //- public ExceptionLog(UnityException exception, Object objectSource = null)
   #region Core Functions
 
   /// Log <summary>
@@ -24,7 +21,7 @@ public class BipolarConsole
   ///      BipolarDevId is the same developer as "from" or if it has
   ///      enabled the "see all logs" option. Only visible in editor mode.
   /// </summary>
-  private static void Log(Devs from, string message, Object objectSource = null) 
+  private static void Log(Devs from, object message, Object objectSource = null) 
   {
 #if UNITY_EDITOR
     if (BipolarDevID.iAm == from || BipolarDevID.seeAll)
@@ -46,15 +43,11 @@ public class BipolarConsole
 
   #endregion
 
-
-  //--- Developer specific log
-  //- <DevName>Log(string message, Object objectSource = null)
-  //      Prints message as a specific developer
   #region Developer Specific Logs
   /// <summary>
   /// Write a message to the console as developer Pedro Engana
   /// </summary>
-  public static void EnganaLog(string message, Object objectSource = null)
+  public static void EnganaLog(object message, Object objectSource = null)
   {
     Log(Devs.ENGANA, message, objectSource);
   }
@@ -62,7 +55,7 @@ public class BipolarConsole
   /// <summary>
   /// Write a message to the console as developer Hugo Goncalves
   /// </summary>
-  public static void HugoLog(string message, Object objectSource = null)
+  public static void HugoLog(object message, Object objectSource = null)
   {
     Log(Devs.HUGO, message, objectSource);
   }
@@ -70,7 +63,7 @@ public class BipolarConsole
   /// <summary>
   /// Write a message to the console as developer Ivo Capelo
   /// </summary>
-  public static void IvoLog(string message, Object objectSource = null)
+  public static void IvoLog(object message, Object objectSource = null)
   {
     Log(Devs.IVO, message, objectSource);
   }
@@ -78,7 +71,7 @@ public class BipolarConsole
   /// <summary>
   /// Write a message to the console as developer Pedro Lousada
   /// </summary>
-  public static void LousadaLog(string message, Object objectSource = null)
+  public static void LousadaLog(object message, Object objectSource = null)
   {
     Log(Devs.LOUSADA, message, objectSource);
   }
@@ -86,7 +79,7 @@ public class BipolarConsole
   /// <summary>
   /// Write a message to the console as developer Rui Dias
   /// </summary>
-  public static void RuiLog(string message, Object objectSource = null)
+  public static void RuiLog(object message, Object objectSource = null)
   {
     Log(Devs.RUI, message, objectSource);
   }
@@ -94,7 +87,7 @@ public class BipolarConsole
   /// <summary>
   /// Write a message to the console which will be visible to all developers
   /// </summary>
-  public static void AllLog(string message)
+  public static void AllLog(object message)
   {
 #if UNITY_EDITOR
     Debug.Log("[ALL] " + message);
