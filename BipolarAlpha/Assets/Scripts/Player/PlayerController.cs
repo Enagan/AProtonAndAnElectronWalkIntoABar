@@ -205,18 +205,24 @@ public class PlayerController : MonoBehaviour
 
   /// <summary>
   /// Checks for player input and applies all logic regarding the translation of the player object
+  /// Parts of unitys' physics simulation is turned off, and those components are added manually
+  /// in the calculations of the players' movement
   /// </summary>
   private void ManageMovement()
   {
-    //Check which movement keys were pressed
+    //Check for the values in the Vertical and Horizontal Axis
+    //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
+    //Values range from 1 to -1
     float fowardMovement = Input.GetAxis("Vertical");
     float sideMovement = Input.GetAxis("Horizontal");
 
-    //Create velocity vector
+    //Create a local velocity vector 
+    //(with Z+ being the direction the camera is facing)
     Vector3 desiredVelocity = new Vector3(sideMovement, 0, fowardMovement);
+    //Transform the local vector into world coordinates
     desiredVelocity = rigidbody.transform.TransformDirection(desiredVelocity);
 
-    //If player is not airborne, apply drag to the X and Z axis
+    //If player is not airborne, apply friction to the X and Z axis
     if (!airborne)
     {
       rigidbody.velocity = new Vector3(rigidbody.velocity.x * 1 / (_floorFriction + 1), 
@@ -224,18 +230,20 @@ public class PlayerController : MonoBehaviour
                                         rigidbody.velocity.z * 1 / (_floorFriction + 1));
     }
 
-    //Apply Sliding if player is colliding with a wall surface and if the desired
-    //velocity vector point towards the wall
-    //If so, projects the desired velocity vector into the surface of the plane 
-    //the player is collising with, thus causing a sliding effect
+    //If player is colliding with a wall surface and if the desired
+    //velocity vector points towards the wall, project the 
+    //desired velocity vector into the surface of the plane 
+    //the player is colliding with, thus causing a sliding motion
+    //instead of being "stuck" on the wall
     if (collidingWithWall
       && Vector3.Angle(desiredVelocity, _samplePointOfCollidingSurface.normal) > 90f)
     {
       desiredVelocity = Vector3.Project(desiredVelocity, Vector3.Cross(_samplePointOfCollidingSurface.normal, Vector3.up).normalized);
+      //Apply friction from dragging along the wall, on top of floor friction
       desiredVelocity *= 1/(_wallFriction+1);
     }
 
-    //Applies calculated velocity adjusted for deltaTime and player acceleration
+    //Applies the previously calculated desired velocity adjusted for deltaTime and player acceleration
     desiredVelocity *= Time.deltaTime * _acceleration;
     rigidbody.AddForce(desiredVelocity, ForceMode.VelocityChange);
 
