@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
     {
       desiredVelocity = Vector3.Project(desiredVelocity, Vector3.Cross(_samplePointOfCollidingSurface.normal, Vector3.up).normalized);
       //Apply friction from dragging along the wall, on top of floor friction
-      desiredVelocity *= 1/(_wallFriction+1);
+      desiredVelocity *= 1 / (_wallFriction + 1);
     }
 
     //Applies the previously calculated desired velocity adjusted for deltaTime and player acceleration
