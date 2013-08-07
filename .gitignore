@@ -1,5 +1,5 @@
 #################
-## Unity
+## Bipolar Ignores
 #################
 [Ll]ibrary/
 [Tt]emp/
@@ -11,3 +11,5 @@
 *.sln
 *.suo
 *.stackdump
+Assets/Scripts/Services/DebugLogger/BipolarDevID.cs
+Assets/Scripts/Services/DebugLogger/BipolarDevID.meta
