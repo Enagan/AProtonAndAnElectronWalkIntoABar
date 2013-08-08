@@ -62,6 +62,16 @@ public class PlayerController : MonoBehaviour
   }
   #endregion
 
+  #region Player Children Entities
+
+  [SerializeField]
+  private PlayerMagnet _leftMagnet;
+  [SerializeField]
+  private PlayerMagnet _rightMagnet;
+
+  #endregion
+
+
   #region Unity MonoBehaviour Functions
 
   /// <summary>
@@ -72,8 +82,11 @@ public class PlayerController : MonoBehaviour
    Screen.lockCursor = true;
    if ((mainCamera = GameObject.Find("Camera")) == null)
      throw new BipolarExceptionComponentNotFound("Camera component not found");
-   //TestAbility
-   _usableAbilities.Add("Jump", new AbilityJump());
+
+   
+   //add initial abilities
+   instantiateAbilities();
+   
   }
 	
   /// <summary>
@@ -135,6 +148,23 @@ public class PlayerController : MonoBehaviour
   {
     _usableAbilities.Add(key, ability);
   }
+
+  #region Players' Private Methods
+
+  /// <summary>
+  /// Instanciates the usable abilities dictionary of the player.
+  /// Intended to be called during Start() MonoBehaviour method
+  /// Any starting ability must be added here
+  /// </summary>
+  private void instantiateAbilities()
+  {
+    Camera playerCamera = this.GetComponentInChildren<Camera>();
+
+    _usableAbilities.Add("Jump", new AbilityJump());
+    _usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
+  }
+    #endregion
   /// <summary>
   /// Removes the ability which can be activated with the specified key
   /// </summary>
@@ -196,7 +226,8 @@ public class PlayerController : MonoBehaviour
   {
     foreach(KeyValuePair<string,Ability> ability in _usableAbilities)
     {
-      if (Input.GetButtonDown(ability.Key))
+      // Uses the Input.GetButton method to read keys currently pressed, be careful due to its continuous reading
+      if (Input.GetButton(ability.Key))
       {
         ability.Value.Use(this);
       }
