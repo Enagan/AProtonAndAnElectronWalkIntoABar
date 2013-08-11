@@ -11,6 +11,8 @@ public class ServiceLocator
   // Variable references to available services/systems
   private static BaseSystem _baseSys = new BaseSystem();
 
+  private static SceneManager _sceneManager;
+
 
   //--- Access functions
   //- Get<SystemInterfaceName>()
@@ -22,6 +24,13 @@ public class ServiceLocator
   public static BaseSystem GetBaseSystem()
   {
       return _baseSys;
+  }
+  /// <summary>
+  /// Returns the current implementation of Scene Manager
+  /// </summary>
+  public static SceneManager GetSceneManager()
+  {
+    return _sceneManager;
   }
   #endregion
 
@@ -36,6 +45,13 @@ public class ServiceLocator
   public static void ProvideBaseSystem(BaseSystem baseSys)
   {
     _baseSys = baseSys;
+  }
+  /// <summary>
+  /// Changes the current implementation of Scene Manager to the specified/provided implementation
+  /// </summary>
+  public static void ProvideSceneMananger(SceneManager sceneMananger)
+  {
+    _sceneManager = sceneMananger;
   }
   #endregion
 }
