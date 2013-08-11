@@ -13,6 +13,8 @@ public class ServiceLocator
 
   private static SceneManager _sceneManager;
 
+  private static ResourceSystem _resourceSystem;
+
 
   //--- Access functions
   //- Get<SystemInterfaceName>()
@@ -31,6 +33,13 @@ public class ServiceLocator
   public static SceneManager GetSceneManager()
   {
     return _sceneManager;
+  }
+  /// <summary>
+  /// Returns the current implementation of Resource System
+  /// </summary>
+  public static ResourceSystem GetResourceSystem()
+  {
+    return _resourceSystem;
   }
   #endregion
 
@@ -52,6 +61,13 @@ public class ServiceLocator
   public static void ProvideSceneMananger(SceneManager sceneMananger)
   {
     _sceneManager = sceneMananger;
+  }
+  /// <summary>
+  /// Changes the current implementation of Resource System to the specified/provided implementation
+  /// </summary>
+  public static void ProvideResourceSystem(ResourceSystem resourceSystem)
+  {
+    _resourceSystem = resourceSystem;
   }
   #endregion
 }
