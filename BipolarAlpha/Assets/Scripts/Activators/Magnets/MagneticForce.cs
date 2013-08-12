@@ -14,9 +14,9 @@
 	
 	    //ToDo - Needs fine tuning // Change these 3 variables to const
 	    [SerializeField]
-	    private float LOW_FORCE_FACTOR = 2.0f;
+	    private float LOW_FORCE_FACTOR = 20.0f;
 	    [SerializeField]
-	    private float MEDIUM_FORCE_FACTOR = 20.0f;
+	    private float MEDIUM_FORCE_FACTOR = 50.0f;
 	    [SerializeField]
 	    private float HIGH_FORCE_FACTOR = 100.0f;
 	
@@ -122,10 +122,10 @@
 	        foreach (MagneticForce otherMagnet in _affectingMagnets) {
 	            if (_isActivated && otherMagnet.isActivated) {
 	                Vector3 forceDirection = otherMagnet.transform.position - this.transform.position;
-					if (otherMagnet.charge == this.charge) {
+                  forceDirection.Normalize();
+				        	if (otherMagnet.charge == this.charge) {
 	                    forceDirection = (-1) * forceDirection;
 	                }
-					
 	                float totalForce = getTotalForce(otherMagnet);
 	                magnetBody.AddForce(totalForce * forceDirection);
 	            }
@@ -166,7 +166,7 @@
                 break;
 			}
         }  
-        totalForce = (1 / (distance * distance ) * forceFactor);
+        totalForce = (1 / (distance  ) * forceFactor);
 		return totalForce;
       }
 	}
