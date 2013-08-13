@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class AbilityJump : Ability {
 
-  private float _jumpStrength = 200f;
+  private float _jumpStrength = 50f;
 
   /// <summary>
   /// JUMP!
