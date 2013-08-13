@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//Made By: Rui
+using UnityEngine;
 using System.Collections.Generic;
 
 public class ResourceSystem : MonoBehaviour

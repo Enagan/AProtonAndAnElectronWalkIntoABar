@@ -1,3 +1,4 @@
+//Made By: Engana
 using UnityEngine;
 using System.Collections;
 
@@ -72,6 +73,7 @@ public class RoomObjectDefinition
     }
   }
 
+  // Needed for Serialization
   public RoomObjectDefinition() { }
 
   public RoomObjectDefinition(string prefabPath, Vector3 position, Vector3 scale, Vector3 eulerAngles)

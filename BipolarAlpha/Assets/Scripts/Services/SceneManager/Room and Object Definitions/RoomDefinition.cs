@@ -1,3 +1,4 @@
+//Made By: Engana
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ public class RoomDefinition
   private string _roomName;
 
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
+
+  // Gateways are treated like special objects because they are in charge of transitioning between rooms
+  // Gateways possess the name of the room they link to
   private List<RoomObjectGatewayDefinition> _gateways = new List<RoomObjectGatewayDefinition>();
 
   /// <summary>
@@ -59,6 +63,7 @@ public class RoomDefinition
     }
   }
 
+  // Needed for Serialization to work
   public RoomDefinition() { }
 
   public RoomDefinition(string name) 

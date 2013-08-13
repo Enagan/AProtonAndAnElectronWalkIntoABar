@@ -1,3 +1,4 @@
+//Made By: Engana
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Collections.Generic;
 /// </summary>
 public class RoomFactory
 {
-  RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
+  private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
   #region [Public Methods] Room Creation and Destruction
   /// <summary>

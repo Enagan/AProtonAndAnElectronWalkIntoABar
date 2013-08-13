@@ -20,7 +20,7 @@ public class SceneManager : MonoBehaviour
 
   private RoomFactory _roomFactory = new RoomFactory();
 
-	void Start () 
+	private void Start () 
   {
     //TEST FUNCTIONS BEFORE XML DETAILING EXISTING ROOMS
     //Loads room definitions from files.

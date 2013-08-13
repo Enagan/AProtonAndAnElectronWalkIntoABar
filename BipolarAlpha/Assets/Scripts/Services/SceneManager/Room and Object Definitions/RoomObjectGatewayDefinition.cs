@@ -1,3 +1,4 @@
+//Made By: Engana
 using UnityEngine;
 using System.Collections;
 
@@ -23,6 +24,7 @@ public class RoomObjectGatewayDefinition : RoomObjectDefinition
     }
   }
 
+  // Needed for Serialization to work
   public RoomObjectGatewayDefinition() : base() { } 
 
   public RoomObjectGatewayDefinition(string roomConnectedTo, string prefabPath,

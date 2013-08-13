@@ -1,3 +1,4 @@
+//Made By: Engana
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,11 +14,10 @@ public class RoomDefinitionCreator : MonoBehaviour
 
   private List<GameObject> _objectsInRoom = new List<GameObject>();
 
-	void Start () 
+	private void Start () 
   {
     _objectsInRoom = ReadScene();
     RoomDefinition roomDef = createRoomDefinition(_roomName, _objectsInRoom);
-    BipolarConsole.EnganaLog(roomDef.objectsInRoom.Count);
     XMLSerializer.Serialize<RoomDefinition>(roomDef, "Assets/Levels/" + roomDef.roomName + ".lvl");
 	}
 
