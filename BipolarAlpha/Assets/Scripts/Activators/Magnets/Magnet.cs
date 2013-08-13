@@ -5,8 +5,8 @@ using System.Collections;
 /// The class Magnet is used to make the connection between an object and it's magnetic force
 /// All objects that have childs with the MagneticForce script on them must have this script aswell
 /// </summary>
-public class Magnet : MonoBehaviour{
-
+public class Magnet : MonoBehaviour
+{
     //
     // Might be usefull down the line
     //
@@ -35,12 +35,13 @@ public class Magnet : MonoBehaviour{
     }
     */
 
-    /// <summary>
-    /// Function used to add a MagneticForce that will affect this object
-    /// </summary>
-    public void AddMagneticForce(MagneticForce mf) {
-        MagneticForce myMagneticForce = (MagneticForce)this.transform.FindChild("Magnetism").GetComponent("MagneticForce");
-        myMagneticForce.AffectedBy(mf);
-    }
+  /// <summary>
+  /// Function used to add a MagneticForce that will affect this object
+  /// </summary>
+  public void AddMagneticForce(MagneticForce mf) 
+  {
+    MagneticForce myMagneticForce = (MagneticForce)this.transform.FindChild("Magnetism").GetComponent("MagneticForce");
+    myMagneticForce.AffectedBy(mf);
+  }
 
 }
