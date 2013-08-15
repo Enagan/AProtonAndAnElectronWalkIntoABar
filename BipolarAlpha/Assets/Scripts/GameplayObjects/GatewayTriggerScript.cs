@@ -29,7 +29,7 @@ public class GatewayTriggerScript : MonoBehaviour {
   {
     if (other.tag == "Player")
     {
-      ServiceLocator.GetSceneManager().SignalPlayerEnterRoom(transform.parent.name);
+      ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
     }
   }
 	

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 /// By using it's RoomFactory, the scene manager dynamically loads and uloads rooms as the player walks through the world
 /// Giving the illusion of an open world.
 /// </summary>
-public class SceneManager : MonoBehaviour 
+public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
 {
   // Adjacent rooms instancing depth
   [SerializeField]
@@ -37,6 +37,7 @@ public class SceneManager : MonoBehaviour
     _allRooms.Add(fifthRoom.roomName, fifthRoom);
 
     ServiceLocator.ProvideSceneMananger(this);
+    ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
 
     //instance the first room
     setActiveRoom("1stRoom");
@@ -125,17 +126,16 @@ public class SceneManager : MonoBehaviour
     }
   }
 
-  //TODO Should be replaced by event system
   /// <summary>
-  /// Notifies the scene manager class that a player 
-  /// has entered a new room
+  /// Interface Listner implementation
+  /// Receives the event when the player changes rooms, with the name
+  /// of the new room
   /// </summary>
-  public void SignalPlayerEnterRoom(string roomName)
+  public void ListenPlayerRoomChange(string newRoomName)
   {
-    if (roomName != _activeRoom.roomName)
+    if (newRoomName != _activeRoom.roomName)
     {
-      setActiveRoom(roomName);
+      setActiveRoom(newRoomName);
     }
   }
-
 }

@@ -15,6 +15,8 @@ public class ServiceLocator
 
   private static ResourceSystem _resourceSystem;
 
+  private static BipolarEventHandlerSystem _eventHandlerSystem = new BipolarEventHandlerSystem();
+
 
   //--- Access functions
   //- Get<SystemInterfaceName>()
@@ -40,6 +42,14 @@ public class ServiceLocator
   public static ResourceSystem GetResourceSystem()
   {
     return _resourceSystem;
+  }
+
+  /// <summary>
+  /// Returns the current implementation of Event Handler System
+  /// </summary>
+  public static BipolarEventHandlerSystem GetEventHandlerSystem()
+  {
+    return _eventHandlerSystem;
   }
   #endregion
 
@@ -68,6 +78,14 @@ public class ServiceLocator
   public static void ProvideResourceSystem(ResourceSystem resourceSystem)
   {
     _resourceSystem = resourceSystem;
+  }
+
+  /// <summary>
+  /// Changes the current implementation of Event Handler to the specified/provided implementation
+  /// </summary>
+  public static void ProvideEventHandlerSystem(BipolarEventHandlerSystem eventHandlerSystem)
+  {
+    _eventHandlerSystem = eventHandlerSystem;
   }
   #endregion
 }
