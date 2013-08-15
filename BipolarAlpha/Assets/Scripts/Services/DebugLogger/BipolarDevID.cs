@@ -9,8 +9,8 @@ using System.Collections;
 public class BipolarDevID
 {
   // Change these variables for your current run definitions
-  private const Devs _iAm = Devs.IVO;
-  private const bool _seeAll = false;
+  private const Devs _iAm = Devs.ENGANA;
+  private const bool _seeAll = true;
 
 
   //-- Acessable properties
