@@ -51,7 +51,13 @@ public class MagneticForce : MonoBehaviour, Activator
   public bool isActivated
   {
     get { return _isActivated; }
-    set { _isActivated = value;}
+    set 
+    { 
+	  if(_isActivated)
+	    NoLongerAffectingMagnets();
+	  _isActivated = value;
+	}
+		
   }
 
   public List<MagneticForce> affectingMagnets
@@ -81,8 +87,12 @@ public class MagneticForce : MonoBehaviour, Activator
     _isActivated = true;
     }
 
-  void Activator.Deactivate(){
-    _isActivated = false;
+  void Activator.Deactivate()
+  {
+    if(_isActivated)
+			NoLongerAffectingMagnets();
+	_isActivated = false;
+	
   }
 
   /// <summary>
@@ -107,7 +117,16 @@ public class MagneticForce : MonoBehaviour, Activator
 
     }
   }
+ 
+  public void NoLongerAffectingMagnets ()
+  {
+	foreach (MagneticForce m in _affectingMagnets) {
+	  m.NoLongerAffectedBy(this);
+      
 
+    }
+	_affectingMagnets.Clear();	
+  }
 
   public void OnTriggerEnter(Collider other)
   {
@@ -125,6 +144,7 @@ public class MagneticForce : MonoBehaviour, Activator
   void Update()
   {
     ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
+	
   }
 
   /// <summary>
@@ -145,6 +165,7 @@ public class MagneticForce : MonoBehaviour, Activator
    }
 
   }
+	
   
   /// <summary>
   /// Calculates the totalForce of two magnet's interactions given the otherMagneticForce
