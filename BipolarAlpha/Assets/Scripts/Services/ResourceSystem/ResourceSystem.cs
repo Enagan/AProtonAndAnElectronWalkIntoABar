@@ -1,5 +1,4 @@
-﻿//Made By: Rui
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class ResourceSystem : MonoBehaviour
@@ -18,7 +17,7 @@ public class ResourceSystem : MonoBehaviour
   /// Adds a new resource to the dictionary. Given a path name to an existing object, it creates a new instance of that object
   /// and adds the instance to a new list. It then adds the pair, consisting of the path name and the list, to the dictionary.
   /// </summary>
-  public GameObject AddNewResource(string pathName)
+  private GameObject AddNewResource(string pathName)
   {
     List<GameObject> newPrefabList = new List<GameObject>();
 
@@ -45,23 +44,25 @@ public class ResourceSystem : MonoBehaviour
   #endregion
 
 
-  //-- Add new instance
-  //- AddInstance(string pathName, GameObject prefabInstance)
-  // Adds a new instance of an object to the respective (path name, instance list) pair in the dictionary
-  #region Add Instance
+  //-- Reuse Resource
+  //- ReuseResource(string pathName, GameObject prefabInstance)
+  // Stores an instance of an object in the respective (path name, instance list) pair in the dictionary for later reuse
+  #region Reuse Resource
   /// <summary>
-  /// Adds a new prefabInstance to the list of instances belonging to pathName in the dictionary , if pathName already exists
-  /// in the dictionary. Otherwise, it adds a new (path name, instance list) pair to the dictionary.
+  /// Stores a prefabInstance, for later reuse, to the list of instances belonging to pathName in the dictionary,
+  /// if pathName already exists in the dictionary. Otherwise, it adds a new (path name, instance list) pair to the dictionary.
   /// </summary>
-  public GameObject AddInstance(string pathName, GameObject prefabInstance) 
+  private GameObject ReuseResource(string pathName, GameObject prefabInstance) 
   {
     List<GameObject> instanceList = new List<GameObject>();
+
+    prefabInstance.SetActive(false);
 
     if (_availableResources.ContainsKey(pathName))
     {
       // Obtains the resource (instance list) stored in the dictionary
       _availableResources.TryGetValue(pathName, out instanceList);
-      // Adds the new instance to the list in the dictionary
+      // Adds the instance to the list in the dictionary
       instanceList.Add(prefabInstance);
     }
     else
@@ -77,167 +78,85 @@ public class ResourceSystem : MonoBehaviour
 
 
   //-- Instatiate object
-  //- InactiveInstanceOf(string pathName)
-  //- InactiveInstanceOf(string pathName, Vector3 position, Quaternion rotation)
-  //- ActiveInstanceOf(string pathName)
-  //- ActiveInstanceOf(string pathName, Vector3 position, Quaternion rotation)
-  // Creates a new instance of the specified object
+  //- public InstanceOf(string pathName, 
+  //                    (optional) Vector3 position, 
+  //                    (optional) Quaternion rotation,
+  //                    (optional) bool active) 
+  // Activates an inactive instance, or creates a new instance if there are no inactive instances, of the specified object
   #region Object Instantiation
   /// <summary>
-  /// Creates a new (inactive) instance of a given object (located on pathName) and stores it in the dictionary.
-  /// If the object does not yet exist in the dictionary, the object is added as a new resource.
+  /// Activates an inactive instance of the specified object and returns it. It can also return an inactive instance,
+  /// if the caller speficies it. In the case that there are no inactive instances, a new instance is created.
   /// </summary>
-  public GameObject InactiveInstanceOf(string pathName)
+  /// <param name="active">(Optional) Defines if the requested object should be visible, or not. 
+  /// It is visible(active = true) by default, if the parameter is not specified.</param>
+  public GameObject InstanceOf(string pathName, 
+                              Vector3 position = default(Vector3), 
+                              Quaternion rotation = default(Quaternion),
+                              bool active = true) 
   {
-    List<GameObject> instanceList;
-    GameObject newInstance;
+    // Obtains an instance of the requested object
+    GameObject prefabInstance = SetSingleActive(pathName, position, rotation);
+    // Ensures the requested object is visible or not, according to the caller's request
+    prefabInstance.SetActive(active);
 
-    if (_availableResources.ContainsKey(pathName)) 
-    {
-      // Obtains the resource (instance list) stored in the dictionary
-      _availableResources.TryGetValue(pathName, out instanceList);
-      GameObject prefabInstance = instanceList[0] as GameObject;
-
-      // Creates a new instance of the requested object
-      newInstance = GameObject.Instantiate(prefabInstance) as GameObject;
-
-      // Adds the new instance to the list in the dictionary
-      instanceList.Add(newInstance);
-    }
-    else 
-    {
-      // Adds the requested object to the dictionary as a new resource
-      newInstance = AddNewResource(pathName);
-    }
-
-    newInstance.SetActive(false);
-
-    return newInstance;
-  }
-
-  /// <summary>
-  /// Creates a new (inactive) instance of a given object (located on pathName) in a given position and with a given rotation, 
-  /// and stores it in the dictionary.
-  /// </summary>
-  public GameObject InactiveInstanceOf(string pathName, Vector3 position, Quaternion rotation) 
-  {
-    List<GameObject> instanceList;
-    GameObject newInstance;
-
-    if (_availableResources.ContainsKey(pathName))
-    {
-      // Obtains the resource (instance list) stored in the dictionary
-      _availableResources.TryGetValue(pathName, out instanceList);
-      GameObject prefabInstance = instanceList[0] as GameObject;
-
-      // Creates a new instance of the requested object
-      newInstance = GameObject.Instantiate(prefabInstance, position, rotation) as GameObject;
-
-      // Adds the new instance to the list in the dictionary
-      instanceList.Add(newInstance);
-    }
-    else
-    {
-      // Loads the requested object from the resources
-      GameObject prefab = Resources.Load(pathName, typeof(GameObject)) as GameObject;
-
-      // Creates a new instance of the requested object
-      newInstance = GameObject.Instantiate(prefab, position, rotation) as GameObject;
-      instanceList = new List<GameObject>();
-      instanceList.Add(newInstance);
-
-      // Adds a new (path name, instance list) pair to the dictionary (creates a new resource)
-      _availableResources.Add(pathName, instanceList);
-    }
-
-    newInstance.SetActive(false);
-
-    return newInstance;  
-  }
-
-  /// <summary>
-  /// Creates a new (active) instance of a given object (located on pathName) and stores it in the dictionary.
-  /// If the object does not yet exist in the dictionary, the object is added as a new resource.
-  /// </summary>
-  public GameObject ActiveInstanceOf(string pathName)
-  {
-    List<GameObject> instanceList;
-    GameObject newInstance;
-
-    if (_availableResources.ContainsKey(pathName))
-    {
-      // Obtains the resource (instance list) stored in the dictionary
-      _availableResources.TryGetValue(pathName, out instanceList);
-      GameObject prefabInstance = instanceList[0] as GameObject;
-
-      // Creates a new instance of the requested object
-      newInstance = GameObject.Instantiate(prefabInstance) as GameObject;
-
-      // Adds the new instance to the list in the dictionary
-      instanceList.Add(newInstance);
-    }
-    else
-    {
-      // Adds the requested object to the dictionary as a new resource
-      newInstance = AddNewResource(pathName);
-    }
-
-    newInstance.SetActive(true);
-
-    return newInstance;
-  }
-
-  /// <summary>
-  /// Creates a new (active) instance of a given object (located on pathName) in a given position and with a given rotation, 
-  /// and stores it in the dictionary.
-  /// </summary>
-  public GameObject ActiveInstanceOf(string pathName, Vector3 position, Quaternion rotation)
-  {
-    List<GameObject> instanceList;
-    GameObject newInstance;
-
-    if (_availableResources.ContainsKey(pathName))
-    {
-      // Obtains the resource (instance list) stored in the dictionary
-      _availableResources.TryGetValue(pathName, out instanceList);
-      GameObject prefabInstance = instanceList[0] as GameObject;
-
-      // Creates a new instance of the requested object
-      newInstance = GameObject.Instantiate(prefabInstance, position, rotation) as GameObject;
-
-      // Adds the new instance to the list in the dictionary
-      instanceList.Add(newInstance);
-    }
-    else
-    {
-      // Loads the requested object from the resources
-      GameObject prefab = Resources.Load(pathName, typeof(GameObject)) as GameObject;
-
-      // Creates a new instance of the requested object
-      newInstance = GameObject.Instantiate(prefab, position, rotation) as GameObject;
-      instanceList = new List<GameObject>();
-      instanceList.Add(newInstance);
-
-      // Adds a new (path name, instance list) pair to the dictionary (creates a new resource)
-      _availableResources.Add(pathName, instanceList);
-    }
-
-    newInstance.SetActive(true);
-
-    return newInstance;
+    return prefabInstance;
   }
   #endregion
 
 
-  //-- Deactivate object instances
-  //- SetSingleInactive(string pathName, GameObject Instance)
-  //- SetInactive(string pathName)
-  //- SetAllInactive()
-  #region Deactivate Object Instances
+  //-- Object instances activation
+  //- SetSingleActive(string pathName, Vector3 position, Quaternion rotation)
+  //- SetSingleInactive(string pathName, GameObject instance)
+  //- SetAllActive(bool active)
+  #region Object Instances Activation
+  /// <summary>
+  /// Sets a single instance of a given object as active, and returns that instance.
+  /// If there isn't an available instance in the dictionary, it creates another.
+  /// </summary>
+  private GameObject SetSingleActive(string pathName, 
+                                  Vector3 position = default(Vector3), 
+                                  Quaternion rotation = default(Quaternion))
+  {
+    List<GameObject> prefabList;
+
+    // Confirms the dictionary contains the requested resource
+    if (_availableResources.ContainsKey(pathName))
+    {
+      // Obtains the resource (instance list) stored in the dictionary
+      _availableResources.TryGetValue(pathName, out prefabList);
+
+      foreach (GameObject prefab in prefabList)
+      {
+        if (!prefab.activeSelf)
+        {
+          // Activates an instance
+          prefab.SetActive(true);
+          prefabList.Remove(prefab);
+          // Returns the activated instance
+          return prefab;
+        }
+      }
+    }
+    else
+    {
+      // In case the dictionary does not have the requested resource, it creates a new one
+      AddNewResource(pathName);
+    }
+
+    // Creates a new instance if there no available instances in the dictionary
+    GameObject prefabObj = Resources.Load(pathName, typeof(GameObject)) as GameObject;
+    GameObject newInstance = GameObject.Instantiate(prefabObj) as GameObject;
+    //prefabList.Add(newInstance); -- might not be required
+    newInstance.SetActive(true);
+
+    return newInstance;
+  }
+
   /// <summary>
   /// Sets a single instance of a given object as inactive.
   /// </summary>
-  public void SetSingleInactive(string pathName, GameObject instance)
+  private void SetSingleInactive(string pathName, GameObject instance)
   {
     List<GameObject> prefabList;
 
@@ -254,104 +173,18 @@ public class ResourceSystem : MonoBehaviour
       }
     }
   }
-  
-  /// <summary>
-  /// Sets every instance of a given object as inactive.
-  /// </summary>
-  public void SetInactive(string pathName)
-  {
-    List<GameObject> prefabList;
-
-    // Obtains the resource (instance list) stored in the dictionary
-    _availableResources.TryGetValue(pathName, out prefabList);
-
-    foreach(GameObject prefab in prefabList)
-    {
-      // Deactivates an instance
-      prefab.SetActive(false);
-    }
-  }
 
   /// <summary>
-  /// Sets all the instances of each object as inactive.
+  /// Sets all the instances of each object as inactive (default) or active.
   /// </summary>
-  public void SetAllInactive()
-  {
-    foreach(List<GameObject> prefabList in _availableResources.Values)
-    {
-      foreach (GameObject prefab in prefabList) 
-      {
-        // Deactivates an instance
-        prefab.SetActive(false);
-      }
-    }
-  }
-  #endregion
-
-
-  //-- Activate object instances
-  //- SetSingleActive(string pathName)
-  //- SetActive(string pathName)
-  //- SetAllActive()
-  #region Activate Object Instances
-  /// <summary>
-  /// Sets a single instance of a given object as active, and returns that instance.
-  /// If there isn't an available instance in the dictionary, it creates another.
-  /// </summary>
-  public GameObject SetSingleActive(string pathName)
-  {
-    List<GameObject> prefabList;
-
-    // Obtains the resource (instance list) stored in the dictionary
-    _availableResources.TryGetValue(pathName, out prefabList);
-
-    foreach (GameObject prefab in prefabList)
-    {
-      if (!prefab.activeSelf) 
-      {
-        // Activates an instance
-        prefab.SetActive(true);
-        // Returns the activated instance
-        return prefab;
-      }
-    }
-
-    // Creates a new instance if there no available instances in the dictionary
-    GameObject newInstance = GameObject.Instantiate(prefabList[0]) as GameObject;
-    prefabList.Add(newInstance);
-    newInstance.SetActive(true);
-
-    return newInstance;
-  }
-
-  /// <summary>
-  /// Sets every instance of a given object as active.
-  /// </summary>
-  public void SetActive(string pathName)
-  {
-    List<GameObject> prefabList;
-
-    // Obtains the resource (instance list) stored in the dictionary
-    _availableResources.TryGetValue(pathName, out prefabList);
-
-    foreach (GameObject prefab in prefabList)
-    {
-      // Activates an instance
-      prefab.SetActive(true);
-    }
-  }
-
-  /// <summary>
-  /// Sets all the instances of each object as active.
-  /// </summary>
-  public void SetAllActive()
+  private void SetAllActive(bool active = false)
   {
     foreach (List<GameObject> prefabList in _availableResources.Values)
     {
       foreach (GameObject prefab in prefabList)
       {
         // Activates an instance
-        prefab.SetActive(true);
+        prefab.SetActive(active);
       }
     }
   }
@@ -363,7 +196,10 @@ public class ResourceSystem : MonoBehaviour
   #region Instance Creating
   void Update()
   {
+    GameObject prefab;
     GameObject newInstance;
+
+    SetAllActive(false);
 
     foreach(KeyValuePair<string, List<GameObject>> instancePair in _availableResources)
     {
@@ -371,7 +207,8 @@ public class ResourceSystem : MonoBehaviour
       if(instancePair.Value.Count < INSTANCE_LIMIT)
       {
         // Creates a new instance
-        newInstance = GameObject.Instantiate(instancePair.Value[0]) as GameObject;
+        prefab = Resources.Load(instancePair.Key, typeof(GameObject)) as GameObject;
+        newInstance = GameObject.Instantiate(prefab) as GameObject;
 
         // Adds the new instance to the list of instances of an object, stored in the dictionary
         instancePair.Value.Add(newInstance);
