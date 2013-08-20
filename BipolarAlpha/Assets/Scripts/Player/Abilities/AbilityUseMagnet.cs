@@ -51,7 +51,6 @@ public class AbilityUseMagnet : Ability
   public void KeyUp()
   {
     _playerMagnet.isActivated = false;
-    _playerMagnet.NoLongerAffectingMagnets();
   }
 
   public void KeyDown()

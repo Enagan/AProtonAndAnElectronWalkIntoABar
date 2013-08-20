@@ -54,7 +54,7 @@ public class MagneticForce : MonoBehaviour, Activator
     set 
     { 
 	  if(_isActivated)
-	    NoLongerAffectingMagnets();
+	    NoLongerAffectingMagnets();    
 	  _isActivated = value;
 	}
 		
