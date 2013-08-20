@@ -20,4 +20,7 @@ public class AbilityJump : Ability {
     }
   }
 
+  public void KeyUp() { }
+
+  public void KeyDown() { }
 }

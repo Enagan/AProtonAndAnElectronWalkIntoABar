@@ -36,9 +36,6 @@ public class AbilityUseMagnet : Ability
     /// </summary> 
   public void Use(PlayerController caller)
   {
-    //Activate Magnet
-    BipolarConsole.IvoLog("AbilityUseMagnet Activated");
-    _playerMagnet.isActivated=true;
 
     //Does this every Update when pressing the ability button
     MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.forward);
@@ -48,9 +45,17 @@ public class AbilityUseMagnet : Ability
       force.ApplyOtherMagnetsForces(_player.rigidbody);
 
     }
-
-    //Deactivate Magnet
-    _playerMagnet.isActivated=false;
 	
+  }
+
+  public void KeyUp()
+  {
+    _playerMagnet.isActivated = false;
+    _playerMagnet.NoLongerAffectingMagnets();
+  }
+
+  public void KeyDown()
+  {
+    _playerMagnet.isActivated = true;
   }
 }

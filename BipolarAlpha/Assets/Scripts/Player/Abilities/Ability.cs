@@ -13,4 +13,14 @@ public interface Ability{
   /// </summary>
   void Use(PlayerController caller);
 	
+  /// <summary>
+  /// The key that activates the ability has been pressed down
+  /// </summary>
+  void KeyDown();
+
+  /// <summary>
+  /// The key that activates the ability has been lifted up
+  /// </summary>
+  void KeyUp();
+
 }

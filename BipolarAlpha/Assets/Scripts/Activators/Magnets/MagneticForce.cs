@@ -117,13 +117,30 @@ public class MagneticForce : MonoBehaviour, Activator
 
     }
   }
- 
+
+  /// <summary>
+  /// Checks if magnet is already being influenced by a certain MagneticForce
+  /// </summary>
+  public bool IsAlreadyAffectedBy(MagneticForce otherMagnet)
+  {
+    foreach (MagneticForce m in _affectingMagnets)
+    {
+      float aux = Vector3.Distance(otherMagnet.transform.position, m.transform.position);
+      if (aux < 0.5f)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// <summary>
+  /// Stops all MagneticForce influences to and from this magnet
+  /// </summary>
   public void NoLongerAffectingMagnets ()
   {
 	foreach (MagneticForce m in _affectingMagnets) {
 	  m.NoLongerAffectedBy(this);
-      
-
     }
 	_affectingMagnets.Clear();	
   }

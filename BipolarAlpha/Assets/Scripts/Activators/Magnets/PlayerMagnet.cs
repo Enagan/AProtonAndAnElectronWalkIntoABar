@@ -20,10 +20,14 @@ public class PlayerMagnet : MagneticForce
     {
       Magnet otherMagnet = (Magnet) hit.collider.gameObject.GetComponent("Magnet");
       Transform otherTransform = hit.collider.gameObject.transform;
-      MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");     
-      
-      otherMagnet.AddMagneticForce(this);
-      this.AffectedBy(otherMagneticForce);
+      MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
+
+      if (!IsAlreadyAffectedBy(otherMagneticForce))
+      {
+        BipolarConsole.LousadaLog("not affected");
+        otherMagnet.AddMagneticForce(this);
+        this.AffectedBy(otherMagneticForce);
+      }
       return this; // leave handling for the ability
     }
     return null; //Maybe change this

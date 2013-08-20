@@ -226,6 +226,19 @@ public class PlayerController : MonoBehaviour
   {
     foreach(KeyValuePair<string,Ability> ability in _usableAbilities)
     {
+
+      if (Input.GetButtonUp(ability.Key))
+      {
+        ability.Value.KeyUp();
+        continue;
+      }
+
+      if (Input.GetButtonDown(ability.Key))
+      {
+        ability.Value.KeyDown();
+        continue;
+      }
+
       // Uses the Input.GetButton method to read keys currently pressed, be careful due to its continuous reading
       if (Input.GetButton(ability.Key))
       {
