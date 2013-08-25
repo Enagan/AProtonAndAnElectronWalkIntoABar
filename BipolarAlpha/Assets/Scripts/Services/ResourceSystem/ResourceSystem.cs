@@ -191,9 +191,15 @@ public class ResourceSystem : MonoBehaviour
   #endregion
 
 
-  //-- Create new instances
-  // Uses the function Update, from Unity's class MonoBehaviour, to create new object instances dinamically
+  //-- Unity Monobehaviour Functions
+  // Start to connect the resource system to the Service Locator
+  // Update, from Unity's class MonoBehaviour, to create new object instances dinamically
   #region Instance Creating
+  void Start()
+  {
+    ServiceLocator.ProvideResourceSystem(this);
+  }
+
   void Update()
   {
     GameObject prefab;

@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Enum designed to be used only inside the system to ease in archiving and registring listners
+/// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -14,6 +14,7 @@ enum BipolarEvent { PlayerRoomChange }
 /// </summary>
 public class BipolarEventHandlerSystem
 {
+  // Dictionary to contains lists of objects for a type of event
   Dictionary<BipolarEvent, List<object>> _listners = new Dictionary<BipolarEvent, List<object>>();
 
   #region Register Listners
@@ -24,6 +25,14 @@ public class BipolarEventHandlerSystem
   public void RegisterPlayerRoomChangeListner(IPlayerRoomChangeListner listner)
   {
     RegisterEventListner(BipolarEvent.PlayerRoomChange, listner);
+  }
+
+  /// <summary>
+  /// Registers a new listner for Object Room Change Events
+  /// </summary>
+  public void RegisterObjectRoomChangeListner(IObjectRoomChangeListner listner)
+  {
+    RegisterEventListner(BipolarEvent.ObjectRoomChange, listner);
   }
 
   /// <summary>
@@ -46,10 +55,20 @@ public class BipolarEventHandlerSystem
   /// </summary>
   public void SendPlayerRoomChangeEvent(string newRoomName)
   {
-    BipolarConsole.EnganaLog("BroadcastingRoomChange");
     foreach (IPlayerRoomChangeListner listner in _listners[BipolarEvent.PlayerRoomChange])
     {
       listner.ListenPlayerRoomChange(newRoomName);
+    }
+  }
+
+  /// <summary>
+  /// Sends an Object Room Change Event, should receive the previous and new room's name as well as the object that transitioned
+  /// </summary>
+  public void SendObjectRoomChangeEvent(string prevRoomName, string newRoomName, GameObject objectPastDoor)
+  {
+    foreach (IObjectRoomChangeListner listner in _listners[BipolarEvent.ObjectRoomChange])
+    {
+      listner.ListenObjectRoomChange(prevRoomName, newRoomName, objectPastDoor);
     }
   }
   #endregion

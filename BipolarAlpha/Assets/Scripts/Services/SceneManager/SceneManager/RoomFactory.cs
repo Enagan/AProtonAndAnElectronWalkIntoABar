@@ -12,7 +12,7 @@ public class RoomFactory
 {
   private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
-  #region [Public Methods] Room Creation and Destruction
+  #region [Public Methods] Room Creation, Destruction and Definition Update
   /// <summary>
   /// Instances a new room. In case the room is already instanced, the function does nothing.
   /// If a "from" room is provided, the new room will be placed connected to the from room
@@ -34,19 +34,68 @@ public class RoomFactory
   }
 
   /// <summary>
+  /// Updates the definition of a specific room, applying the current state
+  /// of all objects to the current definition
+  /// </summary>
+  /// ENGANA@TODO savestate, as well as velocity and torque
+  public RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
+  {
+    if (_instancedObjects.RoomIsRegistered(roomDef))
+    {
+      List<RoomObjectDefinition> updatedDefs = new List<RoomObjectDefinition>();
+      List<RoomObjectGatewayDefinition> updatedGates= new List<RoomObjectGatewayDefinition>();
+      foreach (KeyValuePair<RoomObjectDefinition, GameObject> objs in _instancedObjects.GetAllGameObjectsFromRoom(roomDef))
+      {
+          objs.Key.position = objs.Value.transform.position;
+          objs.Key.eulerAngles = objs.Value.transform.eulerAngles;
+          if (!(objs.Key is RoomObjectGatewayDefinition))
+          {
+            updatedDefs.Add(objs.Key);
+          }
+          else
+          {
+            updatedGates.Add(objs.Key as RoomObjectGatewayDefinition);
+          }
+      }
+
+      roomDef.objectsInRoom = updatedDefs;
+      roomDef.gateways = updatedGates;
+
+      return roomDef;
+    }
+    else
+    {
+      BipolarConsole.AllLog("Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
+      return null;
+    }
+  }
+
+  /// <summary>
+  /// Changes an objects parent room in the current registry while updating transform.parent as well
+  /// </summary>
+  public void ChangeObjectRoom(RoomDefinition prevRoom, RoomDefinition newRoom, GameObject objectChangedRoom)
+  {
+    objectChangedRoom.transform.parent = _instancedObjects.getRoomParentObject(newRoom).transform;
+
+    RoomObjectDefinition objectDef = _instancedObjects.GetDefinitionFromGameObject(prevRoom, objectChangedRoom);
+    _instancedObjects.UnregisterObjectFromRoom(prevRoom, objectDef);
+    _instancedObjects.RegisterObjectInRoom(newRoom, objectDef, objectChangedRoom);
+  }
+
+  /// <summary>
   /// Destroys an already instanced room. In case the room in non-existant, an error is launched
   /// </summary>
-  public void DestroyRoom(RoomDefinition room)
+  public void DestroyRoom(RoomDefinition roomDef)
   {
-    if (_instancedObjects.RoomIsRegistered(room))
+    if (_instancedObjects.RoomIsRegistered(roomDef))
     {
-      GameObject toDestroy = _instancedObjects.getRoomParentObject(room);
-      _instancedObjects.RemoveRoomFromRegistry(room);
+      GameObject toDestroy = _instancedObjects.getRoomParentObject(roomDef);
+      _instancedObjects.RemoveRoomFromRegistry(roomDef);
       GameObject.Destroy(toDestroy);
     }
     else
     {
-      BipolarConsole.AllLog("Error: Deletion of room " + room.roomName + " failed. Room does not exist in registry");
+      BipolarConsole.AllLog("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry");
     }
   }
   #endregion
@@ -141,7 +190,8 @@ public class RoomFactory
   /// </summary>
   private GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
-    GameObject instancedObject = PrefabInstancer.instanceOf(obj.objectPrefabPath);
+
+    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath);
 
     instancedObject.transform.localPosition = WorldPositionInRelationTo(obj.position, relativeOrigin);
     instancedObject.transform.localScale = obj.scale;
@@ -170,4 +220,6 @@ public class RoomFactory
   }
 
   #endregion
+
+  
 }

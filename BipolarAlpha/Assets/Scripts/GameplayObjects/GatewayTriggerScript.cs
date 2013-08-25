@@ -31,6 +31,10 @@ public class GatewayTriggerScript : MonoBehaviour {
     {
       ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
     }
+    if (other.tag == "MovableObject")
+    {
+      ServiceLocator.GetEventHandlerSystem().SendObjectRoomChangeEvent(other.gameObject.transform.parent.name, transform.parent.name, other.gameObject);
+    }
   }
 	
 }

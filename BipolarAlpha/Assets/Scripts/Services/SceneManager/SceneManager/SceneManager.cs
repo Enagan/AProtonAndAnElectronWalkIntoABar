@@ -8,7 +8,7 @@ using System.Collections.Generic;
 /// By using it's RoomFactory, the scene manager dynamically loads and uloads rooms as the player walks through the world
 /// Giving the illusion of an open world.
 /// </summary>
-public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
+public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoomChangeListner
 {
   // Adjacent rooms instancing depth
   [SerializeField]
@@ -22,7 +22,11 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
 
 	private void Start () 
   {
-    //TEST FUNCTIONS BEFORE XML DETAILING EXISTING ROOMS
+    ServiceLocator.ProvideSceneMananger(this);
+    ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
+    ServiceLocator.GetEventHandlerSystem().RegisterObjectRoomChangeListner(this);
+
+    //TODO@Engana Define all room files in a known xml
     //Loads room definitions from files.
     RoomDefinition firstRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/1stRoom.lvl");
     RoomDefinition secondRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/2ndRoom.lvl");
@@ -36,13 +40,11 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
     _allRooms.Add(fourthRoom.roomName, fourthRoom);
     _allRooms.Add(fifthRoom.roomName, fifthRoom);
 
-    ServiceLocator.ProvideSceneMananger(this);
-    ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
-
     //instance the first room
     setActiveRoom("1stRoom");
 	}
 
+  #region Room Creation and Deletion
   /// <summary>
   /// Receives a room name and orders it to be 
   /// instanced as well as it's in-range adjacent rooms.
@@ -93,6 +95,11 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
       }
       if (!foundMatch)
       {
+        //Run updateRoomDefinition to receive a RoomDefinition updated to the rooms'
+        //state right before deletion
+        RoomDefinition updatedDef = _roomFactory.UpdateRoomDefinition(oldRoomDef);
+        _allRooms[updatedDef.roomName] = updatedDef;
+        //Destroy the room
         _roomFactory.DestroyRoom(oldRoomDef);
       }
     }
@@ -125,7 +132,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
       }
     }
   }
+  #endregion
 
+  #region Event Listners
   /// <summary>
   /// Interface Listner implementation
   /// Receives the event when the player changes rooms, with the name
@@ -138,4 +147,18 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner
       setActiveRoom(newRoomName);
     }
   }
+
+  /// <summary>
+  /// Interface Listner implementation
+  /// Receives the event when an object changes rooms, with the name
+  /// of the new room, and the object itself
+  /// </summary>
+  public void ListenObjectRoomChange(string  prevRoomName, string newRoomName, GameObject objectChangedRoom)
+  {
+    if (newRoomName != _activeRoom.roomName)
+    {
+      _roomFactory.ChangeObjectRoom(_allRooms[prevRoomName], _allRooms[newRoomName], objectChangedRoom);
+    }
+  }
+  #endregion
 }
