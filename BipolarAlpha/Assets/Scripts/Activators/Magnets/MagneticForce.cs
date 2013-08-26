@@ -158,7 +158,7 @@ public class MagneticForce : MonoBehaviour, Activator
   }
 
 
-  void Update()
+  public virtual void  Update()
   {
     ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
 	

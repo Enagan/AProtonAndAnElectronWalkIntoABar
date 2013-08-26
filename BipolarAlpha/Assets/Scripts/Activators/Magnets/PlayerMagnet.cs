@@ -18,13 +18,14 @@ public class PlayerMagnet : MagneticForce
     RaycastHit hit;
     if (Physics.Raycast(this.transform.position, direction, out hit) && hit.collider.CompareTag("Magnet")) 
     {
+
+      BipolarConsole.LousadaLog(hit.distance);
       Magnet otherMagnet = (Magnet) hit.collider.gameObject.GetComponent("Magnet");
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
 
       if (!IsAlreadyAffectedBy(otherMagneticForce))
       {
-        BipolarConsole.LousadaLog("not affected");
         otherMagnet.AddMagneticForce(this);
         this.AffectedBy(otherMagneticForce);
       }
