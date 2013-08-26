@@ -7,6 +7,7 @@ using System.Collections;
 /// </summary>
 public class GatewayTriggerScript : MonoBehaviour {
 
+  //String that should be set up in the editor. Should be a valid room name
   [SerializeField]
   private string _connectsTo;
 
@@ -31,10 +32,15 @@ public class GatewayTriggerScript : MonoBehaviour {
     {
       ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
     }
-    if (other.tag == "MovableObject")
+    else if (other.tag == "MovableObject")
     {
       ServiceLocator.GetEventHandlerSystem().SendObjectRoomChangeEvent(other.gameObject.transform.parent.name, transform.parent.name, other.gameObject);
     }
+    else
+    {
+      throw new BipolarExceptionUnexpectedObjectTraversingGateway("Object " + other.name + " with tag " + other.tag + " Tried to traverse " + this + " gateway");
+    }
+
   }
 	
 }

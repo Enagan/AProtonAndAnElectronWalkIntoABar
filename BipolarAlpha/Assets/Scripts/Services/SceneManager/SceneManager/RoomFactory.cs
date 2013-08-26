@@ -212,7 +212,7 @@ public class RoomFactory
   }
 
   /// <summary>
-  /// Returns the opposite vector
+  /// Returns the opposite vector, keeping the up vector intact
   /// </summary>
   private Vector3 OppositeVector(Vector3 vec)
   {

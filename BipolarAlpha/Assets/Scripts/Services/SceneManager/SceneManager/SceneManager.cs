@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// The Scene Manager class is responsible to instance the various rooms the game has, as well as their connections
-/// By using it's RoomFactory, the scene manager dynamically loads and uloads rooms as the player walks through the world
+/// By using it's RoomFactory, the scene manager dynamically loads and unloads rooms as the player walks through the world
 /// Giving the illusion of an open world.
 /// </summary>
 public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoomChangeListner
@@ -26,7 +26,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
     ServiceLocator.GetEventHandlerSystem().RegisterObjectRoomChangeListner(this);
 
-    //TODO@Engana Define all room files in a known xml
+    //TODO@Engana Ask Save Manager
     //Loads room definitions from files.
     RoomDefinition firstRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/1stRoom.lvl");
     RoomDefinition secondRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/2ndRoom.lvl");
@@ -40,7 +40,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     _allRooms.Add(fourthRoom.roomName, fourthRoom);
     _allRooms.Add(fifthRoom.roomName, fifthRoom);
 
-    //instance the first room
+    //instance the first room, temporary
     setActiveRoom("1stRoom");
 	}
 
@@ -118,12 +118,13 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       _roomFactory.CreateRoom(root);
       _currentlyCreatedRooms.Add(root);
     }
+    //Otherwise instance room based in the previous "parent" room
     else
     {
       _roomFactory.CreateRoom(root, parent);
       _currentlyCreatedRooms.Add(root);
     }
-
+    //If we haven't reached the current depth, create all adjacent rooms to current root
     if (currentDepth < _adjacentInstancingDepth)
     {
       foreach (RoomObjectGatewayDefinition gate in root.gateways)
