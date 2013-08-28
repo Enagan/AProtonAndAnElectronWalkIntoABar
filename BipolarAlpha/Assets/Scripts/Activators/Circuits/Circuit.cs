@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//MadeBy: Ivo
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -35,15 +36,11 @@ public abstract class Circuit : MonoBehaviour, Activator
   // counter Variable and Counter property
   // Are used on Circuit creation to acess unique identifiers
   private static int counter = 0;
-  private static int Counter {
-     get { 
-        Increment(); 
+  private static int IncrCounter {
+     get {
+        ++counter;
         return counter; 
      }
-   }
-   // method used by the Counter property to increment its value
-   private static void Increment() {
-       counter++; 
    }
   #endregion
 
@@ -52,7 +49,7 @@ public abstract class Circuit : MonoBehaviour, Activator
   {
     _inputs = new Dictionary<int, bool>();
     _outputs = new List<Circuit>();
-    _identifier = Counter;
+    _identifier = IncrCounter;
   }
   #endregion
   #region Activator interface methods
@@ -62,10 +59,10 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// Sends true as input to all output circuits.
   /// Method can be overriden by leaf circuits
   /// </summary>
-  public void Activate()
+  public virtual void Activate()
   {
     _state = true;
-    propagateToOutputs(true);
+    PropagateToOutputs(true);
   }
 
   /// <summary>
@@ -73,10 +70,10 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// Sends false as input to all output circuits.
   /// Method can be overriden by leaf circuits
   /// </summary>
-  public void Deactivate()
+  public virtual void Deactivate()
   {
     _state = false;
-    propagateToOutputs(false);
+    PropagateToOutputs(false);
   }
 
   #endregion
@@ -91,21 +88,15 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// </summary>
   public bool Input(bool state, int inputID)
   {
-    BipolarConsole.IvoLog(circuitName() + _identifier + " Input:" + state + " sent by " + inputID);
+    //BipolarConsole.IvoLog(CircuitName() + _identifier + " Input:" + state + " sent by " + inputID);
     //Add input to dictionary
-    if(_inputs.ContainsKey(inputID))
-	  {
-	    _inputs[inputID] = state;
-	  }
-    else
-    {
-	    _inputs.Add(inputID, state);
-    }
+	  _inputs[inputID] = state;
+	 
      //Infer Logic from operation and call Activate and Deactivate
      bool[] inputsArray = new bool[_inputs.Count];
      _inputs.Values.CopyTo(inputsArray, 0);
     
-    if (logicOperation(inputsArray))
+    if (LogicOperation(inputsArray))
      {
        Activate();
      }
@@ -120,9 +111,9 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// Auxiliary method that progates output
   /// <param name="output">Output to be propagated</param>
   /// </summary>
-  void propagateToOutputs(bool output)
+  void PropagateToOutputs(bool output)
   {
-    BipolarConsole.IvoLog(circuitName()+_identifier + " Output:" + _state);
+    //BipolarConsole.IvoLog(CircuitName()+_identifier + " Output:" + _state);
     foreach (Circuit c in _outputs)
     {
       c.Input(output, _identifier);
@@ -132,9 +123,9 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// <summary>
   /// Auxiliary method that progates state to output 
   /// </summary>
-  public void propagateToOutputs()
+  public void PropagateToOutputs()
   {
-    propagateToOutputs(_state);
+    PropagateToOutputs(_state);
   }
   #endregion
 
@@ -145,12 +136,12 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// This method has to be overriden by each child classes of Circuit
   /// <param name="inputsArray">Binary input for the circuit</param>
   /// </summary>
-  protected abstract bool logicOperation(bool[] inputsArray);
+  protected abstract bool LogicOperation(bool[] inputsArray);
 
   /// <summary>
   /// Method that returns each circuit Name, used for debug
   /// </summary>
-  public abstract string circuitName();
+  public abstract string CircuitName();
   #endregion
 }
    

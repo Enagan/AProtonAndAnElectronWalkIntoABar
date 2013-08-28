@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//MadeBy: Ivo
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -37,11 +38,11 @@ public class CircuitRepeater : Circuit
     _accumulatedTime += Time.deltaTime;
     if (_accumulatedTime >= _repeatFrequency)
     {
-      onFrequencyEvent();
+      OnFrequencyEvent();
       _accumulatedTime = 0.0f;
     
       // propagates state to output
-      propagateToOutputs();
+      PropagateToOutputs();
     }
   }
 
@@ -49,7 +50,7 @@ public class CircuitRepeater : Circuit
   /// Method called when a frequency event happens
   /// Stub on CircuitRepeater, meant to be overriden by children
   /// </summary>
-  protected virtual void onFrequencyEvent()
+  protected virtual void OnFrequencyEvent()
   {}
 
   /// <summary>
@@ -58,7 +59,7 @@ public class CircuitRepeater : Circuit
   /// WARNING: CircuitRepeater progates its first input only
   /// <param name="inputsArray">Binary input for the circuit</param>
   /// </summary>
-  protected override bool logicOperation(bool[] inputsArray)
+  protected override bool LogicOperation(bool[] inputsArray)
   {
     if (inputsArray.Length > 0)
     {
@@ -70,7 +71,7 @@ public class CircuitRepeater : Circuit
   /// <summary>
   /// Method that returns each circuit Name, used for debug
   /// </summary>
-  public override string circuitName()
+  public override string CircuitName()
   {
     return "Repeater";
   }

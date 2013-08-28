@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//MadeBy: Ivo
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,7 +19,7 @@ public class CircuitXNOR : Circuit
     /// WARNING: For multiple arguments, XOR is defined to be true if an even number of its arguments are true, and false otherwise. 
     /// <param name="inputsArray">Binary input for the circuit</param>
     /// </summary>
-    protected override bool logicOperation(bool[] inputsArray)
+    protected override bool LogicOperation(bool[] inputsArray)
     {
       int trueCount = 0;
       foreach (bool b in inputsArray)
@@ -32,7 +33,7 @@ public class CircuitXNOR : Circuit
     /// <summary>
     /// Method that returns each circuit Name, used for debug
     /// </summary>
-    public override string circuitName()
+    public override string CircuitName()
     {
       return "XNOR";
     }

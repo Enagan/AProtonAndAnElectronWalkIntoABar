@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//MadeBy: Ivo
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,7 +19,7 @@ public class CircuitNOT : Circuit
     /// WARNING: This method only considers the first connected input
     /// <param name="inputsArray">Binary input for the circuit</param>
     /// </summary>
-  protected override bool logicOperation(bool[] inputsArray)
+  protected override bool LogicOperation(bool[] inputsArray)
   {
     if (inputsArray.Length > 0)
     {
@@ -33,7 +34,7 @@ public class CircuitNOT : Circuit
   /// <summary>
   /// Method that returns each circuit Name, used for debug
   /// </summary>
-  public override string circuitName()
+  public override string CircuitName()
   {
     return "NOT";
   }

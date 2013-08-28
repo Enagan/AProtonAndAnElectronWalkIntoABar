@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//MadeBy: Ivo
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,7 +19,7 @@ public class CircuitPulser : CircuitRepeater
   /// 
   /// WARNING: CircuitPulser disregards input and progagates inverse state
   /// </summary>
-  protected override void onFrequencyEvent()
+  protected override void OnFrequencyEvent()
   {
 
     _state = !_state;
@@ -29,7 +30,7 @@ public class CircuitPulser : CircuitRepeater
   /// WARNING: Disregards input and progagates inverse state
   /// <param name="inputsArray">Binary input for the circuit</param>
   /// </summary>
-  protected override bool logicOperation(bool[] inputsArray)
+  protected override bool LogicOperation(bool[] inputsArray)
   {
     return !_state;
   }
@@ -37,7 +38,7 @@ public class CircuitPulser : CircuitRepeater
   /// <summary>
   /// Method that returns each circuit Name, used for debug
   /// </summary>
-  public override string circuitName()
+  public override string CircuitName()
   {
     return "Pulser";
   }
