@@ -29,7 +29,9 @@ public class RotaryMagnetPart : MagneticForce
 
         BipolarConsole.LousadaLog("local direction is: " + localForceDirection);
 
-        magnetBody.AddRelativeTorque(Vector3.up * totalForce * localForceDirection.y); // apply torque only on the local y axis of the rotary magnet
+        #warning not working
+        magnetBody.AddRelativeTorque(transform.up * totalForce * localForceDirection.y); // apply torque only on the local y axis of the rotary magnet
+        
       }
     }
 

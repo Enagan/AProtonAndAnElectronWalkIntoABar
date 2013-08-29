@@ -29,8 +29,6 @@ public class CircuitRepeater : Circuit
 
   /// <summary>
   /// Update will call state on output everytime it reaches frequency
-  /// <param name="state">Binary state recieved by the circuit</param>
-  /// <param name="inputID">Identifier of input</param>
   /// </summary>
  
   void Update()
