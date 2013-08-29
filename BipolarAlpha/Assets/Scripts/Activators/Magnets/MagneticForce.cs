@@ -25,6 +25,9 @@ public class MagneticForce : MonoBehaviour, Activator
   #region MagneticForce Variables
   [SerializeField]
   private bool _isActivated = true;
+
+  [SerializeField]
+  private bool _isMoveable = false;
 	
   public enum Force { LOW, MEDIUM, HIGH };
   public enum Charge { NEGATIVE, POSITIVE};
@@ -58,6 +61,18 @@ public class MagneticForce : MonoBehaviour, Activator
 	  _isActivated = value;
 	}
 		
+  }
+
+  public bool isMoveable
+  {
+    get
+    {
+      return _isMoveable;
+    }
+    set
+    {
+      _isMoveable = value;
+    }
   }
 
   public List<MagneticForce> affectingMagnets

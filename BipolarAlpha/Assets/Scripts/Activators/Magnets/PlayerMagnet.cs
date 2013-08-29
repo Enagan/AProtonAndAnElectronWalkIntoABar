@@ -8,6 +8,21 @@ using System.Collections.Generic;
 //
 public class PlayerMagnet : MagneticForce 
 {
+  // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
+  private bool _isAvailable = true;
+
+  public bool isAvailable
+  {
+    get
+    {
+      return _isAvailable;
+    }
+    set
+    {
+      _isAvailable = value;
+    }
+  }
+
   /// <summary>
   /// Fires a raycast that will make a magnetic object have influence over the player if one is hit
   /// Requiers the direction the player/camera is facing 

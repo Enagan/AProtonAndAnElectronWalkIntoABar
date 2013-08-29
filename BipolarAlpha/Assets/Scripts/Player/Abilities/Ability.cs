@@ -11,7 +11,7 @@ public interface Ability{
   /// <summary>
   /// Triggers the abilities' effect on it's caller
   /// </summary>
-  void Use(PlayerController caller);
+  void Use(PlayerController caller, string key = null);
 	
   /// <summary>
   /// The key that activates the ability has been pressed down

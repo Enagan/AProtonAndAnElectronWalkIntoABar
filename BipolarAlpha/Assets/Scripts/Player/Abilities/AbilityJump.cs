@@ -11,7 +11,7 @@ public class AbilityJump : Ability {
   /// <summary>
   /// JUMP!
   /// </summary>
-  public void Use(PlayerController caller)
+  public void Use(PlayerController caller, string key = null)
   {
     //Only jump if the caller isn't already in the air
     if (!caller.airborne)

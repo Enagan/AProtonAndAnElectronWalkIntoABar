@@ -34,7 +34,7 @@ public class AbilityUseMagnet : Ability
   /// <summary>
     /// Activates the associated directional Magnet with the forward direction of the player's camera
     /// </summary> 
-  public void Use(PlayerController caller)
+  public void Use(PlayerController caller, string key = null)
   {
 
     //Does this every Update when pressing the ability button
