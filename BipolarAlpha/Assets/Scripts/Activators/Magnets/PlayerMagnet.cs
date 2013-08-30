@@ -34,7 +34,6 @@ public class PlayerMagnet : MagneticForce
     if (Physics.Raycast(this.transform.position, direction, out hit) && hit.collider.CompareTag("Magnet")) 
     {
 
-      BipolarConsole.LousadaLog(hit.distance);
       Magnet otherMagnet = (Magnet) hit.collider.gameObject.GetComponent("Magnet");
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
@@ -42,9 +41,16 @@ public class PlayerMagnet : MagneticForce
       if (!IsAlreadyAffectedBy(otherMagneticForce))
       {
         otherMagnet.AddMagneticForce(this);
-        this.AffectedBy(otherMagneticForce);
+        if (!otherMagneticForce.isMoveable)
+        {
+          this.AffectedBy(otherMagneticForce);
+        }
       }
       return this; // leave handling for the ability
+    }
+    else
+    {
+      base.NoLongerAffectingMagnets();
     }
     return null; //Maybe change this
     }

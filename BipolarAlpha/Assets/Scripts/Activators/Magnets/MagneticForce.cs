@@ -175,6 +175,7 @@ public class MagneticForce : MonoBehaviour, Activator
 
   public virtual void  Update()
   {
+   // BipolarConsole.LousadaLog(_isMoveable);
     ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
 	
   }

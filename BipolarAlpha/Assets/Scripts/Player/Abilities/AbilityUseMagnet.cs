@@ -41,7 +41,7 @@ public class AbilityUseMagnet : Ability
     MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.forward);
        
     if (force != null)
-    { 
+    {
       force.ApplyOtherMagnetsForces(_player.rigidbody);
 
     }

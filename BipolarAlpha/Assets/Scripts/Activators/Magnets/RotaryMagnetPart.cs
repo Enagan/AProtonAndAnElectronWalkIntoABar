@@ -19,18 +19,17 @@ public class RotaryMagnetPart : MagneticForce
     {
       if (base.isActivated && otherMagnet.isActivated)
       {
-        Vector3 localForceDirection = this.transform.InverseTransformPoint(otherMagnet.transform.position);
+        Vector3 localForceDirection = this.transform.InverseTransformPoint(otherMagnet.transform.position); // 0 represent's the currect object position on local coordinations
         localForceDirection.Normalize();
-        if (otherMagnet.charge == this.charge)
+        if (otherMagnet.charge != this.charge)
         {
           localForceDirection = (-1) * localForceDirection;
         }
         float totalForce = getTotalForce(otherMagnet);
 
-        BipolarConsole.LousadaLog("local direction is: " + localForceDirection);
+        float localTorque = totalForce * localForceDirection.z / 1000;
 
-        #warning not working
-        magnetBody.AddRelativeTorque(transform.up * totalForce * localForceDirection.y); // apply torque only on the local y axis of the rotary magnet
+        magnetBody.AddRelativeTorque(0.0f, localTorque, 0.0f); // apply torque only on the local y axis of the rotary magnet
         
       }
     }
