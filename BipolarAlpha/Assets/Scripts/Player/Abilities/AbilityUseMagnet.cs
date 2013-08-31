@@ -38,7 +38,7 @@ public class AbilityUseMagnet : Ability
   {
 
     //Does this every Update when pressing the ability button
-    MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.forward);
+    MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
        
     if (force != null)
     {

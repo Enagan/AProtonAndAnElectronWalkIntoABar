@@ -28,12 +28,11 @@ public class PlayerMagnet : MagneticForce
   /// Requiers the direction the player/camera is facing 
   /// </summary>
   /// <returns> The Magnetic Force of the object that was hit </returns>
-  public MagneticForce FireRayCast(Vector3 direction) 
+  public MagneticForce FireRayCast(Vector3 start, Vector3 direction) 
   {
     RaycastHit hit;
-    if (Physics.Raycast(this.transform.position, direction, out hit) && hit.collider.CompareTag("Magnet")) 
+    if (Physics.Raycast(start, direction, out hit) && hit.collider.CompareTag("Magnet"))  
     {
-
       Magnet otherMagnet = (Magnet) hit.collider.gameObject.GetComponent("Magnet");
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
