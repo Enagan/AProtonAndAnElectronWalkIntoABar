@@ -10,6 +10,8 @@ public class PlayerMagnet : MagneticForce
 {
   // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
   private bool _isAvailable = true;
+  private int _raycastMask = ~(1 << 8);  //Ignore objects in layer 8 (Magnetic Force)
+
 
   public bool isAvailable
   {
@@ -31,7 +33,7 @@ public class PlayerMagnet : MagneticForce
   public MagneticForce FireRayCast(Vector3 start, Vector3 direction) 
   {
     RaycastHit hit;
-    if (Physics.Raycast(start, direction, out hit) && hit.collider.CompareTag("Magnet"))  
+    if (Physics.Raycast(start, direction, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))  
     {
       Magnet otherMagnet = (Magnet) hit.collider.gameObject.GetComponent("Magnet");
       Transform otherTransform = hit.collider.gameObject.transform;
