@@ -23,9 +23,8 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner
   private bool fireRaycast()
   {
     RaycastHit hit;
-    if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _raycastMask))// && hit.collider.CompareTag("Magnet"))
+    if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))
     {
-      BipolarConsole.LousadaLog(hit.collider.gameObject.name);
       return true;
     }
     return false;
