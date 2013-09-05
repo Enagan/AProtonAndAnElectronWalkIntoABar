@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿// Made by: Lousada
+using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Class used on both negative and positive parts of a rotary magnet
+/// </summary>
 public class RotaryMagnetPart : MagneticForce
 {
 
@@ -12,6 +15,7 @@ public class RotaryMagnetPart : MagneticForce
 
   /// <summary>
   /// Applies the influence other objects have over this one
+  /// Overrides the method from the base class in order to induse rotation on the rotary magnet
   /// </summary>
   public override void ApplyOtherMagnetsForces(Rigidbody magnetBody)
   {

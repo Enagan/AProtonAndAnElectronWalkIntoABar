@@ -1,12 +1,17 @@
-﻿using UnityEngine;
+﻿//Made by: Lousada
+
+using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Class used to show the head-up display
+/// </summary>
 public class HUD : MonoBehaviour, IPlayerRoomChangeListner
 {
   [SerializeField]
-  private Texture2D _crosshairNormal;
+  private Texture2D _crosshairNormal;   //texture for the standard crosshair
   [SerializeField]
-  private Texture2D _crosshairHighlight;
+  private Texture2D _crosshairHighlight; // texture used when a player is pointing to a magnet
   private GameObject _camera;
   private Rect _crosshairPosition;
   private int _raycastMask = ~(1 << 8); //Ignore objects in layer 8 (Magnetic Force)
@@ -17,9 +22,12 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner
 
   public void ListenPlayerRoomChange(string newRoomName)
   {
-    this.gameObject.guiText.text = newRoomName;
+    //Do Something with this
   }
 
+  /// <summary>
+  /// Fires a ray to determine if a player is pointing at a magnet or not
+  /// </summary>
   private bool fireRaycast()
   {
     RaycastHit hit;
@@ -38,18 +46,17 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner
     _camera = GameObject.Find("Camera");
     _textureWidth = _crosshairNormal.width;
     _textureHeight = _crosshairNormal.height;
-    _crosshairPosition = new Rect(Screen.width - _textureWidth,
+    //positions the crosshair texture on the center of the screen
+    _crosshairPosition = new Rect(Screen.width - _textureWidth,  
                              Screen.height - _textureHeight,
                              _textureWidth,
                              _textureHeight);
-    this.gameObject.guiText.pixelOffset = new Vector2(0, Screen.height / 2 - Screen.height / 10);
   }
 
-  // Update is called once per frame
   void Update()
   {
-
-    _crosshairPosition.Set((Screen.width - _textureWidth / 4) / 2,
+    //positions the crosshair texture on the center of the screen
+    _crosshairPosition.Set((Screen.width - _textureWidth / 4) / 2,       
                            (Screen.height - _textureHeight / 4) / 2,
                            _textureWidth / 4,
                            _textureHeight / 4);

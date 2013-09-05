@@ -1,4 +1,4 @@
-﻿//Owner: Lousada
+﻿//Made by: Lousada
 using UnityEngine;
 using System.Collections;
 /// <summary>

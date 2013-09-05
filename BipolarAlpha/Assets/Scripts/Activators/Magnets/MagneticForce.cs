@@ -1,4 +1,4 @@
-﻿//Owner: Lousada
+﻿//Made by: Lousada
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -175,7 +175,6 @@ public class MagneticForce : MonoBehaviour, Activator
 
   public virtual void  Update()
   {
-   // BipolarConsole.LousadaLog(_isMoveable);
     ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
 	
   }
@@ -183,20 +182,29 @@ public class MagneticForce : MonoBehaviour, Activator
   /// <summary>
   /// Applies the influence other objects have over this one
   /// </summary>
+  protected void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet)
+  {
+    Vector3 forceDirection = otherMagnet.transform.position - this.transform.position;
+    forceDirection.Normalize();
+    if (otherMagnet.charge == this.charge)
+    {
+      forceDirection = (-1) * forceDirection;
+    }
+    float totalForce = getTotalForce(otherMagnet);
+    magnetBody.AddForce(totalForce * forceDirection);
+  }
+
+
+  /// <summary>
+  /// Checks if magnets will influence each other
+  /// </summary>
   public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody) 
   {
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
       if (_isActivated && otherMagnet.isActivated) {
-        Vector3 forceDirection = otherMagnet.transform.position - this.transform.position;
-        forceDirection.Normalize();
-			  if (otherMagnet.charge == this.charge) {
-          forceDirection = (-1) * forceDirection;
-        }
-        float totalForce = getTotalForce(otherMagnet);
-        magnetBody.AddForce(totalForce * forceDirection);
+        ApplyForces(magnetBody, otherMagnet);
       }
    }
-
   }
 	
   

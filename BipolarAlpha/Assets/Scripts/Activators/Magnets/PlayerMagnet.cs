@@ -1,4 +1,4 @@
-﻿//Owner: Lousada
+﻿//Made By: Lousada
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,13 +39,10 @@ public class PlayerMagnet : MagneticForce
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
 
-      if (!IsAlreadyAffectedBy(otherMagneticForce))
+      if (!IsAlreadyAffectedBy(otherMagneticForce) )
       {
         otherMagnet.AddMagneticForce(this);
-        if (!otherMagneticForce.isMoveable)
-        {
-          this.AffectedBy(otherMagneticForce);
-        }
+        this.AffectedBy(otherMagneticForce);       
       }
       return this; // leave handling for the ability
     }
@@ -53,6 +50,22 @@ public class PlayerMagnet : MagneticForce
     {
       base.NoLongerAffectingMagnets();
     }
+
     return null; //Maybe change this
+  }
+
+  /// <summary>
+  /// Checks if magnets will influence each other
+  /// </summary>
+  public override void ApplyOtherMagnetsForces(Rigidbody magnetBody)
+  {
+    foreach (MagneticForce otherMagnet in base.affectingMagnets)
+    {
+      if (base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
+      {
+        base.ApplyForces(magnetBody, otherMagnet);
+      }
     }
+  }
+
 }
