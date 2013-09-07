@@ -17,6 +17,8 @@ public class ServiceLocator
 
   private static BipolarEventHandlerSystem _eventHandlerSystem = new BipolarEventHandlerSystem();
 
+  private static AudioSystem _audioSystem;
+
 
   //--- Access functions
   //- Get<SystemInterfaceName>()
@@ -50,6 +52,14 @@ public class ServiceLocator
   public static BipolarEventHandlerSystem GetEventHandlerSystem()
   {
     return _eventHandlerSystem;
+  }
+
+  /// <summary>
+  /// Returns the current implementation of the Audio System
+  /// </summary>
+  public static AudioSystem GetAudioSystem()
+  {
+    return _audioSystem;
   }
   #endregion
 
@@ -86,6 +96,14 @@ public class ServiceLocator
   public static void ProvideEventHandlerSystem(BipolarEventHandlerSystem eventHandlerSystem)
   {
     _eventHandlerSystem = eventHandlerSystem;
+  }
+
+  /// <summary>
+  /// Changes the current implementation of Event Handler to the specified/provided implementation
+  /// </summary>
+  public static void ProvideAudioSystem(AudioSystem audioSystem)
+  {
+    _audioSystem = audioSystem;
   }
   #endregion
 }

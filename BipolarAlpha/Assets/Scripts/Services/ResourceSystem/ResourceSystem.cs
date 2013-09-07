@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class ResourceSystem : MonoBehaviour
 {
@@ -195,9 +196,24 @@ public class ResourceSystem : MonoBehaviour
   // Start to connect the resource system to the Service Locator
   // Update, from Unity's class MonoBehaviour, to create new object instances dinamically
   #region Instance Creating
+  private void PopulatePrefabDictionary()
+  {
+    Object[] allPrefabs = Resources.LoadAll("Prefabs", typeof(GameObject));
+    foreach (GameObject prefab in allPrefabs)
+    {
+      //Retrieve the specific prefab path and trims it for instancer usage
+      string path = AssetDatabase.GetAssetPath(prefab);
+      path = path.Replace(".prefab", "");
+      path = path.Replace("Assets/Resources/", "");
+
+      _availableResources.Add(path, new List<GameObject>());
+    }
+  }
+
   void Start()
   {
     ServiceLocator.ProvideResourceSystem(this);
+    PopulatePrefabDictionary();
   }
 
   void Update()

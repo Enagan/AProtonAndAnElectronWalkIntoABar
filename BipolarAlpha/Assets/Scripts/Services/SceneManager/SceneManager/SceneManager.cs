@@ -42,6 +42,8 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
     //instance the first room, temporary
     setActiveRoom("1stRoom");
+
+    ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL1&2");
 	}
 
   #region Room Creation and Deletion

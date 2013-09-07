@@ -30,6 +30,7 @@ public class GatewayTriggerScript : MonoBehaviour {
   {
     if (other.tag == "Player")
     {
+      ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL3");
       ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
     }
     else if (other.tag == "MovableObject")
@@ -38,7 +39,7 @@ public class GatewayTriggerScript : MonoBehaviour {
     }
     else
     {
-      throw new BipolarExceptionUnexpectedObjectTraversingGateway("Object " + other.name + " with tag " + other.tag + " Tried to traverse " + this + " gateway");
+      //throw new BipolarExceptionUnexpectedObjectTraversingGateway("Object " + other.name + " with tag " + other.tag + " Tried to traverse " + this + " gateway");
     }
 
   }
