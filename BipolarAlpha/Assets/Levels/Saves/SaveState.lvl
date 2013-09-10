@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomPaths>
+    <string>Assets/Levels/Saves/1stRoom.lvl</string>
+    <string>Assets/Levels/Saves/2ndRoom.lvl</string>
+    <string>Assets/Levels/Saves/3rdRoom.lvl</string>
+    <string>Assets/Levels/Saves/4thRoom.lvl</string>
+    <string>Assets/Levels/Saves/5thRoom.lvl</string>
+  </roomPaths>
+  <activeRoom>2ndRoom</activeRoom>
+  <playerPosition>
+    <x>-0.5280824</x>
+    <y>1.112877</y>
+    <z>26.5724449</z>
+  </playerPosition>
+  <playerRotation>
+    <x>0</x>
+    <y>181.177063</y>
+    <z>0</z>
+  </playerRotation>
+</SaveState>

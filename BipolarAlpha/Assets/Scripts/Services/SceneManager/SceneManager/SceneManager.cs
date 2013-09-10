@@ -137,6 +137,56 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   }
   #endregion
 
+  #region Room State Saving and Loading
+
+  // save active room
+
+  public void SaveRooms()
+  {
+    List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
+    RoomDefinition roomToSave;
+    foreach(RoomDefinition room in _allRooms.Values)
+    {
+      roomToSave = _roomFactory.UpdateRoomDefinition(room);
+      if(roomToSave == null)
+      {
+        roomsToSave.Add(room);
+      }
+      else
+      {
+        roomsToSave.Add(roomToSave);
+      }
+    }
+
+    ServiceLocator.GetSaveSystem().Save(new KeyValuePair<string, List<RoomDefinition>>(_activeRoom.roomName, roomsToSave));
+  }
+
+  // replace and create from previous active room
+
+  public void LoadRooms()
+  {
+    KeyValuePair<string, List<RoomDefinition>> loadedState = ServiceLocator.GetSaveSystem().Load();
+
+    List<RoomDefinition> oldRooms = new List<RoomDefinition>();
+    foreach(RoomDefinition room in loadedState.Value)
+    {
+      oldRooms.Add(_allRooms[room.roomName]);
+      _allRooms[room.roomName] = room;
+    }
+
+    setActiveRoom(loadedState.Key);
+
+    foreach(RoomDefinition oldRoom in oldRooms)
+    {
+      if(oldRoom != null)
+      {
+        _roomFactory.DestroyRoom(oldRoom);
+      }
+    }
+  }
+
+  #endregion
+
   #region Event Listners
   /// <summary>
   /// Interface Listner implementation

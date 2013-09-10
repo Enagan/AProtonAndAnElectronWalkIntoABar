@@ -19,6 +19,8 @@ public class ServiceLocator
 
   private static AudioSystem _audioSystem;
 
+  private static SaveSystem _saveSystem;
+
 
   //--- Access functions
   //- Get<SystemInterfaceName>()
@@ -60,6 +62,14 @@ public class ServiceLocator
   public static AudioSystem GetAudioSystem()
   {
     return _audioSystem;
+  }
+
+  /// <summary>
+  /// Returns the current implementation of the Save System
+  /// </summary>
+  public static SaveSystem GetSaveSystem()
+  {
+    return _saveSystem;
   }
   #endregion
 
@@ -104,6 +114,14 @@ public class ServiceLocator
   public static void ProvideAudioSystem(AudioSystem audioSystem)
   {
     _audioSystem = audioSystem;
+  }
+
+  /// <summary>
+  /// Changes the current implementation of Save System to the specified/provided implementation
+  /// </summary>
+  public static void ProvideSaveSystem(SaveSystem saveSystem)
+  {
+    _saveSystem = saveSystem;
   }
   #endregion
 }
