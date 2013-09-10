@@ -35,13 +35,12 @@ public class PlayerMagnet : MagneticForce
     RaycastHit hit;
     if (Physics.Raycast(start, direction, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))  
     {
-      Magnet otherMagnet = (Magnet) hit.collider.gameObject.GetComponent("Magnet");
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
 
       if (!IsAlreadyAffectedBy(otherMagneticForce) )
       {
-        otherMagnet.AddMagneticForce(this);
+        otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
       return this; // leave handling for the ability
