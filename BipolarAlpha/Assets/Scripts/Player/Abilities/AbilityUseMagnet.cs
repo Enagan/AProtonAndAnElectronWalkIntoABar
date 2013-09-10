@@ -13,23 +13,17 @@ public class AbilityUseMagnet : Ability
 
   private PlayerMagnet _playerMagnet;
   private Camera _playerCamera;
-  private PlayerController _player;
+
   #endregion
 
   /// <summary>
     /// Constructor for AbilityUseMagnet
     /// </summary>
-    /// <param name="playerMagnet">The magnet associated with this ability's trigger</param>
-    /// 
-    /// <param name="playerCamera">The camera associated with the player</param>
-    ///  
-    /// <param name="player">The player associated to this magnet</param>
+
   public AbilityUseMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
   {
     this._playerMagnet = playerMagnet;
     this._playerCamera = playerCamera;
-    this._player = player;
-
   }
   /// <summary>
     /// Activates the associated directional Magnet with the forward direction of the player's camera
@@ -42,8 +36,7 @@ public class AbilityUseMagnet : Ability
        
     if (force != null)
     {
-      force.ApplyOtherMagnetsForces(_player.rigidbody);
-
+      force.ApplyOtherMagnetsForces(caller.rigidbody);
     }
 	
   }

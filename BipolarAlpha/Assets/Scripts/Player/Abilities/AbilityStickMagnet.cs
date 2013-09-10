@@ -13,7 +13,6 @@ public class AbilityStickMagnet : Ability
   #region private fields
   private PlayerMagnet _playerMagnet;
   private Camera _playerCamera;
-  private PlayerController _player;
 
   private bool _stuckToMagnet = false;
 
@@ -24,16 +23,10 @@ public class AbilityStickMagnet : Ability
   /// <summary>
   /// Constructor for AbilityUseMagnet
   /// </summary>
-  /// <param name="playerMagnet">The magnet associated with this ability's trigger</param>
-  /// 
-  /// <param name="playerCamera">The camera associated with the player</param>
-  ///  
-  /// <param name="player">The player associated to this magnet</param>
-  public AbilityStickMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
+  public AbilityStickMagnet(PlayerMagnet playerMagnet, Camera playerCamera)
   {
     _playerMagnet = playerMagnet;
     _playerCamera = playerCamera;
-    _player = player;
   }
 
   /// <summary>
@@ -63,7 +56,7 @@ public class AbilityStickMagnet : Ability
         foreach (MagneticForce otherMagnetForce in effectiveMagnets)
         {
           // In the case, during the magnet's activity, the player collides with a magnet, they stick
-          if (_player.magnetColliding && _playerMagnet.charge != otherMagnetForce.charge)
+          if (caller.magnetColliding && _playerMagnet.charge != otherMagnetForce.charge)
           {
             if (otherMagnetForce.isMoveable)
             {
@@ -81,17 +74,21 @@ public class AbilityStickMagnet : Ability
             break;
           }
 
+          // When the player is holding a magnet but uses the same magnet charge to push it away
           if (otherMagnetForce.transform.parent.gameObject == _magnetStuckToArm &&
             _playerMagnet.charge == otherMagnetForce.charge)
           {
             ReleaseMagnetStuckToPlayer();
           }
         }
-        force.ApplyOtherMagnetsForces(_player.rigidbody);
+        force.ApplyOtherMagnetsForces(caller.rigidbody);
       }
     }
   }
 
+  /// <summary>
+  /// Sticks the magnet associated with the Magnetic force to the player
+  /// </summary>
   private void StickMagnetToPlayer(PlayerController caller, MagneticForce magnet)
   {
     GameObject magnetParent = magnet.transform.parent.gameObject;
@@ -105,8 +102,15 @@ public class AbilityStickMagnet : Ability
     _magnetStuckToArm = magnetParent;
   }
 
+  /// <summary>
+  /// Releases the currently held magnet from the players grasp
+  /// </summary>
   private void ReleaseMagnetStuckToPlayer()
   {
+    if (_magnetStuckToArm == null)
+    {
+      return;
+    }
     _magnetStuckToArm.transform.parent = _previousMagnetParent;
     _previousMagnetParent = null;
     _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
@@ -123,7 +127,6 @@ public class AbilityStickMagnet : Ability
       return;
     }
     _stuckToMagnet = true;
-    //setGrounded();
     caller.rigidbody.velocity = Vector3.zero;
     caller.rigidbody.angularVelocity = Vector3.zero;
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -139,7 +142,6 @@ public class AbilityStickMagnet : Ability
     {
       return;
     }
-    //setAirborne();
     _stuckToMagnet = false;
     caller.transform.parent = null;
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
