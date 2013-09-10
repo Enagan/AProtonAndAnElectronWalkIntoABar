@@ -14,6 +14,11 @@ public class AbilityStickMagnet : Ability
   private PlayerMagnet _playerMagnet;
   private Camera _playerCamera;
   private PlayerController _player;
+
+  private bool _stuckToMagnet = false;
+
+  private static GameObject _magnetStuckToArm = null;
+  private Transform _previousMagnetParent = null;
   #endregion
 
   /// <summary>
@@ -36,68 +41,108 @@ public class AbilityStickMagnet : Ability
   /// </summary>
   public void Use(PlayerController caller, string key = null)
   {
-    if (key == "Release1")
+    if (key.Contains("Release"))
     {
-      // Condition to ensure the player is not releasing himself from a static (non-moveable) magnet,
-      // sticking to the player's other magnet
-      if (_player.leftStickedToMagnet)
+      if (_stuckToMagnet)
       {
-        _player.FreeFromMagnet();
+        FreeFromMagnet(caller);
       }
-      _player.ReleaseMagnetStickingToLeft();
-    }
-    if (key == "Release2")
-    {
-      // Condition to ensure the player is not releasing himself from a static (non-moveable) magnet,
-      // sticking to the player's other magnet
-      if (!_player.leftStickedToMagnet)
+      if (_magnetStuckToArm != null)
       {
-        _player.FreeFromMagnet();
+        ReleaseMagnetStuckToPlayer();
       }
-      _player.ReleaseMagnetStickingToRight();
     }
-    if (((key == "Fire1") || (key == "Fire2")) && _playerMagnet.isAvailable)
+    if ((key.Contains("Fire")) && _playerMagnet.isAvailable)
     {
       //Does this every Update when pressing the ability button
       MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
 
       if (force != null)
       {
-        force.ApplyOtherMagnetsForces(_player.rigidbody);
         List<MagneticForce> effectiveMagnets = force.affectingMagnets;
         foreach (MagneticForce otherMagnetForce in effectiveMagnets)
         {
-          float distance = Vector3.Distance(force.transform.position, otherMagnetForce.transform.position);
           // In the case, during the magnet's activity, the player collides with a magnet, they stick
-          if (distance < 1f || _player.magnetColliding)
+          if (_player.magnetColliding && _playerMagnet.charge != otherMagnetForce.charge)
           {
             if (otherMagnetForce.isMoveable)
-            { 
-              if (key == "Fire1")
+            {
+              if (_magnetStuckToArm == null)
               {
-                _player.MagnetSticksToLeft(otherMagnetForce);
-              }
-              else if (key == "Fire2")
-              {
-                _player.MagnetSticksToRight(otherMagnetForce);
+                StickMagnetToPlayer(caller, otherMagnetForce);
               }
             }
-            else
+            else if (!_stuckToMagnet)
             {
-              _player.StickToMagnet(otherMagnetForce);
-              if (key == "Fire1")
-              {
-                _player.SetLeftStickedToMagnet();
-              }
+              StickToMagnet(otherMagnetForce, caller);
             }
             // Deactives the player magnet while it's sticking to another magnet
             _playerMagnet.isActivated = false;
-            _playerMagnet.isAvailable = false;
             break;
           }
+
+          if (otherMagnetForce.transform.parent.gameObject == _magnetStuckToArm &&
+            _playerMagnet.charge == otherMagnetForce.charge)
+          {
+            ReleaseMagnetStuckToPlayer();
+          }
         }
+        force.ApplyOtherMagnetsForces(_player.rigidbody);
       }
     }
+  }
+
+  private void StickMagnetToPlayer(PlayerController caller, MagneticForce magnet)
+  {
+    GameObject magnetParent = magnet.transform.parent.gameObject;
+    magnetParent.GetComponent<Rigidbody>().isKinematic = true;
+
+    BipolarConsole.EnganaLog(_previousMagnetParent);
+    _previousMagnetParent = magnetParent.transform.parent;
+    magnetParent.transform.parent = caller.transform.FindChild("Camera");
+
+    magnetParent.transform.localPosition = new Vector3(0, 0, 1.5f);
+    _magnetStuckToArm = magnetParent;
+  }
+
+  private void ReleaseMagnetStuckToPlayer()
+  {
+    _magnetStuckToArm.transform.parent = _previousMagnetParent;
+    _previousMagnetParent = null;
+    _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
+    _magnetStuckToArm = null;
+  }
+
+  /// <summary>
+  /// Stops the player's movement, in the case it sticks to a static (non-moveable) magnet
+  /// </summary>
+  private void StickToMagnet(MagneticForce otherMagnet, PlayerController caller)
+  {
+    if (otherMagnet == null)
+    {
+      return;
+    }
+    _stuckToMagnet = true;
+    //setGrounded();
+    caller.rigidbody.velocity = Vector3.zero;
+    caller.rigidbody.angularVelocity = Vector3.zero;
+    caller.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    caller.transform.parent = otherMagnet.transform;
+  }
+
+  /// <summary>
+  /// Makes the player movable again when released from a (static) magnet, that it was sticking to 
+  /// </summary>
+  private void FreeFromMagnet(PlayerController caller)
+  {
+    if (!_stuckToMagnet)
+    {
+      return;
+    }
+    //setAirborne();
+    _stuckToMagnet = false;
+    caller.transform.parent = null;
+    caller.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
   }
 
   public void KeyUp()

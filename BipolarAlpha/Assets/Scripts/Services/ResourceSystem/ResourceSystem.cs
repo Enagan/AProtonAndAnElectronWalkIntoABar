@@ -5,7 +5,8 @@ using UnityEditor;
 public class ResourceSystem : MonoBehaviour
 {
   // Limits the number of instances the Resource System should dinamically create
-  private const uint INSTANCE_LIMIT = 10;
+  [SerializeField]
+  private uint INSTANCE_LIMIT = 10;
 
   // Dictionary to store existing instances of game objects
   private Dictionary<string, List<GameObject>> _availableResources = new Dictionary<string,List<GameObject>>();

@@ -201,7 +201,7 @@ public class MagneticForce : MonoBehaviour, Activator
   public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody) 
   {
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
-      if (_isActivated && otherMagnet.isActivated) {
+      if (_isActivated && otherMagnet.isActivated && _isMoveable) {
         ApplyForces(magnetBody, otherMagnet);
       }
    }

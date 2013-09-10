@@ -41,11 +41,6 @@ public class PlayerController : MonoBehaviour
   private ContactPoint _samplePointOfCollidingSurface;
 
   private bool _magnetColliding = false;
-  private bool _stickedToMagnet = false;
-  // To check if it is either the player's left or right magnet, that is sticking to a static magnet
-  private bool _leftStickedToMagnet = false;
-  private MagneticForce _magnetStickingToLeft;
-  private MagneticForce _magnetStickingToRight;
   #endregion
 
   private GameObject mainCamera;
@@ -74,20 +69,7 @@ public class PlayerController : MonoBehaviour
       return _magnetColliding;
     }
   }
-  public bool stickedToMagnet
-  {
-    get
-    {
-      return _stickedToMagnet;
-    }
-  }
-  public bool leftStickedToMagnet
-  {
-    get
-    {
-      return _leftStickedToMagnet;
-    }
-  }
+
   #endregion
 
   #region Player Children Entities
@@ -142,8 +124,6 @@ public class PlayerController : MonoBehaviour
   /// </summary>
   private void OnCollisionStay(Collision collision)
   {
-    if (!stickedToMagnet)
-    {
       ContactPoint[] contactPoints = collision.contacts;
       //Check how far from Vector.UP the colision normals are
       foreach (ContactPoint point in contactPoints)
@@ -159,7 +139,6 @@ public class PlayerController : MonoBehaviour
           setGrounded();
         }
       }
-    }
     if (collision.gameObject.tag == "Magnet")
     {
       _magnetColliding = true;
@@ -176,11 +155,8 @@ public class PlayerController : MonoBehaviour
   {
     //If the player stops colliding, and is not sticking to a magnet, it means it went airborne
     //So we adjust the cooresponding state flags.
-    if (!stickedToMagnet)
-    {
-      setAirborne();
-      setWallCollisionFree();
-    }
+    setAirborne();
+    setWallCollisionFree();
 
     if(collision.gameObject.tag == "Magnet")
     {
@@ -212,16 +188,16 @@ public class PlayerController : MonoBehaviour
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
     _usableAbilities.Add("Jump", new AbilityJump());
-    _usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
+    /*_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
     _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
-
+    */
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
-    //_usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
-    //_usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
 
-    //_usableAbilities.Add("Release1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
-    //_usableAbilities.Add("Release2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
+    _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
+    _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
   }
     #endregion
   /// <summary>
@@ -273,106 +249,6 @@ public class PlayerController : MonoBehaviour
     _collidingWithWall = false;
   }
 
-
-  /// <summary>
-  /// Signals that the player is sticking to a magnet
-  /// </summary>
-  private void setStickedToMagnet()
-  {
-    _stickedToMagnet = true;
-  }
-  /// <summary>
-  /// Signals that the player is no longer sticking to a magnet
-  /// </summary>
-  private void setStickedToMagnetFree()
-  {
-    _stickedToMagnet = false;
-  }
-
-  /// <summary>
-  /// Signals that the player's left magnet is sticking to a static (non-moveable) magnet
-  /// </summary>
-  public void SetLeftStickedToMagnet()
-  {
-    _leftStickedToMagnet = true;
-  }
-  /// <summary>
-  /// Signals that the player's left is no longer sticking to a static magnet
-  /// </summary>
-  public void FreeLeftStickedToMagnet()
-  {
-    _leftStickedToMagnet = false;
-  }
-
-  /// <summary>
-  /// Attaches a magnet to the player's left magnet
-  /// </summary>
-  public void MagnetSticksToLeft(MagneticForce otherMagnet)
-  {
-    _magnetStickingToLeft = otherMagnet;
-    otherMagnet.transform.parent = _leftMagnet.transform;
-  }
-
-  /// <summary>
-  /// Attaches a magnet to the player's right magnet
-  /// </summary>
-  public void MagnetSticksToRight(MagneticForce otherMagnet)
-  {
-    _magnetStickingToRight = otherMagnet;
-    otherMagnet.transform.parent = _rightMagnet.transform;
-  }
-
-  /// <summary>
-  /// Stops the player's movement, in the case it sticks to a static (non-moveable) magnet
-  /// </summary>
-  public void StickToMagnet(MagneticForce otherMagnet)
-  {
-    setStickedToMagnet();
-    setGrounded();
-    this.rigidbody.velocity = Vector3.zero;
-    this.rigidbody.angularVelocity = Vector3.zero;
-    if (otherMagnet != null)
-    {
-      this.transform.parent = otherMagnet.transform;
-    }
-  }
-
-  /// <summary>
-  /// Makes the player movable again when released from a (static) magnet, that it was sticking to 
-  /// </summary>
-  public void FreeFromMagnet()
-  {
-    setAirborne();
-    setStickedToMagnetFree();
-    this.transform.parent = null;
-  }
-
-  /// <summary>
-  /// Releases a magnet that is sticking to the player's Left Magnet and makes the player's magnet available
-  /// </summary>
-  public void ReleaseMagnetStickingToLeft()
-  {
-    if (_magnetStickingToLeft != null)
-    {
-      _magnetStickingToLeft.transform.parent = null;
-      _magnetStickingToLeft = null;
-    }
-    _leftMagnet.isAvailable = true;
-  }
-
-  /// <summary>
-  /// Releases a magnet that is sticking to the player's Right Magnet and makes the player's magnet available
-  /// </summary>
-  public void ReleaseMagnetStickingToRight()
-  {
-    if (_magnetStickingToRight != null)
-    {
-      _magnetStickingToRight.transform.parent = null;
-      _magnetStickingToRight = null;
-    }
-    _rightMagnet.isAvailable = true;
-  }
-
   #endregion
 
   #region Player SubSystem Managers
@@ -413,55 +289,51 @@ public class PlayerController : MonoBehaviour
   /// </summary>
   private void ManageMovement()
   {
-    // Denies movement if the player is sticking to a (static) magnet
-    if (!stickedToMagnet)
+    //Check for the values in the Vertical and Horizontal Axis
+    //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
+    //Values range from 1 to -1
+    float fowardMovement = Input.GetAxis("Vertical");
+    float sideMovement = Input.GetAxis("Horizontal");
+
+    //Create a local velocity vector 
+    //(with Z+ being the direction the camera is facing)
+    Vector3 desiredVelocity = new Vector3(sideMovement, 0, fowardMovement);
+    //Transform the local vector into world coordinates
+    desiredVelocity = rigidbody.transform.TransformDirection(desiredVelocity);
+
+    //If player is not airborne, apply friction to the X and Z axis
+    if (!airborne)
     {
-      //Check for the values in the Vertical and Horizontal Axis
-      //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
-      //Values range from 1 to -1
-      float fowardMovement = Input.GetAxis("Vertical");
-      float sideMovement = Input.GetAxis("Horizontal");
+      rigidbody.velocity = new Vector3(rigidbody.velocity.x * 1 / (_floorFriction + 1),
+                                        rigidbody.velocity.y,
+                                        rigidbody.velocity.z * 1 / (_floorFriction + 1));
+    }
 
-      //Create a local velocity vector 
-      //(with Z+ being the direction the camera is facing)
-      Vector3 desiredVelocity = new Vector3(sideMovement, 0, fowardMovement);
-      //Transform the local vector into world coordinates
-      desiredVelocity = rigidbody.transform.TransformDirection(desiredVelocity);
+    //If player is colliding with a wall surface and if the desired
+    //velocity vector points towards the wall, project the 
+    //desired velocity vector into the surface of the plane 
+    //the player is colliding with, thus causing a sliding motion
+    //instead of being "stuck" on the wall
+    if (collidingWithWall
+      && Vector3.Angle(desiredVelocity, _samplePointOfCollidingSurface.normal) > 90f)
+    {
+      desiredVelocity = Vector3.Project(desiredVelocity, Vector3.Cross(_samplePointOfCollidingSurface.normal, Vector3.up).normalized);
+      //Apply friction from dragging along the wall, on top of floor friction
+      desiredVelocity *= 1 / (_wallFriction + 1);
+    }
 
-      //If player is not airborne, apply friction to the X and Z axis
-      if (!airborne)
-      {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x * 1 / (_floorFriction + 1),
-                                          rigidbody.velocity.y,
-                                          rigidbody.velocity.z * 1 / (_floorFriction + 1));
-      }
+    //Applies the previously calculated desired velocity adjusted for deltaTime and player acceleration
+    desiredVelocity *= Time.deltaTime * _acceleration;
+    rigidbody.AddForce(desiredVelocity, ForceMode.VelocityChange);
 
-      //If player is colliding with a wall surface and if the desired
-      //velocity vector points towards the wall, project the 
-      //desired velocity vector into the surface of the plane 
-      //the player is colliding with, thus causing a sliding motion
-      //instead of being "stuck" on the wall
-      if (collidingWithWall
-        && Vector3.Angle(desiredVelocity, _samplePointOfCollidingSurface.normal) > 90f)
-      {
-        desiredVelocity = Vector3.Project(desiredVelocity, Vector3.Cross(_samplePointOfCollidingSurface.normal, Vector3.up).normalized);
-        //Apply friction from dragging along the wall, on top of floor friction
-        desiredVelocity *= 1 / (_wallFriction + 1);
-      }
-
-      //Applies the previously calculated desired velocity adjusted for deltaTime and player acceleration
-      desiredVelocity *= Time.deltaTime * _acceleration;
-      rigidbody.AddForce(desiredVelocity, ForceMode.VelocityChange);
-
-      //Prevent the Player from exceeding maxVelocity
-      Vector3 currentVelocity = rigidbody.velocity;
-      currentVelocity.y = 0;
-      if (currentVelocity.sqrMagnitude > _maxVelocity * _maxVelocity)
-      {
-        currentVelocity = currentVelocity.normalized * _maxVelocity;
-        currentVelocity.y = rigidbody.velocity.y;
-        rigidbody.velocity = currentVelocity;
-      }
+    //Prevent the Player from exceeding maxVelocity
+    Vector3 currentVelocity = rigidbody.velocity;
+    currentVelocity.y = 0;
+    if (currentVelocity.sqrMagnitude > _maxVelocity * _maxVelocity)
+    {
+      currentVelocity = currentVelocity.normalized * _maxVelocity;
+      currentVelocity.y = rigidbody.velocity.y;
+      rigidbody.velocity = currentVelocity;
     }
   }
 
