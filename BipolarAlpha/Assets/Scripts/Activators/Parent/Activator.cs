@@ -6,7 +6,8 @@ using System.Collections;
 /// The Activator interface is an interface which will be used by game objects that have the need 
 /// to be activated or deactivated. 
 /// </summary>
-public interface Activator{
+public interface Activator
+{
 
     /// <summary>
     /// Activates the object. 

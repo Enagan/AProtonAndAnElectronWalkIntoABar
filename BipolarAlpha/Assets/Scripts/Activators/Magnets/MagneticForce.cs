@@ -176,7 +176,7 @@ public class MagneticForce : MonoBehaviour, Activator
 
   public void OnDestroy()
   {
-    BipolarConsole.LousadaLog("getting destroyed");
+    
     NoLongerAffectingMagnets();
   }
 
