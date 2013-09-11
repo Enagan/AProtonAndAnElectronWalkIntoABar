@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using System.Collections;
 
+// Class that processes the saving and loading the state of the world
 public class SaveSystem : MonoBehaviour
 {
+  /// <summary>
+  /// Saves the received list of existing room states into .lvl files (in XML format), and saves
+  /// the (received) name of the active room, the paths where the room definitions are being saved
+  /// and the player's position and rotation into a SaveState class.
+  /// Saves the SaveState class as a .lvl file, in XML format.
+  /// </summary>
   public void Save(KeyValuePair<string, List<RoomDefinition>> rooms)
   {
     SaveState saveState = new SaveState();
@@ -28,6 +35,11 @@ public class SaveSystem : MonoBehaviour
     XMLSerializer.Serialize<SaveState>(saveState, "Assets/Levels/Saves/SaveState.lvl");
   }
 
+  /// <summary>
+  /// Retrieves the last saved world state from an existing .lvl file.  
+  /// Resets the player's position and rotation and returns what the active room was and the list of room definitions.
+  /// </summary>
+  /// <returns></returns>
   public KeyValuePair<string, List<RoomDefinition>> Load()
   {
     SaveState saveState = XMLSerializer.Deserialize<SaveState>("Assets/Levels/Saves/SaveState.lvl");

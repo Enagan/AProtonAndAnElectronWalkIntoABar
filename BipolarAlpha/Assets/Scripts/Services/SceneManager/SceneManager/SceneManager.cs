@@ -138,9 +138,10 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   #endregion
 
   #region Room State Saving and Loading
-
-  // save active room
-
+  /// <summary>
+  /// Sends a pair consisting of the currently active room and the list of room definitions to
+  /// the Save System, to record the current world state.
+  /// </summary>
   public void SaveRooms()
   {
     List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
@@ -161,8 +162,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     ServiceLocator.GetSaveSystem().Save(new KeyValuePair<string, List<RoomDefinition>>(_activeRoom.roomName, roomsToSave));
   }
 
-  // replace and create from previous active room
-
+  /// <summary>
+  /// Requests the SaveSystem to retrieve the last saved world state.
+  /// </summary>
   public void LoadRooms()
   {
     KeyValuePair<string, List<RoomDefinition>> loadedState = ServiceLocator.GetSaveSystem().Load();
@@ -184,7 +186,6 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       }
     }
   }
-
   #endregion
 
   #region Event Listners
