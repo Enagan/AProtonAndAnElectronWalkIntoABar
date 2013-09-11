@@ -217,6 +217,7 @@ public class MagneticForce : MonoBehaviour, Activator
 	{
     float distance = Vector3.Distance(otherMagneticForce.transform.position, this.transform.position);
     float forceFactor = 0.0f;
+    float otherForceFactor = 0.0f;
     float totalForce = 0.0f;
 
     if (distance < DUMMY_DISTANCE) 
@@ -241,7 +242,31 @@ public class MagneticForce : MonoBehaviour, Activator
         break;
       }
     }  
-    totalForce = (1 / (distance  ) * forceFactor);
+
+
+    if (distance < DUMMY_DISTANCE) 
+	  {   //This is used to prevent object with different forces to push each other after colliding
+      otherForceFactor = DUMMY_FORCE;
+    }
+    else 
+    {
+      switch (otherMagneticForce.force) 
+      {
+      case Force.LOW:
+        otherForceFactor = LOW_FORCE_FACTOR;
+        break;
+      case Force.MEDIUM:
+        otherForceFactor = MEDIUM_FORCE_FACTOR;
+        break;
+      case Force.HIGH:
+        otherForceFactor = HIGH_FORCE_FACTOR;
+        break;
+      default:
+        //throw exception perhaps
+        break;
+      }
+    }
+    totalForce = ((1 / (distance * distance)) * forceFactor * otherForceFactor);
 	  return totalForce;
   }
 }
