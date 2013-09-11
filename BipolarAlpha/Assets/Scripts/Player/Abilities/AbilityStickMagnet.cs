@@ -93,6 +93,7 @@ public class AbilityStickMagnet : Ability
   {
     GameObject magnetParent = magnet.transform.parent.gameObject;
     magnetParent.GetComponent<Rigidbody>().isKinematic = true;
+    magnetParent.layer = LayerMask.NameToLayer("HeldByPlayerMagnet");
 
     BipolarConsole.EnganaLog(_previousMagnetParent);
     _previousMagnetParent = magnetParent.transform.parent;
@@ -114,6 +115,7 @@ public class AbilityStickMagnet : Ability
     _magnetStuckToArm.transform.parent = _previousMagnetParent;
     _previousMagnetParent = null;
     _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
+    _magnetStuckToArm.layer = LayerMask.NameToLayer("Default");
     _magnetStuckToArm = null;
   }
 
