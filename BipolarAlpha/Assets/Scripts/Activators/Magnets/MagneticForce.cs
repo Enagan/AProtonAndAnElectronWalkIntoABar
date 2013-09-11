@@ -160,6 +160,12 @@ public class MagneticForce : MonoBehaviour, Activator
 	_affectingMagnets.Clear();	
   }
 
+  public void OnDestroy()
+  {
+    BipolarConsole.LousadaLog("getting destroyed");
+    NoLongerAffectingMagnets();
+  }
+
   public void OnTriggerEnter(Collider other)
   {
     MagneticForce otherMagnet = (MagneticForce) other.gameObject.GetComponent("MagneticForce");
@@ -201,7 +207,7 @@ public class MagneticForce : MonoBehaviour, Activator
   public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody) 
   {
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
-      if (_isActivated && otherMagnet.isActivated && _isMoveable) {
+      if (otherMagnet != null && otherMagnet.isActivated && _isMoveable) {
         ApplyForces(magnetBody, otherMagnet);
       }
    }
