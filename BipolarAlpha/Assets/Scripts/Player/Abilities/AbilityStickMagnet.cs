@@ -58,7 +58,7 @@ public class AbilityStickMagnet : Ability
           // In the case, during the magnet's activity, the player collides with a magnet, they stick
           if (caller.magnetColliding && _playerMagnet.charge != otherMagnetForce.charge)
           {
-            if (otherMagnetForce.isMoveable)
+            if (otherMagnetForce.isHoldable)
             {
               if (_magnetStuckToArm == null)
               {

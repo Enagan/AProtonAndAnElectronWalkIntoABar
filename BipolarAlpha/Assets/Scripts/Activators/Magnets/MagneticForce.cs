@@ -9,16 +9,15 @@ using System.Collections.Generic;
 public class MagneticForce : MonoBehaviour, Activator
 {
   #region MagneticForce Constants
-  private const float DUMMY_DISTANCE = 2.0f;
+  private const float DUMMY_DISTANCE = 0.01f;
   private const float DUMMY_FORCE = 10.0f;
 
+  private static float DISTANT_FORCE_CUTOFF = 0.5f;
+
   //ToDo - Needs fine tuning // Change these 3 variables to const
-  [SerializeField]
-  private float LOW_FORCE_FACTOR = 20.0f;
-  [SerializeField]
-  private float MEDIUM_FORCE_FACTOR = 50.0f;
-  [SerializeField]
-  private float HIGH_FORCE_FACTOR = 100.0f;
+  private static float LOW_FORCE_FACTOR = 20.0f;
+  private static float MEDIUM_FORCE_FACTOR = 50.0f;
+  private static float HIGH_FORCE_FACTOR = 100.0f;
 
   #endregion
 	
@@ -28,6 +27,9 @@ public class MagneticForce : MonoBehaviour, Activator
 
   [SerializeField]
   private bool _isMoveable = false;
+
+  [SerializeField]
+  private bool _isHoldable = false;
 	
   public enum Force { LOW, MEDIUM, HIGH };
   public enum Charge { NEGATIVE, POSITIVE};
@@ -72,6 +74,18 @@ public class MagneticForce : MonoBehaviour, Activator
     set
     {
       _isMoveable = value;
+    }
+  }
+
+  public bool isHoldable
+  {
+    get
+    {
+      return _isHoldable;
+    }
+    set
+    {
+      _isHoldable = value;
     }
   }
 
@@ -178,11 +192,20 @@ public class MagneticForce : MonoBehaviour, Activator
     NoLongerAffectedBy(otherMagnet);
   }
 
+  public virtual void Start()
+  {
+    SphereCollider collider = this.GetComponent<SphereCollider>();
+
+    //If the magnetic force has a collider attached it is it's interaction area, and this should be scaled to it's strength
+    if (collider != null)
+    {
+      collider.radius = Mathf.Sqrt(getForceValue(force) * HIGH_FORCE_FACTOR) / Mathf.Sqrt(DISTANT_FORCE_CUTOFF);
+    }
+  }
 
   public virtual void  Update()
   {
     ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
-	
   }
 
   /// <summary>
@@ -197,7 +220,7 @@ public class MagneticForce : MonoBehaviour, Activator
       forceDirection = (-1) * forceDirection;
     }
     float totalForce = getTotalForce(otherMagnet);
-    magnetBody.AddForce(totalForce * forceDirection);
+    magnetBody.AddForce(totalForce * forceDirection, ForceMode.Force);
   }
 
 
@@ -206,11 +229,15 @@ public class MagneticForce : MonoBehaviour, Activator
   /// </summary>
   public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody) 
   {
+    if (!_isMoveable)
+    {
+      return;
+    }
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
-      if (otherMagnet != null && otherMagnet.isActivated && _isMoveable) {
+      if (otherMagnet != null && otherMagnet.isActivated) {
         ApplyForces(magnetBody, otherMagnet);
       }
-   }
+    }
   }
 	
   
@@ -232,21 +259,7 @@ public class MagneticForce : MonoBehaviour, Activator
     }
     else 
     {
-      switch (force) 
-      {
-      case Force.LOW:
-        forceFactor = LOW_FORCE_FACTOR;
-        break;
-      case Force.MEDIUM:
-        forceFactor = MEDIUM_FORCE_FACTOR;
-        break;
-      case Force.HIGH:
-        forceFactor = HIGH_FORCE_FACTOR;
-        break;
-      default:
-        //throw exception perhaps
-        break;
-      }
+      forceFactor = getForceValue(force);
     }  
 
 
@@ -256,23 +269,34 @@ public class MagneticForce : MonoBehaviour, Activator
     }
     else 
     {
-      switch (otherMagneticForce.force) 
-      {
+      otherForceFactor = getForceValue(otherMagneticForce.force);
+    }
+
+    totalForce = ((forceFactor * otherForceFactor) / (distance*distance));
+	  return totalForce;
+  }
+
+  /// <summary>
+  /// Turns a enum force value into it's actual float value
+  /// </summary>
+  private float getForceValue(Force force)
+  {
+    float result = DUMMY_FORCE;
+    switch (force)
+    {
       case Force.LOW:
-        otherForceFactor = LOW_FORCE_FACTOR;
+        result = LOW_FORCE_FACTOR;
         break;
       case Force.MEDIUM:
-        otherForceFactor = MEDIUM_FORCE_FACTOR;
+        result = MEDIUM_FORCE_FACTOR;
         break;
       case Force.HIGH:
-        otherForceFactor = HIGH_FORCE_FACTOR;
+        result = HIGH_FORCE_FACTOR;
         break;
       default:
         //throw exception perhaps
         break;
-      }
     }
-    totalForce = ((1 / (distance * distance)) * forceFactor * otherForceFactor);
-	  return totalForce;
+    return result;
   }
 }
