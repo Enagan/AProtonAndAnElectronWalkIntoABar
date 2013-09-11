@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange, ObjectRoomChange }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -33,6 +33,14 @@ public class BipolarEventHandlerSystem
   public void RegisterObjectRoomChangeListner(IObjectRoomChangeListner listner)
   {
     RegisterEventListner(BipolarEvent.ObjectRoomChange, listner);
+  }
+
+  /// <summary>
+  /// Registers a new listener for Player Ability Obtain Events
+  /// </summary>
+  public void RegisterPlayerAbilityObtainListener(IPlayerAbilityObtainListener listener)
+  {
+    RegisterEventListner(BipolarEvent.PlayerAbilityObtain, listener);
   }
 
   /// <summary>
@@ -69,6 +77,17 @@ public class BipolarEventHandlerSystem
     foreach (IObjectRoomChangeListner listner in _listners[BipolarEvent.ObjectRoomChange])
     {
       listner.ListenObjectRoomChange(prevRoomName, newRoomName, objectPastDoor);
+    }
+  }
+
+  /// <summary>
+  /// Sends a Player Ability Obtain Event, should receive the new room's name
+  /// </summary>
+  public void SendPlayerAbilityObtainEvent(string newAbilityName)
+  {
+    foreach (IPlayerAbilityObtainListener listener in _listners[BipolarEvent.PlayerAbilityObtain])
+    {
+      listener.ListenPlayerAbilityObtain(newAbilityName);
     }
   }
   #endregion

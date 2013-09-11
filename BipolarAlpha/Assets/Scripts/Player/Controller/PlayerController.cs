@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
 {
 
   #region Player Settings Variables
@@ -93,10 +93,10 @@ public class PlayerController : MonoBehaviour
    if ((mainCamera = GameObject.Find("Camera")) == null)
      throw new BipolarExceptionComponentNotFound("Camera component not found");
 
-   
    //add initial abilities
    instantiateAbilities();
-   
+
+   ServiceLocator.GetEventHandlerSystem().RegisterPlayerAbilityObtainListener(this);
   }
 	
   /// <summary>
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
   /// </summary>
   public void AddAbility(string key, Ability ability)
   {
-    _usableAbilities.Add(key, ability);
+    _usableAbilities[key] = ability;
   }
 
   #region Players' Private Methods
@@ -188,16 +188,16 @@ public class PlayerController : MonoBehaviour
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
     _usableAbilities.Add("Jump", new AbilityJump());
-    /*_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera));
-    _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera));
-    */
+    _usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
+    
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
-    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
+    /*_usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
     _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera));
 
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
-    _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
+    _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);*/
   }
     #endregion
   /// <summary>
@@ -351,6 +351,21 @@ public class PlayerController : MonoBehaviour
     transform.localEulerAngles = new Vector3(0, _rotationY, 0);
     //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object
     mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+  }
+  #endregion
+
+  #region Event Listeners
+  public void ListenPlayerAbilityObtain(string newAbilityName)
+  {
+    if(newAbilityName == "Stick")
+    {
+      Camera playerCamera = this.GetComponentInChildren<Camera>();
+      AddAbility("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
+      AddAbility("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera));
+
+      AddAbility("Release1", _usableAbilities["Fire1"]);
+      AddAbility("Release2", _usableAbilities["Fire2"]);
+    }
   }
   #endregion
 }
