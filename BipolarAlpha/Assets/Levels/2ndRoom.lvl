@@ -3,6 +3,42 @@
   <roomName>2ndRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/RotatingMagnet</objectPrefabPath>
+      <position>
+        <x>-3.84922814</x>
+        <y>1.41915512</y>
+        <z>-1.385917</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/Magnet</objectPrefabPath>
+      <position>
+        <x>3.16451359</x>
+        <y>1.445745</y>
+        <z>0.06499195</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
       <position>
         <x>-6.75845575</x>
