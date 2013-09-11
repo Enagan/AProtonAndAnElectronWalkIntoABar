@@ -21,19 +21,14 @@ public class RotaryMagnetPart : MagneticForce
   {
     foreach (MagneticForce otherMagnet in base.affectingMagnets)
     {
-      if (base.isActivated && otherMagnet.isActivated)
+      if (otherMagnet != null && base.isActivated && otherMagnet.isActivated)
       {
         Vector3 localForceDirection = this.transform.InverseTransformPoint(otherMagnet.transform.position); // represent's the currect object position on local coordinations
         localForceDirection.Normalize();
-     /*   if (otherMagnet.charge != this.charge)
-        {
-          localForceDirection = (-1) * localForceDirection;
-        }*/
+
         if(otherMagnet.charge == Charge.NEGATIVE){
           localForceDirection = (-1) * localForceDirection;
         }
-
-    
         float totalForce = getTotalForce(otherMagnet);
 
         float localTorque = totalForce * localForceDirection.z / 1000;
