@@ -160,6 +160,12 @@ public class MagneticForce : MonoBehaviour, Activator
 	_affectingMagnets.Clear();	
   }
 
+  public void OnDestroy()
+  {
+    BipolarConsole.LousadaLog("getting destroyed");
+    NoLongerAffectingMagnets();
+  }
+
   public void OnTriggerEnter(Collider other)
   {
     MagneticForce otherMagnet = (MagneticForce) other.gameObject.GetComponent("MagneticForce");

@@ -21,7 +21,7 @@ public class RotaryMagnetPart : MagneticForce
   {
     foreach (MagneticForce otherMagnet in base.affectingMagnets)
     {
-      if (otherMagnet != null && base.isActivated && otherMagnet.isActivated)
+      if (base.isActivated && otherMagnet.isActivated)
       {
         Vector3 localForceDirection = this.transform.InverseTransformPoint(otherMagnet.transform.position); // represent's the currect object position on local coordinations
         localForceDirection.Normalize();

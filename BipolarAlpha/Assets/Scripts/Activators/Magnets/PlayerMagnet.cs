@@ -60,7 +60,7 @@ public class PlayerMagnet : MagneticForce
   {
     foreach (MagneticForce otherMagnet in base.affectingMagnets)
     {
-      if (otherMagnet != null && base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
+      if (base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
       {
         base.ApplyForces(magnetBody, otherMagnet);
       }
