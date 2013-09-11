@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class that records information of the state of the world
 public class SaveState
 {
   #region Private Variables
+  // Paths where the room save files are kept
   private List<string> _roomPaths;
 
+  // Room where the player was
   private string _activeRoom;
 
+  // State of the player
   private Vector3 _playerPosition;
-
   private Vector3 _playerRotation;
   #endregion
 
