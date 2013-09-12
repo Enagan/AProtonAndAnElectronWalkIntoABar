@@ -9,6 +9,7 @@ using System.Collections.Generic;
 public class PlayerMagnet : MagneticForce 
 {
   // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
+  private Vector3 currentHitPoint = default(Vector3);
   private bool _isAvailable = true;
   private int _raycastMask = ~(1 << 8);  //Ignore objects in layer 8 (Magnetic Force)
 
@@ -40,6 +41,7 @@ public class PlayerMagnet : MagneticForce
 
       if (!IsAlreadyAffectedBy(otherMagneticForce) )
       {
+        currentHitPoint = hit.point;
         otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
@@ -62,7 +64,7 @@ public class PlayerMagnet : MagneticForce
     {
       if (base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
       {
-        base.ApplyForces(magnetBody, otherMagnet);
+        base.ApplyForces(magnetBody, otherMagnet, currentHitPoint);
       }
     }
   }

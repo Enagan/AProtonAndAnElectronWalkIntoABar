@@ -211,9 +211,17 @@ public class MagneticForce : MonoBehaviour, Activator
   /// <summary>
   /// Applies the influence other objects have over this one
   /// </summary>
-  protected void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet)
+  protected void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet, Vector3 hit = default(Vector3))
   {
-    Vector3 forceDirection = otherMagnet.transform.position - this.transform.position;
+    Vector3 forceDirection = new Vector3();
+    if(hit != Vector3.zero)
+    {
+      forceDirection = hit - this.transform.position;
+    }
+    else
+    {
+      forceDirection = otherMagnet.transform.position - this.transform.position;
+    }
     forceDirection.Normalize();
     if (otherMagnet.charge == this.charge)
     {
