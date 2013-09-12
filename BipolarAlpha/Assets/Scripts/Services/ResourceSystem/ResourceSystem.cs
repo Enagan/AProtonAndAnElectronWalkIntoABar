@@ -134,6 +134,8 @@ public class ResourceSystem : MonoBehaviour
         {
           // Activates an instance
           prefab.SetActive(true);
+          prefab.transform.position = position;
+          prefab.transform.rotation = rotation;
           prefabList.Remove(prefab);
           // Returns the activated instance
           return prefab;
@@ -148,7 +150,7 @@ public class ResourceSystem : MonoBehaviour
 
     // Creates a new instance if there no available instances in the dictionary
     GameObject prefabObj = Resources.Load(pathName, typeof(GameObject)) as GameObject;
-    GameObject newInstance = GameObject.Instantiate(prefabObj) as GameObject;
+    GameObject newInstance = GameObject.Instantiate(prefabObj, position, rotation) as GameObject;
     //prefabList.Add(newInstance); -- might not be required
     newInstance.SetActive(true);
 

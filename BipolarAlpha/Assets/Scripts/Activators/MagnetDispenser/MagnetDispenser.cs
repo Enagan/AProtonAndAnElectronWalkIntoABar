@@ -27,13 +27,11 @@ public class MagnetDispenser : MonoBehaviour, Activator
     {
       if (_charge == MagneticForce.Charge.NEGATIVE)
       {
-        GameObject magnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet");
-        magnet.transform.position = this.transform.position + new Vector3(0, 2, 0);
+        GameObject magnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position + new Vector3(0, 2, 0));
       }
       else
       {
-        GameObject magnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet");
-        magnet.transform.position = this.transform.position + new Vector3(0, 2, 0);
+        GameObject magnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position + new Vector3(0, 2, 0));
       }
       _isActive = false;
     }
