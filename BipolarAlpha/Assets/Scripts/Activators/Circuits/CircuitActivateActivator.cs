@@ -12,12 +12,24 @@ public class CircuitActivateActivator : Circuit {
   public override void Activate()
   {
     _state = true;
+    MonoBehaviour[] actv = this.gameObject.GetComponents<MonoBehaviour>();
+    for (int n = 0; n < actv.Length; n++)
+    {
+      if (actv[n] is Activator && !(actv[n] is Circuit))
+      {
+        ((Activator)actv[n]).Activate();
+      }
+    }
+
     for (int i = 0; i < this.gameObject.transform.childCount; i++)
     {
-      Activator actv = (Activator) this.transform.GetChild(i).gameObject.GetComponent("Activator");
-      if (actv is Activator)
+      actv = this.transform.GetChild(i).gameObject.GetComponents<MonoBehaviour>();
+      for (int n = 0; n < actv.Length; n++)
       {
-        actv.Activate();
+        if (actv[n] is Activator && !(actv[n] is Circuit))
+        {
+          ((Activator)actv[n]).Activate();
+        }
       }
     }
   }
@@ -28,12 +40,24 @@ public class CircuitActivateActivator : Circuit {
   public override void Deactivate()
   {
     _state = false;
+    MonoBehaviour[] actv = (MonoBehaviour[])this.gameObject.GetComponents<MonoBehaviour>();
+    for (int n = 0; n < actv.Length; n++)
+    {
+      if (actv[n] is Activator && !(actv[n] is Circuit))
+      {
+        ((Activator)actv[n]).Deactivate();
+      }
+    }
+
     for (int i = 0; i < this.gameObject.transform.childCount; i++)
     {
-      Activator actv = (Activator)this.transform.GetChild(i).gameObject.GetComponent("Activator");
-      if (actv is Activator)
+      actv = (MonoBehaviour[])this.transform.GetChild(i).gameObject.GetComponents<MonoBehaviour>();
+      for (int n = 0; n < actv.Length; n++)
       {
-        actv.Deactivate();
+        if (actv[n] is Activator && !(actv[n] is Circuit))
+        {
+          ((Activator)actv[n]).Deactivate();
+        }
       }
     }
   }
