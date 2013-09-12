@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 using System.IO;
 using System;
+using System.Security.AccessControl;
 
 #pragma warning disable 0168
 
@@ -25,7 +26,15 @@ public class XMLSerializer
     try
     {
       XmlSerializer _xmlserializer = new XmlSerializer(typeof(T));
-      if (File.Exists(filename)) File.Delete(filename);
+      if (File.Exists(filename))
+      {
+        File.Delete(filename);
+      }
+      else
+      {
+        BipolarConsole.EnganaLog(filename.Substring(0,filename.LastIndexOf("/")));
+        Directory.CreateDirectory(filename.Substring(0,filename.LastIndexOf("/")));
+      }
       Stream stream = new FileStream(filename, FileMode.Create);
       _xmlserializer.Serialize(stream, value);
       stream.Flush();
