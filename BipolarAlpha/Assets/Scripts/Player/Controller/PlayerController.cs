@@ -187,17 +187,17 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
   {
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
-    _usableAbilities.Add("Jump", new AbilityJump());
-    _usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
-    _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
+    //_usableAbilities.Add("Jump", new AbilityJump());
+    //_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
+    //_usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
     
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
-    /*_usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
+    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
     _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera));
 
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
-    _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);*/
+    _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
   }
     #endregion
   /// <summary>
