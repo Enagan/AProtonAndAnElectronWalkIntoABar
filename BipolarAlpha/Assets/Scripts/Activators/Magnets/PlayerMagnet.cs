@@ -9,7 +9,8 @@ using System.Collections.Generic;
 public class PlayerMagnet : MagneticForce 
 {
   // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
-  private Vector3 currentHitPoint = default(Vector3);
+  private Vector3 _mangetHitPoint = default(Vector3);
+  private Vector3 _currentHitPoint = default(Vector3);
   private bool _isAvailable = true;
   private int _raycastMask = ~(1 << 8);  //Ignore objects in layer 8 (Magnetic Force)
 
@@ -26,6 +27,31 @@ public class PlayerMagnet : MagneticForce
     }
   }
 
+  public Vector3 currentHitPoint
+  {
+    get
+    {
+      return _currentHitPoint;
+    }
+    set
+    {
+      _currentHitPoint = value;
+    }
+  }
+
+  public Vector3 magnetHitPoint
+  {
+    get
+    {
+      return _mangetHitPoint;
+    }
+    set
+    {
+      _mangetHitPoint = value;
+    }
+  }
+
+
   /// <summary>
   /// Fires a raycast that will make a magnetic object have influence over the player if one is hit
   /// Requiers the direction the player/camera is facing 
@@ -38,10 +64,11 @@ public class PlayerMagnet : MagneticForce
     {
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
+      _currentHitPoint = hit.point;
 
       if (!IsAlreadyAffectedBy(otherMagneticForce) )
       {
-        currentHitPoint = hit.point;
+        _mangetHitPoint = hit.point;
         otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
@@ -49,6 +76,8 @@ public class PlayerMagnet : MagneticForce
     }
     else
     {
+      _mangetHitPoint = Vector3.zero;
+      _currentHitPoint = Vector3.zero;
       base.NoLongerAffectingMagnets();
     }
 
@@ -64,7 +93,7 @@ public class PlayerMagnet : MagneticForce
     {
       if (base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
       {
-        base.ApplyForces(magnetBody, otherMagnet, currentHitPoint);
+        base.ApplyForces(magnetBody, otherMagnet, _mangetHitPoint);
       }
     }
   }
