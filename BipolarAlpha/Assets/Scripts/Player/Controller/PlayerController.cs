@@ -340,13 +340,47 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
   /// <summary>
   /// Checks for player mouse input and applies all logic regarding the rotation of the player object
   /// </summary>
-  private void ManageRotation()
+  public  void ManageRotation()
   {
-    _rotationY = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
+    PlayerMagnet leftPlayerMagnet = GameObject.Find("Left Player Magnet").transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
+    PlayerMagnet rightPlayerMagnet = GameObject.Find("Right Player Magnet").transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
+   
+    Vector3 hitPoint = Vector3.zero;
+    Vector3 magnetPoint = Vector3.zero;
+    if (leftPlayerMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet with left hand    
+    {
+      hitPoint = leftPlayerMagnet.currentHitPoint;
+      magnetPoint =leftPlayerMagnet.magnetHitPoint;
+    }
+    else
+    {
+      if (rightPlayerMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet with right hand
+      {
+        hitPoint = rightPlayerMagnet.currentHitPoint;
+        magnetPoint =rightPlayerMagnet.magnetHitPoint;
+      }
+    }
+    if(hitPoint != Vector3.zero)
+    {
+      float counterActionY = -1.0f * Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime / (Vector3.Distance(magnetPoint, hitPoint) / 3 + 1.05f);
+      float actionY = Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
+       _rotationY += actionY + counterActionY;
 
-    _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity *  Time.deltaTime;
+      float counterActionX = -1.0f * Input.GetAxis("Mouse Y") * _mouseHorizontalSensitivity * Time.deltaTime / (Vector3.Distance(magnetPoint, hitPoint) / 3 + 1.05f);
+      float actionX = Input.GetAxis("Mouse Y") * _mouseHorizontalSensitivity * Time.deltaTime;
+      _rotationX += actionX + counterActionX;
+
+
+    }
+    else
+    {
+
+        _rotationY += Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
+        _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity *  Time.deltaTime;
+    }
+
+
     _rotationX = Mathf.Clamp(_rotationX, _minimumVerticalRotation, _maximumVerticalRotation);
-
     //hackish..I only rotate the player at y axis, so the collision box doesn't get affected by other rotations
     transform.localEulerAngles = new Vector3(0, _rotationY, 0);
     //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object

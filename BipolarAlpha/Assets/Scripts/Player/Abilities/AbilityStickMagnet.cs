@@ -152,6 +152,8 @@ public class AbilityStickMagnet : Ability
   public void KeyUp()
   {
     _playerMagnet.isActivated = false;
+    _playerMagnet.currentHitPoint = Vector3.zero;
+    _playerMagnet.magnetHitPoint = Vector3.zero;
   }
 
   public void KeyDown()
