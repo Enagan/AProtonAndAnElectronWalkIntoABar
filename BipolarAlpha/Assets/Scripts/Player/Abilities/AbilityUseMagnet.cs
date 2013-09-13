@@ -30,13 +30,12 @@ public class AbilityUseMagnet : Ability
     /// </summary> 
   public void Use(PlayerController caller, string key = null)
   {
-
     //Does this every Update when pressing the ability button
     MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
-
+       
     if (force != null)
     {
-      force.ApplyOtherMagnetsForces(caller.rigidbody);      
+      force.ApplyOtherMagnetsForces(caller.rigidbody);
     }
 	
   }
@@ -44,10 +43,15 @@ public class AbilityUseMagnet : Ability
   public void KeyUp()
   {
     _playerMagnet.isActivated = false;
+    //TODO Hackish way to trigger anim, should consider change
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
   }
 
   public void KeyDown()
   {
     _playerMagnet.isActivated = true;
+    //TODO Hackish way to trigger anim, should consider change
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+    
   }
 }

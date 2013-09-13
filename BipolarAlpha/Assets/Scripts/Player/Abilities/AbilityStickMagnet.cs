@@ -16,6 +16,8 @@ public class AbilityStickMagnet : Ability
 
   private bool _stuckToMagnet = false;
 
+  private bool _usingSpike = false;
+
   private static GameObject _magnetStuckToArm = null;
   private Transform _previousMagnetParent = null;
   #endregion
@@ -79,6 +81,10 @@ public class AbilityStickMagnet : Ability
             _playerMagnet.charge == otherMagnetForce.charge)
           {
             ReleaseMagnetStuckToPlayer();
+
+            //TODO SUPA Hackish Way to trigger anim, should be changed
+            _playerMagnet.transform.parent.parent.FindChild("Left Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+            _playerMagnet.transform.parent.parent.FindChild("Right Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
           }
         }
         force.ApplyOtherMagnetsForces(caller.rigidbody);
@@ -91,6 +97,9 @@ public class AbilityStickMagnet : Ability
   /// </summary>
   private void StickMagnetToPlayer(PlayerController caller, MagneticForce magnet)
   {
+    //TODO Hackish Way to trigger anim, should be changed
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+
     GameObject magnetParent = magnet.transform.parent.gameObject;
     magnetParent.GetComponent<Rigidbody>().isKinematic = true;
     magnetParent.layer = LayerMask.NameToLayer("HeldByPlayerMagnet");
@@ -112,6 +121,10 @@ public class AbilityStickMagnet : Ability
     {
       return;
     }
+
+    //TODO Hackish Way to trigger anim, should be changed
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+
     _magnetStuckToArm.transform.parent = _previousMagnetParent;
     _previousMagnetParent = null;
     _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
@@ -128,6 +141,9 @@ public class AbilityStickMagnet : Ability
     {
       return;
     }
+    //TODO Hackish Way to trigger anim, should be changed
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+
     _stuckToMagnet = true;
     caller.rigidbody.velocity = Vector3.zero;
     caller.rigidbody.angularVelocity = Vector3.zero;
@@ -144,6 +160,9 @@ public class AbilityStickMagnet : Ability
     {
       return;
     }
+    //TODO Hackish Way to trigger anim, should be changed
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+
     _stuckToMagnet = false;
     caller.transform.parent = null;
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -151,6 +170,9 @@ public class AbilityStickMagnet : Ability
 
   public void KeyUp()
   {
+    //TODO Hackish Way to trigger anim, should be changed
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+
     _playerMagnet.isActivated = false;
     _playerMagnet.currentHitPoint = Vector3.zero;
     _playerMagnet.magnetHitPoint = Vector3.zero;
@@ -158,6 +180,9 @@ public class AbilityStickMagnet : Ability
 
   public void KeyDown()
   {
+    //TODO Hackish Way to trigger anim, should be changed
+    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+
     _playerMagnet.isActivated = true;
   }
 }
