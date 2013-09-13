@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
   {
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
-    //_usableAbilities.Add("Jump", new AbilityJump());
+    _usableAbilities.Add("Jump", new AbilityJump());
     //_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
     //_usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
     

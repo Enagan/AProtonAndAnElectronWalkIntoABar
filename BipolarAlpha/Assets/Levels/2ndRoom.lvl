@@ -3,42 +3,6 @@
   <roomName>2ndRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/RotatingMagnet</objectPrefabPath>
-      <position>
-        <x>-3.84922814</x>
-        <y>1.41915512</y>
-        <z>-1.385917</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/Magnet</objectPrefabPath>
-      <position>
-        <x>3.16451359</x>
-        <y>1.445745</y>
-        <z>0.06499195</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
       <position>
         <x>-6.75845575</x>
@@ -54,6 +18,24 @@
         <x>0</x>
         <y>0</y>
         <z>90.00001</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/MovableMagnet</objectPrefabPath>
+      <position>
+        <x>0.03153324</x>
+        <y>1.6945715</y>
+        <z>1.85146737</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -247,6 +229,24 @@
         <x>14.1734209</x>
         <y>0.110773005</y>
         <z>14.1734209</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/RotatingMagnet</objectPrefabPath>
+      <position>
+        <x>-3.84922814</x>
+        <y>1.41915512</y>
+        <z>-1.385917</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
       </scale>
       <eulerAngles>
         <x>0</x>
