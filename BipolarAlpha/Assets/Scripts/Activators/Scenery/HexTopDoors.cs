@@ -29,7 +29,7 @@ public class HexTopDoors : MonoBehaviour, Activator
 
   public void Deactivate()
   {
-    ServiceLocator.GetAudioSystem().PlayQuickSFX("OpenDoor", this.transform.position);
+    ServiceLocator.GetAudioSystem().PlayQuickSFX("CloseDoor", this.transform.position);
 
     _leftPart.CrossFade("TopLeftClose");
     _rightPart.CrossFade("TopRightClose");
