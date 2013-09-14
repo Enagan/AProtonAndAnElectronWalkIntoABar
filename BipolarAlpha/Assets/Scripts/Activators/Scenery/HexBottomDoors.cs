@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Automatic doors that open when Activated and Close when Deactivated
 /// </summary>
-public class HexDoors : MonoBehaviour, Activator
+public class HexBottomDoors : MonoBehaviour, Activator
 {
   Animation _leftPart;
   Animation _rightPart;
@@ -21,15 +21,15 @@ public class HexDoors : MonoBehaviour, Activator
 
   public void Activate()
   {
-    _leftPart.Play("TopLeftOpen");
-    _rightPart.Play("TopRightOpen");
-    _centerPart.Play("TopCenterOpen");
+    _leftPart.CrossFade("BottomLeftOpen");
+    _rightPart.CrossFade("BottomRightOpen");
+    _centerPart.CrossFade("BottomCenterOpen");
   }
 
   public void Deactivate()
   {
-    _leftPart.Play("TopLeftClose");
-    _rightPart.Play("TopRightClose");
-    _centerPart.Play("TopCenterClose");
+    _leftPart.CrossFade("BottomLeftClose");
+    _rightPart.CrossFade("BottomRightClose");
+    _centerPart.CrossFade("BottomCenterClose");
   }
 }
