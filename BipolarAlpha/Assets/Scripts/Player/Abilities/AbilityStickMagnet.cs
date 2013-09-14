@@ -16,8 +16,6 @@ public class AbilityStickMagnet : Ability
 
   private bool _stuckToMagnet = false;
 
-  private bool _usingSpike = false;
-
   private static GameObject _magnetStuckToArm = null;
   private Transform _previousMagnetParent = null;
   #endregion
