@@ -1,0 +1,93 @@
+fileFormatVersion: 2
+guid: 0524e5c9a8d1a9a40bf7ca640bd23e67
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cylinder
+    100004: Torus
+    100006: Torus_001
+    100008: BottomCover
+    100010: TopCover
+    100012: Core
+    400000: //RootNode
+    400002: Cylinder
+    400004: Torus
+    400006: Torus_001
+    400008: BottomCover
+    400010: TopCover
+    400012: Core
+    2300000: //RootNode
+    2300002: Cylinder
+    2300004: Torus
+    2300006: Torus_001
+    2300008: BottomCover
+    2300010: TopCover
+    2300012: Core
+    3300000: //RootNode
+    3300002: Cylinder
+    3300004: Torus
+    3300006: Torus_001
+    3300008: BottomCover
+    3300010: TopCover
+    3300012: Core
+    4300000: Cylinder
+    4300002: Torus_001
+    4300004: Torus
+    4300006: Core
+    4300008: TopCover
+    4300010: BottomCover
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 0
+  userData: 

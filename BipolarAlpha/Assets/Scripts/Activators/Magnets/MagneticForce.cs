@@ -37,7 +37,10 @@ public class MagneticForce : MonoBehaviour, Activator
   private Force _force = Force.MEDIUM;
   [SerializeField]
   private Charge _charge = Charge.NEGATIVE;
-	
+
+  [SerializeField]
+  private List<Light> _magnetLights = new List<Light>();
+
   private List<MagneticForce> _affectingMagnets = new List<MagneticForce>();
   #endregion
 	
@@ -200,6 +203,21 @@ public class MagneticForce : MonoBehaviour, Activator
     if (collider != null)
     {
       collider.radius = Mathf.Sqrt(getForceValue(force) * HIGH_FORCE_FACTOR) / Mathf.Sqrt(DISTANT_FORCE_CUTOFF);
+    }
+
+    float g = 52f / 255f;
+    float b = 174f / 255f;
+
+    foreach(Light light in _magnetLights)
+    {
+      if(charge == Charge.NEGATIVE)
+      {
+        light.color = new Color(0, g, b);
+      }
+      else
+      {
+        light.color = Color.red;
+      }
     }
   }
 
