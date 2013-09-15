@@ -53,6 +53,7 @@ ModelImporter:
     2300026: Support_4
     2300028: Support_5
     2300030: Support_6
+    2300032: //RootNode
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -69,6 +70,7 @@ ModelImporter:
     3300026: Support_4
     3300028: Support_5
     3300030: Support_6
+    3300032: //RootNode
     4300000: Cube_005
     4300002: Cube_004
     4300004: Cube_003

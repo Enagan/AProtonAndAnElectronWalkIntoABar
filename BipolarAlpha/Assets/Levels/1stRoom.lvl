@@ -5,42 +5,6 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
       <position>
-        <x>-1.17781925</x>
-        <y>-1.33152628</y>
-        <z>19.8404865</z>
-      </position>
-      <scale>
-        <x>14.1734209</x>
-        <y>0.110773005</y>
-        <z>2.62088346</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>90.00001</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
-      <position>
-        <x>1.116996</x>
-        <y>-1.331526</y>
-        <z>17.74516</z>
-      </position>
-      <scale>
-        <x>14.1734209</x>
-        <y>0.110773005</y>
-        <z>6.47917938</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>90.00001</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
-      <position>
         <x>-6.75845575</x>
         <y>-1.331527</y>
         <z>0</z>
@@ -49,6 +13,24 @@
         <x>14.1734209</x>
         <y>0.110773005</y>
         <z>14.1734209</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>90.00001</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
+      <position>
+        <x>-1.17781925</x>
+        <y>-1.33152628</y>
+        <z>19.8404865</z>
+      </position>
+      <scale>
+        <x>14.1734209</x>
+        <y>0.110773005</y>
+        <z>2.62088346</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -198,6 +180,24 @@
         <x>0</x>
         <y>0</y>
         <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
+      <position>
+        <x>1.116996</x>
+        <y>-1.331526</y>
+        <z>17.74516</z>
+      </position>
+      <scale>
+        <x>14.1734209</x>
+        <y>0.110773005</y>
+        <z>6.47917938</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>90.00001</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -363,7 +363,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
-      <connectedToRoom>2ndRoom</connectedToRoom>
+      <connectedToRoom>FurnaceRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Gateway</objectPrefabPath>
