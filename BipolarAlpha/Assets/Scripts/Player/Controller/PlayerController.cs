@@ -360,6 +360,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
         magnetPoint =rightPlayerMagnet.magnetHitPoint;
       }
     }
+
     if(hitPoint != Vector3.zero)
     {
       float counterActionY = -1.0f * Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime / (Vector3.Distance(magnetPoint, hitPoint) / 3 + 1.05f);
@@ -369,12 +370,9 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
       float counterActionX = -1.0f * Input.GetAxis("Mouse Y") * _mouseHorizontalSensitivity * Time.deltaTime / (Vector3.Distance(magnetPoint, hitPoint) / 3 + 1.05f);
       float actionX = Input.GetAxis("Mouse Y") * _mouseHorizontalSensitivity * Time.deltaTime;
       _rotationX += actionX + counterActionX;
-
-
     }
     else
     {
-
         _rotationY += Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
         _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity *  Time.deltaTime;
     }
@@ -382,7 +380,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
 
     _rotationX = Mathf.Clamp(_rotationX, _minimumVerticalRotation, _maximumVerticalRotation);
     //hackish..I only rotate the player at y axis, so the collision box doesn't get affected by other rotations
-    transform.localEulerAngles = new Vector3(0, _rotationY, 0);
+    transform.eulerAngles = new Vector3(0, _rotationY, 0);
     //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object
     mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
   }

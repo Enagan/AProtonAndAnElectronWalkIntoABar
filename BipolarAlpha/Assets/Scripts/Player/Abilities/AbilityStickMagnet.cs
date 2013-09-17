@@ -102,7 +102,6 @@ public class AbilityStickMagnet : Ability
     magnetParent.GetComponent<Rigidbody>().isKinematic = true;
     magnetParent.layer = LayerMask.NameToLayer("HeldByPlayerMagnet");
 
-    BipolarConsole.EnganaLog(_previousMagnetParent);
     _previousMagnetParent = magnetParent.transform.parent;
     magnetParent.transform.parent = caller.transform.FindChild("Camera");
 
@@ -145,8 +144,12 @@ public class AbilityStickMagnet : Ability
     _stuckToMagnet = true;
     caller.rigidbody.velocity = Vector3.zero;
     caller.rigidbody.angularVelocity = Vector3.zero;
-    caller.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    BipolarConsole.EnganaLog(caller.transform.localRotation.eulerAngles);
     caller.transform.parent = otherMagnet.transform;
+    BipolarConsole.EnganaLog(caller.transform.localRotation.eulerAngles);
+    caller.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+    /*caller.transform.rotation = rot;*/
   }
 
   /// <summary>
@@ -162,8 +165,9 @@ public class AbilityStickMagnet : Ability
     _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
 
     _stuckToMagnet = false;
-    caller.transform.parent = null;
+    
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+    caller.transform.parent = null;
   }
 
   public void KeyUp()

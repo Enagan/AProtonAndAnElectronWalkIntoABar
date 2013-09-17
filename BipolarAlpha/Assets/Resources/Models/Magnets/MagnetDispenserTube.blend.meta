@@ -1,33 +1,20 @@
 fileFormatVersion: 2
-guid: 1e0135048b3b9ed4f86e9abe1ab16d75
+guid: aa3c662dd1d0a5d46b5876efdbfdbbb0
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: BottomLid
-    100002: //RootNode
-    100004: NurbsPath
-    100006: Pipe
-    100008: TopLid
-    400000: BottomLid
-    400002: //RootNode
-    400004: NurbsPath
-    400006: Pipe
-    400008: TopLid
-    2300000: BottomLid
-    2300002: //RootNode
-    2300004: NurbsPath
-    2300006: Pipe
-    2300008: TopLid
-    3300000: BottomLid
-    3300002: //RootNode
-    3300004: NurbsPath
-    3300006: Pipe
-    3300008: TopLid
-    4300000: Body
-    4300002: NurbsPath
-    4300004: Pipe
-    4300006: BottomLid
-    4300008: TopLid
+    100000: //RootNode
+    100002: NurbsPath
+    100004: Pipe
+    400000: //RootNode
+    400002: NurbsPath
+    400004: Pipe
+    2300000: NurbsPath
+    2300002: Pipe
+    3300000: NurbsPath
+    3300002: Pipe
+    4300000: NurbsPath
+    4300002: Pipe
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -53,7 +40,7 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
+    optimizeMeshForGPU: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
@@ -62,7 +49,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

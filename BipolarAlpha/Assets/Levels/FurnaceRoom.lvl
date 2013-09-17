@@ -42,7 +42,7 @@
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMagnet</objectPrefabPath>
       <position>
         <x>-15.6112156</x>
-        <y>9.693998</y>
+        <y>9.42183</y>
         <z>0.007584337</z>
       </position>
       <scale>
@@ -237,6 +237,42 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/FurnaceRoomStairs</objectPrefabPath>
+      <position>
+        <x>-0.473438263</x>
+        <y>6.53459454</y>
+        <z>3.89981341</z>
+      </position>
+      <scale>
+        <x>4.969606</x>
+        <y>0.918116</y>
+        <z>0.1906851</z>
+      </scale>
+      <eulerAngles>
+        <x>302.9235</x>
+        <y>90</y>
+        <z>270</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMagnet</objectPrefabPath>
+      <position>
+        <x>20.34714</x>
+        <y>9.620016</y>
+        <z>1.65910467E-06</z>
+      </position>
+      <scale>
+        <x>1.07707286</x>
+        <y>1.07707286</y>
+        <z>1.07707286</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180</y>
+        <z>270</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/FurnaceRoom</objectPrefabPath>
       <position>
         <x>-15.6083145</x>
@@ -345,6 +381,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/FurnaceRoomStairs</objectPrefabPath>
+      <position>
+        <x>-0.473438263</x>
+        <y>6.53459454</y>
+        <z>-3.87541127</z>
+      </position>
+      <scale>
+        <x>4.969606</x>
+        <y>0.918116</y>
+        <z>0.1906851</z>
+      </scale>
+      <eulerAngles>
+        <x>302.9235</x>
+        <y>90</y>
+        <z>270</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
       <position>
         <x>-21.7814159</x>
@@ -370,9 +424,9 @@
         <z>6.2584877E-07</z>
       </position>
       <scale>
-        <x>0.628264248</x>
-        <y>0.628264248</y>
-        <z>0.628264248</z>
+        <x>1.07707286</x>
+        <y>1.07707286</y>
+        <z>1.07707286</z>
       </scale>
       <eulerAngles>
         <x>-5.008956E-06</x>

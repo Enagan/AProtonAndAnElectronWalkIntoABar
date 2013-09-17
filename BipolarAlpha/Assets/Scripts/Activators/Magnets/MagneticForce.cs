@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class MagneticForce : MonoBehaviour, Activator
 {
   #region MagneticForce Constants
-  private const float DUMMY_DISTANCE = 0.01f;
+  private const float DUMMY_DISTANCE = 2.0f;
   private const float DUMMY_FORCE = 10.0f;
 
   private static float DISTANT_FORCE_CUTOFF = 0.5f;
