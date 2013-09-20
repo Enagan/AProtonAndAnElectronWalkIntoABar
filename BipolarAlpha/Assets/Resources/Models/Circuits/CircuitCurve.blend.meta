@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8bbff171ac94ddb46a09935c30bfd01d
+guid: e69aca246fd8296449522a89d3ad5699
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -11,7 +11,7 @@ ModelImporter:
     7400000: Default Take
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -40,9 +40,9 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 30
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
@@ -60,5 +60,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   additionalBone: 1
-  animationType: 2
+  animationType: 0
   userData: 
