@@ -32,7 +32,6 @@ public class XMLSerializer
       }
       else
       {
-        BipolarConsole.EnganaLog(filename.Substring(0,filename.LastIndexOf("/")));
         Directory.CreateDirectory(filename.Substring(0,filename.LastIndexOf("/")));
       }
       Stream stream = new FileStream(filename, FileMode.Create);

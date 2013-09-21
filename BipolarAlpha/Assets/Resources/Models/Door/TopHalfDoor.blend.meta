@@ -45,6 +45,10 @@ ModelImporter:
     4300010: TopDoorLeft
     4300012: TopDoorCenter
     4300014: Lock
+    6400000: Lock
+    6400002: TopDoorCenter
+    6400004: TopDoorLeft
+    6400006: TopDoorRight
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -65,7 +69,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -77,8 +81,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
+    normalSmoothAngle: 0
+    splitTangentsAcrossUV: 0
     normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1

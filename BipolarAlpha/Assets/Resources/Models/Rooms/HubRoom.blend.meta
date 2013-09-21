@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 053cb7d4687520b48a5bb546a2788e64
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Hexabool
+    100002: //RootNode
+    100004: SupportBeam4_007
+    100006: SupportBeam4_008
+    100008: SupportBeam4_009
+    100010: SupportBeam4_010
+    100012: Torus
+    100014: Torus_001
+    100016: Torus_002
+    100018: BalconySupport1
+    100020: BalconySupport1_001
+    100022: Catwalk
+    100024: Catwalk_001
+    100026: FloorDetail
+    100028: TestingZoneHubRoom
+    400000: Hexabool
+    400002: //RootNode
+    400004: SupportBeam4_007
+    400006: SupportBeam4_008
+    400008: SupportBeam4_009
+    400010: SupportBeam4_010
+    400012: Torus
+    400014: Torus_001
+    400016: Torus_002
+    400018: BalconySupport1
+    400020: BalconySupport1_001
+    400022: Catwalk
+    400024: Catwalk_001
+    400026: FloorDetail
+    400028: TestingZoneHubRoom
+    2300000: Hexabool
+    2300002: SupportBeam4_007
+    2300004: SupportBeam4_008
+    2300006: SupportBeam4_009
+    2300008: SupportBeam4_010
+    2300010: Torus
+    2300012: Torus_001
+    2300014: Torus_002
+    2300016: BalconySupport1
+    2300018: BalconySupport1_001
+    2300020: Catwalk
+    2300022: Catwalk_001
+    2300024: FloorDetail
+    2300026: TestingZoneHubRoom
+    2300028: //RootNode
+    3300000: Hexabool
+    3300002: SupportBeam4_007
+    3300004: SupportBeam4_008
+    3300006: SupportBeam4_009
+    3300008: SupportBeam4_010
+    3300010: Torus
+    3300012: Torus_001
+    3300014: Torus_002
+    3300016: BalconySupport1
+    3300018: BalconySupport1_001
+    3300020: Catwalk
+    3300022: Catwalk_001
+    3300024: FloorDetail
+    3300026: TestingZoneHubRoom
+    3300028: //RootNode
+    4300000: SupportBeam4_010
+    4300002: SupportBeam4_009
+    4300004: SupportBeam4_008
+    4300006: Torus_002
+    4300008: Hexabool
+    4300010: Torus_001
+    4300012: Torus
+    4300014: SupportBeam4_007
+    4300016: TestingZoneHubRoom
+    4300018: BalconySupport1_001
+    4300020: Catwalk_001
+    4300022: Catwalk
+    4300024: FloorDetail
+    4300026: BalconySupport1
+    6400000: BalconySupport1
+    6400002: BalconySupport1_001
+    6400004: Catwalk
+    6400006: Catwalk_001
+    6400008: FloorDetail
+    6400010: //RootNode
+    6400012: SupportBeam4_007
+    6400014: SupportBeam4_008
+    6400016: SupportBeam4_009
+    6400018: SupportBeam4_010
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 0
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 0
+  userData: 

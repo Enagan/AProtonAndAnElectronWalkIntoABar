@@ -64,9 +64,9 @@
         <z>-6.317512</z>
       </position>
       <scale>
-        <x>0.8599999</x>
+        <x>0.859999955</x>
         <y>0.859999955</y>
-        <z>0.9895434</z>
+        <z>0.989543259</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -473,11 +473,11 @@
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Gateway</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>-7.303399</x>
-        <y>27.5259018</y>
-        <z>-0.015640229</z>
+        <x>-8.231888</x>
+        <y>27.67041</y>
+        <z>0</z>
       </position>
       <scale>
         <x>1</x>
@@ -489,7 +489,7 @@
         <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
-      <connectedToRoom>1stRoom</connectedToRoom>
+      <connectedToRoom>TestingFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
 </RoomDefinition>
