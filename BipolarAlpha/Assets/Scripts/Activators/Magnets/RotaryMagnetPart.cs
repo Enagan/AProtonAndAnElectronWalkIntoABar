@@ -21,7 +21,8 @@ public class RotaryMagnetPart : MagneticForce
   {
     foreach (MagneticForce otherMagnet in base.affectingMagnets)
     {
-      if (base.isActivated && otherMagnet.isActivated)
+      if (base.isActivated && otherMagnet.isActivated 
+         && otherMagnet.transform.parent.transform.parent != this.transform.parent.transform.parent)  //so they won't affect each other if they belong to the same generator
       {
         Vector3 localForceDirection = this.transform.InverseTransformPoint(otherMagnet.transform.position); // represent's the currect object position on local coordinations
         localForceDirection.Normalize();
