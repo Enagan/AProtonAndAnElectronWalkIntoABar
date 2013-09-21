@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomPaths>
+    <string>Assets/Levels/FurnaceRoom.lvl</string>
+    <string>Assets/Levels/TestingFacilityHub.lvl</string>
+    <string>Assets/Levels/MentalAssessmentRoom.lvl</string>
+  </roomPaths>
+  <activeRoom>FurnaceRoom</activeRoom>
+  <playerPosition>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </playerPosition>
+  <playerRotation>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </playerRotation>
+</SaveState>

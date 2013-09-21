@@ -28,7 +28,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
     //TODO@Engana Ask Save Manager
     //Loads room definitions from files.
-    RoomDefinition firstRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/1stRoom.lvl");
+   /* RoomDefinition firstRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/1stRoom.lvl");
     RoomDefinition furnaceRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/FurnaceRoom.lvl");
     RoomDefinition testingFacilityHub = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/TestingFacilityHub.lvl");
     RoomDefinition secondRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/2ndRoom.lvl");
@@ -43,9 +43,16 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     _allRooms.Add(fifthRoom.roomName, fifthRoom);
     _allRooms.Add(furnaceRoom.roomName, furnaceRoom);
     _allRooms.Add(testingFacilityHub.roomName, testingFacilityHub);
+    */
+    KeyValuePair<string,List<RoomDefinition>> _initState = ServiceLocator.GetSaveSystem().LoadInitialState();
+
+    foreach (RoomDefinition room in _initState.Value)
+    {
+      _allRooms.Add(room.roomName, room);
+    }
 
     //instance the first room, temporary
-    setActiveRoom("FurnaceRoom");
+    setActiveRoom(_initState.Key);
 
     ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL1&2");
 	}
@@ -171,7 +178,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   public void LoadRooms()
   {
-    KeyValuePair<string, List<RoomDefinition>> loadedState = ServiceLocator.GetSaveSystem().Load();
+    KeyValuePair<string, List<RoomDefinition>> loadedState = ServiceLocator.GetSaveSystem().LoadSaveState();
 
     List<RoomDefinition> oldRooms = new List<RoomDefinition>();
     foreach(RoomDefinition room in loadedState.Value)

@@ -6,7 +6,7 @@ public class ResourceSystem : MonoBehaviour
 {
   // Limits the number of instances the Resource System should dinamically create
   [SerializeField]
-  private uint INSTANCE_LIMIT = 10;
+  private int INSTANCE_LIMIT = 10;
 
   // Dictionary to store existing instances of game objects
   private Dictionary<string, List<GameObject>> _availableResources = new Dictionary<string,List<GameObject>>();

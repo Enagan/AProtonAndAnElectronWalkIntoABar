@@ -40,9 +40,9 @@ public class SaveSystem : MonoBehaviour
   /// Resets the player's position and rotation and returns what the active room was and the list of room definitions.
   /// </summary>
   /// <returns></returns>
-  public KeyValuePair<string, List<RoomDefinition>> Load()
+  private KeyValuePair<string, List<RoomDefinition>> Load(string saveStatePath)
   {
-    SaveState saveState = XMLSerializer.Deserialize<SaveState>("Assets/Levels/Saves/SaveState.lvl");
+    SaveState saveState = XMLSerializer.Deserialize<SaveState>(saveStatePath);
 
     if (saveState == null)
     {
@@ -64,6 +64,16 @@ public class SaveSystem : MonoBehaviour
     player.eulerAngles = saveState.playerRotation;
 
     return new KeyValuePair<string, List<RoomDefinition>>(saveState.activeRoom, loadedRooms);
+  }
+
+  public KeyValuePair<string, List<RoomDefinition>> LoadSaveState()
+  {
+    return Load("Assets/Levels/Saves/SaveState.lvl");
+  }
+
+  public KeyValuePair<string, List<RoomDefinition>> LoadInitialState()
+  {
+    return Load("Assets/Levels/SaveState.lvl");
   }
 
   void Start()
