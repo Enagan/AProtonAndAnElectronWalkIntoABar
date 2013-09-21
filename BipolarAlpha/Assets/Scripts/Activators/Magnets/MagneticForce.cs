@@ -19,6 +19,8 @@ public class MagneticForce : MonoBehaviour, Activator
   private static float MEDIUM_FORCE_FACTOR = 50.0f;
   private static float HIGH_FORCE_FACTOR = 100.0f;
 
+  private static int _raycastMaskGeneral = 1 << 8;  //Ignore all objects that aren't on layer 8 (Magnetic Force)
+
   #endregion
 	
   #region MagneticForce Variables
@@ -185,14 +187,20 @@ public class MagneticForce : MonoBehaviour, Activator
 
   public void OnTriggerEnter(Collider other)
   {
-    MagneticForce otherMagnet = (MagneticForce) other.gameObject.GetComponent("MagneticForce");
-    AffectedBy(otherMagnet);
+    if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.tag == "Magnet")
+    {
+      MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
+      AffectedBy(otherMagnet);
+    }
   }
 
   public void OnTriggerExit(Collider other) 
   {
-    MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
-    NoLongerAffectedBy(otherMagnet);
+    if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.tag == "Magnet")
+    {
+      MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
+      NoLongerAffectedBy(otherMagnet);
+    }
   }
 
   public virtual void Start()
@@ -261,7 +269,14 @@ public class MagneticForce : MonoBehaviour, Activator
     }
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
       if (otherMagnet != null && otherMagnet.isActivated) {
-        ApplyForces(magnetBody, otherMagnet);
+        RaycastHit hit;
+        //This is used to see if there is any Magnetic Blocker between the two magnets
+        if (Physics.Raycast(this.transform.position, otherMagnet.transform.position - this.transform.position
+           , out hit, Mathf.Infinity, _raycastMaskGeneral) && hit.collider.gameObject.tag == "MagneticBlocker")
+          {
+            continue;
+          }
+          ApplyForces(magnetBody, otherMagnet);
       }
     }
   }
