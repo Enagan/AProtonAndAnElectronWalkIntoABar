@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
   /// <summary>
   /// Calls the players' Subsystem Managers
   /// </summary>
-  private void Update () {
+  private void Update () 
+  {
     ManageMovement();
     ManageRotation();
     ManageAbilities();
@@ -347,7 +348,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
    
     Vector3 hitPoint = Vector3.zero;
     Vector3 magnetPoint = Vector3.zero;
-    if (leftPlayerMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet with left hand    
+   /* if (leftPlayerMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet with left hand    
     {
       hitPoint = leftPlayerMagnet.currentHitPoint;
       magnetPoint =leftPlayerMagnet.magnetHitPoint;
@@ -372,10 +373,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
       _rotationX += actionX + counterActionX;
     }
     else
-    {
+    {*/
         _rotationY += Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
         _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity *  Time.deltaTime;
-    }
+    //}
 
 
     _rotationX = Mathf.Clamp(_rotationX, _minimumVerticalRotation, _maximumVerticalRotation);
