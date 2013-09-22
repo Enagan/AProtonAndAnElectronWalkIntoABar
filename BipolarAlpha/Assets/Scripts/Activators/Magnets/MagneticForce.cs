@@ -10,14 +10,14 @@ public class MagneticForce : MonoBehaviour, Activator
 {
   #region MagneticForce Constants
   private const float DUMMY_DISTANCE = 2.0f;
-  private const float DUMMY_FORCE = 10.0f;
+  private const float DUMMY_FORCE = 100.0f;
 
   private static float DISTANT_FORCE_CUTOFF = 0.5f;
 
   //ToDo - Needs fine tuning // Change these 3 variables to const
-  private static float LOW_FORCE_FACTOR = 20.0f;
-  private static float MEDIUM_FORCE_FACTOR = 50.0f;
-  private static float HIGH_FORCE_FACTOR = 100.0f;
+  private static float LOW_FORCE_FACTOR = 200.0f;
+  private static float MEDIUM_FORCE_FACTOR = 500.0f;
+  private static float HIGH_FORCE_FACTOR = 1000.0f;
 
   #endregion
 	
@@ -280,7 +280,7 @@ public class MagneticForce : MonoBehaviour, Activator
       forceDirection = (-1) * forceDirection;
     }
     float totalForce = getTotalForce(otherMagnet);
-    magnetBody.AddForce(totalForce * forceDirection, ForceMode.Force);
+    magnetBody.AddForce(totalForce * forceDirection * Time.deltaTime, ForceMode.Force);
   }
 
 
