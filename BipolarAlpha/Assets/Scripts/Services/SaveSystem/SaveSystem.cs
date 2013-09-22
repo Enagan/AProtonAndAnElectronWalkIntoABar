@@ -5,6 +5,8 @@ using System.Collections;
 // Class that processes the saving and loading the state of the world
 public class SaveSystem : MonoBehaviour
 {
+
+  private string _rootPath;
   /// <summary>
   /// Saves the received list of existing room states into .lvl files (in XML format), and saves
   /// the (received) name of the active room, the paths where the room definitions are being saved
@@ -21,8 +23,8 @@ public class SaveSystem : MonoBehaviour
 
     foreach(RoomDefinition room in rooms.Value)
     {
-      XMLSerializer.Serialize<RoomDefinition>(room, "Assets/Resources/Levels/Saves/" + room.roomName + ".lvl");
-      paths.Add("Assets/Resources/Levels/Saves/" + room.roomName + ".lvl");
+      XMLSerializer.Serialize<RoomDefinition>(room, _rootPath + "Saves/" + room.roomName + ".lvl");
+      paths.Add(_rootPath + "Saves/" + room.roomName + ".lvl");
     }
 
     saveState.roomPaths = paths;
@@ -32,7 +34,7 @@ public class SaveSystem : MonoBehaviour
     saveState.playerPosition = player.position;
     saveState.playerRotation = player.eulerAngles;
 
-    XMLSerializer.Serialize<SaveState>(saveState, "Assets/Resources/Levels/Saves/SaveState.lvl");
+    XMLSerializer.Serialize<SaveState>(saveState, _rootPath + "Saves/SaveState.lvl");
   }
 
   /// <summary>
@@ -68,16 +70,25 @@ public class SaveSystem : MonoBehaviour
 
   public KeyValuePair<string, List<RoomDefinition>> LoadSaveState()
   {
-    return Load("Assets/Resources/Levels/Saves/SaveState.lvl");
+    return Load(_rootPath + "Saves/SaveState.lvl");
   }
 
   public KeyValuePair<string, List<RoomDefinition>> LoadInitialState()
   {
-    return Load("Assets/Resources/Levels/SaveState.lvl");
+    return Load(_rootPath + "SaveState.lvl");
   }
 
   void Start()
   {
+    if (Application.isEditor)
+    {
+      _rootPath = "Assets/Resources/Levels/";
+    }
+    else
+    {
+      _rootPath = "BipolarAlpha_Data/Levels/";
+    }
+
     ServiceLocator.ProvideSaveSystem(this);
   }
 
