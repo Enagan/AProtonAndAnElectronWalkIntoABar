@@ -275,7 +275,6 @@ public class MagneticForce : MonoBehaviour, Activator
         RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition,otherPosition));
 
         foreach(RaycastHit singleHit in hits){
-          BipolarConsole.LousadaLog("" + singleHit.collider.gameObject.name);
           if (singleHit.collider.gameObject.tag == "MagneticBlocker")
           {
             magneticBlockerFound = true;
