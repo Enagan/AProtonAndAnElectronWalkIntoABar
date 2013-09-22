@@ -109,14 +109,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
     ManageAbilities();
   }
 
-  private void OnCollisionEnter(Collision collision) 
-  {
-    if (collision.gameObject.tag == "Magnet")
-    {
-      _magnetColliding = true;
-    }
-  }
-
   /// <summary>
   /// Updates the players state, checks for ground or wall collision,
   /// or if the player is not sticking to a magnet,
@@ -126,6 +118,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
   private void OnCollisionStay(Collision collision)
   {
       ContactPoint[] contactPoints = collision.contacts;
+
+      bool wallColliding = false;
       //Check how far from Vector.UP the colision normals are
       foreach (ContactPoint point in contactPoints)
       {
@@ -133,6 +127,11 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
         if (Vector3.Angle(point.normal, Vector3.up) > _groundAngleThreshold)
         {
           setCollidingWithWall(point);
+          wallColliding = true;
+          if (collision.gameObject.tag == "Magnet")
+          {
+            _magnetColliding = true;
+          }
         }
         //Otherwise, we're colliding with the floor, in which case, if we're airborne, we shouldn't be so anymore
         else if (airborne)
@@ -140,10 +139,12 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
           setGrounded();
         }
       }
-    if (collision.gameObject.tag == "Magnet")
-    {
-      _magnetColliding = true;
-    }
+
+      if (!wallColliding)
+      {
+        setWallCollisionFree();
+      }
+    
   }
 
   /// <summary>

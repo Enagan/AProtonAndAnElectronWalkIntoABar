@@ -144,9 +144,7 @@ public class AbilityStickMagnet : Ability
     _stuckToMagnet = true;
     caller.rigidbody.velocity = Vector3.zero;
     caller.rigidbody.angularVelocity = Vector3.zero;
-    BipolarConsole.EnganaLog(caller.transform.localRotation.eulerAngles);
     caller.transform.parent = otherMagnet.transform;
-    BipolarConsole.EnganaLog(caller.transform.localRotation.eulerAngles);
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
     /*caller.transform.rotation = rot;*/
