@@ -260,6 +260,25 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiTwoGateHighGateway</objectPrefabPath>
       <position>
+        <x>6.392284</x>
+        <y>2.98498487</y>
+        <z>3.69846177</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>59.27694</y>
+        <z>0</z>
+      </eulerAngles>
+      <connectedToRoom>PhysicalAptitudeRoom</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiTwoGateHighGateway</objectPrefabPath>
+      <position>
         <x>-6.36186075</x>
         <y>2.98498487</y>
         <z>3.71629643</z>
