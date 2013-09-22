@@ -14,6 +14,8 @@ public class PlayerMagnet : MagneticForce
   private bool _isAvailable = true;
   private int _raycastMask = ~(1 << 8);  //Ignore objects in layer 8 (Magnetic Force)
 
+  [SerializeField]
+  private Light _hittingMagnetLight = null;
 
   public bool isAvailable
   {
@@ -72,6 +74,7 @@ public class PlayerMagnet : MagneticForce
         otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
+
       return this; // leave handling for the ability
     }
     else
@@ -95,6 +98,22 @@ public class PlayerMagnet : MagneticForce
       {
         base.ApplyForces(magnetBody, otherMagnet, _mangetHitPoint);
       }
+    }
+  }
+
+  public void EnableMagnetHitHaloLight()
+  {
+    if (_hittingMagnetLight != null)
+    {
+      _hittingMagnetLight.enabled = true;
+    }
+  }
+
+  public void DisableMagnetHitHaloLight()
+  {
+    if (_hittingMagnetLight != null)
+    {
+      _hittingMagnetLight.enabled = false;
     }
   }
 

@@ -52,6 +52,7 @@ public class AbilityStickMagnet : Ability
 
       if (force != null)
       {
+        _playerMagnet.EnableMagnetHitHaloLight();
         List<MagneticForce> effectiveMagnets = force.affectingMagnets;
         foreach (MagneticForce otherMagnetForce in effectiveMagnets)
         {
@@ -86,6 +87,10 @@ public class AbilityStickMagnet : Ability
           }
         }
         force.ApplyOtherMagnetsForces(caller.rigidbody);
+      }
+      else
+      {
+        _playerMagnet.DisableMagnetHitHaloLight();
       }
     }
   }
@@ -176,6 +181,8 @@ public class AbilityStickMagnet : Ability
     _playerMagnet.isActivated = false;
     _playerMagnet.currentHitPoint = Vector3.zero;
     _playerMagnet.magnetHitPoint = Vector3.zero;
+
+    _playerMagnet.DisableMagnetHitHaloLight();
   }
 
   public void KeyDown()
