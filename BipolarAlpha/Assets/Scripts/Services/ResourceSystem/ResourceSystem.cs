@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class ResourceSystem : MonoBehaviour
 {
@@ -201,6 +203,7 @@ public class ResourceSystem : MonoBehaviour
   #region Instance Creating
   private void PopulatePrefabDictionary()
   {
+#if UNITY_EDITOR
     Object[] allPrefabs = Resources.LoadAll("Prefabs", typeof(GameObject));
     foreach (GameObject prefab in allPrefabs)
     {
@@ -211,6 +214,7 @@ public class ResourceSystem : MonoBehaviour
 
       _availableResources.Add(path, new List<GameObject>());
     }
+#endif
   }
 
   void Start()

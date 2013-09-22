@@ -1,4 +1,5 @@
 //Made By: Engana
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ public class RoomDefinitionCreator : MonoBehaviour
   {
     _objectsInRoom = ReadScene();
     RoomDefinition roomDef = createRoomDefinition(_roomName, _objectsInRoom);
-    XMLSerializer.Serialize<RoomDefinition>(roomDef, "Assets/Levels/" + roomDef.roomName + ".lvl");
+    XMLSerializer.Serialize<RoomDefinition>(roomDef, "Assets/Resources/Levels/" + roomDef.roomName + ".lvl");
 	}
 
   /// <summary>
@@ -85,3 +86,5 @@ public class RoomDefinitionCreator : MonoBehaviour
   }
 
 }
+
+#endif

@@ -21,8 +21,8 @@ public class SaveSystem : MonoBehaviour
 
     foreach(RoomDefinition room in rooms.Value)
     {
-      XMLSerializer.Serialize<RoomDefinition>(room, "Assets/Levels/Saves/" + room.roomName + ".lvl");
-      paths.Add("Assets/Levels/Saves/" + room.roomName + ".lvl");
+      XMLSerializer.Serialize<RoomDefinition>(room, "Assets/Resources/Levels/Saves/" + room.roomName + ".lvl");
+      paths.Add("Assets/Resources/Levels/Saves/" + room.roomName + ".lvl");
     }
 
     saveState.roomPaths = paths;
@@ -32,7 +32,7 @@ public class SaveSystem : MonoBehaviour
     saveState.playerPosition = player.position;
     saveState.playerRotation = player.eulerAngles;
 
-    XMLSerializer.Serialize<SaveState>(saveState, "Assets/Levels/Saves/SaveState.lvl");
+    XMLSerializer.Serialize<SaveState>(saveState, "Assets/Resources/Levels/Saves/SaveState.lvl");
   }
 
   /// <summary>
@@ -68,12 +68,12 @@ public class SaveSystem : MonoBehaviour
 
   public KeyValuePair<string, List<RoomDefinition>> LoadSaveState()
   {
-    return Load("Assets/Levels/Saves/SaveState.lvl");
+    return Load("Assets/Resources/Levels/Saves/SaveState.lvl");
   }
 
   public KeyValuePair<string, List<RoomDefinition>> LoadInitialState()
   {
-    return Load("Assets/Levels/SaveState.lvl");
+    return Load("Assets/Resources/Levels/SaveState.lvl");
   }
 
   void Start()
