@@ -263,7 +263,7 @@ public class MagneticForce : MonoBehaviour, Activator
   /// <summary>
   /// Applies the influence other objects have over this one
   /// </summary>
-  protected void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet, Vector3 hit = default(Vector3))
+  public virtual void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet, Vector3 hit = default(Vector3))
   {
     Vector3 forceDirection = new Vector3();
     if(hit != Vector3.zero)
@@ -296,7 +296,6 @@ public class MagneticForce : MonoBehaviour, Activator
     }
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
       if (otherMagnet != null && otherMagnet.isActivated && !(otherMagnet is PlayerMagnet)) {
-      
         Vector3 thisPosition = this.transform.position;
         Vector3 otherPosition = otherMagnet.transform.position;
         //This is used to see if there is any Magnetic Blocker between the two magnets
@@ -308,13 +307,14 @@ public class MagneticForce : MonoBehaviour, Activator
             magneticBlockerFound = true;
             break;
           }
+
         }
         if(magneticBlockerFound)
         {
           continue;
         }
       }
-          ApplyForces(magnetBody, otherMagnet);
+      ApplyForces(magnetBody, otherMagnet);
       
     }
   }
