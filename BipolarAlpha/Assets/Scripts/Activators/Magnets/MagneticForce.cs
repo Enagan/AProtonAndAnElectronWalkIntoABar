@@ -119,14 +119,33 @@ public class MagneticForce : MonoBehaviour, Activator
   void Activator.Activate()
   {
     _isActivated = true;
-    }
+
+    TurnOnLights();
+  }
 
   void Activator.Deactivate()
   {
     if(_isActivated)
 			NoLongerAffectingMagnets();
 	_isActivated = false;
-	
+
+  TurnOffLights();
+  }
+
+  private void TurnOnLights()
+  {
+    foreach (Light light in _magnetLights)
+    {
+      light.enabled = true;
+    }
+  }
+
+  private void TurnOffLights()
+  {
+    foreach (Light light in _magnetLights)
+    {
+      light.enabled = false;
+    }
   }
 
   /// <summary>
@@ -226,6 +245,15 @@ public class MagneticForce : MonoBehaviour, Activator
       {
         light.color = Color.red;
       }
+    }
+
+    if (!_isActivated)
+    {
+      TurnOffLights();
+    }
+    else
+    {
+      TurnOnLights();
     }
   }
 

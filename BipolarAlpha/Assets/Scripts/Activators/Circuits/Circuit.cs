@@ -30,6 +30,9 @@ public abstract class Circuit : MonoBehaviour, Activator
   // Best variable for DEBUG of logical operations
   [SerializeField]
   protected bool _state = false;
+
+  [SerializeField]
+  protected GameObject _activatedLightsParent = null;
   #endregion
 
   #region private properties
@@ -51,6 +54,18 @@ public abstract class Circuit : MonoBehaviour, Activator
     _outputs = new List<Circuit>();
     _identifier = IncrCounter;
   }
+
+  private void Start()
+  {
+    if (_state)
+    { 
+      TurnOnLights(); 
+    }
+    else
+    {
+      TurnOffLights();
+    }
+  }
   #endregion
   #region Activator interface methods
 
@@ -63,7 +78,9 @@ public abstract class Circuit : MonoBehaviour, Activator
   {
     _state = true;
     PropagateToOutputs(true);
+    TurnOnLights();
   }
+
 
   /// <summary>
   /// Deactivates the object. 
@@ -74,6 +91,35 @@ public abstract class Circuit : MonoBehaviour, Activator
   {
     _state = false;
     PropagateToOutputs(false);
+
+    TurnOffLights();
+  }
+
+
+  private void TurnOnLights()
+  {
+    if (_activatedLightsParent == null)
+    {
+      return;
+    }
+
+    foreach (Light light in _activatedLightsParent.GetComponentsInChildren<Light>())
+    {
+      light.enabled = true;
+    }
+  }
+
+  private void TurnOffLights()
+  {
+    if (_activatedLightsParent == null)
+    {
+      return;
+    }
+    
+    foreach (Light light in _activatedLightsParent.GetComponentsInChildren<Light>())
+    {
+      light.enabled = false;
+    }
   }
 
   #endregion
@@ -88,7 +134,7 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// </summary>
   public bool Input(bool state, int inputID)
   {
-    //BipolarConsole.IvoLog(CircuitName() + _identifier + " Input:" + state + " sent by " + inputID);
+    BipolarConsole.IvoLog(CircuitName() + _identifier + " Input:" + state + " sent by " + inputID);
     //Add input to dictionary
 	  _inputs[inputID] = state;
 	 

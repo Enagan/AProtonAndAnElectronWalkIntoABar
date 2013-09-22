@@ -5,60 +5,6 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>0</x>
-        <y>2.84389949</y>
-        <z>9.51226</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
-        <x>0</x>
-        <y>2.84389949</y>
-        <z>31.44349</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
-        <x>0</x>
-        <y>2.84389949</y>
-        <z>21.01169</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
         <x>3.56280756</x>
         <y>-0.230395019</y>
         <z>6.36817551</z>
@@ -151,7 +97,7 @@
       <position>
         <x>0</x>
         <y>1.20291042</y>
-        <z>27.2325935</z>
+        <z>27.2536163</z>
       </position>
       <scale>
         <x>1.5</x>
@@ -219,11 +165,65 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>2.84389949</y>
+        <z>9.51226</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>2.84389949</y>
+        <z>31.44349</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/HubExitSystem</objectPrefabPath>
       <position>
         <x>0</x>
         <y>0</y>
         <z>0</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>2.84389949</y>
+        <z>21.01169</z>
       </position>
       <scale>
         <x>1</x>
