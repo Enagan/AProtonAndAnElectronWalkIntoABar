@@ -24,6 +24,10 @@ public class CircuitOR : Circuit
       {
         state = state || b;
       }
+      if (state)
+      {
+        ServiceLocator.GetAudioSystem().PlayQuickSFX("CircuitOn",this.gameObject.transform.position,5);
+      }
       return state;
     }
 

@@ -3,24 +3,6 @@
   <roomName>FurnaceRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
-      <position>
-        <x>0.0218095779</x>
-        <y>1.15035009</y>
-        <z>0.0536551476</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
       <position>
         <x>-22.9228268</x>
@@ -64,9 +46,9 @@
         <z>0.007584337</z>
       </position>
       <scale>
-        <x>1.07707286</x>
-        <y>1.07707286</y>
-        <z>1.07707286</z>
+        <x>0.6050089</x>
+        <y>0.6050089</y>
+        <z>0.6050089</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -242,6 +224,24 @@
         <x>-5.2474823</x>
         <y>4.66871548</y>
         <z>18.5979881</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>0.0218095779</x>
+        <y>1.15035009</y>
+        <z>0.0536551476</z>
       </position>
       <scale>
         <x>1</x>

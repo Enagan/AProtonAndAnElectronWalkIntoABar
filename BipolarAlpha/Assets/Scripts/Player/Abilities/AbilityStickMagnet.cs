@@ -53,6 +53,8 @@ public class AbilityStickMagnet : Ability
       if (force != null)
       {
         _playerMagnet.EnableMagnetHitHaloLight();
+        ServiceLocator.GetAudioSystem().PlayLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform,50);
+
         List<MagneticForce> effectiveMagnets = force.affectingMagnets;
         foreach (MagneticForce otherMagnetForce in effectiveMagnets)
         {
@@ -63,11 +65,13 @@ public class AbilityStickMagnet : Ability
             {
               if (_magnetStuckToArm == null)
               {
+                ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
                 StickMagnetToPlayer(caller, otherMagnetForce);
               }
             }
             else if (!_stuckToMagnet)
             {
+              ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
               StickToMagnet(otherMagnetForce, caller);
             }
             // Deactives the player magnet while it's sticking to another magnet
@@ -91,6 +95,7 @@ public class AbilityStickMagnet : Ability
       else
       {
         _playerMagnet.DisableMagnetHitHaloLight();
+        ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
       }
     }
   }
@@ -183,6 +188,7 @@ public class AbilityStickMagnet : Ability
     _playerMagnet.magnetHitPoint = Vector3.zero;
 
     _playerMagnet.DisableMagnetHitHaloLight();
+    ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
   }
 
   public void KeyDown()

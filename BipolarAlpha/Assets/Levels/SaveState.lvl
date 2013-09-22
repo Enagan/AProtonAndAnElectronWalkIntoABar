@@ -5,7 +5,7 @@
     <string>Assets/Levels/TestingFacilityHub.lvl</string>
     <string>Assets/Levels/MentalAssessmentRoom.lvl</string>
   </roomPaths>
-  <activeRoom>FurnaceRoom</activeRoom>
+  <activeRoom>MentalAssessmentRoom</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>

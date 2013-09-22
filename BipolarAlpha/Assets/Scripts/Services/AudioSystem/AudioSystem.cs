@@ -75,6 +75,10 @@ public class AudioSystem : MonoBehaviour
   /// </summary>
   public void StopLoopingSFX(string sfxName, Transform objectEmittingSound)
   {
+    if (!_currentlyPlayingAudioObjects.ContainsKey(new KeyValuePair<Transform, string>(objectEmittingSound, sfxName)))
+    {
+      return;
+    }
     //Destroys the previously instanced object made to play the audio clip
     GameObject.Destroy(_currentlyPlayingAudioObjects[new KeyValuePair<Transform, string>(objectEmittingSound, sfxName)]);
     _currentlyPlayingAudioObjects.Remove(new KeyValuePair<Transform, string>(objectEmittingSound, sfxName));

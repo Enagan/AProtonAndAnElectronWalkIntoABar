@@ -33,7 +33,7 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner
     RaycastHit hit;
     if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))
     {
-      return true;
+      return hit.collider.gameObject.GetComponentInChildren<MagneticForce>().isActivated;
     }
     return false;
   }
