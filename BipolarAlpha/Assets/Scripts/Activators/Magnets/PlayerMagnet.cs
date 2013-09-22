@@ -12,7 +12,7 @@ public class PlayerMagnet : MagneticForce
   private Vector3 _mangetHitPoint = default(Vector3);
   private Vector3 _currentHitPoint = default(Vector3);
   private bool _isAvailable = true;
-  private int _raycastMask = ~(1 << 8);  //Ignore objects in layer 8 (Magnetic Force)
+  private int _raycastMask = ~( (1 << 8) | (1 << 13));  //Ignore objects in layer 8 (Magnetic Force) and 13 (Triggers)
 
 
   public bool isAvailable

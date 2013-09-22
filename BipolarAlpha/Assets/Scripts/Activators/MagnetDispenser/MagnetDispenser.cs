@@ -5,17 +5,18 @@ public class MagnetDispenser : MonoBehaviour, Activator
 {
   [SerializeField]
   private MagneticForce.Charge _charge = MagneticForce.Charge.NEGATIVE;
+  private GameObject _lastCreatedMagnet;
 
   #region Activator Interface functions
   void Activator.Activate()
   {
     if (_charge == MagneticForce.Charge.NEGATIVE)
     {
-      ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position);
+      _lastCreatedMagnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position);
     }
     else
     {
-      ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position);
+      _lastCreatedMagnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position);
     }
   }
 
@@ -24,4 +25,14 @@ public class MagnetDispenser : MonoBehaviour, Activator
     
   }
   #endregion
+
+  /// <summary>
+  /// Compares the given object reference to the last spawned magnet
+  /// Used primarily by the ExitTrigger of the magnet dispenser
+  /// </summary>
+
+  public bool IsLastCreated(GameObject obj)
+  {
+    return obj == _lastCreatedMagnet;
+  }
 }

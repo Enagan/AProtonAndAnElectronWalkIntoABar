@@ -9,7 +9,7 @@ public class RotaryMagnetPart : MagneticForce
 
   public override void Update()
   {
-    ApplyOtherMagnetsForces(this.transform.parent.transform.parent.rigidbody);
+    base.ApplyOtherMagnetsForces(this.transform.parent.transform.parent.rigidbody);
 
   }
 
@@ -17,10 +17,8 @@ public class RotaryMagnetPart : MagneticForce
   /// Applies the influence other objects have over this one
   /// Overrides the method from the base class in order to induse rotation on the rotary magnet
   /// </summary>
-  public override void ApplyOtherMagnetsForces(Rigidbody magnetBody)
+  public override void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet, Vector3 hit = default(Vector3))
   {
-    foreach (MagneticForce otherMagnet in base.affectingMagnets)
-    {
       if (base.isActivated && otherMagnet.isActivated 
          && otherMagnet.transform.parent.transform.parent != this.transform.parent.transform.parent)  //so they won't affect each other if they belong to the same generator
       {
@@ -37,7 +35,5 @@ public class RotaryMagnetPart : MagneticForce
         magnetBody.AddRelativeTorque(0.0f, localTorque, 0.0f); // apply torque only on the local y axis of the rotary magnet
         
       }
-    }
-
   }
 }
