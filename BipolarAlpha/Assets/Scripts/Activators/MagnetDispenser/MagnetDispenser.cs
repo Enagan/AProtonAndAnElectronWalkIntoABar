@@ -12,11 +12,11 @@ public class MagnetDispenser : MonoBehaviour, Activator
   {
     if (_charge == MagneticForce.Charge.NEGATIVE)
     {
-      _lastCreatedMagnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position);
+      _lastCreatedMagnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableNegativeMagnet", this.transform.position);
     }
     else
     {
-      _lastCreatedMagnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovableMagnet", this.transform.position);
+      _lastCreatedMagnet = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/Activators/Magnets/MovablePositiveMagnet", this.transform.position);
     }
   }
 
