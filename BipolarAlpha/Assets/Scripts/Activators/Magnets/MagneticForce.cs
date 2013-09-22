@@ -19,8 +19,6 @@ public class MagneticForce : MonoBehaviour, Activator
   private static float MEDIUM_FORCE_FACTOR = 50.0f;
   private static float HIGH_FORCE_FACTOR = 100.0f;
 
-  private static int _raycastMaskGeneral = 1 << 8;  //Ignore all objects that aren't on layer 8 (Magnetic Force)
-
   #endregion
 	
   #region MagneticForce Variables
@@ -263,21 +261,34 @@ public class MagneticForce : MonoBehaviour, Activator
   /// </summary>
   public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody) 
   {
+    bool magneticBlockerFound = false;
     if (!_isMoveable)
     {
       return;
     }
     foreach (MagneticForce otherMagnet in _affectingMagnets) {
-      if (otherMagnet != null && otherMagnet.isActivated) {
-        RaycastHit hit;
+      if (otherMagnet != null && otherMagnet.isActivated && !(otherMagnet is PlayerMagnet)) {
+      
+        Vector3 thisPosition = this.transform.position;
+        Vector3 otherPosition = otherMagnet.transform.position;
         //This is used to see if there is any Magnetic Blocker between the two magnets
-        if (Physics.Raycast(this.transform.position, otherMagnet.transform.position - this.transform.position
-           , out hit, Mathf.Infinity, _raycastMaskGeneral) && hit.collider.gameObject.tag == "MagneticBlocker")
+        RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition,otherPosition));
+
+        foreach(RaycastHit singleHit in hits){
+          BipolarConsole.LousadaLog("" + singleHit.collider.gameObject.name);
+          if (singleHit.collider.gameObject.tag == "MagneticBlocker")
           {
-            continue;
+            magneticBlockerFound = true;
+            break;
           }
-          ApplyForces(magnetBody, otherMagnet);
+        }
+        if(magneticBlockerFound)
+        {
+          continue;
+        }
       }
+          ApplyForces(magnetBody, otherMagnet);
+      
     }
   }
 	
