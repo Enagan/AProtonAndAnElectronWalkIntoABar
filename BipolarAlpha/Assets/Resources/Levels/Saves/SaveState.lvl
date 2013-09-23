@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <roomPaths>
-    <string>Assets/Resources/Levels/Saves/1stRoom.lvl</string>
-    <string>Assets/Resources/Levels/Saves/2ndRoom.lvl</string>
-    <string>Assets/Resources/Levels/Saves/3rdRoom.lvl</string>
-    <string>Assets/Resources/Levels/Saves/4thRoom.lvl</string>
-    <string>Assets/Resources/Levels/Saves/5thRoom.lvl</string>
+    <string>Assets/Resources/Levels/Saves/FurnaceRoom.lvl</string>
+    <string>Assets/Resources/Levels/Saves/TestingFacilityHub.lvl</string>
+    <string>Assets/Resources/Levels/Saves/MentalAssessmentRoom.lvl</string>
+    <string>Assets/Resources/Levels/Saves/PhysicalAptitudeRoom.lvl</string>
   </roomPaths>
-  <activeRoom>2ndRoom</activeRoom>
+  <activeRoom>FurnaceRoom</activeRoom>
   <playerPosition>
-    <x>-0.5280824</x>
-    <y>1.112877</y>
-    <z>26.5724449</z>
+    <x>4.17538443E-12</x>
+    <y>-0.751627</y>
+    <z>-8.940697E-08</z>
   </playerPosition>
   <playerRotation>
     <x>0</x>
-    <y>181.177063</y>
+    <y>0</y>
     <z>0</z>
   </playerRotation>
 </SaveState>

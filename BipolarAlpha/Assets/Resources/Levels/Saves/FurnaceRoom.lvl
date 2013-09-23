@@ -16,7 +16,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>90.00001</y>
+        <y>90.00002</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -286,7 +286,7 @@
       </scale>
       <eulerAngles>
         <x>302.9235</x>
-        <y>90</y>
+        <y>90.0000153</y>
         <z>270</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -412,7 +412,7 @@
       </scale>
       <eulerAngles>
         <x>302.9235</x>
-        <y>90</y>
+        <y>90.0000153</y>
         <z>270</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -448,8 +448,8 @@
       </scale>
       <eulerAngles>
         <x>-5.008956E-06</x>
-        <y>180</y>
-        <z>180</z>
+        <y>180.000015</y>
+        <z>180.000015</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -504,7 +504,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>90.00001</y>
+        <y>90.00002</y>
         <z>0</z>
       </eulerAngles>
       <connectedToRoom>TestingFacilityHub</connectedToRoom>

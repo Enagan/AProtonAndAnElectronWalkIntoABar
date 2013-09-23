@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, TutorialMessageTrigger }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -44,6 +44,14 @@ public class BipolarEventHandlerSystem
   }
 
   /// <summary>
+  /// Registers a new listener for TutorialMessageTrigger Events
+  /// </summary>
+  public void RegisterTutorialMessageTriggerListener(ITutorialMessageTriggerListener listener)
+  {
+    RegisterEventListner(BipolarEvent.TutorialMessageTrigger, listener);
+  }
+
+  /// <summary>
   /// Master Register event function, receives the cooresponding enum, and listner
   /// archiving them for future sending of events
   /// </summary>
@@ -63,6 +71,10 @@ public class BipolarEventHandlerSystem
   /// </summary>
   public void SendPlayerRoomChangeEvent(string newRoomName)
   {
+    if (!_listners.ContainsKey(BipolarEvent.PlayerRoomChange))
+    {
+      return;
+    }
     foreach (IPlayerRoomChangeListner listner in _listners[BipolarEvent.PlayerRoomChange])
     {
       listner.ListenPlayerRoomChange(newRoomName);
@@ -74,6 +86,10 @@ public class BipolarEventHandlerSystem
   /// </summary>
   public void SendObjectRoomChangeEvent(string prevRoomName, string newRoomName, GameObject objectPastDoor)
   {
+    if (!_listners.ContainsKey(BipolarEvent.ObjectRoomChange))
+    {
+      return;
+    }
     foreach (IObjectRoomChangeListner listner in _listners[BipolarEvent.ObjectRoomChange])
     {
       listner.ListenObjectRoomChange(prevRoomName, newRoomName, objectPastDoor);
@@ -85,9 +101,28 @@ public class BipolarEventHandlerSystem
   /// </summary>
   public void SendPlayerAbilityObtainEvent(string newAbilityName)
   {
+    if (!_listners.ContainsKey(BipolarEvent.PlayerAbilityObtain))
+    {
+      return;
+    }
     foreach (IPlayerAbilityObtainListener listener in _listners[BipolarEvent.PlayerAbilityObtain])
     {
       listener.ListenPlayerAbilityObtain(newAbilityName);
+    }
+  }
+
+  /// <summary>
+  /// Sends a Player Ability Obtain Event, should receive the new room's name
+  /// </summary>
+  public void SendTutorialMessageTriggerEvent(string tutorialMessage)
+  {
+    if (!_listners.ContainsKey(BipolarEvent.TutorialMessageTrigger))
+    {
+      return;
+    }
+    foreach (ITutorialMessageTriggerListener listener in _listners[BipolarEvent.TutorialMessageTrigger])
+    {
+      listener.ListenTutorialMessageTrigger(tutorialMessage);
     }
   }
   #endregion
