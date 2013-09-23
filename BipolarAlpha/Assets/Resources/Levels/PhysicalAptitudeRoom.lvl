@@ -3,11 +3,47 @@
   <roomName>PhysicalAptitudeRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/CheckPoint/Checkpoint</objectPrefabPath>
+      <position>
+        <x>-8.190283</x>
+        <y>23.2856655</y>
+        <z>25.4909515</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Hazard/PitHazard</objectPrefabPath>
+      <position>
+        <x>-8.190283</x>
+        <y>-24.9737625</y>
+        <z>51.2928772</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-16.8978539</x>
-        <y>-32.18134</y>
-        <z>41.86299</z>
+        <x>-17.4711361</x>
+        <y>-31.3982487</y>
+        <z>44.4575653</z>
       </position>
       <scale>
         <x>2.5</x>
@@ -57,6 +93,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-8.023826</x>
+        <y>37.1275253</y>
+        <z>61.59622</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.811359</x>
@@ -71,24 +125,6 @@
       <eulerAngles>
         <x>270</x>
         <y>30.0000038</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
-      <position>
-        <x>-11.7753754</x>
-        <y>-31.8483982</y>
-        <z>69.2903748</z>
-      </position>
-      <scale>
-        <x>2.5</x>
-        <y>2.5</y>
-        <z>75</z>
-      </scale>
-      <eulerAngles>
-        <x>270</x>
-        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -125,6 +161,24 @@
       <eulerAngles>
         <x>270</x>
         <y>30.0000038</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-8.190283</x>
+        <y>21.2583961</y>
+        <z>36.6819229</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -201,6 +255,42 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-20.3820381</x>
+        <y>28.5191917</y>
+        <z>37.73035</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-7.159973</x>
+        <y>17.63918</y>
+        <z>47.51315</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/PhysicalAptitudeRoom</objectPrefabPath>
       <position>
         <x>-8.190283</x>
@@ -229,6 +319,24 @@
         <x>1</x>
         <y>1</y>
         <z>17</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>30.0000038</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-18.18617</x>
+        <y>24.3552856</y>
+        <z>50.92873</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>18</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -309,6 +417,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-2.58380175</x>
+        <y>26.6985931</y>
+        <z>26.39041</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-5.567375</x>
@@ -345,6 +471,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-6.23411274</x>
+        <y>31.5612869</y>
+        <z>66.91916</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.45714</x>
@@ -363,20 +507,38 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
       <position>
-        <x>-3.35135841</x>
-        <y>-31.34673</y>
-        <z>50.113308</z>
+        <x>-4.33305</x>
+        <y>23.8775177</y>
+        <z>44.6191025</z>
       </position>
       <scale>
-        <x>2.5</x>
-        <y>2.5</y>
-        <z>75</z>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-10.2130775</x>
+        <y>24.6830082</y>
+        <z>46.96656</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>18.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
-        <y>0</y>
+        <y>30.0000038</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -399,29 +561,29 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-11.80236</x>
-        <y>22.7637615</y>
-        <z>69.30374</z>
+        <x>-12.5903454</x>
+        <y>26.7318439</y>
+        <z>43.9783134</z>
       </position>
       <scale>
-        <x>0.8</x>
-        <y>0.8</y>
-        <z>0.8</z>
+        <x>1</x>
+        <y>1</y>
+        <z>15.5</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>0</y>
+        <x>270</x>
+        <y>30.0000038</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-2.0477972</x>
+        <x>-2.53072023</x>
         <y>-35.8114548</y>
-        <z>63.46257</z>
+        <z>63.6407166</z>
       </position>
       <scale>
         <x>2.5</x>
@@ -437,36 +599,18 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-6.26784468</x>
-        <y>-30.97937</y>
-        <z>71.42323</z>
+        <x>-16.3078175</x>
+        <y>24.87772</y>
+        <z>51.246788</z>
       </position>
       <scale>
-        <x>2.5</x>
-        <y>2.5</y>
-        <z>78</z>
+        <x>1</x>
+        <y>1</y>
+        <z>18</z>
       </scale>
       <eulerAngles>
         <x>270</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
-      <position>
-        <x>-1.19455147</x>
-        <y>-34.37038</y>
-        <z>56.75684</z>
-      </position>
-      <scale>
-        <x>2.5</x>
-        <y>2.5</y>
-        <z>75</z>
-      </scale>
-      <eulerAngles>
-        <x>270</x>
-        <y>0</y>
+        <y>30.0000038</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -489,16 +633,16 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
       <position>
-        <x>-3.378347</x>
-        <y>23.2619972</y>
-        <z>50.126667</z>
+        <x>-8.023826</x>
+        <y>26.0400276</y>
+        <z>61.59622</z>
       </position>
       <scale>
-        <x>0.8</x>
-        <y>0.8</y>
-        <z>0.8</z>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -525,11 +669,11 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-16.92484</x>
-        <y>22.45014</y>
-        <z>41.87635</z>
+        <x>-17.4981232</x>
+        <y>23.192564</y>
+        <z>44.48518</z>
       </position>
       <scale>
         <x>0.8</x>
@@ -543,29 +687,11 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-1.22154</x>
-        <y>20.2520847</y>
-        <z>56.7702</z>
-      </position>
-      <scale>
-        <x>0.8</x>
-        <y>0.8</y>
-        <z>0.8</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
-      <position>
-        <x>-2.07478142</x>
+        <x>-2.55770445</x>
         <y>18.8140678</y>
-        <z>63.3641319</z>
+        <z>63.54228</z>
       </position>
       <scale>
         <x>0.8</x>
@@ -617,6 +743,24 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
+        <x>-11.7455912</x>
+        <y>24.8797226</y>
+        <z>46.0925636</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>18.5</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>30.0000038</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <position>
         <x>-3.44746065</x>
         <y>28.3922234</y>
         <z>37.4500237</z>
@@ -633,7 +777,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
         <x>0.3244677</x>
         <y>26.25001</y>
@@ -653,18 +797,18 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-11.326</x>
-        <y>-39.1698456</y>
-        <z>47.11185</z>
+        <x>-8.83513451</x>
+        <y>25.5210114</y>
+        <z>48.4606552</z>
       </position>
       <scale>
-        <x>2.5</x>
-        <y>2.5</y>
-        <z>75</z>
+        <x>1</x>
+        <y>1</y>
+        <z>17.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
-        <y>0</y>
+        <y>30.0000038</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -687,11 +831,11 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
       <position>
-        <x>-6.294829</x>
-        <y>25.8198776</y>
-        <z>71.4366</z>
+        <x>1.9370991</x>
+        <y>21.78475</y>
+        <z>53.01106</z>
       </position>
       <scale>
         <x>0.8</x>
@@ -699,9 +843,9 @@
         <z>0.8</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
+        <x>-4.26886828E-07</x>
+        <y>349.547241</y>
+        <z>90.00001</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -741,10 +885,10 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-13.10449</x>
-        <y>21.50883</y>
+        <x>-12.93343</x>
+        <y>21.46973</y>
         <z>34.0144958</z>
       </position>
       <scale>
@@ -755,6 +899,60 @@
       <eulerAngles>
         <x>0</x>
         <y>30.0000019</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
+      <position>
+        <x>-6.294829</x>
+        <y>37.3048172</y>
+        <z>70.0224</z>
+      </position>
+      <scale>
+        <x>0.8</x>
+        <y>0.8</y>
+        <z>0.8</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>180.000015</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>-8.010082</x>
+        <y>32.484726</y>
+        <z>74.36089</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>4.0864296</x>
+        <y>28.5191917</y>
+        <z>37.73035</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -795,6 +993,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-13.8781023</x>
+        <y>27.1921253</y>
+        <z>26.3103733</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-11.659338</x>
@@ -815,9 +1031,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-12.9681625</x>
-        <y>-34.37038</y>
-        <z>54.3354454</z>
+        <x>-11.0090656</x>
+        <y>-35.1888657</y>
+        <z>52.807148</z>
       </position>
       <scale>
         <x>2.5</x>
@@ -827,6 +1043,24 @@
       <eulerAngles>
         <x>270</x>
         <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-15.5903063</x>
+        <y>24.87772</y>
+        <z>52.86988</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>18</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>30.0000038</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -849,11 +1083,11 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-12.99515</x>
-        <y>20.24204</y>
-        <z>54.34881</z>
+        <x>-11.0360527</x>
+        <y>19.4007263</y>
+        <z>52.82051</z>
       </position>
       <scale>
         <x>0.8</x>
@@ -867,11 +1101,29 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-2.58380175</x>
+        <y>36.9823456</y>
+        <z>26.39041</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-12.9681625</x>
-        <y>-30.64377</y>
-        <z>60.689106</z>
+        <y>-31.1670933</y>
+        <z>63.86886</z>
       </position>
       <scale>
         <x>2.5</x>
@@ -885,29 +1137,11 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
         <x>-12.99515</x>
-        <y>26.1581154</y>
-        <z>60.70247</z>
-      </position>
-      <scale>
-        <x>0.8</x>
-        <y>0.8</y>
-        <z>0.8</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowMagnet</objectPrefabPath>
-      <position>
-        <x>-11.3529873</x>
-        <y>15.46167</y>
-        <z>47.12521</z>
+        <y>25.5984917</y>
+        <z>63.88222</z>
       </position>
       <scale>
         <x>0.8</x>
