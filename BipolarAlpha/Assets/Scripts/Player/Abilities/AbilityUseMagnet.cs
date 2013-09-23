@@ -40,18 +40,24 @@ public class AbilityUseMagnet : Ability
 	
   }
 
-  public void KeyUp()
+  public void KeyUp(string key = null)
   {
     _playerMagnet.isActivated = false;
     //TODO Hackish way to trigger anim, should consider change
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+    if (!key.Contains("Release"))
+    {
+      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+    }
   }
 
-  public void KeyDown()
+  public void KeyDown(string key = null)
   {
     _playerMagnet.isActivated = true;
     //TODO Hackish way to trigger anim, should consider change
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+    if (!key.Contains("Release"))
+    {
+      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+    }
     
   }
 }

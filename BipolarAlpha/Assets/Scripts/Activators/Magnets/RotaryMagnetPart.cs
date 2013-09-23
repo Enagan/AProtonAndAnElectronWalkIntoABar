@@ -22,17 +22,31 @@ public class RotaryMagnetPart : MagneticForce
       if (base.isActivated && otherMagnet.isActivated 
          && otherMagnet.transform.parent.transform.parent != this.transform.parent.transform.parent)  //so they won't affect each other if they belong to the same generator
       {
-        Vector3 localForceDirection = this.transform.InverseTransformPoint(otherMagnet.transform.position); // represent's the currect object position on local coordinations
+        Vector3 localForceDirection = this.transform.position - otherMagnet.transform.position;
+          
+          //this.transform.InverseTransformPoint(otherMagnet.transform.position); // represent's the currect object position on local coordinations
         localForceDirection.Normalize();
 
-        if(otherMagnet.charge == Charge.NEGATIVE){
+        if(otherMagnet.charge == this.charge){
           localForceDirection = (-1) * localForceDirection;
         }
+
+        Vector3 toCenterVector = magnetBody.transform.position - this.transform.position;
+        toCenterVector.Normalize();
+
+        Vector3 rotationDir = Vector3.Cross(toCenterVector, localForceDirection);
+
         float totalForce = getTotalForce(otherMagnet);
 
-        float localTorque = totalForce * localForceDirection.z / 1000;
+        Vector3 localTorque = rotationDir * totalForce * Time.deltaTime;
+        //totalForce * (1 - localForceDirection.y) * Time.deltaTime
+        //magnetBody.AddForceAtPosition(totalForce * localForceDirection, hit);
 
-        magnetBody.AddRelativeTorque(0.0f, localTorque, 0.0f); // apply torque only on the local y axis of the rotary magnet
+        BipolarConsole.EnganaLog(rotationDir);
+
+        //magnetBody.AddForceAtPosition(totalForce * localForceDirection * Time.deltaTime, hit);
+
+        magnetBody.AddTorque( localTorque); // apply torque only on the local y axis of the rotary magnet
         
       }
   }

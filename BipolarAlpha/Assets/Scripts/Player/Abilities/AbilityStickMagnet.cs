@@ -71,6 +71,11 @@ public class AbilityStickMagnet : Ability
             }
             else if (!_stuckToMagnet)
             {
+              //Pretty hackish way to get the string
+              ServiceLocator.GetEventHandlerSystem().SendTutorialMessageTriggerEvent("I see you used your handy spike to\n" +
+                                          "Stick yourself to the magnet!\n" +
+                                          "To release spike and fall back down, press\n" +
+                                            "\"Q\" or \"E\"\n");
               ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
               StickToMagnet(otherMagnetForce, caller);
             }
@@ -178,10 +183,13 @@ public class AbilityStickMagnet : Ability
     caller.transform.parent = null;
   }
 
-  public void KeyUp()
+  public void KeyUp(string key = null)
   {
-    //TODO Hackish Way to trigger anim, should be changed
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+    if (!key.Contains("Release"))
+    {
+      //TODO Hackish Way to trigger anim, should be changed
+      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+    }
 
     _playerMagnet.isActivated = false;
     _playerMagnet.currentHitPoint = Vector3.zero;
@@ -191,10 +199,13 @@ public class AbilityStickMagnet : Ability
     ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
   }
 
-  public void KeyDown()
+  public void KeyDown(string key = null)
   {
-    //TODO Hackish Way to trigger anim, should be changed
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+    if (!key.Contains("Release"))
+    {
+      //TODO Hackish Way to trigger anim, should be changed
+      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+    }
 
     _playerMagnet.isActivated = true;
   }

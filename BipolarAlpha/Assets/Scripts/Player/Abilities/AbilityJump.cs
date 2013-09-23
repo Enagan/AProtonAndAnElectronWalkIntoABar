@@ -20,7 +20,7 @@ public class AbilityJump : Ability {
     }
   }
 
-  public void KeyUp() { }
+  public void KeyUp(string key = null) { }
 
-  public void KeyDown() { }
+  public void KeyDown(string key = null) { }
 }

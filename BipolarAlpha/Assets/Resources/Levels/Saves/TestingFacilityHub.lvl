@@ -3,11 +3,11 @@
   <roomName>TestingFacilityHub</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>26.87165</x>
-        <y>35.8353958</y>
-        <z>5.87012529</z>
+        <x>3.56280756</x>
+        <y>-0.230395019</y>
+        <z>6.36817551</z>
       </position>
       <scale>
         <x>1</x>
@@ -16,34 +16,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>120.271149</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
-      <position>
-        <x>26.4311142</x>
-        <y>35.8192635</y>
-        <z>-6.36040926</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>83.57651</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>19.378727</x>
-        <y>27.801157</y>
-        <z>3.562798</z>
+        <x>3.56280756</x>
+        <y>-0.230395019</y>
+        <z>-6.08904076</z>
       </position>
       <scale>
         <x>1</x>
@@ -52,16 +34,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>31.8359451</x>
-        <y>27.801157</y>
-        <z>3.56279373</z>
+        <x>-3.48809767</x>
+        <y>-0.230395019</y>
+        <z>6.36817551</z>
       </position>
       <scale>
         <x>1</x>
@@ -70,34 +52,34 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/HubRoomTutorial</objectPrefabPath>
       <position>
-        <x>19.3787251</x>
-        <y>27.801157</y>
-        <z>-3.488108</z>
+        <x>0.06501125</x>
+        <y>0.888371944</y>
+        <z>0.70271796</z>
       </position>
       <scale>
-        <x>1</x>
+        <x>5.28762436</x>
         <y>1</y>
         <z>1</z>
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>180.691</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/HubRoom</objectPrefabPath>
       <position>
-        <x>25.7469025</x>
-        <y>28.3178482</y>
-        <z>-1.21517605E-05</z>
+        <x>0</x>
+        <y>0.286295176</y>
+        <z>0</z>
       </position>
       <scale>
         <x>1.5</x>
@@ -106,16 +88,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>31.8359413</x>
-        <y>27.801157</y>
-        <z>-3.48811245</z>
+        <x>-3.48809767</x>
+        <y>-0.230395019</y>
+        <z>-6.08904076</z>
       </position>
       <scale>
         <x>1</x>
@@ -124,16 +106,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/Tunnel</objectPrefabPath>
       <position>
-        <x>-1.50671673</x>
-        <y>29.2344627</y>
-        <z>-2.40510826E-06</z>
+        <x>0</x>
+        <y>1.20291042</y>
+        <z>27.2536163</z>
       </position>
       <scale>
         <x>1.5</x>
@@ -142,16 +124,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>25.70707</x>
-        <y>33.71262</y>
-        <z>5.12296057</z>
+        <x>5.122972</x>
+        <y>5.68106747</y>
+        <z>0.03983736</z>
       </position>
       <scale>
         <x>1</x>
@@ -160,16 +142,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/Tunnel</objectPrefabPath>
       <position>
-        <x>11.994772</x>
-        <y>29.2344627</y>
-        <z>-7.23361654E-06</z>
+        <x>0</x>
+        <y>1.20291042</y>
+        <z>13.75213</z>
       </position>
       <scale>
         <x>1.5</x>
@@ -178,16 +160,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
       <position>
-        <x>25.7070656</x>
-        <y>33.71262</y>
-        <z>-5.178941</z>
+        <x>-6.360396</x>
+        <y>7.78771</y>
+        <z>-0.684217036</z>
       </position>
       <scale>
         <x>1</x>
@@ -196,16 +178,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>173.576477</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>16.234642</x>
-        <y>30.875452</y>
-        <z>-8.749912E-06</z>
+        <x>-5.178928</x>
+        <y>5.68106747</y>
+        <z>0.03983736</z>
       </position>
       <scale>
         <x>1</x>
@@ -214,16 +196,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>-5.69659042</x>
-        <y>30.875452</y>
-        <z>-9.06693E-07</z>
+        <x>0</x>
+        <y>2.84389949</y>
+        <z>9.51226</z>
       </position>
       <scale>
         <x>1</x>
@@ -232,16 +214,34 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>2.84389949</y>
+        <z>31.44349</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/HubExitSystem</objectPrefabPath>
       <position>
-        <x>25.7469025</x>
-        <y>28.0315533</y>
-        <z>-1.21517605E-05</z>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
       </position>
       <scale>
         <x>1</x>
@@ -250,16 +250,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>4.73521042</x>
-        <y>30.875452</y>
-        <z>-4.63739525E-06</z>
+        <x>0</x>
+        <y>2.84389949</y>
+        <z>21.01169</z>
       </position>
       <scale>
         <x>1</x>
@@ -268,7 +268,25 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
+      <position>
+        <x>6.173339</x>
+        <y>7.78771</y>
+        <z>-1.150934</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>173.576477</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -277,9 +295,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>-8.231888</x>
-        <y>27.67041</y>
-        <z>0</z>
+        <x>0</x>
+        <y>-0.361142755</y>
+        <z>33.9787865</z>
       </position>
       <scale>
         <x>1</x>
@@ -288,7 +306,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270.000031</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
       <connectedToRoom>FurnaceRoom</connectedToRoom>
@@ -296,9 +314,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiTwoGateHighGateway</objectPrefabPath>
       <position>
-        <x>22.0306034</x>
-        <y>31.0165367</y>
-        <z>-6.361872</z>
+        <x>-6.36186075</x>
+        <y>2.98498487</y>
+        <z>3.71629643</z>
       </position>
       <scale>
         <x>1</x>
@@ -307,7 +325,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>211.100052</y>
+        <y>301.1</y>
         <z>0</z>
       </eulerAngles>
       <connectedToRoom>MentalAssessmentRoom</connectedToRoom>
@@ -315,9 +333,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiTwoGateHighGateway</objectPrefabPath>
       <position>
-        <x>22.0398388</x>
-        <y>31.0165367</y>
-        <z>6.402703</z>
+        <x>6.402713</x>
+        <y>2.98498487</y>
+        <z>3.7070663</z>
       </position>
       <scale>
         <x>1</x>
@@ -326,7 +344,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>328.9518</y>
+        <y>58.951767</y>
         <z>0</z>
       </eulerAngles>
       <connectedToRoom>PhysicalAptitudeRoom</connectedToRoom>

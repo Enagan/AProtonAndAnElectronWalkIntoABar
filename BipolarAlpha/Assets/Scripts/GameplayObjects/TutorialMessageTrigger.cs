@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-enum TutorialMessage { Generators, OppositeMagnets }
+public enum TutorialMessage { Generators, OppositeMagnets, HubRoom, StartGame, StickToMagnets }
 
 public class TutorialMessageTrigger : MonoBehaviour {
 
@@ -20,6 +20,31 @@ public class TutorialMessageTrigger : MonoBehaviour {
     _messages[TutorialMessage.OppositeMagnets] = "Equally charged magnets \n" +
                                             "when activated \n" +
                                             "strongly repel each other \n";
+
+    _messages[TutorialMessage.HubRoom] = "See those circuits? It appears that\n" +
+                                         "the door ahead can be opened by \n" +
+                                         "something in the balconies above \n";
+
+    _messages[TutorialMessage.StartGame] = "> MagOS restored sucessfully\n" +
+                             "> Situational Awareness Module Activated\n" +
+                             "> Previous Directive Restored: \n" +
+                             "      Pass Quality Assurance\n" +
+                             "\n" +
+                             "> Current Step: Exit Recycling Container\n" +
+                             "\n" +
+                             "> Positive Directional Magnet Driver Corrupted\n" +
+                             "> ...\n" +
+                             "> ...\n" +
+                             "> ...\n" +
+                             "> Positive Directional Magnet Driver Restored:\n" +
+                             "> Advisor Subroutine:\n" +
+                             "      Use left mouse button to activate\n" +
+                             "      your directional magnet.\n" +
+                             "      Point it at negative charged magnets (blue)\n" +
+                             "      For rapid magnetic approximation\n" +
+                             "\n(press \"z\" to dismiss command line)";
+
+
   }
 
   private void OnTriggerEnter(Collider other)

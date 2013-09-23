@@ -57,6 +57,7 @@ public abstract class Circuit : MonoBehaviour, Activator
 
   private void Start()
   {
+    PropagateToOutputs();
     if (_state)
     { 
       TurnOnLights(); 

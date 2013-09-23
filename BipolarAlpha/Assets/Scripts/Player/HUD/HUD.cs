@@ -75,26 +75,6 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner, ITutorialMessageTrig
     ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
     ServiceLocator.GetEventHandlerSystem().RegisterTutorialMessageTriggerListener(this);
 
-    //Starting command line message
-    _currentlyDisplayedTip = "> MagOS restored sucessfully\n" +
-                             "> Situational Awareness Module Activated\n" +
-                             "> Previous Directive Restored: \n" +
-                             "      Pass Quality Assurance\n" +
-                             "\n" +
-                             "> Current Step: Exit Recycling Container\n" +
-                             "\n" +
-                             "> Positive Directional Magnet Driver Corrupted\n" +
-                             "> ...\n" +
-                             "> ...\n" +
-                             "> ...\n" +
-                             "> Positive Directional Magnet Driver Restored:\n" +
-                             "> Advisor Subroutine:\n" +
-                             "      Use left mouse button to activate\n" +
-                             "      your directional magnet.\n" +
-                             "      Point it at negative charged magnets (blue)\n" +
-                             "      For rapid magnetic approximation\n" +
-                             "\n(press \"z\" to dismiss command line)";
-
     _commandLineStyle = new GUIStyle();
     _commandLineStyle.font = _commandLineFont;
     _commandLineStyle.normal.textColor = Color.green;

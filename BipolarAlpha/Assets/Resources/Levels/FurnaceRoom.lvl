@@ -3,24 +3,6 @@
   <roomName>FurnaceRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/TutorialMessageGates/OppositeMagnetsMessage</objectPrefabPath>
-      <position>
-        <x>-18.5307331</x>
-        <y>10.9350023</y>
-        <z>0.0490252972</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>90.00001</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
       <position>
         <x>-22.9228268</x>
@@ -35,6 +17,24 @@
       <eulerAngles>
         <x>0</x>
         <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/OppositeMagnetsMessage</objectPrefabPath>
+      <position>
+        <x>-18.5307331</x>
+        <y>10.9350023</y>
+        <z>0.0490252972</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -57,20 +57,38 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMagnet</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-15.6112156</x>
-        <y>9.42183</y>
-        <z>0.007584337</z>
+        <x>-15.6175671</x>
+        <y>9.408309</y>
+        <z>0.0137962084</z>
       </position>
       <scale>
-        <x>0.6050089</x>
-        <y>0.6050089</y>
-        <z>0.6050089</z>
+        <x>0.953941166</x>
+        <y>0.953941166</y>
+        <z>0.953941166</z>
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>0.7137386</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/StartGane</objectPrefabPath>
+      <position>
+        <x>-0.0684490055</x>
+        <y>-1.48837566</y>
+        <z>0.1915624</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>90</x>
+        <y>90</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>

@@ -6,15 +6,15 @@
     <string>Assets/Resources/Levels/Saves/MentalAssessmentRoom.lvl</string>
     <string>Assets/Resources/Levels/Saves/PhysicalAptitudeRoom.lvl</string>
   </roomPaths>
-  <activeRoom>FurnaceRoom</activeRoom>
+  <activeRoom>PhysicalAptitudeRoom</activeRoom>
   <playerPosition>
-    <x>4.17538443E-12</x>
-    <y>-0.751627</y>
-    <z>-8.940697E-08</z>
+    <x>38.7841</x>
+    <y>4.57127857</y>
+    <z>28.6346569</z>
   </playerPosition>
   <playerRotation>
     <x>0</x>
-    <y>0</y>
+    <y>108.298042</y>
     <z>0</z>
   </playerRotation>
 </SaveState>

@@ -16,11 +16,11 @@ public interface Ability{
   /// <summary>
   /// The key that activates the ability has been pressed down
   /// </summary>
-  void KeyDown();
+  void KeyDown(string key = null);
 
   /// <summary>
   /// The key that activates the ability has been lifted up
   /// </summary>
-  void KeyUp();
+  void KeyUp(string key = null);
 
 }

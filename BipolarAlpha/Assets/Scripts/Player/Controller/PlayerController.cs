@@ -266,13 +266,13 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
 
       if (Input.GetButtonUp(ability.Key))
       {
-        ability.Value.KeyUp();
+        ability.Value.KeyUp(ability.Key);
         continue;
       }
 
       if (Input.GetButtonDown(ability.Key))
       {
-        ability.Value.KeyDown();
+        ability.Value.KeyDown(ability.Key);
         continue;
       }
 

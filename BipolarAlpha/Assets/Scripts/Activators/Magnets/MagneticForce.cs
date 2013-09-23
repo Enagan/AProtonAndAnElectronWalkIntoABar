@@ -16,7 +16,7 @@ public class MagneticForce : MonoBehaviour, Activator
 
   //ToDo - Needs fine tuning // Change these 3 variables to const
   private static float LOW_FORCE_FACTOR = 100.0f;
-  private static float MEDIUM_FORCE_FACTOR = 500.0f;
+  private static float MEDIUM_FORCE_FACTOR = 250.0f;
   private static float HIGH_FORCE_FACTOR = 1000.0f;
 
   #endregion
