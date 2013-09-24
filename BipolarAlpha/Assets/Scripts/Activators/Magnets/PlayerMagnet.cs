@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class PlayerMagnet : MagneticForce 
 {
   // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
-  private Vector3 _mangetHitPoint = default(Vector3);
+  private Vector3 _magnetHitPoint = default(Vector3);
   private Vector3 _currentHitPoint = default(Vector3);
   private bool _isAvailable = true;
   private int _raycastMask = ~( (1 << 8) | (1 << 13));  //Ignore objects in layer 8 (Magnetic Force) and 13 (Triggers)
@@ -45,11 +45,11 @@ public class PlayerMagnet : MagneticForce
   {
     get
     {
-      return _mangetHitPoint;
+      return _magnetHitPoint;
     }
     set
     {
-      _mangetHitPoint = value;
+      _magnetHitPoint = value;
     }
   }
 
@@ -70,16 +70,16 @@ public class PlayerMagnet : MagneticForce
 
       if (!IsAlreadyAffectedBy(otherMagneticForce) )
       {
-        _mangetHitPoint = hit.point;
+        _magnetHitPoint = hit.point;
         otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
-
+      BipolarConsole.EnganaLog("WUT");
       return this; // leave handling for the ability
     }
     else
     {
-      _mangetHitPoint = Vector3.zero;
+      _magnetHitPoint = Vector3.zero;
       _currentHitPoint = Vector3.zero;
       base.NoLongerAffectingMagnets();
     }
@@ -96,7 +96,7 @@ public class PlayerMagnet : MagneticForce
     {
       if (base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
       {
-        base.ApplyForces(magnetBody, otherMagnet, _mangetHitPoint);
+        base.ApplyForces(magnetBody, otherMagnet, _magnetHitPoint);
       }
     }
   }

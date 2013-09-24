@@ -49,22 +49,28 @@ public class AbilityStickMagnet : Ability
     {
       //Does this every Update when pressing the ability button
       MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
-
+      
       if (force != null)
       {
+        BipolarConsole.EnganaLog(force.affectingMagnets);
         _playerMagnet.EnableMagnetHitHaloLight();
         ServiceLocator.GetAudioSystem().PlayLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform,50);
 
         List<MagneticForce> effectiveMagnets = force.affectingMagnets;
+        
         foreach (MagneticForce otherMagnetForce in effectiveMagnets)
         {
+          
           // In the case, during the magnet's activity, the player collides with a magnet, they stick
           if (caller.magnetColliding && _playerMagnet.charge != otherMagnetForce.charge)
           {
+            
             if (otherMagnetForce.isHoldable)
             {
+              
               if (_magnetStuckToArm == null)
               {
+
                 ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
                 StickMagnetToPlayer(caller, otherMagnetForce);
               }
@@ -88,8 +94,8 @@ public class AbilityStickMagnet : Ability
           if (otherMagnetForce.transform.parent.gameObject == _magnetStuckToArm &&
             _playerMagnet.charge == otherMagnetForce.charge)
           {
-            ReleaseMagnetStuckToPlayer();
-
+            ReleaseMagnetStuckToPlayer(true);
+            
             //TODO SUPA Hackish Way to trigger anim, should be changed
             _playerMagnet.transform.parent.parent.FindChild("Left Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
             _playerMagnet.transform.parent.parent.FindChild("Right Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
@@ -127,7 +133,7 @@ public class AbilityStickMagnet : Ability
   /// <summary>
   /// Releases the currently held magnet from the players grasp
   /// </summary>
-  private void ReleaseMagnetStuckToPlayer()
+  private void ReleaseMagnetStuckToPlayer(bool initialRepulsion = false)
   {
     if (_magnetStuckToArm == null)
     {
@@ -141,6 +147,10 @@ public class AbilityStickMagnet : Ability
     _previousMagnetParent = null;
     _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
     _magnetStuckToArm.layer = LayerMask.NameToLayer("Default");
+    if (initialRepulsion)
+    {
+      _magnetStuckToArm.rigidbody.AddForce(_playerCamera.transform.forward * _playerMagnet.getForceValue(_playerMagnet.force));
+    }
     _magnetStuckToArm = null;
   }
 

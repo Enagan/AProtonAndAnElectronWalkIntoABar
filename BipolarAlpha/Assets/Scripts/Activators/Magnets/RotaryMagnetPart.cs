@@ -6,10 +6,16 @@ using System.Collections;
 /// </summary>
 public class RotaryMagnetPart : MagneticForce
 {
-
   public override void Update()
   {
-    base.ApplyOtherMagnetsForces(this.transform.parent.transform.parent.rigidbody);
+    if (parentToAffect == null)
+    {
+      base.ApplyOtherMagnetsForces(this.transform.parent.transform.parent.rigidbody);
+    }
+    else
+    {
+      base.ApplyOtherMagnetsForces(parentToAffect.rigidbody);
+    }
 
   }
 
@@ -41,8 +47,6 @@ public class RotaryMagnetPart : MagneticForce
         Vector3 localTorque = rotationDir * totalForce * Time.deltaTime;
         //totalForce * (1 - localForceDirection.y) * Time.deltaTime
         //magnetBody.AddForceAtPosition(totalForce * localForceDirection, hit);
-
-        BipolarConsole.EnganaLog(rotationDir);
 
         //magnetBody.AddForceAtPosition(totalForce * localForceDirection * Time.deltaTime, hit);
 

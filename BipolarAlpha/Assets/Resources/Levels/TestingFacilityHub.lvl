@@ -39,6 +39,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>8.692353</y>
+        <z>-4.0203104</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>6.63219357</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
         <x>-3.48809767</x>
@@ -165,6 +183,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>8.692353</y>
+        <z>-5.998559</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>6.63219357</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
       <position>
         <x>-6.360396</x>
@@ -196,6 +232,24 @@
       </scale>
       <eulerAngles>
         <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>8.692353</y>
+        <z>-2.1655755</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>6.63219357</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
         <y>0</y>
         <z>0</z>
       </eulerAngles>
@@ -329,6 +383,25 @@
         <z>0</z>
       </eulerAngles>
       <connectedToRoom>MentalAssessmentRoom</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>-2.58072869E-10</x>
+        <y>-0.361142755</y>
+        <z>-7.132192</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <connectedToRoom>MentalPhysicalCoordinationRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiTwoGateHighGateway</objectPrefabPath>

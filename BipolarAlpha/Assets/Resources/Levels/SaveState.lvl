@@ -5,8 +5,9 @@
     <string>Assets/Resources/Levels/TestingFacilityHub.lvl</string>
     <string>Assets/Resources/Levels/MentalAssessmentRoom.lvl</string>
     <string>Assets/Resources/Levels/PhysicalAptitudeRoom.lvl</string>
+   <string>Assets/Resources/Levels/MentalPhysicalCoordinationRoom.lvl</string>
   </roomPaths>
-  <activeRoom>FurnaceRoom</activeRoom>
+  <activeRoom>MentalPhysicalCoordinationRoom</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>

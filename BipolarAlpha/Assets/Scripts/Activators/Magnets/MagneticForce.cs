@@ -41,6 +41,9 @@ public class MagneticForce : MonoBehaviour, Activator
   [SerializeField]
   private List<Light> _magnetLights = new List<Light>();
 
+  [SerializeField]
+  protected GameObject parentToAffect = null;
+
   private List<MagneticForce> _affectingMagnets = new List<MagneticForce>();
   #endregion
 	
@@ -151,6 +154,10 @@ public class MagneticForce : MonoBehaviour, Activator
   /// </summary>
   public void AffectedBy(MagneticForce otherMagnet)
   {
+    if(_affectingMagnets.Contains(otherMagnet))
+    {
+      return;
+    }
     _affectingMagnets.Add(otherMagnet);
   }
 
@@ -204,10 +211,43 @@ public class MagneticForce : MonoBehaviour, Activator
 
   public void OnTriggerEnter(Collider other)
   {
-    if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.tag == "Magnet")
+    CheckForMagnetAffecting(other);
+  }
+
+  public void OnTriggerStay(Collider other)
+  {
+    if (_isMoveable)
     {
-      MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
-      AffectedBy(otherMagnet);
+      CheckForMagnetAffecting(other);
+    }
+  }
+
+  private void CheckForMagnetAffecting(Collider other)
+  {
+    MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
+    if (other.gameObject.transform.parent != null && 
+      other.gameObject.transform.parent.tag == "Magnet" && 
+      !(_affectingMagnets.Contains(otherMagnet)))
+    {
+      bool magneticBlockerFound = false;
+      Vector3 thisPosition = this.transform.position;
+      Vector3 otherPosition = other.transform.position;
+      RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition, otherPosition));
+
+      foreach (RaycastHit singleHit in hits)
+      {
+        if (singleHit.collider.gameObject.tag == "MagneticBlocker")
+        {
+          magneticBlockerFound = true;
+          break;
+        }
+
+      }
+      if (!magneticBlockerFound)
+      {
+        
+        AffectedBy(otherMagnet);
+      }
     }
   }
 
@@ -257,7 +297,15 @@ public class MagneticForce : MonoBehaviour, Activator
 
   public virtual void  Update()
   {
-    ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
+    if (parentToAffect == null)
+    {
+      ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
+    }
+    else
+    {
+      ApplyOtherMagnetsForces(parentToAffect.rigidbody);
+    }
+
   }
 
   /// <summary>
@@ -287,35 +335,18 @@ public class MagneticForce : MonoBehaviour, Activator
   /// <summary>
   /// Checks if magnets will influence each other
   /// </summary>
-  public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody) 
+  public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody)
   {
-    bool magneticBlockerFound = false;
     if (!_isMoveable)
     {
       return;
     }
-    foreach (MagneticForce otherMagnet in _affectingMagnets) {
-      if (otherMagnet != null && otherMagnet.isActivated && !(otherMagnet is PlayerMagnet)) {
-        Vector3 thisPosition = this.transform.position;
-        Vector3 otherPosition = otherMagnet.transform.position;
-        //This is used to see if there is any Magnetic Blocker between the two magnets
-        RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition,otherPosition));
-
-        foreach(RaycastHit singleHit in hits){
-          if (singleHit.collider.gameObject.tag == "MagneticBlocker")
-          {
-            magneticBlockerFound = true;
-            break;
-          }
-
-        }
-        if(magneticBlockerFound)
-        {
-          continue;
-        }
+    foreach (MagneticForce otherMagnet in _affectingMagnets)
+    {
+      if (otherMagnet != null && otherMagnet.isActivated)
+      {
+        ApplyForces(magnetBody, otherMagnet);
       }
-      ApplyForces(magnetBody, otherMagnet);
-      
     }
   }
 	
@@ -358,7 +389,7 @@ public class MagneticForce : MonoBehaviour, Activator
   /// <summary>
   /// Turns a enum force value into it's actual float value
   /// </summary>
-  private float getForceValue(Force force)
+  public float getForceValue(Force force)
   {
     float result = DUMMY_FORCE;
     switch (force)

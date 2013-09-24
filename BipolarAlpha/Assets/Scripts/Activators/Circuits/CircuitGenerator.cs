@@ -26,7 +26,6 @@ public class CircuitGenerator : Circuit {
       {
         // Circuit is disabled
         Deactivate();
-        BipolarConsole.IvoLog("Generator OFF");
       }
     }
     else
@@ -35,7 +34,6 @@ public class CircuitGenerator : Circuit {
       {
         // Circuit is enabled
         Activate();
-        BipolarConsole.IvoLog("Generator ON");
       }
     }
   }
