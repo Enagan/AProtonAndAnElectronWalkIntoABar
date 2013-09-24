@@ -16,6 +16,10 @@ ModelImporter:
     100020: SupportBeam4_001
     100022: SupportBeam4_002
     100024: SupportBeam4_003
+    100026: SupportBeam4_004
+    100028: SupportBeam4_005
+    100030: SupportBeam4_006
+    100032: SupportBeam4_011
     400000: Catwalk_000
     400002: Catwalk_001
     400004: FloorDetail
@@ -29,6 +33,10 @@ ModelImporter:
     400020: SupportBeam4_001
     400022: SupportBeam4_002
     400024: SupportBeam4_003
+    400026: SupportBeam4_004
+    400028: SupportBeam4_005
+    400030: SupportBeam4_006
+    400032: SupportBeam4_011
     2300000: Catwalk_000
     2300002: Catwalk_001
     2300004: FloorDetail
@@ -42,6 +50,10 @@ ModelImporter:
     2300020: SupportBeam4_001
     2300022: SupportBeam4_002
     2300024: SupportBeam4_003
+    2300026: SupportBeam4_004
+    2300028: SupportBeam4_005
+    2300030: SupportBeam4_006
+    2300032: SupportBeam4_011
     3300000: Catwalk_000
     3300002: Catwalk_001
     3300004: FloorDetail
@@ -55,6 +67,10 @@ ModelImporter:
     3300020: SupportBeam4_001
     3300022: SupportBeam4_002
     3300024: SupportBeam4_003
+    3300026: SupportBeam4_004
+    3300028: SupportBeam4_005
+    3300030: SupportBeam4_006
+    3300032: SupportBeam4_011
     4300000: Catwalk_000
     4300002: Catwalk_001
     4300004: MentalPhysicalCoordinationRoom
@@ -67,6 +83,10 @@ ModelImporter:
     4300018: SupportBeam4_002
     4300020: SupportBeam4_001
     4300022: SupportBeam4_000
+    4300024: SupportBeam4_011
+    4300026: SupportBeam4_006
+    4300028: SupportBeam4_005
+    4300030: SupportBeam4_004
     6400000: Catwalk_000
     6400002: Catwalk_001
     6400004: FloorDetail
@@ -79,6 +99,11 @@ ModelImporter:
     6400018: SupportBeam4_008
     6400020: SupportBeam4_009
     6400022: SupportBeam4_010
+    6400024: MentalPhysicalCoordinationRoom
+    6400026: SupportBeam4_004
+    6400028: SupportBeam4_005
+    6400030: SupportBeam4_006
+    6400032: SupportBeam4_011
     7400000: Default Take
     9500000: //RootNode
   materials:

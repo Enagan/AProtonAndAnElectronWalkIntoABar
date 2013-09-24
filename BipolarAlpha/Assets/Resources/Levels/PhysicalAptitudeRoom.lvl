@@ -3,7 +3,7 @@
   <roomName>PhysicalAptitudeRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-17.4711361</x>
         <y>-31.3982487</y>
@@ -21,7 +21,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.44746065</x>
         <y>25.1541328</y>
@@ -39,7 +39,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.098326</x>
         <y>31.1791477</y>
@@ -75,7 +75,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.811359</x>
         <y>25.0706</y>
@@ -93,7 +93,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-2.75653219</x>
         <y>30.8423176</y>
@@ -111,7 +111,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-10.6591806</x>
         <y>31.2722282</y>
@@ -129,7 +129,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-6.82932425</x>
         <y>25.22409</y>
@@ -165,7 +165,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.133835</x>
         <y>27.2845154</y>
@@ -183,7 +183,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.133835</x>
         <y>26.8621311</y>
@@ -201,7 +201,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.811359</x>
         <y>26.3313541</y>
@@ -219,7 +219,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-6.754366</x>
         <y>26.9440231</y>
@@ -291,7 +291,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.40379953</x>
         <y>26.2003822</y>
@@ -309,7 +309,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-18.18617</x>
         <y>24.3552856</y>
@@ -345,7 +345,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-2.73246</x>
         <y>30.8471832</y>
@@ -363,7 +363,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-5.567375</x>
         <y>24.6516342</y>
@@ -381,7 +381,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-6.31622362</x>
         <y>27.7017555</y>
@@ -399,7 +399,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-10.4411936</x>
         <y>30.335144</y>
@@ -417,7 +417,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-11.0622587</x>
         <y>30.335144</y>
@@ -453,7 +453,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-5.567375</x>
         <y>26.3221226</y>
@@ -471,7 +471,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.9034543</x>
         <y>26.4191246</y>
@@ -525,7 +525,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.45714</x>
         <y>26.4417362</y>
@@ -561,7 +561,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-10.2130775</x>
         <y>24.6830082</y>
@@ -579,7 +579,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.133835</x>
         <y>26.8621311</y>
@@ -597,7 +597,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-12.5903454</x>
         <y>26.7318439</y>
@@ -615,7 +615,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-4.611821</x>
         <y>30.6692886</y>
@@ -633,7 +633,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-2.53072023</x>
         <y>-35.8114548</y>
@@ -651,7 +651,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-16.3078175</x>
         <y>24.87772</y>
@@ -669,7 +669,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.719375</x>
         <y>30.8423176</y>
@@ -723,7 +723,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.9034543</x>
         <y>26.47496</y>
@@ -777,7 +777,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.948732</x>
         <y>31.3876572</y>
@@ -795,7 +795,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.40379953</x>
         <y>25.4087963</y>
@@ -813,7 +813,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-11.7455912</x>
         <y>24.8797226</y>
@@ -831,7 +831,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.44746065</x>
         <y>28.3922234</y>
@@ -867,7 +867,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.83513451</x>
         <y>25.5210114</y>
@@ -885,7 +885,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-4.056287</x>
         <y>30.6692886</y>
@@ -921,7 +921,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-4.392301</x>
         <y>29.9101181</y>
@@ -939,7 +939,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-5.66632128</x>
         <y>31.5150642</y>
@@ -1047,7 +1047,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.82655144</x>
         <y>30.24365</y>
@@ -1065,7 +1065,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>0.351456642</x>
         <y>-31.995697</y>
@@ -1101,7 +1101,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-11.659338</x>
         <y>30.7617664</y>
@@ -1119,7 +1119,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-11.0090656</x>
         <y>-35.1888657</y>
@@ -1137,7 +1137,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-15.5903063</x>
         <y>24.87772</y>
@@ -1173,7 +1173,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-2.97348976</x>
         <y>31.36327</y>
@@ -1227,7 +1227,7 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Scenery/HexagonalPlatform</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-12.9681625</x>
         <y>-31.1670933</y>
