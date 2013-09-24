@@ -3,11 +3,11 @@
   <roomName>MentalPhysicalCoordinationRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Hazard/PitHazard</objectPrefabPath>
       <position>
-        <x>-20.4707375</x>
-        <y>3.46071863</y>
-        <z>3.07199478</z>
+        <x>0.9166255</x>
+        <y>-20.1067142</y>
+        <z>-9.314861</z>
       </position>
       <scale>
         <x>1</x>
@@ -16,88 +16,16 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>89.4741745</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <objectPrefabPath>Prefabs/CheckPoint/Checkpoint</objectPrefabPath>
       <position>
-        <x>20.3186188</x>
-        <y>3.46071863</y>
-        <z>3.07199478</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
-        <x>20.3186188</x>
-        <y>3.46071863</y>
-        <z>-21.8615818</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
-        <x>-20.4707375</x>
-        <y>3.46071863</y>
-        <z>-21.8615818</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
-        <x>0.288672447</x>
-        <y>-4.288545</y>
-        <z>1.39364648</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
-      <position>
-        <x>0.0650488138</x>
-        <y>-4.42170668</y>
-        <z>-18.54045</z>
+        <x>0.588960648</x>
+        <y>-1.33854032</y>
+        <z>3.68165731</z>
       </position>
       <scale>
         <x>1</x>
@@ -183,6 +111,42 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>-20.4707375</x>
+        <y>3.46071863</y>
+        <z>3.07199478</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>20.3186188</x>
+        <y>3.46071863</y>
+        <z>-21.8615818</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>26.4062767</x>
@@ -203,9 +167,45 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
+        <x>-20.4707375</x>
+        <y>3.46071863</y>
+        <z>-21.8615818</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
         <x>10.6063185</x>
         <y>-4.288545</y>
         <z>1.39364648</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>0.0650488138</x>
+        <y>-4.42170668</y>
+        <z>-18.54045</z>
       </position>
       <scale>
         <x>1</x>
@@ -288,6 +288,42 @@
         <x>349.147369</x>
         <y>90</y>
         <z>1.13011829E-05</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>0.288672447</x>
+        <y>-4.288545</y>
+        <z>1.39364648</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <position>
+        <x>20.3186188</x>
+        <y>3.46071863</y>
+        <z>3.07199478</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
   </objectsInRoom>

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum TutorialMessage { Generators, OppositeMagnets, HubRoom, StartGame, StickToMagnets }
+public enum TutorialMessage { Generators, OppositeMagnets, HubRoom, StartGame}
 
 public class TutorialMessageTrigger : MonoBehaviour {
 
