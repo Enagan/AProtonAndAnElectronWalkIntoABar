@@ -21,6 +21,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/Tunnel</objectPrefabPath>
+      <position>
+        <x>0.00322604179</x>
+        <y>-1.601697</y>
+        <z>-42.54593</z>
+      </position>
+      <scale>
+        <x>1.5</x>
+        <y>1.5</y>
+        <z>1.5</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CheckPoint/Checkpoint</objectPrefabPath>
       <position>
         <x>0.588960648</x>
@@ -57,6 +75,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
+      <position>
+        <x>0.000207185964</x>
+        <y>-1.55158079</y>
+        <z>-48.3672256</z>
+      </position>
+      <scale>
+        <x>0.859999955</x>
+        <y>0.859999955</y>
+        <z>0.989543259</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>270</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
         <x>-30.8417549</x>
@@ -80,6 +116,24 @@
         <x>30.22115</x>
         <y>-21.2871342</y>
         <z>-9.03981</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/MiscGameplay/EnderGate</objectPrefabPath>
+      <position>
+        <x>-0.0291266441</x>
+        <y>-1.60576439</y>
+        <z>-45.74414</z>
       </position>
       <scale>
         <x>1</x>
@@ -255,6 +309,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/Tunnel</objectPrefabPath>
+      <position>
+        <x>0.00322604179</x>
+        <y>-1.601697</y>
+        <z>-29.1066532</z>
+      </position>
+      <scale>
+        <x>1.5</x>
+        <y>1.5</y>
+        <z>1.5</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/RotatingMagnetWithPlatform</objectPrefabPath>
       <position>
         <x>0</x>
@@ -296,6 +368,24 @@
         <x>0.288672447</x>
         <y>-4.288545</y>
         <z>1.39364648</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
+      <position>
+        <x>-0.116951145</x>
+        <y>-0.2435627</y>
+        <z>-39.56923</z>
       </position>
       <scale>
         <x>1</x>
