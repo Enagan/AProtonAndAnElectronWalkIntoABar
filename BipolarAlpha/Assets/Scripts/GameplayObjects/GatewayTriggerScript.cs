@@ -30,7 +30,7 @@ public class GatewayTriggerScript : MonoBehaviour {
   {
     if (other.tag == "Player")
     {
-      ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL3");
+      ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL1&2");
       ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
     }
     else if (other.tag == "MovableObject")

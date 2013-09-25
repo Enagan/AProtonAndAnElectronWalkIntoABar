@@ -352,9 +352,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiTwoGateHighGateway</objectPrefabPath>
       <position>
-        <x>6.402713</x>
-        <y>2.98498487</y>
-        <z>3.7070663</z>
+        <x>6.407003</x>
+        <y>2.974304</y>
+        <z>3.69994044</z>
       </position>
       <scale>
         <x>1</x>

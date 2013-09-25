@@ -283,22 +283,24 @@ public class MagneticForce : MonoBehaviour, Activator
 
     if (_magnetLightsParent == null)
     {
-      GameObject parentLights = this.transform.parent.FindChild("MagnetLights").gameObject;
-      if (parentLights != null)
+      Transform parentTransformLights = this.transform.parent.FindChild("MagnetLights");
+      if (parentTransformLights != null)
       {
-        _magnetLightsParent = parentLights;
+        _magnetLightsParent = parentTransformLights.gameObject;
       }
     }
-
-    foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
+    if (_magnetLightsParent != null)
     {
-      if(charge == Charge.NEGATIVE)
+      foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
       {
-        light.color = new Color(0, g, b);
-      }
-      else
-      {
-        light.color = Color.red;
+        if (charge == Charge.NEGATIVE)
+        {
+          light.color = new Color(0, g, b);
+        }
+        else
+        {
+          light.color = Color.red;
+        }
       }
     }
 

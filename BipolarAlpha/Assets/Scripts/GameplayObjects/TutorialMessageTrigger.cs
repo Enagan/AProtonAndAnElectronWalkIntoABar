@@ -26,12 +26,10 @@ public class TutorialMessageTrigger : MonoBehaviour {
                                          "something in the balconies above \n";
 
     _messages[TutorialMessage.StartGame] = 
-                             "      Use left mouse button to activate\n" +
-                             "      your directional magnet.\n" +
-                             "      Point it at negative charged magnets (blue)\n" +
-                             "      For rapid magnetic approximation\n";
-
-
+                             "Use left mouse button to activate\n" +
+                             "your directional magnet.\n" +
+                             "Point it at negative charged magnets (blue)\n" +
+                             "For rapid magnetic approximation\n";
   }
 
   private void OnTriggerEnter(Collider other)

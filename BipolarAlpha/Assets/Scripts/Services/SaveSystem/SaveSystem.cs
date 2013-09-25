@@ -94,7 +94,7 @@ public class SaveSystem : MonoBehaviour
 
   void Update()
   {
-    if (Input.GetKey(KeyCode.F)) { ServiceLocator.GetSceneManager().SaveRooms(); }
-    if (Input.GetKey(KeyCode.R)) { ServiceLocator.GetSceneManager().LoadRooms(); }
+    if (Input.GetKey(KeyCode.End)) { ServiceLocator.GetSceneManager().SaveRooms(); }
+    if (Input.GetKey(KeyCode.Home)) { ServiceLocator.GetSceneManager().LoadRooms(); }
   }
 }

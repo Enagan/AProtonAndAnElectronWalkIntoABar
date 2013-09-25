@@ -32,7 +32,7 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner, ITutorialMessageTrig
 
   public void ListenPlayerRoomChange(string newRoomName)
   {
-    _currentlyDisplayedTip = "> Positioning System - Current Location:\n    " + newRoomName + "\n(press \"z\" to dismiss command line)";
+    //_currentlyDisplayedTip = "> Positioning System - Current Location:\n    " + newRoomName + "\n(press \"z\" to dismiss command line)";
   }
 
   public void ListenTutorialMessageTrigger(string tutorialMessage)
@@ -77,7 +77,7 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner, ITutorialMessageTrig
 
     _commandLineStyle = new GUIStyle();
     _commandLineStyle.font = _commandLineFont;
-    _commandLineStyle.normal.textColor = Color.green;
+    _commandLineStyle.normal.textColor = Color.white;
     _commandLineStyle.border = new RectOffset(10, 10, 10, 10);
   }
 
@@ -110,7 +110,7 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner, ITutorialMessageTrig
     if (_currentlyDisplayedTip != null)
     {
       float height = 25 + 25*(_currentlyDisplayedTip.Length / 40);
-      GUI.TextField(new Rect(Screen.width/2 - 150, Screen.height - 10 - height, 300, height), _currentlyDisplayedTip/*, _commandLineStyle*/);
+      GUI.Label(new Rect(Screen.width/2 - 150, Screen.height - 10 - height, 300, height), _currentlyDisplayedTip, _commandLineStyle);
     }
   }
 }
