@@ -3,11 +3,83 @@
   <roomName>PhysicalAptitudeRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <position>
+        <x>-8.710764</x>
+        <y>13.2647247</y>
+        <z>41.65226</z>
+      </position>
+      <scale>
+        <x>0.9539411</x>
+        <y>0.953941166</y>
+        <z>0.953941166</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>30.0000019</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-17.4711361</x>
-        <y>-31.3982487</y>
-        <z>44.4575653</z>
+        <x>2.59427667</x>
+        <y>20.8824768</y>
+        <z>53.30906</z>
+      </position>
+      <scale>
+        <x>2.5</x>
+        <y>2.5</y>
+        <z>3</z>
+      </scale>
+      <eulerAngles>
+        <x>320.852234</x>
+        <y>259.29715</y>
+        <z>150.339981</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-5.242962</x>
+        <y>17.08612</y>
+        <z>47.843483</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>29</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>30.0000038</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-4.746887</x>
+        <y>17.08612</y>
+        <z>46.166</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>29</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>30.0000038</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-17.49812</x>
+        <y>-31.385582</y>
+        <z>44.48518</z>
       </position>
       <scale>
         <x>2.5</x>
@@ -21,16 +93,88 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/SupportPlatform</objectPrefabPath>
+      <position>
+        <x>-12.1716938</x>
+        <y>16.6197243</y>
+        <z>34.79762</z>
+      </position>
+      <scale>
+        <x>15.98779</x>
+        <y>1</y>
+        <z>7.45225573</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
+      <position>
+        <x>-7.602112</x>
+        <y>23.09008</y>
+        <z>49.1778336</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>21</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>30.0000038</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/SupportPlatform</objectPrefabPath>
+      <position>
+        <x>-5.869568</x>
+        <y>12.5817089</y>
+        <z>41.31318</z>
+      </position>
+      <scale>
+        <x>3.13696671</x>
+        <y>1</y>
+        <z>11.9641781</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/SupportPlatform</objectPrefabPath>
+      <position>
+        <x>-14.439764</x>
+        <y>12.5817089</y>
+        <z>52.46467</z>
+      </position>
+      <scale>
+        <x>14.0217</x>
+        <y>1</y>
+        <z>34.25766</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.44746065</x>
-        <y>25.1541328</y>
+        <y>17.6660156</y>
         <z>39.2472572</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>18.5</z>
+        <z>28.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -78,13 +222,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.811359</x>
-        <y>25.0706</y>
-        <z>42.7903442</z>
+        <y>18.1434765</y>
+        <z>42.8202133</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>18.5</z>
+        <z>28.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -131,14 +275,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-6.82932425</x>
-        <y>25.22409</y>
-        <z>49.1523323</z>
+        <x>-6.66048</x>
+        <y>17.4407578</y>
+        <z>47.63355</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>18.5</z>
+        <z>28.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -168,13 +312,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.133835</x>
-        <y>27.2845154</y>
+        <y>19.79097</y>
         <z>58.7436256</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>15</z>
+        <z>25</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -186,13 +330,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.133835</x>
-        <y>26.8621311</y>
+        <y>19.1615181</y>
         <z>60.4711533</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>16</z>
+        <z>26</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -203,14 +347,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-3.811359</x>
-        <y>26.3313541</y>
+        <x>-3.871389</x>
+        <y>18.8932438</y>
         <z>41.01245</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>17</z>
+        <z>27</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -222,13 +366,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-6.754366</x>
-        <y>26.9440231</y>
+        <y>19.5632286</y>
         <z>57.59822</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>15.5</z>
+        <z>25.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -258,8 +402,8 @@
       <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
       <position>
         <x>-7.159973</x>
-        <y>17.63918</y>
-        <z>47.51315</z>
+        <y>19.2635555</y>
+        <z>45.79645</z>
       </position>
       <scale>
         <x>1</x>
@@ -294,13 +438,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.40379953</x>
-        <y>26.2003822</y>
+        <y>18.861393</y>
         <z>52.6906967</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>17</z>
+        <z>27</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -329,9 +473,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CheckPoint/Checkpoint</objectPrefabPath>
       <position>
-        <x>-12.9293613</x>
+        <x>-13.1831684</x>
         <y>27.82418</y>
-        <z>63.3615074</z>
+        <z>63.6680527</z>
       </position>
       <scale>
         <x>1</x>
@@ -366,13 +510,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-5.567375</x>
-        <y>24.6516342</y>
-        <z>46.0251541</z>
+        <y>17.08612</y>
+        <z>46.166</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>19</z>
+        <z>29</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -384,13 +528,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-6.31622362</x>
-        <y>27.7017555</y>
+        <y>20.18126</y>
         <z>65.84158</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>14.5</z>
+        <z>24.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -455,14 +599,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-5.567375</x>
-        <y>26.3221226</y>
-        <z>47.78106</z>
+        <x>-6.13417244</x>
+        <y>18.75746</y>
+        <z>49.6347237</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>17</z>
+        <z>27</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -474,13 +618,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.9034543</x>
-        <y>26.4191246</y>
+        <y>18.9982224</y>
         <z>56.1218262</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>16.5</z>
+        <z>26.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -528,13 +672,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.45714</x>
-        <y>26.4417362</y>
+        <y>18.70403</y>
         <z>64.41897</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>16.5</z>
+        <z>26.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -545,9 +689,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
       <position>
-        <x>-4.33305</x>
-        <y>23.8775177</y>
-        <z>44.6191025</z>
+        <x>-6.356777</x>
+        <y>32.0530968</y>
+        <z>43.5574646</z>
       </position>
       <scale>
         <x>1</x>
@@ -582,13 +726,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-8.133835</x>
-        <y>26.8621311</y>
+        <y>19.1615181</y>
         <z>62.70625</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>16</z>
+        <z>26</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -726,13 +870,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.9034543</x>
-        <y>26.47496</y>
+        <y>19.0477943</y>
         <z>54.3906746</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>16.5</z>
+        <z>26.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -744,7 +888,7 @@
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
         <x>-17.4981232</x>
-        <y>23.192564</y>
+        <y>23.2039528</y>
         <z>44.48518</z>
       </position>
       <scale>
@@ -798,13 +942,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-7.40379953</x>
-        <y>25.4087963</y>
+        <y>18.0827274</y>
         <z>50.92873</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>18</z>
+        <z>28</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -834,13 +978,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.44746065</x>
-        <y>28.3922234</y>
+        <y>20.89122</y>
         <z>37.4500237</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>14</z>
+        <z>24</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -869,14 +1013,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-8.83513451</x>
-        <y>25.5210114</y>
-        <z>48.4606552</z>
+        <x>-8.729761</x>
+        <y>23.0009251</y>
+        <z>48.1170044</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>17.5</z>
+        <z>20.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -905,8 +1049,8 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
       <position>
-        <x>1.9370991</x>
-        <y>21.78475</y>
+        <x>0.6889874</x>
+        <y>22.56728</y>
         <z>53.01106</z>
       </position>
       <scale>
@@ -915,22 +1059,22 @@
         <z>0.8</z>
       </scale>
       <eulerAngles>
-        <x>-4.26886828E-07</x>
-        <y>349.547241</y>
-        <z>90.00001</z>
+        <x>0</x>
+        <y>349.5472</y>
+        <z>50.0000076</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
-        <x>-4.392301</x>
-        <y>29.9101181</y>
+        <x>-4.48982668</x>
+        <y>22.6727524</y>
         <z>44.5814819</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>11.5</z>
+        <z>21.5</z>
       </scale>
       <eulerAngles>
         <x>270</x>
@@ -1050,13 +1194,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>-3.82655144</x>
-        <y>30.24365</y>
+        <y>23.5253239</y>
         <z>35.6588745</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>11</z>
+        <z>21</z>
       </scale>
       <eulerAngles>
         <x>270</x>
