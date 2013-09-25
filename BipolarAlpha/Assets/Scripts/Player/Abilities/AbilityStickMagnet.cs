@@ -47,6 +47,16 @@ public class AbilityStickMagnet : Ability
     }
     if ((key.Contains("Fire")) && _playerMagnet.isAvailable)
     {
+      if (caller.magnetColliding &&
+        _playerMagnet.charge != caller.magnetCollidingWith.charge &&
+        caller.magnetCollidingWith.isHoldable &&
+        _magnetStuckToArm == null)
+      {
+        ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
+        StickMagnetToPlayer(caller, caller.magnetCollidingWith);
+      }
+
+
       //Does this every Update when pressing the ability button
       MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
       

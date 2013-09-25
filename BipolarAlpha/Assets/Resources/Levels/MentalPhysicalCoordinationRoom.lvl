@@ -3,11 +3,11 @@
   <roomName>MentalPhysicalCoordinationRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Hazard/PitHazard</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/Dispenser</objectPrefabPath>
       <position>
-        <x>0.9166255</x>
-        <y>-20.1067142</y>
-        <z>-9.314861</z>
+        <x>15.0112915</x>
+        <y>-2.44623566</y>
+        <z>1.81727982</z>
       </position>
       <scale>
         <x>1</x>
@@ -16,7 +16,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>89.4741745</y>
+        <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -35,24 +35,6 @@
       <eulerAngles>
         <x>0</x>
         <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/Dispenser</objectPrefabPath>
-      <position>
-        <x>15.0112915</x>
-        <y>-2.03112078</y>
-        <z>1.81727982</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -150,7 +132,7 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonalPlatform</objectPrefabPath>
       <position>
         <x>26.4062767</x>
-        <y>4.597259</y>
+        <y>4.08048</y>
         <z>-3.711924</z>
       </position>
       <scale>
@@ -252,6 +234,24 @@
         <x>342.486267</x>
         <y>270</y>
         <z>1.61149364E-05</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Hazard/PitHazard</objectPrefabPath>
+      <position>
+        <x>0.9166255</x>
+        <y>-20.1067142</y>
+        <z>-9.314861</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>89.4741745</y>
+        <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>

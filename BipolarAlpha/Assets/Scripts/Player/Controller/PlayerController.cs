@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
   private ContactPoint _samplePointOfCollidingSurface;
 
   private bool _magnetColliding = false;
+  private MagneticForce _magnetCollidingWith = null;
   #endregion
 
   private GameObject mainCamera;
@@ -67,6 +68,13 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
     get
     {
       return _magnetColliding;
+    }
+  }
+  public MagneticForce magnetCollidingWith
+  {
+    get
+    {
+      return _magnetCollidingWith;
     }
   }
 
@@ -131,6 +139,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
           if (collision.gameObject.tag == "Magnet")
           {
             _magnetColliding = true;
+            _magnetCollidingWith = collision.gameObject.GetComponentInChildren<MagneticForce>();
           }
         }
         //Otherwise, we're colliding with the floor, in which case, if we're airborne, we shouldn't be so anymore
@@ -163,6 +172,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
     if(collision.gameObject.tag == "Magnet")
     {
       _magnetColliding = false;
+      _magnetCollidingWith = null;
     }
   }
 

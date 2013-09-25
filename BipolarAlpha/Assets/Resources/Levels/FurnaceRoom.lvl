@@ -39,24 +39,6 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-15.6481495</x>
-        <y>9.722191</y>
-        <z>7.15486574</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
         <x>-15.6175671</x>
@@ -71,6 +53,42 @@
       <eulerAngles>
         <x>0</x>
         <y>0.7137386</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
+      <position>
+        <x>-14.360054</x>
+        <y>16.7308559</y>
+        <z>-2.13143253</z>
+      </position>
+      <scale>
+        <x>3.801747</x>
+        <y>21.0147629</y>
+        <z>0.0530857</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>330.000031</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
+      <position>
+        <x>-21.0299549</x>
+        <y>27.5914841</y>
+        <z>-2.172335</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>173.576477</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -107,24 +125,6 @@
       <eulerAngles>
         <x>0</x>
         <y>240.000015</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-9.402963</x>
-        <y>9.722191</y>
-        <z>3.46569943</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -219,21 +219,21 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>-9.50281048</x>
-        <y>9.722191</y>
-        <z>-3.57553959</z>
+        <x>-0.291934043</x>
+        <y>11.3088713</y>
+        <z>0.00364294648</z>
       </position>
       <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
+        <x>0.6193133</x>
+        <y>0.6193133</y>
+        <z>0.6193133</z>
       </scale>
       <eulerAngles>
         <x>0</x>
         <y>0</y>
-        <z>0</z>
+        <z>180.000015</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -327,6 +327,24 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
+      <position>
+        <x>-16.4084034</x>
+        <y>16.7308559</y>
+        <z>-2.396721</z>
+      </position>
+      <scale>
+        <x>3.80174661</x>
+        <y>21.0147629</y>
+        <z>0.0530857071</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>30.0000019</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
       <position>
         <x>-21.8325138</x>
@@ -363,20 +381,20 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
+      <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
       <position>
-        <x>-15.6676121</x>
-        <y>9.722191</y>
-        <z>-7.180564</z>
+        <x>-16.4223442</x>
+        <y>16.7308559</y>
+        <z>2.4170568</z>
       </position>
       <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
+        <x>3.80174661</x>
+        <y>21.0147629</y>
+        <z>0.0530857071</z>
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>150</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>
@@ -386,24 +404,6 @@
         <x>-7.52428055</x>
         <y>9.485777</y>
         <z>3.36918378</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-8.897261</x>
-        <y>33.9790649</y>
-        <z>2.78037071</z>
       </position>
       <scale>
         <x>1</x>
@@ -435,6 +435,60 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
+      <position>
+        <x>-20.9017811</x>
+        <y>27.5914841</y>
+        <z>1.81512022</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>173.576477</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
+      <position>
+        <x>-14.232976</x>
+        <y>16.7308559</y>
+        <z>2.05365229</z>
+      </position>
+      <scale>
+        <x>3.80174685</x>
+        <y>21.0147629</y>
+        <z>0.0530857034</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>210.000015</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/CircuitSystems/GeneratorIntroductionSystem</objectPrefabPath>
+      <position>
+        <x>-16.8029079</x>
+        <y>28.5078487</y>
+        <z>3.23755956</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
       <position>
         <x>-21.7814159</x>
@@ -450,24 +504,6 @@
         <x>0</x>
         <y>0</y>
         <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMagnet</objectPrefabPath>
-      <position>
-        <x>-0.303049326</x>
-        <y>11.2922564</y>
-        <z>6.2584877E-07</z>
-      </position>
-      <scale>
-        <x>0.6050089</x>
-        <y>0.6050089</y>
-        <z>0.6050089</z>
-      </scale>
-      <eulerAngles>
-        <x>-5.008956E-06</x>
-        <y>180</y>
-        <z>180</z>
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -489,11 +525,11 @@
       </eulerAngles>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Lightning/StrongSpotlight</objectPrefabPath>
       <position>
-        <x>-8.897261</x>
-        <y>33.9790649</y>
-        <z>-2.93831825</z>
+        <x>-25.2137337</x>
+        <y>35.842186</y>
+        <z>-0.379475236</z>
       </position>
       <scale>
         <x>1</x>
@@ -501,8 +537,26 @@
         <z>1</z>
       </scale>
       <eulerAngles>
+        <x>26.94136</x>
+        <y>90.4554443</y>
+        <z>270</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
+      <position>
+        <x>-13.14714</x>
+        <y>16.7308559</y>
+        <z>-0.123233862</z>
+      </position>
+      <scale>
+        <x>3.80174685</x>
+        <y>21.0147629</y>
+        <z>0.0530857034</z>
+      </scale>
+      <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>270</y>
         <z>0</z>
       </eulerAngles>
     </RoomObjectDefinition>

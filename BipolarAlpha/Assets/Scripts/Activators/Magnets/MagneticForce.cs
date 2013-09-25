@@ -39,7 +39,7 @@ public class MagneticForce : MonoBehaviour, Activator
   private Charge _charge = Charge.NEGATIVE;
 
   [SerializeField]
-  private List<Light> _magnetLights = new List<Light>();
+  private GameObject _magnetLightsParent = null;
 
   [SerializeField]
   protected GameObject parentToAffect = null;
@@ -135,7 +135,11 @@ public class MagneticForce : MonoBehaviour, Activator
 
   private void TurnOnLights()
   {
-    foreach (Light light in _magnetLights)
+    if (_magnetLightsParent == null)
+    {
+      return;
+    }
+    foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
     {
       light.enabled = true;
     }
@@ -143,7 +147,11 @@ public class MagneticForce : MonoBehaviour, Activator
 
   private void TurnOffLights()
   {
-    foreach (Light light in _magnetLights)
+    if (_magnetLightsParent == null)
+    {
+      return;
+    }
+    foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
     {
       light.enabled = false;
     }
@@ -273,7 +281,16 @@ public class MagneticForce : MonoBehaviour, Activator
     float g = 52f / 255f;
     float b = 174f / 255f;
 
-    foreach(Light light in _magnetLights)
+    if (_magnetLightsParent == null)
+    {
+      GameObject parentLights = this.transform.parent.FindChild("MagnetLights").gameObject;
+      if (parentLights != null)
+      {
+        _magnetLightsParent = parentLights;
+      }
+    }
+
+    foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
     {
       if(charge == Charge.NEGATIVE)
       {

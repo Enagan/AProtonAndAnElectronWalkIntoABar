@@ -110,7 +110,7 @@ public class HUD : MonoBehaviour, IPlayerRoomChangeListner, ITutorialMessageTrig
     if (_currentlyDisplayedTip != null)
     {
       float height = 25 + 25*(_currentlyDisplayedTip.Length / 40);
-      GUI.TextField(new Rect(10, Screen.height - 10 - height, 300, height), _currentlyDisplayedTip/*, _commandLineStyle*/);
+      GUI.TextField(new Rect(Screen.width/2 - 150, Screen.height - 10 - height, 300, height), _currentlyDisplayedTip/*, _commandLineStyle*/);
     }
   }
 }

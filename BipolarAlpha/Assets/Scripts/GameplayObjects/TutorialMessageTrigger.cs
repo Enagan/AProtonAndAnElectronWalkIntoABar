@@ -25,24 +25,11 @@ public class TutorialMessageTrigger : MonoBehaviour {
                                          "the door ahead can be opened by \n" +
                                          "something in the balconies above \n";
 
-    _messages[TutorialMessage.StartGame] = "> MagOS restored sucessfully\n" +
-                             "> Situational Awareness Module Activated\n" +
-                             "> Previous Directive Restored: \n" +
-                             "      Pass Quality Assurance\n" +
-                             "\n" +
-                             "> Current Step: Exit Recycling Container\n" +
-                             "\n" +
-                             "> Positive Directional Magnet Driver Corrupted\n" +
-                             "> ...\n" +
-                             "> ...\n" +
-                             "> ...\n" +
-                             "> Positive Directional Magnet Driver Restored:\n" +
-                             "> Advisor Subroutine:\n" +
+    _messages[TutorialMessage.StartGame] = 
                              "      Use left mouse button to activate\n" +
                              "      your directional magnet.\n" +
                              "      Point it at negative charged magnets (blue)\n" +
-                             "      For rapid magnetic approximation\n" +
-                             "\n(press \"z\" to dismiss command line)";
+                             "      For rapid magnetic approximation\n";
 
 
   }
