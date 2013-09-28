@@ -3,7 +3,25 @@
   <roomName>MentalAssessmentRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Lightning/GreenLight</objectPrefabPath>
+      <position>
+        <x>12.0728626</x>
+        <y>-1.15127754</y>
+        <z>0.1499939</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/GreenLight</objectPrefabPath>
       <position>
         <x>-6.20135164</x>
         <y>-1.15127754</y>
@@ -77,9 +95,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
       <position>
-        <x>12.2656488</x>
-        <y>-1.15127754</y>
-        <z>0.0568399429</z>
+        <x>0.09171438</x>
+        <y>10.2214384</y>
+        <z>9.969849</z>
       </position>
       <scale>
         <x>1</x>
