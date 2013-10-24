@@ -20,7 +20,8 @@ public class ServiceLocator
   private static AudioSystem _audioSystem;
 
   private static SaveSystem _saveSystem;
-
+	
+  private static HUDSystem _HUDSystem;
 
   //--- Access functions
   //- Get<SystemInterfaceName>()
@@ -70,6 +71,14 @@ public class ServiceLocator
   public static SaveSystem GetSaveSystem()
   {
     return _saveSystem;
+  }
+	
+	  /// <summary>
+  /// Returns the current implementation of the HUD System
+  /// </summary>
+  public static HUDSystem GetHUDSystem()
+  {
+    return _HUDSystem;
   }
   #endregion
 
@@ -122,6 +131,14 @@ public class ServiceLocator
   public static void ProvideSaveSystem(SaveSystem saveSystem)
   {
     _saveSystem = saveSystem;
+  }
+	
+  /// <summary>
+  /// Changes the current implementation of Save System to the specified/provided implementation
+  /// </summary>
+  public static void ProvideHUDSystem(HUDSystem hudSystem)
+  {
+    _HUDSystem = hudSystem;
   }
   #endregion
 }
