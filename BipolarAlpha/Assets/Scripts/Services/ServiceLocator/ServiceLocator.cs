@@ -23,6 +23,8 @@ public class ServiceLocator
 	
   private static HUDSystem _HUDSystem;
 
+  private static StringRetrievalSystem _stringSystem;
+
   //--- Access functions
   //- Get<SystemInterfaceName>()
   //    Access functions to the available services/systems
@@ -73,12 +75,20 @@ public class ServiceLocator
     return _saveSystem;
   }
 	
-	  /// <summary>
+	/// <summary>
   /// Returns the current implementation of the HUD System
   /// </summary>
   public static HUDSystem GetHUDSystem()
   {
     return _HUDSystem;
+  }
+
+  /// <summary>
+  /// Returns the current implementation of the String Retrieval System
+  /// </summary>
+  public static StringRetrievalSystem GetStringRetrievalSystem()
+  {
+    return _stringSystem;
   }
   #endregion
 
@@ -134,11 +144,19 @@ public class ServiceLocator
   }
 	
   /// <summary>
-  /// Changes the current implementation of Save System to the specified/provided implementation
+  /// Changes the current implementation of HUD System to the specified/provided implementation
   /// </summary>
   public static void ProvideHUDSystem(HUDSystem hudSystem)
   {
     _HUDSystem = hudSystem;
+  }
+
+  /// <summary>
+  /// Changes the current implementation of String Retrieval System to the specified/provided implementation
+  /// </summary>
+  public static void ProvideStringRetrievalSystem(StringRetrievalSystem stringSystem)
+  {
+    _stringSystem = stringSystem;
   }
   #endregion
 }
