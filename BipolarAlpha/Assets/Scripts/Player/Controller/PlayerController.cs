@@ -210,6 +210,9 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
 
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
+
+    // To test scan ability
+    _usableAbilities.Add("Scan", new AbilityScan());
   }
     #endregion
   /// <summary>
@@ -409,6 +412,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
 
       AddAbility("Release1", _usableAbilities["Fire1"]);
       AddAbility("Release2", _usableAbilities["Fire2"]);
+      AddAbility("Scan", new AbilityScan());
     }
   }
   #endregion

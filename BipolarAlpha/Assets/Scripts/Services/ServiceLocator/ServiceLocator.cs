@@ -23,7 +23,7 @@ public class ServiceLocator
 	
   private static HUDSystem _HUDSystem;
 
-  private static StringRetrievalSystem _stringSystem;
+  private static StringRetrievalSystem _stringSystem = new StringRetrievalSystem();
 
   //--- Access functions
   //- Get<SystemInterfaceName>()

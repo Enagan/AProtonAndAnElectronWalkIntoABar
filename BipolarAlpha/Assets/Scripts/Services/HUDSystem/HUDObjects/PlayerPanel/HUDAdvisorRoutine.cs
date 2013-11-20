@@ -11,7 +11,6 @@ public class HUDAdvisorRoutine : HUDObject, IPlayerRoomChangeListner, ITutorialM
   #region private variables
   // Text style elements
   private GUIStyle _commandLineStyle;
-  private Font _commandLineFont;
 
   // Current and stored tooltips
   private string _currentlyDisplayedTip = null;
@@ -23,15 +22,17 @@ public class HUDAdvisorRoutine : HUDObject, IPlayerRoomChangeListner, ITutorialM
   // Constructor
   public HUDAdvisorRoutine(int priority) : base(priority)
   {
+  
    // Register self as Listener
    ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
    ServiceLocator.GetEventHandlerSystem().RegisterTutorialMessageTriggerListener(this);
 		
    // Set text style
-   _commandLineStyle = new GUIStyle();
-   _commandLineStyle.font = _commandLineFont;
-   _commandLineStyle.normal.textColor = Color.white;
-   _commandLineStyle.border = new RectOffset(10, 10, 10, 10);
+		
+   GUISkin mySkin = (GUISkin) Resources.Load("GUI/Skins/PlayerPanelSkin");
+   _commandLineStyle = mySkin.box;
+		
+	
   }
 	
   public override void DrawHUD()
@@ -39,7 +40,7 @@ public class HUDAdvisorRoutine : HUDObject, IPlayerRoomChangeListner, ITutorialM
     if (_currentlyDisplayedTip != null)
     {
       float height = 25 + 25*(_currentlyDisplayedTip.Length / 40);
-      GUI.Label(new Rect(Screen.width/2 - 150, Screen.height - 10 - height, 300, height), _currentlyDisplayedTip, _commandLineStyle);
+      GUI.Label(new Rect(Screen.width/2-_commandLineStyle.fixedWidth/2, 0, 300, height), _currentlyDisplayedTip, _commandLineStyle);
     }
   }
 	
@@ -57,7 +58,7 @@ public class HUDAdvisorRoutine : HUDObject, IPlayerRoomChangeListner, ITutorialM
     {
       return;
     }
-    _currentlyDisplayedTip = "> Advisor Subroutine:\n  " + tutorialMessage + "\n(press \"z\" to dismiss command line)";
+    _currentlyDisplayedTip = "> Advisor Subroutine:\n" +"> "+ tutorialMessage;
     _alreadyPresentedTips.Add(tutorialMessage);
   }
   #endregion

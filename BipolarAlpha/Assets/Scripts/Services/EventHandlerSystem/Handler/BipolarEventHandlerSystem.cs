@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, TutorialMessageTrigger }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -50,6 +50,15 @@ public class BipolarEventHandlerSystem
   {
     RegisterEventListner(BipolarEvent.TutorialMessageTrigger, listener);
   }
+
+  /// <summary>
+  /// Registers a new listener for AbilityScan Events
+  /// </summary>
+  public void RegisterPlayerAbilityScanListener(IPlayerAbilityScanListener listener)
+  {
+    RegisterEventListner(BipolarEvent.PlayerAbilityScan, listener);
+  }
+
 
   /// <summary>
   /// Master Register event function, receives the cooresponding enum, and listner
@@ -123,6 +132,21 @@ public class BipolarEventHandlerSystem
     foreach (ITutorialMessageTriggerListener listener in _listners[BipolarEvent.TutorialMessageTrigger])
     {
       listener.ListenTutorialMessageTrigger(tutorialMessage);
+    }
+  }
+
+  /// <summary>
+  /// Sends a Player Ability Scan Event, should receive bool indicating if its scanning or not
+  /// </summary>
+  public void SendPlayerAbilityScanEvent(bool isScanning)
+  {
+    if (!_listners.ContainsKey(BipolarEvent.PlayerAbilityScan))
+    {
+      return;
+    }
+    foreach (IPlayerAbilityScanListener listener in _listners[BipolarEvent.PlayerAbilityScan])
+    {
+      listener.ListenPlayerScan(isScanning);
     }
   }
   #endregion

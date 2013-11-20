@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-public class StringRetrievalSystem : MonoBehaviour
+public class StringRetrievalSystem
 {
 
   #region private variables 
@@ -29,10 +29,10 @@ public class StringRetrievalSystem : MonoBehaviour
     }
   }
   #endregion
-  #region Monobehavior methods
+  #region constructor methods
 
   // Use this for initialization
-	void Start () {
+  public StringRetrievalSystem () {
 
     if (Application.isEditor)
     {
@@ -50,8 +50,8 @@ public class StringRetrievalSystem : MonoBehaviour
     SerializableStringContainer container = XMLSerializer.Deserialize<SerializableStringContainer>(fileLocation); //Deserialize File
 
     _stringAssets = container.toDictionary();
-    ServiceLocator.ProvideStringRetrievalSystem(this);
-	}
+   
+  }
   #endregion
 
   #region String Retrieval access methods
