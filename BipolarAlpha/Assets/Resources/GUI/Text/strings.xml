@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<SerializableStringContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <stringAssets>
+    <SerializableStringToken>
+      <key>key1</key>
+      <stringAsset>This is a sample text</stringAsset>
+    </SerializableStringToken>
+    <SerializableStringToken>
+      <key>key2</key>
+      <stringAsset>Potato</stringAsset>
+    </SerializableStringToken>
+    <SerializableStringToken>
+      <key>TutorialMessage.Generators</key>
+      <stringAsset>When Magnetic Force is applied to the rotatable piece, this device will generate an electric current</stringAsset>
+    </SerializableStringToken>
+    <SerializableStringToken>
+      <key>TutorialMessage.OppositeMagnets</key>
+      <stringAsset>Equally charged magnets when activated strongly repel each other</stringAsset>
+    </SerializableStringToken>
+    <SerializableStringToken>
+      <key>TutorialMessage.HubRoom</key>
+      <stringAsset>See those circuits? It appears that the door ahead can be opened by something in the balconies above</stringAsset>
+    </SerializableStringToken>
+    <SerializableStringToken>
+      <key>TutorialMessage.StartGame</key>
+      <stringAsset>Use left mouse button to activate your directional magnet. Point it at negative charged magnets (blue) for rapid magnetic approximation</stringAsset>
+    </SerializableStringToken>
+  </stringAssets>
+</SerializableStringContainer>
