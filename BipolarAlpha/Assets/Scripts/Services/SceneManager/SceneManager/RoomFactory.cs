@@ -44,10 +44,21 @@ public class RoomFactory
     {
       List<RoomObjectDefinition> updatedDefs = new List<RoomObjectDefinition>();
       List<RoomObjectGatewayDefinition> updatedGates= new List<RoomObjectGatewayDefinition>();
+      
       foreach (KeyValuePair<RoomObjectDefinition, GameObject> objs in _instancedObjects.GetAllGameObjectsFromRoom(roomDef))
       {
+          List<ComplexState> updatedComplexStates = new List<ComplexState>();
+          foreach (ComplexState complexState in objs.Key.complexStates)
+          {
+            Transform objectWithComplexState = objs.Value.transform.Find(complexState.objectNameInHierarchy);
+            IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+            updatedComplexStates.Add(scriptToLoadComplexState.UpdateComplexState(complexState));
+          }
+
           objs.Key.position = objs.Value.transform.position;
           objs.Key.eulerAngles = objs.Value.transform.eulerAngles;
+          objs.Key.complexStates = updatedComplexStates;
+
           if (!(objs.Key is RoomObjectGatewayDefinition))
           {
             updatedDefs.Add(objs.Key);
@@ -198,6 +209,13 @@ public class RoomFactory
     instancedObject.transform.localEulerAngles = obj.eulerAngles;
 
     instancedObject.transform.parent = parentTransform;
+
+    foreach (ComplexState complexState in obj.complexStates)
+    {
+      Transform objectWithComplexState = instancedObject.transform.Find(complexState.objectNameInHierarchy);
+      IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+      scriptToLoadComplexState.LoadComplexState(complexState);
+    }
 
     return instancedObject;
   }

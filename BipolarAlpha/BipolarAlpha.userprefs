@@ -2,6 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Services\SceneManager\SceneManager\SceneManager.cs">
     <Files>
+      <File FileName="Assets\Scripts\Services\SceneManager\Room and Object Definitions\ComplexState\IHasComplexState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Services\THROWAWAYSystems\BaseSystem.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Services\SaveSystem\SaveSystem.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GameplayObjects\GatewayTriggerScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Services\SceneManager\SceneManager\RoomFactory.cs" Line="1" Column="1" />

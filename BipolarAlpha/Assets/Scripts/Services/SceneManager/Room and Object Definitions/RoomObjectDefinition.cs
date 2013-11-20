@@ -1,6 +1,7 @@
 //Made By: Engana
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Represents an object within a room
@@ -12,6 +13,8 @@ public class RoomObjectDefinition
   private Vector3 _position;
   private Vector3 _scale;
   private Vector3 _eulerAngles;
+
+  private List<ComplexState> _complexStates = new List<ComplexState>();
 
   /// <summary>
   /// Prefab path in the file structure that cooresponds to this object
@@ -73,6 +76,21 @@ public class RoomObjectDefinition
     }
   }
 
+  /// <summary>
+  /// ComplexStates attached to this object
+  /// </summary>
+  public List<ComplexState> complexStates
+  {
+    get
+    {
+      return _complexStates;
+    }
+    set
+    {
+      _complexStates = value;
+    }
+  }
+
   // Needed for Serialization
   public RoomObjectDefinition() { }
 
@@ -82,6 +100,23 @@ public class RoomObjectDefinition
     _position = position;
     _scale = scale;
     _eulerAngles = eulerAngles;
+  }
+
+  /// <summary>
+  /// Attach a new Complex State to be saved by this object
+  /// </summary>
+  public void AddComplexState(ComplexState state)
+  {
+    foreach (ComplexState previouslyAddedState in _complexStates)
+    {
+      if (previouslyAddedState.objectNameInHierarchy.Equals(state.objectNameInHierarchy))
+      {
+        throw new BipolarExceptionSamePathInHierarchyAsAnotherComplexState("Complex state: " + state.GetComplexStateName() +
+                                                                      " in path " + state.objectNameInHierarchy + 
+                                                                      " is invalid. Another Object with an equal path already registered in this object");
+      }
+    }
+    _complexStates.Add(state);
   }
 
 }

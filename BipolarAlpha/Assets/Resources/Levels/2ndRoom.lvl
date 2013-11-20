@@ -19,24 +19,7 @@
         <y>0</y>
         <z>90.00001</z>
       </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/MovableMagnet</objectPrefabPath>
-      <position>
-        <x>0.03153324</x>
-        <y>1.6945715</y>
-        <z>1.85146737</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Decor1</objectPrefabPath>
@@ -55,6 +38,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -73,6 +57,7 @@
         <y>90</y>
         <z>90</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -91,6 +76,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Decor1</objectPrefabPath>
@@ -109,6 +95,7 @@
         <y>359.45517</y>
         <z>52.3085175</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -127,6 +114,33 @@
         <y>90</y>
         <z>90</z>
       </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/MovablePositiveMagnet</objectPrefabPath>
+      <position>
+        <x>-0.117724657</x>
+        <y>1.42597437</y>
+        <z>1.39947033</z>
+      </position>
+      <scale>
+        <x>0.5</x>
+        <y>0.5</y>
+        <z>0.5</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MovablePositiveMagnet/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -145,6 +159,7 @@
         <y>90</y>
         <z>90</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -163,6 +178,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -181,6 +197,7 @@
         <y>90</y>
         <z>90</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -199,6 +216,7 @@
         <y>0</y>
         <z>90.00001</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Decor1</objectPrefabPath>
@@ -217,6 +235,7 @@
         <y>321.333954</y>
         <z>24.048975</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Floor</objectPrefabPath>
@@ -235,24 +254,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/RotatingMagnet</objectPrefabPath>
-      <position>
-        <x>-3.84922814</x>
-        <y>1.41915512</y>
-        <z>-1.385917</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
@@ -273,6 +275,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
       <connectedToRoom>1stRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>

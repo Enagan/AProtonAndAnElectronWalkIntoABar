@@ -5,24 +5,6 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/GreenLight</objectPrefabPath>
       <position>
-        <x>12.0728626</x>
-        <y>-1.15127754</y>
-        <z>0.1499939</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/GreenLight</objectPrefabPath>
-      <position>
         <x>-6.20135164</x>
         <y>-1.15127754</y>
         <z>-10.7916517</z>
@@ -37,6 +19,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
@@ -55,6 +38,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/StrongSpotlight</objectPrefabPath>
@@ -73,6 +57,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/New Prefab</objectPrefabPath>
@@ -91,6 +76,62 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 1/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 1/RotatingMagnetAxis/RotatingMagnetSlab2/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 2/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 2/RotatingMagnetAxis/RotatingMagnetSlab/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 3/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 3/RotatingMagnetAxis/RotatingMagnetSlab/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 4/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 4/RotatingMagnetAxis/RotatingMagnetSlab/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>StaticMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/MediumPointLight</objectPrefabPath>
@@ -109,6 +150,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/MentalAssessmentRoom</objectPrefabPath>
@@ -127,6 +169,26 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/GreenLight</objectPrefabPath>
+      <position>
+        <x>12.0728626</x>
+        <y>-1.15127754</y>
+        <z>0.1499939</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
@@ -147,6 +209,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
       <connectedToRoom>TestingFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>

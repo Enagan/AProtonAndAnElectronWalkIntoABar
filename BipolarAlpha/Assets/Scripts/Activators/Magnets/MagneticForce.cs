@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// The MagneticForce script is used to allow objects to interact with one another on a magnetic level
 /// each object using this script must be on the magnetic layer and have a trigger collider
 /// </summary>
-public class MagneticForce : MonoBehaviour, Activator
+public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
 {
   #region MagneticForce Constants
   private const float DUMMY_DISTANCE = 2.0f;
@@ -278,9 +278,13 @@ public class MagneticForce : MonoBehaviour, Activator
       collider.radius = Mathf.Sqrt(getForceValue(force) * HIGH_FORCE_FACTOR) / Mathf.Sqrt(DISTANT_FORCE_CUTOFF);
     }
 
+    InitLights();
+  }
+
+  private void InitLights()
+  {
     float g = 52f / 255f;
     float b = 174f / 255f;
-
     if (_magnetLightsParent == null)
     {
       Transform parentTransformLights = this.transform.parent.FindChild("MagnetLights");
@@ -428,4 +432,53 @@ public class MagneticForce : MonoBehaviour, Activator
     }
     return result;
   }
+
+
+#region Complex State Save, Load and Update
+
+  public ComplexState WriteComplexState()
+  {
+    MagneticForceComplexState state = new MagneticForceComplexState(this.gameObject);
+    state.isActive = _isActivated;
+    state.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
+    state.magnetForce = _force == Force.LOW ? 
+                              0 : _force == Force.MEDIUM ? 
+                                        1 : 2;
+
+    return state;
+  }
+
+  public void LoadComplexState(ComplexState state)
+  {
+    if(!(state is MagneticForceComplexState))
+    {
+      throw new BipolarExceptionComplexStateNotCompatibleWithScript(state.GetComplexStateName() + " is not compatible with Magnetic Force class");
+    }
+
+    MagneticForceComplexState magneticState = ((MagneticForceComplexState) state);
+
+    _isActivated = magneticState.isActive;
+    _force = magneticState.magnetForce == 0 ? Force.LOW : magneticState.magnetForce == 1 ? Force.MEDIUM : Force.HIGH;
+    _charge = magneticState.magnetCharge == 0 ? Charge.NEGATIVE : Charge.POSITIVE;
+
+    InitLights();
+  }
+
+  public ComplexState UpdateComplexState(ComplexState state)
+  {
+    if (!(state is MagneticForceComplexState))
+    {
+      throw new BipolarExceptionComplexStateNotCompatibleWithScript("Complex State " + state.GetComplexStateName() + " cannot be updated in MagneticForce Class");
+    }
+    MagneticForceComplexState specificState = (state as MagneticForceComplexState);
+    specificState.isActive = _isActivated;
+    specificState.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
+    specificState.magnetForce = _force == Force.LOW ?
+                              0 : _force == Force.MEDIUM ?
+                                        1 : 2;
+
+    return specificState;
+  }
+
+#endregion
 }

@@ -6,6 +6,8 @@ using System.Runtime.Serialization;
 using System.IO;
 using System;
 using System.Security.AccessControl;
+using System.Reflection;
+using System.Collections.Generic;
 
 #pragma warning disable 0168
 
@@ -14,6 +16,9 @@ using System.Security.AccessControl;
 /// </summary>
 public class XMLSerializer
 {
+  private static List<Type> _extraTypes = new List<Type>();
+
+
   /// <summary>
   /// Writes the template class instance to an XML file
   /// </summary>
@@ -25,7 +30,22 @@ public class XMLSerializer
     }
     try
     {
-      XmlSerializer _xmlserializer = new XmlSerializer(typeof(T));
+      if (_extraTypes.Count <= 0)
+      {
+        /// Fecthing subtypes of complex state to allow polymorphic serialization of complex state subclasses
+        Type baseType = typeof(ComplexState);
+        Assembly assembly = typeof(ComplexState).Assembly;
+
+        foreach (Type possibleType in assembly.GetTypes())
+        {
+          if (possibleType.BaseType == typeof(ComplexState))
+          {
+            _extraTypes.Add(possibleType);
+          }
+        }
+      }
+
+      XmlSerializer _xmlserializer = new XmlSerializer(typeof(T),_extraTypes.ToArray());
       if (File.Exists(filename))
       {
         File.Delete(filename);
@@ -58,7 +78,21 @@ public class XMLSerializer
     }
     try
     {
-      XmlSerializer _xmlSerializer = new XmlSerializer(typeof(T));
+      if (_extraTypes.Count <= 0)
+      {
+        /// Fecthing subtypes of complex state to allow polymorphic serialization of complex state subclasses
+        Type baseType = typeof(ComplexState);
+        Assembly assembly = typeof(ComplexState).Assembly;
+
+        foreach (Type possibleType in assembly.GetTypes())
+        {
+          if (possibleType.BaseType == typeof(ComplexState))
+          {
+            _extraTypes.Add(possibleType);
+          }
+        }
+      }
+      XmlSerializer _xmlSerializer = new XmlSerializer(typeof(T), _extraTypes.ToArray());
       Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
       var result = (T)_xmlSerializer.Deserialize(stream);
       stream.Close();
@@ -66,7 +100,7 @@ public class XMLSerializer
     }
     catch (Exception ex)
     {
-      Debug.Log(ex.Message);
+      Debug.Log(ex.Message + " In file " + filename);
       return default(T);
     }
   }

@@ -19,6 +19,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/TutorialMessageGates/OppositeMagnetsMessage</objectPrefabPath>
@@ -37,6 +38,7 @@
         <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
@@ -55,6 +57,14 @@
         <y>0.7137386</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
@@ -73,6 +83,7 @@
         <y>330.000031</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
@@ -91,6 +102,7 @@
         <y>173.576477</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/TutorialMessageGates/StartGane</objectPrefabPath>
@@ -109,6 +121,7 @@
         <y>90</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
@@ -127,6 +140,7 @@
         <y>240.000015</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
@@ -145,6 +159,7 @@
         <y>120.000008</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -163,6 +178,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
@@ -181,6 +197,7 @@
         <y>60.0000038</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -199,6 +216,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -217,6 +235,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
@@ -235,6 +254,14 @@
         <y>0</y>
         <z>180.000015</z>
       </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -253,6 +280,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -271,6 +299,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
@@ -289,6 +318,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/FurnaceRoomStairs</objectPrefabPath>
@@ -307,6 +337,7 @@
         <y>90</y>
         <z>270</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/FurnaceRoom</objectPrefabPath>
@@ -325,6 +356,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
@@ -343,6 +375,7 @@
         <y>30.0000019</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -361,6 +394,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
@@ -379,6 +413,7 @@
         <y>300</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
@@ -397,6 +432,7 @@
         <y>150</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -415,6 +451,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/FurnaceRoomStairs</objectPrefabPath>
@@ -433,6 +470,7 @@
         <y>90</y>
         <z>270</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/TutorialMessageGates/GeneratorTutorialMessage</objectPrefabPath>
@@ -451,6 +489,7 @@
         <y>173.576477</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
@@ -469,6 +508,7 @@
         <y>210.000015</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/GeneratorIntroductionSystem</objectPrefabPath>
@@ -487,6 +527,20 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 1/RotatingMagnetAxis/RotatingMagnetSlab2/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator 1/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -505,6 +559,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -523,6 +578,7 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/StrongSpotlight</objectPrefabPath>
@@ -541,6 +597,7 @@
         <y>90.4554443</y>
         <z>270</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
@@ -559,6 +616,7 @@
         <y>270</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
@@ -579,6 +637,7 @@
         <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
+      <complexStates />
       <connectedToRoom>TestingFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>

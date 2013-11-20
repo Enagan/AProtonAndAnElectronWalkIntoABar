@@ -43,7 +43,7 @@ public class RoomDefinitionCreator : MonoBehaviour
   }
 
   /// <summary>
-  /// Creates the room definition, complete with all its objects whih are instanceable prefabs
+  /// Creates the room definition, complete with all its objects which are instanceable prefabs
   /// </summary>
   private RoomDefinition createRoomDefinition(string roomName, List<GameObject> objectsInRoom)
   {
@@ -75,10 +75,18 @@ public class RoomDefinitionCreator : MonoBehaviour
       }
       else
       {
-        roomDef.AddObject(new RoomObjectDefinition(path,
+        RoomObjectDefinition def = new RoomObjectDefinition(path,
                                   obj.transform.position,
                                   obj.transform.localScale,
-                                  obj.transform.eulerAngles));
+                                  obj.transform.eulerAngles);
+
+        ///Gets all instances of IHasComplexState Scripts in the given object's Hierarchy tree and generates their complex state definitions
+        foreach (IHasComplexState hasComplexState in BipolarUtilityFunctions.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
+        {
+          def.AddComplexState(hasComplexState.WriteComplexState());
+        }
+        roomDef.AddObject(def);
+
       }
     }
     

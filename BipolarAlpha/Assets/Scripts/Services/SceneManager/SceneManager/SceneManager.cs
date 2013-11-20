@@ -45,7 +45,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     _allRooms.Add(testingFacilityHub.roomName, testingFacilityHub);
     */
     KeyValuePair<string,List<RoomDefinition>> _initState = ServiceLocator.GetSaveSystem().LoadInitialState();
-
+    
     foreach (RoomDefinition room in _initState.Value)
     {
       _allRooms.Add(room.roomName, room);
