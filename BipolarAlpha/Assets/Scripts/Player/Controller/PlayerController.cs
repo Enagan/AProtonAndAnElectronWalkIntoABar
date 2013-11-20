@@ -291,12 +291,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
       {
         ability.Value.Use(this, ability.Key);
       }
-
-      //TODO Hackish way to quit scene, should be changed, pronto
-      if (Input.GetKeyUp(KeyCode.Escape))
-      {
-        Application.LoadLevel("MainMenu");
-      }
     }
   }
 
