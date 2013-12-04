@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger, PauseGame }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -57,6 +57,14 @@ public class BipolarEventHandlerSystem
   public void RegisterPlayerAbilityScanListener(IPlayerAbilityScanListener listener)
   {
     RegisterEventListner(BipolarEvent.PlayerAbilityScan, listener);
+  }
+
+  /// <summary>
+  /// Registers a new listener for Pause Events
+  /// </summary>
+  public void RegisterPauseListener(IPauseListener listener)
+  {
+    RegisterEventListner(BipolarEvent.PauseGame, listener);
   }
 
 
@@ -147,6 +155,21 @@ public class BipolarEventHandlerSystem
     foreach (IPlayerAbilityScanListener listener in _listners[BipolarEvent.PlayerAbilityScan])
     {
       listener.ListenPlayerScan(isScanning);
+    }
+  }
+
+  /// <summary>
+  /// Sends a Game Event
+  /// </summary>
+  public void SendPauseEvent(bool isPaused)
+  {
+    if (!_listners.ContainsKey(BipolarEvent.PauseGame))
+    {
+      return;
+    }
+    foreach (IPauseListener listener in _listners[BipolarEvent.PauseGame])
+    {
+      listener.ListenPause(isPaused);
     }
   }
   #endregion

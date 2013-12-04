@@ -12,6 +12,7 @@ public abstract class HUDPanel : HUDObject {
 	
   //Aggregated HUDObjects array	
   private ArrayList _HUDObjects;
+  private ArrayList _disposableHUDObjects;
   #endregion
 	
   #region overriden methods from HUDObject
@@ -19,12 +20,30 @@ public abstract class HUDPanel : HUDObject {
   {
     if (_HUDObjects != null)
     {
-      //TODO make foreach ordered by priority
+      //Draws HUDObjects according to sorted ArrayList
       foreach (HUDObject obj in _HUDObjects)
       {
         if (obj != null)
           obj.DrawHUD();
       }
+    }
+
+    // Check if needs disposal
+    if (_disposableHUDObjects!=null)
+    {
+      bool disposed = false;
+      //if contains none doesn't do disposal
+      foreach(HUDObject obj in _disposableHUDObjects)
+      {
+        disposed = true;
+        if (_HUDObjects != null && _HUDObjects.Contains(obj))
+        {
+          _HUDObjects.Remove(obj);
+          _HUDObjects.Sort(new HUDObjectComparator());
+        }
+      }
+      if(disposed)
+        _disposableHUDObjects.Clear();
     }
   }
   #endregion
@@ -33,6 +52,7 @@ public abstract class HUDPanel : HUDObject {
   protected HUDPanel(int priority) : base(priority) 
   {
     _HUDObjects = new ArrayList();
+    _disposableHUDObjects = new ArrayList();
   }
 
   public void addHUDObject(HUDObject obj)
@@ -49,8 +69,8 @@ public abstract class HUDPanel : HUDObject {
   {
     if (_HUDObjects != null && _HUDObjects.Contains(obj))
     {
-      _HUDObjects.Remove(obj);
-      _HUDObjects.Sort(new HUDObjectComparator());
+      // Add for later disposal
+      _disposableHUDObjects.Add(obj);
     }
   }
 

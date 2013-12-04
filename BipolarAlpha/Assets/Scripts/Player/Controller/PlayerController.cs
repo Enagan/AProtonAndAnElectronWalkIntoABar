@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
+public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPauseListener
 {
 
   #region Player Settings Variables
@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
    instantiateAbilities();
 
    ServiceLocator.GetEventHandlerSystem().RegisterPlayerAbilityObtainListener(this);
+   ServiceLocator.GetEventHandlerSystem().RegisterPauseListener(this);
   }
 	
   /// <summary>
@@ -213,6 +214,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
 
     // To test scan ability
     _usableAbilities.Add("Scan", new AbilityScan());
+    //Pause Game
+    _usableAbilities.Add("Menu", new AbilityPauseGame());
   }
     #endregion
   /// <summary>
@@ -413,7 +416,16 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener
       AddAbility("Release1", _usableAbilities["Fire1"]);
       AddAbility("Release2", _usableAbilities["Fire2"]);
       AddAbility("Scan", new AbilityScan());
+      AddAbility("Menu", new AbilityPauseGame());
     }
+  }
+
+  public void ListenPause(bool isPaused)
+  {
+    if (isPaused)
+      Screen.lockCursor = false;
+    else
+      Screen.lockCursor = true;
   }
   #endregion
 }

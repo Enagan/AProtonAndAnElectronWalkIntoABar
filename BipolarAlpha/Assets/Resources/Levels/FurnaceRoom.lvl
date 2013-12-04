@@ -3,6 +3,38 @@
   <roomName>FurnaceRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>PlayerPrefab/Player</objectPrefabPath>
+      <position>
+        <x>-1.836303</x>
+        <y>4.552939</y>
+        <z>4.480926</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Camera/Left Player Magnet/Left Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Camera/Right Player Magnet/Right Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
       <position>
         <x>-22.9228268</x>
@@ -162,25 +194,6 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>6.0361824</x>
-        <y>4.62678051</y>
-        <z>5.73909664</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
       <position>
         <x>-19.2492771</x>
@@ -195,44 +208,6 @@
       <eulerAngles>
         <x>0</x>
         <y>60.0000038</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>18.8738346</x>
-        <y>4.62678051</y>
-        <z>-2.943821</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>6.02602</x>
-        <y>4.62678051</y>
-        <z>-5.69344234</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
@@ -262,63 +237,6 @@
           <magnetCharge>1</magnetCharge>
         </ComplexState>
       </complexStates>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-7.64584064</x>
-        <y>9.643717</y>
-        <z>-3.38980079</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-5.2474823</x>
-        <y>4.66871548</y>
-        <z>18.5979881</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/WeakPointLight</objectPrefabPath>
-      <position>
-        <x>0.0218095779</x>
-        <y>1.15035009</y>
-        <z>0.0536551476</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/FurnaceRoomStairs</objectPrefabPath>
@@ -378,25 +296,6 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-21.8325138</x>
-        <y>9.722191</y>
-        <z>-3.6882534</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
       <position>
         <x>-19.24964</x>
@@ -430,25 +329,6 @@
       <eulerAngles>
         <x>0</x>
         <y>150</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-7.52428055</x>
-        <y>9.485777</y>
-        <z>3.36918378</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
@@ -541,63 +421,6 @@
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>-21.7814159</x>
-        <y>9.722191</y>
-        <z>3.70339823</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
-      <position>
-        <x>18.6200275</x>
-        <y>4.62678051</y>
-        <z>2.86807823</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/StrongSpotlight</objectPrefabPath>
-      <position>
-        <x>-25.2137337</x>
-        <y>35.842186</y>
-        <z>-0.379475236</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>26.94136</x>
-        <y>90.4554443</y>
-        <z>270</z>
-      </eulerAngles>
-      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
