@@ -58,7 +58,7 @@ public class HUDSystem : MonoBehaviour, IPauseListener
     if (_isGamePaused)
     {
       //Pausing everything code
-      //Time.timeScale = 0; <- Engana hates this, here as a testament to "bad coding"
+      Time.timeScale = 0; //<- Engana hates this, here as a testament to "bad coding"
 
       // Get all Objects in scene
       object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(MonoBehaviour));
@@ -67,16 +67,20 @@ public class HUDSystem : MonoBehaviour, IPauseListener
         MonoBehaviour castObject = ((MonoBehaviour)thisObject);
         if (castObject != null && castObject!=this && castObject.transform.parent == null)
         {
-          //Pause all Objects in scene
-          castObject.enabled = false;
-          _pausedObjects.Add(castObject);
+          //Check if object is enabled only necessary on disabling
+          if (castObject.enabled)
+          {
+            //Pause all Objects in scene
+            castObject.enabled = false;
+            _pausedObjects.Add(castObject);
+          }
         }
       }
     }
     else
     {
       //Unpausing everything code
-      //Time.timeScale = 1; <- Engana hates this aswell, its efficient though
+      Time.timeScale = 1; //<- Engana hates this aswell, its efficient though
 
       foreach (MonoBehaviour thisObject in _pausedObjects)
       {
