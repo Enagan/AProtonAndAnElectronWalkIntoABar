@@ -103,8 +103,7 @@ public class AnimationRootHandler : AnimationChildHandler
     string[] split = key.Split(new char[] {_splitSymbol});
     if(split.Length !=2)
     {
-      //TODO RAISE EXCEPTION
-      return "NOPE";
+      throw new BipolarExceptionInvalidRegisteredChild("Invalid data for key: " + key);
     }
     else
     {
@@ -117,10 +116,9 @@ public class AnimationRootHandler : AnimationChildHandler
   public static string getChildNameFromAnimChildrenKey(string key)
   {
     string[] split = key.Split(new char[] {_splitSymbol});
-    if(split.Length !=2)
+    if (split.Length != 2)
     {
-      //TODO RAISE EXCEPTION
-      return "NOPE";
+      throw new BipolarExceptionInvalidRegisteredChild("Invalid data for key: " + key);
     }
     else
     {
@@ -152,8 +150,8 @@ public class AnimationRootHandler : AnimationChildHandler
         return _animChildren[key].getAnimation();
       }
     }
-    //TODO no such child exception
-    return null;
+
+    throw new BipolarExceptionInvalidRegisteredChild("Not Able to Find AnimationChildHandler with name:"+childName);
   }
 
   #endregion

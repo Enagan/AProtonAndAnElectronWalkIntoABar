@@ -79,7 +79,7 @@ public class AnimationChildHandler : MonoBehaviour
     //Force naming on AnimationChildHandler
     if (childName.CompareTo("") == 0)
     {
-      //TODO Raise Exception
+      throw new BipolarExceptionUnassignedName("Nameless Animation instanced");
     }
     else
     {
