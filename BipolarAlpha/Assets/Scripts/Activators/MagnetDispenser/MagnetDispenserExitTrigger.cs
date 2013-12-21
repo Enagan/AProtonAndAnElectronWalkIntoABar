@@ -12,7 +12,6 @@ public class MagnetDispenserExitTrigger : MonoBehaviour {
 
   public void OnTriggerExit(Collider other)
   {
-    BipolarConsole.LousadaLog("" + other.gameObject);
     if(_spawner.IsLastCreated(other.gameObject))
     {
       this.transform.parent.GetComponentInChildren<MagnetDispenserGenerator>().Reset();

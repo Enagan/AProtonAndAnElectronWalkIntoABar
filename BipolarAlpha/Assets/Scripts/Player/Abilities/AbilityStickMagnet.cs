@@ -116,11 +116,11 @@ public class AbilityStickMagnet : Ability
             
             //_playerMagnet.transform.parent.parent.FindChild("Left Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
 
-            _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
+            // _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
 
             //_playerMagnet.transform.parent.parent.FindChild("Right Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
 
-            _animHandler.playChildAnimation("RightSpike", "RetractSpike");
+            // _animHandler.playChildAnimation("RightSpike", "RetractSpike");
           }
         }
         force.ApplyOtherMagnetsForces(caller.rigidbody);
@@ -143,11 +143,11 @@ public class AbilityStickMagnet : Ability
 
     if (key.CompareTo("Fire1")==0)//left
     {
-      _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
     }
     else if (key.CompareTo("Fire2") == 0)//Right
     {
-      _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
     }
 
 
@@ -176,11 +176,11 @@ public class AbilityStickMagnet : Ability
     //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
     if(key.CompareTo("Fire1")==0) //left
     {
-      _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
+      // _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
     } 
     else if(key.CompareTo("Fire2")==0)//right
     {
-      _animHandler.playChildAnimation("RightSpike", "RetractSpike");
+      // _animHandler.playChildAnimation("RightSpike", "RetractSpike");
     }
     
 
@@ -209,11 +209,11 @@ public class AbilityStickMagnet : Ability
     //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
     if (key.CompareTo("Fire1") == 0) //left
     {
-      _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+   //   _animHandler.playChildAnimation("LeftSpike", "UseSpike");
     }
     else if (key.CompareTo("Fire2") == 0)//right
     {
-      _animHandler.playChildAnimation("RightSpike", "UseSpike");
+   //   _animHandler.playChildAnimation("RightSpike", "UseSpike");
     }
 
     _stuckToMagnet = true;
@@ -238,11 +238,11 @@ public class AbilityStickMagnet : Ability
     //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
     if (key.CompareTo("Fire1") == 0) //left
     {
-      _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
     }
     else if (key.CompareTo("Fire2") == 0)//right
     {
-      _animHandler.playChildAnimation("RightSpike", "UseSpike");
+      // _animHandler.playChildAnimation("RightSpike", "UseSpike");
     }
 
     _stuckToMagnet = false;
@@ -258,11 +258,11 @@ public class AbilityStickMagnet : Ability
       //leftMagnet
       if (key.CompareTo("Fire1") == 0)
       {
-        _animHandler.getChildAnimation("LeftClaw").Stop();
+  //      _animHandler.getChildAnimation("LeftClaw").Stop();
       }
       else if (key.CompareTo("Fire2") == 0) // Right
       {
-        _animHandler.getChildAnimation("RightClaw").Stop();
+    //    _animHandler.getChildAnimation("RightClaw").Stop();
       }
     }
 
@@ -281,11 +281,11 @@ public class AbilityStickMagnet : Ability
       //leftMagnet
       if (key.CompareTo("Fire1") == 0)
       {
-        _animHandler.getChildAnimation("LeftClaw").CrossFade("MagnetActive");
+  //      _animHandler.getChildAnimation("LeftClaw").CrossFade("MagnetActive");
       }
       else if (key.CompareTo("Fire2") == 0) // Right
       {
-        _animHandler.getChildAnimation("RightClaw").CrossFade("MagnetActiveReverse");
+  //      _animHandler.getChildAnimation("RightClaw").CrossFade("MagnetActiveReverse");
       }
     }
 
