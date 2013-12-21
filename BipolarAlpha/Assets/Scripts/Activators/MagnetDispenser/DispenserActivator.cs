@@ -20,4 +20,11 @@ public class DispenserActivator : OpenCloseAnimationHelperCircuit
   {
     return "Door_Circuit";
   }
+
+  public override void Activate()
+  {
+      base.Activate();
+      this.transform.GetComponentInChildren<MagnetDispenser>().Activate();
+
+  }
 }

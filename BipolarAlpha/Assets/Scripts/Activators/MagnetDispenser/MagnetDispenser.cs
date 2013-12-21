@@ -8,7 +8,8 @@ public class MagnetDispenser : MonoBehaviour, Activator
   private GameObject _lastCreatedMagnet;
 
   #region Activator Interface functions
-  void Activator.Activate()
+
+  public void Activate()
   {
     if (_charge == MagneticForce.Charge.NEGATIVE)
     {
@@ -20,7 +21,7 @@ public class MagnetDispenser : MonoBehaviour, Activator
     }
   }
 
-  void Activator.Deactivate()
+  public void Deactivate()
   {
     
   }
