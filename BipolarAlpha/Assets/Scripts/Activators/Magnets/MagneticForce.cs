@@ -8,477 +8,472 @@ using System.Collections.Generic;
 /// </summary>
 public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
 {
-  #region MagneticForce Constants
-  private const float DUMMY_DISTANCE = 2.0f;
-  private const float DUMMY_FORCE = 100.0f;
+    #region MagneticForce Constants
+    private const float DUMMY_DISTANCE = 2.0f;
+    private const float DUMMY_FORCE = 100.0f;
 
-  private static float DISTANT_FORCE_CUTOFF = 0.5f;
+    private static float DISTANT_FORCE_CUTOFF = 0.5f;
 
-  //ToDo - Needs fine tuning // Change these 3 variables to const
-  private static float LOW_FORCE_FACTOR = 100.0f;
-  private static float MEDIUM_FORCE_FACTOR = 250.0f;
-  private static float HIGH_FORCE_FACTOR = 1000.0f;
+    //ToDo - Needs fine tuning // Change these 3 variables to const
+    private static float LOW_FORCE_FACTOR = 100.0f;
+    private static float MEDIUM_FORCE_FACTOR = 250.0f;
+    private static float HIGH_FORCE_FACTOR = 1000.0f;
 
-  #endregion
-	
-  #region MagneticForce Variables
-  [SerializeField]
-  private bool _isActivated = true;
+    #endregion
 
-  [SerializeField]
-  private bool _isMoveable = false;
+    #region MagneticForce Variables
+    [SerializeField]
+    private bool _isActivated = true;
 
-  [SerializeField]
-  private bool _isHoldable = false;
-	
-  public enum Force { LOW, MEDIUM, HIGH };
-  public enum Charge { NEGATIVE, POSITIVE};
-  [SerializeField]
-  private Force _force = Force.MEDIUM;
-  [SerializeField]
-  private Charge _charge = Charge.NEGATIVE;
+    [SerializeField]
+    private bool _isMoveable = false;
 
-  [SerializeField]
-  private GameObject _magnetLightsParent = null;
+    [SerializeField]
+    private bool _isHoldable = false;
 
-  [SerializeField]
-  protected GameObject parentToAffect = null;
+    public enum Force { LOW, MEDIUM, HIGH };
+    public enum Charge { NEGATIVE, POSITIVE };
+    [SerializeField]
+    private Force _force = Force.MEDIUM;
+    [SerializeField]
+    private Charge _charge = Charge.NEGATIVE;
 
-  private List<MagneticForce> _affectingMagnets = new List<MagneticForce>();
-  #endregion
-	
-  #region MagneticForce Properties
-	
-  public Force force
-  {
-    get { return _force; }
-  }
-	
-  public Charge charge
-  {
-    get { return _charge; }
-  }
+    [SerializeField]
+    private GameObject _magnetLightsParent = null;
 
-  public bool isActivated
-  {
-    get { return _isActivated; }
-    set 
-    { 
-	  if(_isActivated)
-	    NoLongerAffectingMagnets();    
-	  _isActivated = value;
-	}
-		
-  }
+    [SerializeField]
+    protected GameObject parentToAffect = null;
 
-  public bool isMoveable
-  {
-    get
+    private List<MagneticForce> _affectingMagnets = new List<MagneticForce>();
+    #endregion
+
+    #region MagneticForce Properties
+
+    public Force force
     {
-      return _isMoveable;
+        get { return _force; }
     }
-    set
+
+    public Charge charge
     {
-      _isMoveable = value;
+        get { return _charge; }
     }
-  }
 
-  public bool isHoldable
-  {
-    get
+    public bool isActivated
     {
-      return _isHoldable;
-    }
-    set
-    {
-      _isHoldable = value;
-    }
-  }
-
-  public List<MagneticForce> affectingMagnets
-  {
-    get { return _affectingMagnets; }
-  }
-
-  public float low_force_factor 
-  {
-    get { return LOW_FORCE_FACTOR; }
-  }
-
-  public float medium_force_factor 
-  {
-    get { return MEDIUM_FORCE_FACTOR; }
-  }
-
-  public float high_force_factor
-  {
-    get { return HIGH_FORCE_FACTOR; }
-  }
-  #endregion
-
-
-  void Activator.Activate()
-  {
-    _isActivated = true;
-
-    TurnOnLights();
-  }
-
-  void Activator.Deactivate()
-  {
-    if(_isActivated)
-			NoLongerAffectingMagnets();
-	_isActivated = false;
-
-  TurnOffLights();
-  }
-
-  private void TurnOnLights()
-  {
-    if (_magnetLightsParent == null)
-    {
-      return;
-    }
-    foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
-    {
-      light.enabled = true;
-    }
-  }
-
-  private void TurnOffLights()
-  {
-    if (_magnetLightsParent == null)
-    {
-      return;
-    }
-    foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
-    {
-      light.enabled = false;
-    }
-  }
-
-  /// <summary>
-  /// The AffectedBy function makes the MagneticForce provided begin to influence this object
-  /// </summary>
-  public void AffectedBy(MagneticForce otherMagnet)
-  {
-    if(_affectingMagnets.Contains(otherMagnet))
-    {
-      return;
-    }
-    _affectingMagnets.Add(otherMagnet);
-  }
-
-  /// <summary>
-  /// Stops the influence of the MagneticForce provided
-  /// </summary>
-  public void NoLongerAffectedBy(MagneticForce otherMagnet) 
-  {
-    foreach (MagneticForce m in _affectingMagnets) {
-      float aux = Vector3.Distance(otherMagnet.transform.position, m.transform.position);
-      if (aux < 0.5f) {
-        _affectingMagnets.Remove(m);
-        break;
-      }
-
-    }
-  }
-
-  /// <summary>
-  /// Checks if magnet is already being influenced by a certain MagneticForce
-  /// </summary>
-  public bool IsAlreadyAffectedBy(MagneticForce otherMagnet)
-  {
-    foreach (MagneticForce m in _affectingMagnets)
-    {
-      float aux = Vector3.Distance(otherMagnet.transform.position, m.transform.position);
-      if (aux < 0.5f)
-      {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /// <summary>
-  /// Stops all MagneticForce influences to and from this magnet
-  /// </summary>
-  public void NoLongerAffectingMagnets ()
-  {
-	foreach (MagneticForce m in _affectingMagnets) {
-	  m.NoLongerAffectedBy(this);
-    }
-	_affectingMagnets.Clear();	
-  }
-
-  public void OnDestroy()
-  {
-    
-    NoLongerAffectingMagnets();
-  }
-
-  public void OnTriggerEnter(Collider other)
-  {
-    CheckForMagnetAffecting(other);
-  }
-
-  public void OnTriggerStay(Collider other)
-  {
-    if (_isMoveable)
-    {
-      CheckForMagnetAffecting(other);
-    }
-  }
-
-  private void CheckForMagnetAffecting(Collider other)
-  {
-    MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
-    if (other.gameObject.transform.parent != null && 
-      other.gameObject.transform.parent.tag == "Magnet" && 
-      !(_affectingMagnets.Contains(otherMagnet)))
-    {
-      bool magneticBlockerFound = false;
-      Vector3 thisPosition = this.transform.position;
-      Vector3 otherPosition = other.transform.position;
-      RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition, otherPosition));
-
-      foreach (RaycastHit singleHit in hits)
-      {
-        if (singleHit.collider.gameObject.tag == "MagneticBlocker")
+        get { return _isActivated; }
+        set
         {
-          magneticBlockerFound = true;
-          break;
+            if (_isActivated)
+                NoLongerAffectingMagnets();
+            _isActivated = value;
         }
 
-      }
-      if (!magneticBlockerFound)
-      {
-        
-        AffectedBy(otherMagnet);
-      }
-    }
-  }
-
-  public void OnTriggerExit(Collider other) 
-  {
-    if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.tag == "Magnet")
-    {
-      MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
-      NoLongerAffectedBy(otherMagnet);
-    }
-  }
-
-  public virtual void Start()
-  {
-    SphereCollider collider = this.GetComponent<SphereCollider>();
-
-    //If the magnetic force has a collider attached it is it's interaction area, and this should be scaled to it's strength
-    if (collider != null)
-    {
-      collider.radius = Mathf.Sqrt(getForceValue(force) * HIGH_FORCE_FACTOR) / Mathf.Sqrt(DISTANT_FORCE_CUTOFF);
     }
 
-    InitLights();
-  }
-
-  private void InitLights()
-  {
-    float g = 52f / 255f;
-    float b = 174f / 255f;
-    if (_magnetLightsParent == null)
+    public bool isMoveable
     {
-      Transform parentTransformLights = this.transform.parent.FindChild("MagnetLights");
-      if (parentTransformLights != null)
-      {
-        _magnetLightsParent = parentTransformLights.gameObject;
-      }
-    }
-    if (_magnetLightsParent != null)
-    {
-      foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
-      {
-        if (charge == Charge.NEGATIVE)
+        get
         {
-          light.color = new Color(0, g, b);
+            return _isMoveable;
+        }
+        set
+        {
+            _isMoveable = value;
+        }
+    }
+
+    public bool isHoldable
+    {
+        get
+        {
+            return _isHoldable;
+        }
+        set
+        {
+            _isHoldable = value;
+        }
+    }
+
+    public List<MagneticForce> affectingMagnets
+    {
+        get { return _affectingMagnets; }
+    }
+
+    public float low_force_factor
+    {
+        get { return LOW_FORCE_FACTOR; }
+    }
+
+    public float medium_force_factor
+    {
+        get { return MEDIUM_FORCE_FACTOR; }
+    }
+
+    public float high_force_factor
+    {
+        get { return HIGH_FORCE_FACTOR; }
+    }
+    #endregion
+
+
+    void Activator.Activate()
+    {
+        _isActivated = true;
+        TurnOnLights();
+    }
+
+    void Activator.Deactivate()
+    {
+        if (_isActivated)
+        {
+            NoLongerAffectingMagnets();
+        }
+        _isActivated = false;
+        TurnOffLights();
+    }
+
+    public virtual void Start()
+    {
+        InitLights();
+        SphereCollider collider = this.GetComponent<SphereCollider>();
+
+        //If the magnetic force has a collider attached it is it's interaction area, and this should be scaled to it's strength
+        if (collider != null)
+        {
+            collider.radius = Mathf.Sqrt(getForceValue(force) * HIGH_FORCE_FACTOR) / Mathf.Sqrt(DISTANT_FORCE_CUTOFF);
+        }
+
+        //If no parent is assigned then assign one's own parent
+        if (parentToAffect == null)
+        {
+            parentToAffect = this.transform.parent.gameObject;
+        }
+
+    }
+
+    public virtual void Update()
+    {
+        ApplyOtherMagnetsForces(parentToAffect.rigidbody);
+    }
+
+    #region Light Management
+    /// <summary>
+    /// Changes the associated lights according to the magnet's charge
+    /// </summary>
+    private void InitLights()
+    {
+        float g = 52f / 255f;
+        float b = 174f / 255f;
+        if (_magnetLightsParent == null)
+        {
+            Transform parentTransformLights = this.transform.parent.FindChild("MagnetLights");
+            if (parentTransformLights != null)
+            {
+                _magnetLightsParent = parentTransformLights.gameObject;
+            }
+        }
+        if (_magnetLightsParent != null)
+        {
+            foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
+            {
+                if (charge == Charge.NEGATIVE)
+                {
+                    light.color = new Color(0, g, b);
+                }
+                else
+                {
+                    light.color = Color.red;
+                }
+            }
+        }
+
+        if (_isActivated)
+        {
+            TurnOnLights();
         }
         else
         {
-          light.color = Color.red;
+            TurnOffLights();
         }
-      }
     }
 
-    if (!_isActivated)
+
+    private void TurnOnLights()
     {
-      TurnOffLights();
+        if (_magnetLightsParent != null)
+        {
+            foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
+            {
+                light.enabled = true;
+            }
+        }
     }
-    else
+
+    private void TurnOffLights()
     {
-      TurnOnLights();
+        if (_magnetLightsParent != null)
+        {
+            foreach (Light light in _magnetLightsParent.GetComponentsInChildren<Light>())
+            {
+                light.enabled = false;
+            }
+        }
     }
-  }
+    #endregion
 
-  public virtual void  Update()
-  {
-    if (parentToAffect == null)
+    #region Magnet Incluence Management
+    /// <summary>
+    /// The AffectedBy function makes the MagneticForce provided begin to influence this object
+    /// </summary>
+    public void AffectedBy(MagneticForce otherMagnet)
     {
-      ApplyOtherMagnetsForces(this.transform.parent.rigidbody);
+        if (!IsAlreadyAffectedBy(otherMagnet))
+        {
+            _affectingMagnets.Add(otherMagnet);
+        }
     }
-    else
+
+    /// <summary>
+    /// Stops the influence of the MagneticForce provided over this magnet
+    /// </summary>
+    public void NoLongerAffectedBy(MagneticForce otherMagnet)
     {
-      ApplyOtherMagnetsForces(parentToAffect.rigidbody);
+        _affectingMagnets.Remove(otherMagnet);
+
     }
 
-  }
-
-  /// <summary>
-  /// Applies the influence other objects have over this one
-  /// </summary>
-  public virtual void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet, Vector3 hit = default(Vector3))
-  {
-    Vector3 forceDirection = new Vector3();
-    if(hit != Vector3.zero)
+    /// <summary>
+    /// Checks if magnet is already being influenced by the recieved MagneticForce
+    /// </summary>
+    public bool IsAlreadyAffectedBy(MagneticForce otherMagnet)
     {
-      forceDirection = hit - this.transform.position;
+        return _affectingMagnets.Contains(otherMagnet);
     }
-    else
+
+    /// <summary>
+    /// Stops all MagneticForce influences to and from this magnet
+    /// </summary>
+    public void NoLongerAffectingMagnets()
     {
-      forceDirection = otherMagnet.transform.position - this.transform.position;
+        foreach (MagneticForce m in _affectingMagnets)
+        {
+            m.NoLongerAffectedBy(this);
+        }
+        _affectingMagnets.Clear();
     }
-    forceDirection.Normalize();
-    if (otherMagnet.charge == this.charge)
+
+    /// <summary>
+    /// Checks if the given Collider has MagneticForce
+    /// If it does then it adds it to the affecting magnets list if no MagneticBlocker is in the way
+    /// </summary>
+    private void CheckForMagnetAffecting(Collider other)
     {
-      forceDirection = (-1) * forceDirection;
+        MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
+        if (other.gameObject.transform.parent != null &&
+            other.gameObject.transform.parent.tag == "Magnet" &&
+            !IsAlreadyAffectedBy(otherMagnet))
+        {
+            bool magneticBlockerFound = false;
+            Vector3 thisPosition = this.transform.position;
+            Vector3 otherPosition = other.transform.position;
+            RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition, otherPosition));
+
+            foreach (RaycastHit singleHit in hits)  //Checks for magnetic blockers between MagneticForces
+            {
+                if (singleHit.collider.gameObject.tag == "MagneticBlocker")
+                {
+                    magneticBlockerFound = true;
+                    break;
+                }
+
+            }
+            if (!magneticBlockerFound)
+            {
+
+                AffectedBy(otherMagnet);
+            }
+        }
     }
-    float totalForce = getTotalForce(otherMagnet);
-    magnetBody.AddForce(totalForce * forceDirection * Time.deltaTime, ForceMode.Force);
-  }
 
-
-  /// <summary>
-  /// Checks if magnets will influence each other
-  /// </summary>
-  public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody)
-  {
-    if (!_isMoveable)
+    public void OnTriggerEnter(Collider other)
     {
-      return;
+        CheckForMagnetAffecting(other);
     }
-    foreach (MagneticForce otherMagnet in _affectingMagnets)
+
+    public void OnTriggerStay(Collider other)
     {
-      if (otherMagnet != null && otherMagnet.isActivated)
-      {
-        ApplyForces(magnetBody, otherMagnet);
-      }
+        if (_isMoveable)
+        {
+            CheckForMagnetAffecting(other);
+        }
     }
-  }
-	
-  
-  /// <summary>
-  /// Calculates the totalForce of two magnet's interactions given the otherMagneticForce
-  /// </summary>
-  /// <param name="otherMagneticForce">MagneticForce from another Magnet that is interacting with this one</param>
-  /// <returns></returns>
-	public float getTotalForce (MagneticForce otherMagneticForce)
-	{
-    float distance = Vector3.Distance(otherMagneticForce.transform.position, this.transform.position);
-    float forceFactor = 0.0f;
-    float otherForceFactor = 0.0f;
-    float totalForce = 0.0f;
 
-    if (distance < DUMMY_DISTANCE) 
-	  {   //This is used to prevent object with different forces to push each other after colliding
-      forceFactor = DUMMY_FORCE;
-    }
-    else 
+    public void OnTriggerExit(Collider other)
     {
-      forceFactor = getForceValue(force);
-    }  
-
-
-    if (distance < DUMMY_DISTANCE) 
-	  {   //This is used to prevent object with different forces to push each other after colliding
-      otherForceFactor = DUMMY_FORCE;
+        if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.tag == "Magnet")
+        {
+            MagneticForce otherMagnet = (MagneticForce)other.gameObject.GetComponent("MagneticForce");
+            NoLongerAffectedBy(otherMagnet);
+        }
     }
-    else 
+
+
+    public void OnDestroy()
     {
-      otherForceFactor = getForceValue(otherMagneticForce.force);
+        NoLongerAffectingMagnets();
     }
 
-    totalForce = ((forceFactor * otherForceFactor) / (distance*distance));
-	  return totalForce;
-  }
+    #endregion
 
-  /// <summary>
-  /// Turns a enum force value into it's actual float value
-  /// </summary>
-  public float getForceValue(Force force)
-  {
-    float result = DUMMY_FORCE;
-    switch (force)
+    #region Force Application
+
+    /// <summary>
+    /// Applies the influence other objects have over this one
+    /// </summary>
+    public virtual void ApplyForces(Rigidbody magnetBody, MagneticForce otherMagnet, Vector3 hit = default(Vector3))
     {
-      case Force.LOW:
-        result = LOW_FORCE_FACTOR;
-        break;
-      case Force.MEDIUM:
-        result = MEDIUM_FORCE_FACTOR;
-        break;
-      case Force.HIGH:
-        result = HIGH_FORCE_FACTOR;
-        break;
-      default:
-        //throw exception perhaps
-        break;
+        Vector3 forceDirection = new Vector3();
+        if (hit != Vector3.zero)
+        {
+            forceDirection = hit - this.transform.position;
+        }
+        else
+        {
+            forceDirection = otherMagnet.transform.position - this.transform.position;
+        }
+        forceDirection.Normalize();
+        if (otherMagnet.charge == this.charge)
+        {
+            forceDirection = (-1) * forceDirection;
+        }
+        float totalForce = getTotalForce(otherMagnet);
+        magnetBody.AddForce(totalForce * forceDirection * Time.deltaTime, ForceMode.Force);
     }
-    return result;
-  }
 
 
-#region Complex State Save, Load and Update
-
-  public ComplexState WriteComplexState()
-  {
-    MagneticForceComplexState state = new MagneticForceComplexState(this.gameObject);
-    state.isActive = _isActivated;
-    state.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
-    state.magnetForce = _force == Force.LOW ? 
-                              0 : _force == Force.MEDIUM ? 
-                                        1 : 2;
-
-    return state;
-  }
-
-  public void LoadComplexState(ComplexState state)
-  {
-    if(!(state is MagneticForceComplexState))
+    /// <summary>
+    /// Checks if magnets will influence each other
+    /// </summary>
+    public virtual void ApplyOtherMagnetsForces(Rigidbody magnetBody)
     {
-      throw new BipolarExceptionComplexStateNotCompatibleWithScript(state.GetComplexStateName() + " is not compatible with Magnetic Force class");
+        if (_isMoveable)
+        {
+            foreach (MagneticForce otherMagnet in _affectingMagnets)
+            {
+                if (otherMagnet != null && otherMagnet.isActivated)
+                {
+                    ApplyForces(magnetBody, otherMagnet);
+                }
+            }
+        }
     }
 
-    MagneticForceComplexState magneticState = ((MagneticForceComplexState) state);
 
-    _isActivated = magneticState.isActive;
-    _force = magneticState.magnetForce == 0 ? Force.LOW : magneticState.magnetForce == 1 ? Force.MEDIUM : Force.HIGH;
-    _charge = magneticState.magnetCharge == 0 ? Charge.NEGATIVE : Charge.POSITIVE;
-
-    InitLights();
-  }
-
-  public ComplexState UpdateComplexState(ComplexState state)
-  {
-    if (!(state is MagneticForceComplexState))
+    /// <summary>
+    /// Calculates the totalForce of two magnet's interactions given the otherMagneticForce
+    /// </summary>
+    /// <param name="otherMagneticForce">MagneticForce from another Magnet that is interacting with this one</param>
+    /// <returns></returns>
+    public float getTotalForce(MagneticForce otherMagneticForce)
     {
-      throw new BipolarExceptionComplexStateNotCompatibleWithScript("Complex State " + state.GetComplexStateName() + " cannot be updated in MagneticForce Class");
+        float distance = Vector3.Distance(otherMagneticForce.transform.position, this.transform.position);
+        float forceFactor = 0.0f;
+        float otherForceFactor = 0.0f;
+        float totalForce = 0.0f;
+
+        if (distance < DUMMY_DISTANCE)
+        {   //This is used to prevent object with different forces to push each other after colliding
+            forceFactor = DUMMY_FORCE;
+        }
+        else
+        {
+            forceFactor = getForceValue(force);
+        }
+
+
+        if (distance < DUMMY_DISTANCE)
+        {   //This is used to prevent object with different forces to push each other after colliding
+            otherForceFactor = DUMMY_FORCE;
+        }
+        else
+        {
+            otherForceFactor = getForceValue(otherMagneticForce.force);
+        }
+
+        totalForce = ((forceFactor * otherForceFactor) / (distance * distance));
+        return totalForce;
     }
-    MagneticForceComplexState specificState = (state as MagneticForceComplexState);
-    specificState.isActive = _isActivated;
-    specificState.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
-    specificState.magnetForce = _force == Force.LOW ?
-                              0 : _force == Force.MEDIUM ?
-                                        1 : 2;
 
-    return specificState;
-  }
+    /// <summary>
+    /// Turns a enum force value into it's actual float value
+    /// </summary>
+    public float getForceValue(Force force)
+    {
+        float result = DUMMY_FORCE;
+        switch (force)
+        {
+            case Force.LOW:
+                result = LOW_FORCE_FACTOR;
+                break;
+            case Force.MEDIUM:
+                result = MEDIUM_FORCE_FACTOR;
+                break;
+            case Force.HIGH:
+                result = HIGH_FORCE_FACTOR;
+                break;
+            default:
+                //throw exception perhaps
+                break;
+        }
+        return result;
+    }
 
-#endregion
+    #endregion
+
+    #region Complex State Save, Load and Update
+    public ComplexState WriteComplexState()
+    {
+        MagneticForceComplexState state = new MagneticForceComplexState(this.gameObject);
+        state.isActive = _isActivated;
+        state.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
+        state.magnetForce = _force == Force.LOW ?
+                                  0 : _force == Force.MEDIUM ?
+                                            1 : 2;
+
+        return state;
+    }
+
+    public void LoadComplexState(ComplexState state)
+    {
+        if (!(state is MagneticForceComplexState))
+        {
+            throw new BipolarExceptionComplexStateNotCompatibleWithScript(state.GetComplexStateName() + " is not compatible with Magnetic Force class");
+        }
+
+        MagneticForceComplexState magneticState = ((MagneticForceComplexState)state);
+
+        _isActivated = magneticState.isActive;
+        _force = magneticState.magnetForce == 0 ? Force.LOW : magneticState.magnetForce == 1 ? Force.MEDIUM : Force.HIGH;
+        _charge = magneticState.magnetCharge == 0 ? Charge.NEGATIVE : Charge.POSITIVE;
+
+        InitLights();
+    }
+
+    public ComplexState UpdateComplexState(ComplexState state)
+    {
+        if (!(state is MagneticForceComplexState))
+        {
+            throw new BipolarExceptionComplexStateNotCompatibleWithScript("Complex State " + state.GetComplexStateName() + " cannot be updated in MagneticForce Class");
+        }
+        MagneticForceComplexState specificState = (state as MagneticForceComplexState);
+        specificState.isActive = _isActivated;
+        specificState.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
+        specificState.magnetForce = _force == Force.LOW ?
+                                  0 : _force == Force.MEDIUM ?
+                                            1 : 2;
+        return specificState;
+    }
+
+    #endregion
 }
