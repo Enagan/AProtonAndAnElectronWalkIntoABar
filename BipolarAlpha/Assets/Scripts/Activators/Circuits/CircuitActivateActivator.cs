@@ -25,6 +25,9 @@ public class CircuitActivateActivator : Circuit
 
       // Confirms the current Activator is an same instance of CircuitActivateActivator and
       // activates the Activator in the hierarchy
+
+      // NOTE: It might not be desired to activate circuits
+      // (just remove "ActivateActivator" from the 'if' bellow to produce that effect)
       if (!(act is CircuitActivateActivator))
       {
         act.Activate();
@@ -47,6 +50,9 @@ public class CircuitActivateActivator : Circuit
     {
       // Confirms the current Activator is not an instance of CircuitActivateActivator and
       // deactivates the Activator in the hierarchy
+
+      // NOTE: It might not be desired to deactivate circuits 
+      // (just remove "ActivateActivator" from the 'if' bellow to produce that effect)
       if (!(act is CircuitActivateActivator))
       {
         act.Deactivate();
