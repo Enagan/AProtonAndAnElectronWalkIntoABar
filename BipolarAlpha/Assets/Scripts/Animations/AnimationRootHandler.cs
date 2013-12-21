@@ -151,9 +151,24 @@ public class AnimationRootHandler : AnimationChildHandler
       }
     }
 
-    throw new BipolarExceptionInvalidRegisteredChild("Not Able to Find AnimationChildHandler with name:"+childName);
+    throw new BipolarExceptionInvalidRegisteredChild("Not able to Find AnimationChildHandler with name:"+childName);
   }
 
+  public AnimationChildHandler getChildHandler(string childName)
+  {
+      
+    foreach (string key in _animChildren.Keys)
+    {
+      
+      if (getChildNameFromAnimChildrenKey(key).CompareTo(childName) == 0)
+      {
+        
+        return _animChildren[key];
+      }
+    }
+
+    throw new BipolarExceptionInvalidRegisteredChild("Not able to Find AnimationChildHandler with name:" + childName);
+  }
   #endregion
 
   #region Debug methods
