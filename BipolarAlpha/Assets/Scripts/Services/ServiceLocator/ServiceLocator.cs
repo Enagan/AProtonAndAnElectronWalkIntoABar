@@ -25,6 +25,8 @@ public class ServiceLocator
 
   private static StringRetrievalSystem _stringSystem = new StringRetrievalSystem();
 
+  private static CheckPointSystem _checkpointSystem= new CheckPointSystem();
+
   //--- Access functions
   //- Get<SystemInterfaceName>()
   //    Access functions to the available services/systems
@@ -89,6 +91,14 @@ public class ServiceLocator
   public static StringRetrievalSystem GetStringRetrievalSystem()
   {
     return _stringSystem;
+  }
+
+  /// <summary>
+  /// Returns the current implementation of the CheckPoint System
+  /// </summary>
+  public static CheckPointSystem GetCheckPointSystem()
+  {
+    return _checkpointSystem;
   }
   #endregion
 
@@ -157,6 +167,14 @@ public class ServiceLocator
   public static void ProvideStringRetrievalSystem(StringRetrievalSystem stringSystem)
   {
     _stringSystem = stringSystem;
+  }
+
+  /// <summary>
+  /// Changes the current implementation of CheckPoint System to the specified/provided implementation
+  /// </summary>
+  public static void ProvideStringRetrievalSystem(CheckPointSystem checkpointSystem)
+  {
+    _checkpointSystem = checkpointSystem;
   }
   #endregion
 }

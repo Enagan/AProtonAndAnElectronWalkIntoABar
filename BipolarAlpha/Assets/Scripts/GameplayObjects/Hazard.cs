@@ -10,9 +10,8 @@ class Hazard : MonoBehaviour
   {
     if (other.tag == "Player")
     {
+      ServiceLocator.GetCheckPointSystem().respawnPlayer(other.GetComponent<PlayerController>());
       //ServiceLocator.GetSceneManager().LoadRooms();
-      other.transform.position = CheckPoint.savedPlayerPosition;
-      other.transform.eulerAngles = CheckPoint.savedPlayerRotation;
     }
   }
 }

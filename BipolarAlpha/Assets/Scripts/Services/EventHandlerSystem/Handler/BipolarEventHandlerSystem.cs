@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger, PauseGame }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger, PauseGame, CheckPoint }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -67,6 +67,15 @@ public class BipolarEventHandlerSystem
     RegisterEventListner(BipolarEvent.PauseGame, listener);
   }
 
+  /// <summary>
+  /// Registers a new listener for CheckPoint change events
+  /// </summary>
+  public void RegisterCheckPointListener(ICheckPointRegisterListener listener)
+  {
+    RegisterEventListner(BipolarEvent.CheckPoint, listener);
+  }
+
+ 
 
   /// <summary>
   /// Master Register event function, receives the cooresponding enum, and listner
@@ -170,6 +179,22 @@ public class BipolarEventHandlerSystem
     foreach (IPauseListener listener in _listners[BipolarEvent.PauseGame])
     {
       listener.ListenPause(isPaused);
+    }
+  }
+
+
+  /// <summary>
+  /// Sends a Checkpoint register event
+  /// </summary>
+  public void SendCheckPointRegisterEvent(CheckPoint checkpoint)
+  {
+    if (!_listners.ContainsKey(BipolarEvent.PauseGame))
+    {
+      return;
+    }
+    foreach (ICheckPointRegisterListener listener in _listners[BipolarEvent.CheckPoint])
+    {
+      listener.ListenCheckPointChange(checkpoint);
     }
   }
   #endregion
