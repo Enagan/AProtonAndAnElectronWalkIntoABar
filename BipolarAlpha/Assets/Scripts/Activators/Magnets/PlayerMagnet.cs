@@ -11,6 +11,10 @@ public class PlayerMagnet : MagneticForce
   // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
   private Vector3 _magnetHitPoint = default(Vector3);
   private Vector3 _currentHitPoint = default(Vector3);
+
+  //used when snapping
+  private bool _snapingToMagnet = false;
+
   private bool _isAvailable = true;
   private int _raycastMask = ~( (1 << 8) | (1 << 13));  //Ignore objects in layer 8 (Magnetic Force) and 13 (Triggers)
 
@@ -53,6 +57,18 @@ public class PlayerMagnet : MagneticForce
     }
   }
 
+  public bool snapingToMagnet
+  {
+    get
+    {
+      return _snapingToMagnet;
+    }
+    set
+    {
+      _snapingToMagnet = value;
+    }
+  }
+
 
   /// <summary>
   /// Fires a raycast that will make a magnetic object have influence over the player if one is hit
@@ -77,7 +93,11 @@ public class PlayerMagnet : MagneticForce
       BipolarConsole.EnganaLog("WUT");
       return this; // leave handling for the ability
     }
-    else
+    else if(snapingToMagnet)
+    {
+      return this;
+    }
+    else 
     {
       _magnetHitPoint = Vector3.zero;
       _currentHitPoint = Vector3.zero;

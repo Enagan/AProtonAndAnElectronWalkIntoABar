@@ -11,6 +11,17 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private float _groundAngleThreshold = 0f;
 
   [SerializeField]
+  private float _snapAngleThereshold = 0f;
+
+  //Force applied when the player is moving the mouse from the magnet, valid values are [0,1]
+  [SerializeField]
+  private float _snapInstantForce = 0f;
+
+  //Force applied when the player stops moving the mouse
+  [SerializeField]
+  private float _snapContinuousForce = 0f;
+
+  [SerializeField]
   private float _acceleration = 0f;
   [SerializeField]
   private float _maxVelocity = 0f;
@@ -35,6 +46,11 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private float _rotationX = 0f;
   private float _rotationY = 0f;
 
+  private float _totalStartRotationInSnap = 0;
+  private Vector2 _startRotationInSnap = Vector2.zero;
+  private bool _currentlyAffectingMagnet = false;
+  private float _snapTimer = 0;
+
   private bool _airborne = true;
 
   private bool _collidingWithWall = false;
@@ -42,6 +58,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
   private bool _magnetColliding = false;
   private MagneticForce _magnetCollidingWith = null;
+
   #endregion
 
   private GameObject mainCamera;
@@ -95,24 +112,34 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// <summary>
   /// Initializes Variables
   /// </summary>
-  private void Start () {
-   _rotationX = -transform.localEulerAngles.x;
-   Screen.lockCursor = true;
-   if ((mainCamera = GameObject.Find("Camera")) == null)
-     throw new BipolarExceptionComponentNotFound("Camera component not found");
+  private void Start()
+  {
+    _rotationX = -transform.localEulerAngles.x;
+    _snapContinuousForce = Mathf.Clamp01(_snapContinuousForce);
+    Screen.lockCursor = true;
+    Screen.showCursor = true;
+    Screen.showCursor = false;
+    if ((mainCamera = GameObject.Find("Camera")) == null)
+      throw new BipolarExceptionComponentNotFound("Camera component not found");
 
-   //add initial abilities
-   instantiateAbilities();
+    _leftMagnet = GameObject.Find("Left Player Magnet").transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
+    _rightMagnet = GameObject.Find("Right Player Magnet").transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
 
-   ServiceLocator.GetEventHandlerSystem().RegisterPlayerAbilityObtainListener(this);
-   ServiceLocator.GetEventHandlerSystem().RegisterPauseListener(this);
+    //add initial abilities
+    instantiateAbilities();
+    ServiceLocator.GetEventHandlerSystem().RegisterPlayerAbilityObtainListener(this);
+    ServiceLocator.GetEventHandlerSystem().RegisterPauseListener(this);
   }
-	
+
   /// <summary>
   /// Calls the players' Subsystem Managers
   /// </summary>
-  private void Update () 
+  private void Update()
   {
+    //This for centering the mouse for editor after pressing escape
+    Screen.showCursor = false;
+    Screen.lockCursor = true;
+
     ManageMovement();
     ManageRotation();
     ManageAbilities();
@@ -126,35 +153,35 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void OnCollisionStay(Collision collision)
   {
-      ContactPoint[] contactPoints = collision.contacts;
+    ContactPoint[] contactPoints = collision.contacts;
 
-      bool wallColliding = false;
-      //Check how far from Vector.UP the colision normals are
-      foreach (ContactPoint point in contactPoints)
+    bool wallColliding = false;
+    //Check how far from Vector.UP the colision normals are
+    foreach (ContactPoint point in contactPoints)
+    {
+      //If the angle is greater than GROUND_ANGLE_THRESHOLD passes, we're colliding with a wall
+      if (Vector3.Angle(point.normal, Vector3.up) > _groundAngleThreshold)
       {
-        //If the angle is greater than GROUND_ANGLE_THRESHOLD passes, we're colliding with a wall
-        if (Vector3.Angle(point.normal, Vector3.up) > _groundAngleThreshold)
+        setCollidingWithWall(point);
+        wallColliding = true;
+        if (collision.gameObject.tag == "Magnet")
         {
-          setCollidingWithWall(point);
-          wallColliding = true;
-          if (collision.gameObject.tag == "Magnet")
-          {
-            _magnetColliding = true;
-            _magnetCollidingWith = collision.gameObject.GetComponentInChildren<MagneticForce>();
-          }
-        }
-        //Otherwise, we're colliding with the floor, in which case, if we're airborne, we shouldn't be so anymore
-        else if (airborne)
-        {
-          setGrounded();
+          _magnetColliding = true;
+          _magnetCollidingWith = collision.gameObject.GetComponentInChildren<MagneticForce>();
         }
       }
-
-      if (!wallColliding)
+      //Otherwise, we're colliding with the floor, in which case, if we're airborne, we shouldn't be so anymore
+      else if (airborne)
       {
-        setWallCollisionFree();
+        setGrounded();
       }
-    
+    }
+
+    if (!wallColliding)
+    {
+      setWallCollisionFree();
+    }
+
   }
 
   /// <summary>
@@ -170,7 +197,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     setAirborne();
     setWallCollisionFree();
 
-    if(collision.gameObject.tag == "Magnet")
+    if (collision.gameObject.tag == "Magnet")
     {
       _magnetColliding = false;
       _magnetCollidingWith = null;
@@ -203,7 +230,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     _usableAbilities.Add("Jump", new AbilityJump());
     //_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
     //_usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
-    
+
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
     _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
@@ -217,7 +244,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     //Pause Game
     _usableAbilities.Add("Menu", new AbilityPauseGame());
   }
-    #endregion
+  #endregion
   /// <summary>
   /// Removes the ability which can be activated with the specified key
   /// </summary>
@@ -277,7 +304,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void ManageAbilities()
   {
-    foreach(KeyValuePair<string,Ability> ability in _usableAbilities)
+    foreach (KeyValuePair<string, Ability> ability in _usableAbilities)
     {
 
       if (Input.GetButtonUp(ability.Key))
@@ -358,56 +385,104 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// <summary>
   /// Checks for player mouse input and applies all logic regarding the rotation of the player object
   /// </summary>
-  public  void ManageRotation()
+  private void ManageRotation()
   {
-    PlayerMagnet leftPlayerMagnet = GameObject.Find("Left Player Magnet").transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
-    PlayerMagnet rightPlayerMagnet = GameObject.Find("Right Player Magnet").transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
-   
-    Vector3 hitPoint = Vector3.zero;
-    Vector3 magnetPoint = Vector3.zero;
-   /* if (leftPlayerMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet with left hand    
+
+    PlayerMagnet activeMagnet = null;
+
+    //Check if a magnet is active
+    if (_leftMagnet.currentHitPoint != Vector3.zero)
     {
-      hitPoint = leftPlayerMagnet.currentHitPoint;
-      magnetPoint =leftPlayerMagnet.magnetHitPoint;
+      activeMagnet = _leftMagnet;
+    }
+    else if (_rightMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet
+    {
+      activeMagnet = _rightMagnet;
+    }
+
+    if (activeMagnet)
+    {
+      //Snapping to magnet
+      if (!_currentlyAffectingMagnet)
+      {
+        _startRotationInSnap = new Vector2(_rotationX, _rotationY);
+        _totalStartRotationInSnap = Mathf.Abs(_rotationX) + Mathf.Abs(_rotationY);
+        _currentlyAffectingMagnet = true;
+        activeMagnet.snapingToMagnet = true;
+      }
     }
     else
     {
-      if (rightPlayerMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet with right hand
+      _currentlyAffectingMagnet = false;
+      _startRotationInSnap = Vector2.zero;
+    }
+
+    if (_currentlyAffectingMagnet)
+    {
+      float currentRotation = Mathf.Abs(_rotationX) + Mathf.Abs(_rotationY);
+      float angleDifference = Mathf.Abs(currentRotation - _totalStartRotationInSnap);
+
+      if (angleDifference > 0f)
       {
-        hitPoint = rightPlayerMagnet.currentHitPoint;
-        magnetPoint =rightPlayerMagnet.magnetHitPoint;
+        float counterForce = GetCounterActionForce(angleDifference);
+
+        //snap angle thereshold reached, can release snap
+        if (counterForce == 0)
+        {
+          activeMagnet.snapingToMagnet = false;
+        }
+        else
+        {
+          if (Input.GetAxisRaw("Mouse X") == 0 && Input.GetAxisRaw("Mouse Y") == 0) //mouse is idle, apply instant force
+          {
+            _rotationX = Mathf.Lerp(_rotationX, _startRotationInSnap.x, _snapTimer * _snapInstantForce);
+            _rotationY = Mathf.Lerp(_rotationY, _startRotationInSnap.y, _snapTimer * _snapInstantForce);
+            _snapTimer += Time.deltaTime;
+          }
+          else
+          {
+            //player is moving mouse, apply continuous force to magnet
+            _snapTimer = 0;
+            float counterActionY = -1.0f * Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime * counterForce;
+            float counterActionX = -1.0f * Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity * Time.deltaTime * counterForce;
+            _rotationY += counterActionY;
+            _rotationX += counterActionX;
+          }
+        }
       }
     }
 
-    if(hitPoint != Vector3.zero)
-    {
-      float counterActionY = -1.0f * Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime / (Vector3.Distance(magnetPoint, hitPoint) / 3 + 1.05f);
-      float actionY = Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
-       _rotationY += actionY + counterActionY;
-
-      float counterActionX = -1.0f * Input.GetAxis("Mouse Y") * _mouseHorizontalSensitivity * Time.deltaTime / (Vector3.Distance(magnetPoint, hitPoint) / 3 + 1.05f);
-      float actionX = Input.GetAxis("Mouse Y") * _mouseHorizontalSensitivity * Time.deltaTime;
-      _rotationX += actionX + counterActionX;
-    }
-    else
-    {*/
-        _rotationY += Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
-        _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity *  Time.deltaTime;
-    //}
-
+    _rotationY += Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
+    _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity * Time.deltaTime;
 
     _rotationX = Mathf.Clamp(_rotationX, _minimumVerticalRotation, _maximumVerticalRotation);
-    //hackish..I only rotate the player at y axis, so the collision box doesn't get affected by other rotations
+    //I only rotate the player at y axis, so the collision box doesn't get affected by other rotations
     transform.eulerAngles = new Vector3(0, _rotationY, 0);
     //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object
     mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
   }
+
+  /// <summary>
+  /// Calculates the continuous force to apply to the mouse, using a linear function
+  /// </summary>
+  private float GetCounterActionForce(float angleDifference)
+  {
+
+    //angleDifference should always be positive
+    if (angleDifference < 0)
+    {
+      return 0;
+    }
+    float force = -(1f / _snapAngleThereshold) * angleDifference + 1; // y = (-1/threshold)x + 1
+    return Mathf.Clamp(force, 0, _snapContinuousForce);
+  }
+
   #endregion
 
   #region Event Listeners
   public void ListenPlayerAbilityObtain(string newAbilityName)
   {
-    if(newAbilityName == "Stick")
+    if (newAbilityName == "Stick")
     {
       Camera playerCamera = this.GetComponentInChildren<Camera>();
       AddAbility("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
