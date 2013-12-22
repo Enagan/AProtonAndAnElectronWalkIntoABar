@@ -241,6 +241,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
     _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera));
 
+    //MagneticBoots ability (Q and E)
+    _usableAbilities.Add("Boot1", new AbilityMagnetBoots(GameObject.Find("LeftBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera));
+    _usableAbilities.Add("Boot2", new AbilityMagnetBoots(GameObject.Find("RightBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera));
+
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
 

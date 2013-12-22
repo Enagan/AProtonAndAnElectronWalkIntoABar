@@ -83,6 +83,31 @@ public class PlayerMagnet : MagneticForce
   }
 
 
+  public override void Start()
+  {
+    base.Start();
+
+    Transform player = transform;
+
+    //Find player object in parents
+    while((player = player.parent))
+    {
+      if(player.gameObject.CompareTag("Player"))
+      {
+        break;
+      }
+    }
+
+    if(player != null)
+    {
+      parentToAffect = player.gameObject;
+    }
+    else 
+    {
+      Debug.Log("PlayerMagnet is not child of Player, YOU ARE DOING IT WRONG");
+    }
+  }
+
   /// <summary>
   /// Fires a raycast that will make a magnetic object have influence over the player if one is hit
   /// Requiers the direction the player/camera is facing 
