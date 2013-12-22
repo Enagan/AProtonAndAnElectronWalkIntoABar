@@ -18,6 +18,9 @@ public class AbilityStickMagnet : Ability
 
   private static GameObject _magnetStuckToArm = null;
   private Transform _previousMagnetParent = null;
+
+  //parent root handler
+  private AnimationRootHandler _animHandler;
   #endregion
 
   /// <summary>
@@ -27,6 +30,10 @@ public class AbilityStickMagnet : Ability
   {
     _playerMagnet = playerMagnet;
     _playerCamera = playerCamera;
+
+    //I blame people who arent passing playerController by. Ivo.
+    // Also blame the people that are trying to call animations in a brother hiearchy
+    _animHandler = _playerMagnet.transform.parent.parent.parent.GetComponent<AnimationRootHandler>();
   }
 
   /// <summary>
@@ -38,11 +45,11 @@ public class AbilityStickMagnet : Ability
     {
       if (_stuckToMagnet)
       {
-        FreeFromMagnet(caller);
+        FreeFromMagnet(caller,key);
       }
       if (_magnetStuckToArm != null)
       {
-        ReleaseMagnetStuckToPlayer();
+        ReleaseMagnetStuckToPlayer(key);
       }
     }
     if ((key.Contains("Fire")) && _playerMagnet.isAvailable)
@@ -53,7 +60,7 @@ public class AbilityStickMagnet : Ability
         _magnetStuckToArm == null)
       {
         ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
-        StickMagnetToPlayer(caller, caller.magnetCollidingWith);
+        StickMagnetToPlayer(caller, caller.magnetCollidingWith,key);
       }
 
 
@@ -82,7 +89,7 @@ public class AbilityStickMagnet : Ability
               {
 
                 ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
-                StickMagnetToPlayer(caller, otherMagnetForce);
+                StickMagnetToPlayer(caller, otherMagnetForce, key);
               }
             }
             else if (!_stuckToMagnet)
@@ -93,7 +100,7 @@ public class AbilityStickMagnet : Ability
                                           "To release spike and fall back down, press\n" +
                                             "\"Q\" or \"E\"\n");
               ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
-              StickToMagnet(otherMagnetForce, caller);
+              StickToMagnet(otherMagnetForce, caller, key);
             }
             // Deactives the player magnet while it's sticking to another magnet
             _playerMagnet.isActivated = false;
@@ -104,11 +111,16 @@ public class AbilityStickMagnet : Ability
           if (otherMagnetForce.transform.parent.gameObject == _magnetStuckToArm &&
             _playerMagnet.charge == otherMagnetForce.charge)
           {
-            ReleaseMagnetStuckToPlayer(true);
+            ReleaseMagnetStuckToPlayer(key, true);
             
-            //TODO SUPA Hackish Way to trigger anim, should be changed
-            _playerMagnet.transform.parent.parent.FindChild("Left Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
-            _playerMagnet.transform.parent.parent.FindChild("Right Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+            
+            //_playerMagnet.transform.parent.parent.FindChild("Left Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+
+            // _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
+
+            //_playerMagnet.transform.parent.parent.FindChild("Right Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+
+            // _animHandler.playChildAnimation("RightSpike", "RetractSpike");
           }
         }
         force.ApplyOtherMagnetsForces(caller.rigidbody);
@@ -124,10 +136,20 @@ public class AbilityStickMagnet : Ability
   /// <summary>
   /// Sticks the magnet associated with the Magnetic force to the player
   /// </summary>
-  private void StickMagnetToPlayer(PlayerController caller, MagneticForce magnet)
+  private void StickMagnetToPlayer(PlayerController caller, MagneticForce magnet, string key)
   {
     //TODO Hackish Way to trigger anim, should be changed
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+
+    if (key.CompareTo("Fire1")==0)//left
+    {
+      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+    }
+    else if (key.CompareTo("Fire2") == 0)//Right
+    {
+      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+    }
+
 
     GameObject magnetParent = magnet.transform.parent.gameObject;
     magnetParent.GetComponent<Rigidbody>().isKinematic = true;
@@ -143,15 +165,25 @@ public class AbilityStickMagnet : Ability
   /// <summary>
   /// Releases the currently held magnet from the players grasp
   /// </summary>
-  private void ReleaseMagnetStuckToPlayer(bool initialRepulsion = false)
+  private void ReleaseMagnetStuckToPlayer( string key, bool initialRepulsion = false)
   {
     if (_magnetStuckToArm == null)
     {
       return;
     }
 
-    //TODO Hackish Way to trigger anim, should be changed
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+    
+    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+    if(key.CompareTo("Fire1")==0) //left
+    {
+      // _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
+    } 
+    else if(key.CompareTo("Fire2")==0)//right
+    {
+      // _animHandler.playChildAnimation("RightSpike", "RetractSpike");
+    }
+    
+
 
     _magnetStuckToArm.transform.parent = _previousMagnetParent;
     _previousMagnetParent = null;
@@ -167,14 +199,22 @@ public class AbilityStickMagnet : Ability
   /// <summary>
   /// Stops the player's movement, in the case it sticks to a static (non-moveable) magnet
   /// </summary>
-  private void StickToMagnet(MagneticForce otherMagnet, PlayerController caller)
+  private void StickToMagnet(MagneticForce otherMagnet, PlayerController caller, string key)
   {
     if (otherMagnet == null)
     {
       return;
     }
     //TODO Hackish Way to trigger anim, should be changed
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+    if (key.CompareTo("Fire1") == 0) //left
+    {
+   //   _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+    }
+    else if (key.CompareTo("Fire2") == 0)//right
+    {
+   //   _animHandler.playChildAnimation("RightSpike", "UseSpike");
+    }
 
     _stuckToMagnet = true;
     caller.rigidbody.velocity = Vector3.zero;
@@ -188,14 +228,22 @@ public class AbilityStickMagnet : Ability
   /// <summary>
   /// Makes the player movable again when released from a (static) magnet, that it was sticking to 
   /// </summary>
-  private void FreeFromMagnet(PlayerController caller)
+  private void FreeFromMagnet(PlayerController caller, string key)
   {
     if (!_stuckToMagnet)
     {
       return;
     }
     //TODO Hackish Way to trigger anim, should be changed
-    _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
+    if (key.CompareTo("Fire1") == 0) //left
+    {
+      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
+    }
+    else if (key.CompareTo("Fire2") == 0)//right
+    {
+      // _animHandler.playChildAnimation("RightSpike", "UseSpike");
+    }
 
     _stuckToMagnet = false;
     
@@ -207,8 +255,15 @@ public class AbilityStickMagnet : Ability
   {
     if (!key.Contains("Release"))
     {
-      //TODO Hackish Way to trigger anim, should be changed
-      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+      //leftMagnet
+      if (key.CompareTo("Fire1") == 0)
+      {
+  //      _animHandler.getChildAnimation("LeftClaw").Stop();
+      }
+      else if (key.CompareTo("Fire2") == 0) // Right
+      {
+    //    _animHandler.getChildAnimation("RightClaw").Stop();
+      }
     }
 
     _playerMagnet.isActivated = false;
@@ -223,8 +278,15 @@ public class AbilityStickMagnet : Ability
   {
     if (!key.Contains("Release"))
     {
-      //TODO Hackish Way to trigger anim, should be changed
-      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+      //leftMagnet
+      if (key.CompareTo("Fire1") == 0)
+      {
+  //      _animHandler.getChildAnimation("LeftClaw").CrossFade("MagnetActive");
+      }
+      else if (key.CompareTo("Fire2") == 0) // Right
+      {
+  //      _animHandler.getChildAnimation("RightClaw").CrossFade("MagnetActiveReverse");
+      }
     }
 
     _playerMagnet.isActivated = true;

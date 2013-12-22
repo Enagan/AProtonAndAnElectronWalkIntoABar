@@ -13,6 +13,7 @@ public class AbilityUseMagnet : Ability
 
   private PlayerMagnet _playerMagnet;
   private Camera _playerCamera;
+  private AnimationRootHandler _animHandler;
 
   #endregion
 
@@ -24,6 +25,7 @@ public class AbilityUseMagnet : Ability
   {
     this._playerMagnet = playerMagnet;
     this._playerCamera = playerCamera;
+    _animHandler = player.GetComponent<AnimationRootHandler>();
   }
   /// <summary>
     /// Activates the associated directional Magnet with the forward direction of the player's camera
@@ -43,10 +45,20 @@ public class AbilityUseMagnet : Ability
   public void KeyUp(string key = null)
   {
     _playerMagnet.isActivated = false;
-    //TODO Hackish way to trigger anim, should consider change
+
+    BipolarConsole.AllLog("KEY" + key);
+
     if (!key.Contains("Release"))
     {
-      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Stop();
+      //leftMagnet
+      if (key.CompareTo("Fire1") == 0)
+      {
+        _animHandler.getChildAnimation("LeftClaw").Stop();
+      }
+      else if (key.CompareTo("Fire2") == 0) // Right
+      {
+        _animHandler.getChildAnimation("RightClaw").Stop();
+      }
     }
   }
 
@@ -56,7 +68,15 @@ public class AbilityUseMagnet : Ability
     //TODO Hackish way to trigger anim, should consider change
     if (!key.Contains("Release"))
     {
-      _playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("ClawJoint").GetComponent<Animation>().Play();
+      //leftMagnet
+      if (key.CompareTo("Fire1") == 0)
+      {
+        _animHandler.getChildAnimation("LeftClaw").CrossFade("MagnetActive");
+      }
+      else if (key.CompareTo("Fire2") == 0) // Right
+      {
+        _animHandler.getChildAnimation("RightClaw").CrossFade("MagnetActiveReverse");
+      }
     }
     
   }

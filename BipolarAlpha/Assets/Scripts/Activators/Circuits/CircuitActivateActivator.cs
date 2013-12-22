@@ -1,66 +1,65 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
-/// Circuit that only activates it´s children when it´s activated
+/// Circuit that activates its children when it´s activated
+/// Circuit that deactivates its children when it´s deactivated
 /// </summary>
-public class CircuitActivateActivator : Circuit {
+public class CircuitActivateActivator : Circuit
+{
 
+  #region Activator Methods
   /// <summary>
-  /// Activates the object and it´s children
+  /// Activates the object and its children
   /// </summary>
   public override void Activate()
   {
+    // Calls the components' activate method
     _state = true;
-    MonoBehaviour[] actv = this.gameObject.GetComponents<MonoBehaviour>();
-    for (int n = 0; n < actv.Length; n++)
-    {
-      if (actv[n] is Activator && !(actv[n] is Circuit))
-      {
-        ((Activator)actv[n]).Activate();
-      }
-    }
 
-    for (int i = 0; i < this.gameObject.transform.childCount; i++)
-    {
-      actv = this.transform.GetChild(i).gameObject.GetComponents<MonoBehaviour>();
-      for (int n = 0; n < actv.Length; n++)
+    // Fetches all Activators in the hierarchy of this object
+    List<Activator> actvs = BipolarUtilityFunctions.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
+
+    foreach (Activator act in actvs) {
+
+      // Confirms the current Activator is an same instance of CircuitActivateActivator and
+      // activates the Activator in the hierarchy
+
+      // NOTE: It might not be desired to activate circuits
+      // (just remove "ActivateActivator" from the 'if' bellow to produce that effect)
+      if (!(act is CircuitActivateActivator))
       {
-        if (actv[n] is Activator && !(actv[n] is Circuit))
-        {
-          ((Activator)actv[n]).Activate();
-        }
+        act.Activate();
       }
     }
   }
 
   /// <summary>
-  /// Deactivates the object and it´s children
+  /// Deactivates the object and its children
   /// </summary>
   public override void Deactivate()
   {
-    _state = false;
-    MonoBehaviour[] actv = (MonoBehaviour[])this.gameObject.GetComponents<MonoBehaviour>();
-    for (int n = 0; n < actv.Length; n++)
-    {
-      if (actv[n] is Activator && !(actv[n] is Circuit))
-      {
-        ((Activator)actv[n]).Deactivate();
-      }
-    }
+    // Calls the components' deactivate method
+    _state = true;
 
-    for (int i = 0; i < this.gameObject.transform.childCount; i++)
+    // Fetches all Activators in the hierarchy of this object
+    List<Activator> actvs = BipolarUtilityFunctions.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
+
+    foreach (Activator act in actvs)
     {
-      actv = (MonoBehaviour[])this.transform.GetChild(i).gameObject.GetComponents<MonoBehaviour>();
-      for (int n = 0; n < actv.Length; n++)
+      // Confirms the current Activator is not an instance of CircuitActivateActivator and
+      // deactivates the Activator in the hierarchy
+
+      // NOTE: It might not be desired to deactivate circuits 
+      // (just remove "ActivateActivator" from the 'if' bellow to produce that effect)
+      if (!(act is CircuitActivateActivator))
       {
-        if (actv[n] is Activator && !(actv[n] is Circuit))
-        {
-          ((Activator)actv[n]).Deactivate();
-        }
+        act.Deactivate();
       }
     }
   }
+  #endregion
 
   #region Circuit Methods
 
