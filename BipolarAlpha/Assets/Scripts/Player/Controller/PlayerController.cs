@@ -457,6 +457,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
       Vector3 dir = (center - mainCamera.transform.position).normalized;
 
+      //Find angle between camera foward and vector directed to magnet center
       float angle = Vector3.Angle(camForward, dir);
       angle = Mathf.Abs(angle);
 
@@ -468,7 +469,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
         activePlayerMagnet.snapingToMagnet = false;
       }
 
-      // Codigo verificaçao
+      // Verify if angle is large enough to unsnap
       if (angle > _snapAngleThereshold)
       {
         activePlayerMagnet.snapingToMagnet = false;
@@ -476,8 +477,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       }
       else
       {
-        //Codigo alteraçao
-
+        //Snap the foward vector to the center of the affecting magnet
         _snapTimer += Time.deltaTime;
         Vector3 lerpedVector = Vector3.Lerp(camForward, dir, _snapTimer * _snapInstantForce);
         Vector3 eulerAngleLerped = Quaternion.LookRotation(lerpedVector).eulerAngles;
