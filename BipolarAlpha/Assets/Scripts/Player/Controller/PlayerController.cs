@@ -45,18 +45,12 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private float _mouseVerticalSensitivity = 0f;
 
   [SerializeField]
-  private float _minimumVerticalRotation = 0f;
-  [SerializeField]
   private float _maximumVerticalRotation = 0f;
 
   #endregion
   #region Player State Variables
-  private Vector3 _rotation = Vector3.zero;
-  private Vector3 _acumulatedRotation = Vector3.zero;
   private Quaternion _baseRotation = Quaternion.identity;
 
-  private float _totalStartRotationInSnap = 0;
-  private Vector2 _startRotationInSnap = Vector2.zero;
   private bool _currentlyAffectingMagnet = false;
   private float _snapTimer = 0;
 
@@ -416,7 +410,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       //Snapping to magnet
       if (!_currentlyAffectingMagnet)
       {
-        _acumulatedRotation = Vector2.zero;
         _currentlyAffectingMagnet = true;
         activePlayerMagnet.snapingToMagnet = true;
         _snapTimer = 0;
@@ -438,7 +431,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
     //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object
     mainCamera.transform.Rotate(Vector3.left, mouseX);
-    print(Quaternion.Angle( _baseRotation, mainCamera.transform.localRotation));
     if (Quaternion.Angle(mainCamera.transform.localRotation, _baseRotation) >= _maximumVerticalRotation)
     {
       mainCamera.transform.localRotation = previousRotation;
@@ -473,7 +465,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       if (angle > _snapAngleThereshold)
       {
         activePlayerMagnet.snapingToMagnet = false;
-        Vector3 currentRotation = Quaternion.LookRotation(mainCamera.transform.forward).eulerAngles;
       }
       else
       {
