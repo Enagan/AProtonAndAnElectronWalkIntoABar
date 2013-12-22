@@ -8,287 +8,237 @@ using System.Collections.Generic;
 /// AbilityStickMagnet provides use of a player's single directional magnet, and permiting sticking to magnets,
 /// as well, as releasing a sticked magnet
 /// </summary>
-public class AbilityStickMagnet : Ability
+public class AbilityStickMagnet : AbilityUseMagnet
 {
-  #region private fields
-  private PlayerMagnet _playerMagnet;
-  private Camera _playerCamera;
 
-  private bool _stuckToMagnet = false;
+  #region private Variables
 
+  //For attaching magnets to player
   private static GameObject _magnetStuckToArm = null;
   private Transform _previousMagnetParent = null;
+  private MagneticForce.Charge _previousMagnetCharge;
 
-  //parent root handler
-  private AnimationRootHandler _animHandler;
+  // For attaching player to magnets
+  private static bool _isStuck = false;
+
+  //Player should be released after button is repressed
+  private bool _canReleasePlayer = true;
+
+  #endregion
+  
+  #region Constructor 
+
+  /// <summary>
+  /// Constructor for AbilityStickMagnet
+  /// </summary>
+  public AbilityStickMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player) :base(playerMagnet, playerCamera, player) 
+  {}
+
   #endregion
 
-  /// <summary>
-  /// Constructor for AbilityUseMagnet
-  /// </summary>
-  public AbilityStickMagnet(PlayerMagnet playerMagnet, Camera playerCamera)
+  #region Ability methods
+
+  public override void Use(PlayerController caller, string key=null)
   {
-    _playerMagnet = playerMagnet;
-    _playerCamera = playerCamera;
-
-    //I blame people who arent passing playerController by. Ivo.
-    // Also blame the people that are trying to call animations in a brother hiearchy
-    _animHandler = _playerMagnet.transform.parent.parent.parent.GetComponent<AnimationRootHandler>();
-  }
-
-  /// <summary>
-  /// Activates the associated directional Magnet with the forward direction of the player's camera
-  /// </summary>
-  public void Use(PlayerController caller, string key = null)
-  {
-    if (key.Contains("Release"))
+    //For first use defines which arm abillity reffers to
+    setArm(key);
+    
+    //Check if needs to release player
+    if (_canReleasePlayer || key.Contains("Release")) 
     {
-      if (_stuckToMagnet)
+      if (_isStuck)
       {
-        FreeFromMagnet(caller,key);
-      }
-      if (_magnetStuckToArm != null)
-      {
-        ReleaseMagnetStuckToPlayer(key);
-      }
-    }
-    if ((key.Contains("Fire")) && _playerMagnet.isAvailable)
-    {
-      if (caller.magnetColliding &&
-        _playerMagnet.charge != caller.magnetCollidingWith.charge &&
-        caller.magnetCollidingWith.isHoldable &&
-        _magnetStuckToArm == null)
-      {
-        ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
-        StickMagnetToPlayer(caller, caller.magnetCollidingWith,key);
-      }
-
-
-      //Does this every Update when pressing the ability button
-      MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
-      
-      if (force != null)
-      {
-        BipolarConsole.EnganaLog(force.affectingMagnets);
-        _playerMagnet.EnableMagnetHitHaloLight();
-        ServiceLocator.GetAudioSystem().PlayLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform,50);
-
-        List<MagneticForce> effectiveMagnets = force.affectingMagnets;
+        //Release Player From Magnet
+        unstickPlayerFromMagnet(caller);
         
-        foreach (MagneticForce otherMagnetForce in effectiveMagnets)
-        {
-          
-          // In the case, during the magnet's activity, the player collides with a magnet, they stick
-          if (caller.magnetColliding && _playerMagnet.charge != otherMagnetForce.charge)
-          {
-            
-            if (otherMagnetForce.isHoldable)
-            {
-              
-              if (_magnetStuckToArm == null)
-              {
-
-                ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
-                StickMagnetToPlayer(caller, otherMagnetForce, key);
-              }
-            }
-            else if (!_stuckToMagnet)
-            {
-              //Pretty hackish way to get the string
-              ServiceLocator.GetEventHandlerSystem().SendTutorialMessageTriggerEvent("I see you used your handy spike to\n" +
-                                          "Stick yourself to the magnet!\n" +
-                                          "To release spike and fall back down, press\n" +
-                                            "\"Q\" or \"E\"\n");
-              ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
-              StickToMagnet(otherMagnetForce, caller, key);
-            }
-            // Deactives the player magnet while it's sticking to another magnet
-            _playerMagnet.isActivated = false;
-            break;
-          }
-
-          // When the player is holding a magnet but uses the same magnet charge to push it away
-          if (otherMagnetForce.transform.parent.gameObject == _magnetStuckToArm &&
-            _playerMagnet.charge == otherMagnetForce.charge)
-          {
-            ReleaseMagnetStuckToPlayer(key, true);
-            
-            
-            //_playerMagnet.transform.parent.parent.FindChild("Left Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
-
-            // _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
-
-            //_playerMagnet.transform.parent.parent.FindChild("Right Player Magnet").FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
-
-            // _animHandler.playChildAnimation("RightSpike", "RetractSpike");
-          }
-        }
-        force.ApplyOtherMagnetsForces(caller.rigidbody);
       }
-      else
+      else  if (_magnetStuckToArm != null)
       {
-        _playerMagnet.DisableMagnetHitHaloLight();
-        ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
+        //Release Magnet From Player
+        if(_previousMagnetCharge == _playerMagnet.charge)
+           unstickMagnetFromPlayer(true); // Unstick and apply initial repulsion
+        else
+           unstickMagnetFromPlayer(false); // Unstick
+      }
+      unstickAnimation();
+    }
+
+    //Apply Forces if not holding anything
+    MagneticForce force = null;
+
+    if(_magnetStuckToArm == null)
+      force = ApplyForces(caller);
+
+    //Check if Collisions happened
+    if (force != null)
+    {
+      //Check if player is colliding with a magnet with opposite charge (mutual attraction)
+      if (caller.magnetColliding &&
+       _playerMagnet.charge != caller.magnetCollidingWith.charge)
+      {
+        if(caller.magnetCollidingWith.isHoldable)
+        {
+          //Player Holds Magnets
+          stickMagnetToPlayer(caller, caller.magnetCollidingWith);
+
+        }
+        else
+        {
+          //Magnets Hold Player
+          stickPlayerToMagnet(caller, caller.magnetCollidingWith);
+        }
+        stickAnimation();
       }
     }
   }
 
-  /// <summary>
-  /// Sticks the magnet associated with the Magnetic force to the player
-  /// </summary>
-  private void StickMagnetToPlayer(PlayerController caller, MagneticForce magnet, string key)
+  public override void KeyUp(string key = null)
   {
-    //TODO Hackish Way to trigger anim, should be changed
-    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
+    //After use if player got stuck on next use he should be released
+    if (_isStuck || _magnetStuckToArm != null)
+      _canReleasePlayer = true;
 
-    if (key.CompareTo("Fire1")==0)//left
-    {
-      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
-    }
-    else if (key.CompareTo("Fire2") == 0)//Right
-    {
-      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
-    }
-
-
-    GameObject magnetParent = magnet.transform.parent.gameObject;
-    magnetParent.GetComponent<Rigidbody>().isKinematic = true;
-    magnetParent.layer = LayerMask.NameToLayer("HeldByPlayerMagnet");
-
-    _previousMagnetParent = magnetParent.transform.parent;
-    magnetParent.transform.parent = caller.transform.FindChild("Camera");
-
-    magnetParent.transform.localPosition = new Vector3(0, 0, 1.5f);
-    _magnetStuckToArm = magnetParent;
+    //Activates magnet
+    base.KeyUp(key);
   }
 
-  /// <summary>
-  /// Releases the currently held magnet from the players grasp
-  /// </summary>
-  private void ReleaseMagnetStuckToPlayer( string key, bool initialRepulsion = false)
+
+  public override void KeyDown(string key = null)
   {
-    if (_magnetStuckToArm == null)
-    {
-      return;
-    }
+    // On Press if player isnt stuck nor has a magnet he cannot be released (nothing attached anyway)
+    if (!_isStuck && _magnetStuckToArm == null)
+      _canReleasePlayer = false;
 
-    
-    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
-    if(key.CompareTo("Fire1")==0) //left
-    {
-      // _animHandler.playChildAnimation("LeftSpike", "RetractSpike");
-    } 
-    else if(key.CompareTo("Fire2")==0)//right
-    {
-      // _animHandler.playChildAnimation("RightSpike", "RetractSpike");
-    }
-    
-
-
-    _magnetStuckToArm.transform.parent = _previousMagnetParent;
-    _previousMagnetParent = null;
-    _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
-    _magnetStuckToArm.layer = LayerMask.NameToLayer("Default");
-    if (initialRepulsion)
-    {
-      _magnetStuckToArm.rigidbody.AddForce(_playerCamera.transform.forward * _playerMagnet.getForceValue(_playerMagnet.force));
-    }
-    _magnetStuckToArm = null;
+    //Deactivates magnet
+    base.KeyDown(key);
   }
+  #endregion
+
+  #region Stick/Unstick methods
 
   /// <summary>
-  /// Stops the player's movement, in the case it sticks to a static (non-moveable) magnet
+  /// Attaches Player to a non Holdable Magnet
   /// </summary>
-  private void StickToMagnet(MagneticForce otherMagnet, PlayerController caller, string key)
+  /// <param name="caller">The Player</param>
+  /// <param name="otherMagnet">Colliding Magnet</param>
+  protected void stickPlayerToMagnet(PlayerController caller, MagneticForce otherMagnet)
   {
+    //if no magnet returns
     if (otherMagnet == null)
     {
       return;
     }
-    //TODO Hackish Way to trigger anim, should be changed
-    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("UseSpike");
-    if (key.CompareTo("Fire1") == 0) //left
-    {
-   //   _animHandler.playChildAnimation("LeftSpike", "UseSpike");
-    }
-    else if (key.CompareTo("Fire2") == 0)//right
-    {
-   //   _animHandler.playChildAnimation("RightSpike", "UseSpike");
-    }
 
-    _stuckToMagnet = true;
+    _isStuck = true;
+
+    //Stops player
     caller.rigidbody.velocity = Vector3.zero;
     caller.rigidbody.angularVelocity = Vector3.zero;
     caller.transform.parent = otherMagnet.transform;
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
-    /*caller.transform.rotation = rot;*/
   }
 
   /// <summary>
-  /// Makes the player movable again when released from a (static) magnet, that it was sticking to 
+  /// Releases Player from being attached to a magnet
   /// </summary>
-  private void FreeFromMagnet(PlayerController caller, string key)
+  /// <param name="caller">The Player</param>
+  protected void unstickPlayerFromMagnet(PlayerController caller)
   {
-    if (!_stuckToMagnet)
+    // if not stuck return
+    if (!_isStuck)
     {
       return;
     }
-    //TODO Hackish Way to trigger anim, should be changed
-    //_playerMagnet.transform.parent.FindChild("ClawMagnet").FindChild("Spike").GetComponent<Animation>().Play("RetractSpike");
-    if (key.CompareTo("Fire1") == 0) //left
-    {
-      // _animHandler.playChildAnimation("LeftSpike", "UseSpike");
-    }
-    else if (key.CompareTo("Fire2") == 0)//right
-    {
-      // _animHandler.playChildAnimation("RightSpike", "UseSpike");
-    }
 
-    _stuckToMagnet = false;
-    
+    //Enables player movement
     caller.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     caller.transform.parent = null;
+    _isStuck = false;
   }
 
-  public void KeyUp(string key = null)
+  /// <summary>
+  /// Sticks a Holdable Magnet to the player
+  /// </summary>
+  /// <param name="caller">The Player</param>
+  /// <param name="magnet">Colliding Magnet</param>
+  protected void stickMagnetToPlayer(PlayerController caller, MagneticForce magnet)
   {
-    if (!key.Contains("Release"))
-    {
-      //leftMagnet
-      if (key.CompareTo("Fire1") == 0)
-      {
-  //      _animHandler.getChildAnimation("LeftClaw").Stop();
-      }
-      else if (key.CompareTo("Fire2") == 0) // Right
-      {
-    //    _animHandler.getChildAnimation("RightClaw").Stop();
-      }
-    }
+    
+    //Find Magnet Parent for later restore
+    GameObject magnetParent = magnet.transform.parent.gameObject;
+    magnetParent.GetComponent<Rigidbody>().isKinematic = true;
+    magnetParent.layer = LayerMask.NameToLayer("HeldByPlayerMagnet");
+    _previousMagnetParent = magnetParent.transform.parent;
 
-    _playerMagnet.isActivated = false;
-    _playerMagnet.currentHitPoint = Vector3.zero;
-    _playerMagnet.magnetHitPoint = Vector3.zero;
+    //Change magnet parent so it is carried about
+    magnetParent.transform.parent = caller.transform.FindChild("Camera");
 
-    _playerMagnet.DisableMagnetHitHaloLight();
-    ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
+    //Place in hands
+    magnetParent.transform.localPosition = new Vector3(0, 0, 1.5f);
+    _magnetStuckToArm = magnetParent;
+
+    _previousMagnetCharge = magnet.charge;
+
   }
-
-  public void KeyDown(string key = null)
+  
+  /// <summary>
+  /// Unsticks magnet that player is holding
+  /// </summary>
+  /// <param name="initialRepulsion">Whether to apply repulsion or not</param>
+  protected void unstickMagnetFromPlayer(bool initialRepulsion = false)
   {
-    if (!key.Contains("Release"))
+    //Check if there is a magnet to release
+    if (_magnetStuckToArm == null)
     {
-      //leftMagnet
-      if (key.CompareTo("Fire1") == 0)
-      {
-  //      _animHandler.getChildAnimation("LeftClaw").CrossFade("MagnetActive");
-      }
-      else if (key.CompareTo("Fire2") == 0) // Right
-      {
-  //      _animHandler.getChildAnimation("RightClaw").CrossFade("MagnetActiveReverse");
-      }
+      return;
     }
+    //Restore previous parent
+    _magnetStuckToArm.transform.parent = _previousMagnetParent;
+    _previousMagnetParent = null;
+    _magnetStuckToArm.GetComponent<Rigidbody>().isKinematic = false;
+    _magnetStuckToArm.layer = LayerMask.NameToLayer("Default");
 
-    _playerMagnet.isActivated = true;
+    if (initialRepulsion)
+    {
+      _magnetStuckToArm.rigidbody.AddForce(_playerCamera.transform.forward * _playerMagnet.getForceValue(_playerMagnet.force));
+    }
+    _magnetStuckToArm = null;
+
   }
+
+  #endregion
+ 
+  #region Animations
+
+  /// <summary>
+  /// Calls animations for using Spike
+  /// </summary>
+  protected void stickAnimation()
+  {  
+      switch (_arm)
+      {
+        case Arm.Left:
+          _animHandler.getChildAnimation("LeftSpike").CrossFade("RetractSpike");
+          break;
+        case Arm.Right:
+          _animHandler.getChildAnimation("RightSpike").CrossFade("RetractSpike");
+          break;
+      }
+      //ServiceLocator.GetAudioSystem().PlayLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
+  }
+
+  /// <summary>
+  /// Calls animations for Retracting Spike
+  /// </summary>
+  protected void unstickAnimation()
+  {
+    //Does animation on both hands since it can be unstuck with both abilities
+     _animHandler.getChildAnimation("LeftSpike").CrossFade("UseSpike");
+     _animHandler.getChildAnimation("RightSpike").CrossFade("UseSpike");
+     //ServiceLocator.GetAudioSystem().StopLoopingSFX("MagnetHitBuzz", _playerMagnet.gameObject.transform);
+  }
+
+#endregion
 }
+

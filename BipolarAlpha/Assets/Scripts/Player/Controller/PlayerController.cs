@@ -238,8 +238,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
-    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
-    _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera));
+    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
 
     //MagneticBoots ability (Q and E)
     _usableAbilities.Add("Boot1", new AbilityMagnetBoots(GameObject.Find("LeftBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera));
@@ -507,8 +507,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     if (newAbilityName == "Stick")
     {
       Camera playerCamera = this.GetComponentInChildren<Camera>();
-      AddAbility("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera));
-      AddAbility("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera));
+      AddAbility("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
+      AddAbility("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
 
       AddAbility("Release1", _usableAbilities["Fire1"]);
       AddAbility("Release2", _usableAbilities["Fire2"]);
