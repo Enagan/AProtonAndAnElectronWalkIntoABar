@@ -11,6 +11,7 @@ public class PlayerMagnet : MagneticForce
   // Boolean required to confirm if the magnet isn't sticking to another magnet, and can be used
   private Vector3 _magnetHitPoint = default(Vector3);
   private Vector3 _currentHitPoint = default(Vector3);
+  private GameObject _magnet;
 
   //used when snapping
   private bool _snapingToMagnet = false;
@@ -69,6 +70,18 @@ public class PlayerMagnet : MagneticForce
     }
   }
 
+  public GameObject hittedMagnet
+  {
+    get
+    {
+      return _magnet;
+    }
+    set
+    {
+      _magnet = value;
+    }
+  }
+
 
   /// <summary>
   /// Fires a raycast that will make a magnetic object have influence over the player if one is hit
@@ -83,7 +96,7 @@ public class PlayerMagnet : MagneticForce
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
       _currentHitPoint = hit.point;
-
+      _magnet = hit.transform.gameObject;
       if (!IsAlreadyAffectedBy(otherMagneticForce) )
       {
         _magnetHitPoint = hit.point;

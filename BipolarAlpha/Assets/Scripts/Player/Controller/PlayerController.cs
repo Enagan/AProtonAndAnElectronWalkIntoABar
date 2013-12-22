@@ -17,6 +17,14 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private float _snapInstantForce = 0f;
 
+  //Is snap active
+  [SerializeField]
+  private bool _snapActive = false;
+
+  //Mouse movement force in which the snap breaks
+  [SerializeField]
+  private float _minMouseSnapMovement = 0.15f;
+
   //Force applied when the player stops moving the mouse
   [SerializeField]
   private float _snapContinuousForce = 0f;
@@ -43,8 +51,9 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
   #endregion
   #region Player State Variables
-  private float _rotationX = 0f;
-  private float _rotationY = 0f;
+  private Vector3 _rotation = Vector3.zero;
+  private Vector3 _acumulatedRotation = Vector3.zero;
+  private Quaternion _baseRotation = Quaternion.identity;
 
   private float _totalStartRotationInSnap = 0;
   private Vector2 _startRotationInSnap = Vector2.zero;
@@ -114,13 +123,15 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void Start()
   {
-    _rotationX = -transform.localEulerAngles.x;
     _snapContinuousForce = Mathf.Clamp01(_snapContinuousForce);
     Screen.lockCursor = true;
     Screen.showCursor = true;
     Screen.showCursor = false;
     if ((mainCamera = GameObject.Find("Camera")) == null)
       throw new BipolarExceptionComponentNotFound("Camera component not found");
+
+    //Initial rotation saved, used to clamp min and max rotation
+    _baseRotation = mainCamera.transform.localRotation;
 
     _leftMagnet = GameObject.Find("Left Player Magnet").transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
     _rightMagnet = GameObject.Find("Right Player Magnet").transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
@@ -388,78 +399,94 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private void ManageRotation()
   {
 
-    PlayerMagnet activeMagnet = null;
+    PlayerMagnet activePlayerMagnet = null;
 
     //Check if a magnet is active
     if (_leftMagnet.currentHitPoint != Vector3.zero)
     {
-      activeMagnet = _leftMagnet;
+      activePlayerMagnet = _leftMagnet;
     }
     else if (_rightMagnet.currentHitPoint != Vector3.zero)  //player is hitting a magnet
     {
-      activeMagnet = _rightMagnet;
+      activePlayerMagnet = _rightMagnet;
     }
 
-    if (activeMagnet)
+    if (activePlayerMagnet)
     {
       //Snapping to magnet
       if (!_currentlyAffectingMagnet)
       {
-        _startRotationInSnap = new Vector2(_rotationX, _rotationY);
-        _totalStartRotationInSnap = Mathf.Abs(_rotationX) + Mathf.Abs(_rotationY);
+        _acumulatedRotation = Vector2.zero;
         _currentlyAffectingMagnet = true;
-        activeMagnet.snapingToMagnet = true;
+        activePlayerMagnet.snapingToMagnet = true;
+        _snapTimer = 0;
       }
     }
     else
     {
       _currentlyAffectingMagnet = false;
-      _startRotationInSnap = Vector2.zero;
+    }
+
+    //Get input from mouse
+    float mouseY = Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
+    float mouseX = Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity * Time.deltaTime;
+
+    //Save rotation, in case the next rotate causes the camera to pass the _maxiumVerticalRotation
+    Quaternion previousRotation = mainCamera.transform.localRotation;
+
+    transform.Rotate(Vector3.up, mouseY);
+
+    //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object
+    mainCamera.transform.Rotate(Vector3.left, mouseX);
+    print(Quaternion.Angle( _baseRotation, mainCamera.transform.localRotation));
+    if (Quaternion.Angle(mainCamera.transform.localRotation, _baseRotation) >= _maximumVerticalRotation)
+    {
+      mainCamera.transform.localRotation = previousRotation;
+    }
+
+    //If snap is not active, don't do snap calculations
+    if (!_snapActive)
+    {
+      return;
     }
 
     if (_currentlyAffectingMagnet)
     {
-      float currentRotation = Mathf.Abs(_rotationX) + Mathf.Abs(_rotationY);
-      float angleDifference = Mathf.Abs(currentRotation - _totalStartRotationInSnap);
+      Vector3 center = activePlayerMagnet.hittedMagnet.transform.position;
+      Vector3 camForward = mainCamera.transform.forward;
 
-      if (angleDifference > 0f)
+      Vector3 dir = (center - mainCamera.transform.position).normalized;
+
+      float angle = Vector3.Angle(camForward, dir);
+      angle = Mathf.Abs(angle);
+
+      //Rotating mouse with force, unsnap from magnet
+      if (Mathf.Abs(Input.GetAxis("Mouse X")) + Mathf.Abs(Input.GetAxis("Mouse Y")) > _minMouseSnapMovement)
       {
-        float counterForce = GetCounterActionForce(angleDifference);
+        _currentlyAffectingMagnet = false;
+        _snapTimer = 0;
+        activePlayerMagnet.snapingToMagnet = false;
+      }
 
-        //snap angle thereshold reached, can release snap
-        if (counterForce == 0)
-        {
-          activeMagnet.snapingToMagnet = false;
-        }
-        else
-        {
-          if (Input.GetAxisRaw("Mouse X") == 0 && Input.GetAxisRaw("Mouse Y") == 0) //mouse is idle, apply instant force
-          {
-            _rotationX = Mathf.Lerp(_rotationX, _startRotationInSnap.x, _snapTimer * _snapInstantForce);
-            _rotationY = Mathf.Lerp(_rotationY, _startRotationInSnap.y, _snapTimer * _snapInstantForce);
-            _snapTimer += Time.deltaTime;
-          }
-          else
-          {
-            //player is moving mouse, apply continuous force to magnet
-            _snapTimer = 0;
-            float counterActionY = -1.0f * Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime * counterForce;
-            float counterActionX = -1.0f * Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity * Time.deltaTime * counterForce;
-            _rotationY += counterActionY;
-            _rotationX += counterActionX;
-          }
-        }
+      // Codigo verificaçao
+      if (angle > _snapAngleThereshold)
+      {
+        activePlayerMagnet.snapingToMagnet = false;
+        Vector3 currentRotation = Quaternion.LookRotation(mainCamera.transform.forward).eulerAngles;
+      }
+      else
+      {
+        //Codigo alteraçao
+
+        _snapTimer += Time.deltaTime;
+        Vector3 lerpedVector = Vector3.Lerp(camForward, dir, _snapTimer * _snapInstantForce);
+        Vector3 eulerAngleLerped = Quaternion.LookRotation(lerpedVector).eulerAngles;
+        transform.localEulerAngles = new Vector3(0, eulerAngleLerped.y, 0);
+        mainCamera.transform.localEulerAngles = new Vector3(eulerAngleLerped.x, 0, 0);
+
       }
     }
 
-    _rotationY += Input.GetAxis("Mouse X") * _mouseHorizontalSensitivity * Time.deltaTime;
-    _rotationX += Input.GetAxis("Mouse Y") * _mouseVerticalSensitivity * Time.deltaTime;
-
-    _rotationX = Mathf.Clamp(_rotationX, _minimumVerticalRotation, _maximumVerticalRotation);
-    //I only rotate the player at y axis, so the collision box doesn't get affected by other rotations
-    transform.eulerAngles = new Vector3(0, _rotationY, 0);
-    //Rotate camera on the x axis. We don't need to rotate it on the Y axis because it's a child of the player object
-    mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
   }
 
   /// <summary>
