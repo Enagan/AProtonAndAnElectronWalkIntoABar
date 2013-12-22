@@ -32,6 +32,7 @@ public class AbilityUseMagnet : Ability
 
   public AbilityUseMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
   {
+    if (_playerMagnet) Debug.Log("Its not null!");
     this._playerMagnet = playerMagnet;
     this._playerCamera = playerCamera;
     this._player = player;
@@ -51,7 +52,7 @@ public class AbilityUseMagnet : Ability
     setArm(key);
 
     //Applies magnetic forces
-    ApplyForces(caller);
+    ApplyForces(caller, _playerCamera.transform.forward);
   }
 
   public virtual void KeyUp(string key = null)
@@ -115,10 +116,10 @@ public class AbilityUseMagnet : Ability
   /// </summary>
   /// <param name="caller">The Player</param>
   /// <returns></returns>
-  protected MagneticForce ApplyForces(PlayerController caller)
+  protected MagneticForce ApplyForces(PlayerController caller, Vector3 direction)
   {
     //Cast ray to check for magnets
-    MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, _playerCamera.transform.forward);
+    MagneticForce force = _playerMagnet.FireRayCast(_playerCamera.transform.position, direction);
 
     //Apply force on player
     if (force != null)

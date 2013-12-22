@@ -67,7 +67,7 @@ public class AbilityStickMagnet : AbilityUseMagnet
     MagneticForce force = null;
 
     if(_magnetStuckToArm == null)
-      force = ApplyForces(caller);
+      force = ApplyForces(caller, _playerCamera.transform.forward);
 
     //Check if Collisions happened
     if (force != null)
