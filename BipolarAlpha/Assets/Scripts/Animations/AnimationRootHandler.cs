@@ -45,7 +45,7 @@ public class AnimationRootHandler : AnimationChildHandler
   #region Monobehavior methods
 
   // Use this for initialization
-	void Start () {
+	void Awake () {
     //Initialize _animChildren with all animations in hiearchy below
     initializeAnimations();
 	}

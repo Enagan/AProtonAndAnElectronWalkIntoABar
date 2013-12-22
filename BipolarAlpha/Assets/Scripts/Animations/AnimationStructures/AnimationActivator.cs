@@ -2,12 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// This is a class to help call animations on circuit structures that open/close
-/// Examples: Door, Dispenser
-/// </summary>
-public abstract class OpenCloseAnimationHelperCircuit : Circuit
+public abstract class AnimationActivator : MonoBehaviour, Activator 
 {
+
   #region variables
   //List containing all ChildAnimations that open/close
   private List<AnimationChildHandler> _childAnimators = new List<AnimationChildHandler>();
@@ -17,10 +14,14 @@ public abstract class OpenCloseAnimationHelperCircuit : Circuit
 
   #endregion
 
-  #region OpenCLoseAnimation helper children methods
+  #region OnAwake Methods
 
-  // Method to be overriden by children
-  // Children need initialize their own openclose children by calling addChild(string anim)
+  public virtual void Start()
+  {
+    initializeHandler();
+  }
+
+  // Initializes openclose children by calling addChild(string anim)
   public abstract void initializeHandler();
 
   //Adds a child with open/close animation
@@ -36,12 +37,10 @@ public abstract class OpenCloseAnimationHelperCircuit : Circuit
 
   #endregion
 
-  #region circuit methods
+  #region Activator Methods
   //Override of activate opens all children
-  public override void Activate()
+  public virtual void Activate()
   {
-    _state = true;
-
     if (_handler == null)
       initializeHandler();
 
@@ -53,26 +52,13 @@ public abstract class OpenCloseAnimationHelperCircuit : Circuit
   }
 
   //Override of deactivate closes all children
-  public override void Deactivate()
+  public virtual void Deactivate()
   {
-    _state = false;
-
     //Call child animations
     foreach (AnimationChildHandler anim in _childAnimators)
     {
       anim.getAnimation().CrossFade(anim.childName + "Close");
     }
-  }
-
-  /// <summary>
-  /// Stub doesn't implement logic
-  /// </summary>
-  protected override bool LogicOperation(bool[] inputsArray)
-  {
-    if (inputsArray.Length > 0)
-      return inputsArray[0];
-    else
-      return false;
   }
 
   #endregion

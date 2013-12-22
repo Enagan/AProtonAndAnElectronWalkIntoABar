@@ -28,7 +28,9 @@ public class RoomFactory
       }
       else
       {
-        CreateAdjancentRoom(newRoom, fromRoom);
+        ServiceLocator.GetSceneManager().StartCoroutine(CreateAdjancentRoom(newRoom, fromRoom));
+
+        //CreateAdjancentRoom(newRoom, fromRoom);
       }
     }
   }
@@ -119,6 +121,7 @@ public class RoomFactory
   {
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(room.roomName);
+    roomParentObject.SetActive(false);
     _instancedObjects.RegisterRoom(room, roomParentObject);
 
     //Instances all objects present in the room definition 
@@ -137,6 +140,7 @@ public class RoomFactory
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
+    roomParentObject.SetActiveRecursively(true);
   }
 
   /// <summary>
@@ -144,7 +148,7 @@ public class RoomFactory
   /// Rooms will be connected via their respective gateways to each other.
   /// Execution will halt in case a connection does not exist.
   /// </summary>
-  private void CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
+  private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
   {
     RoomObjectGatewayDefinition fromGate;
     RoomObjectGatewayDefinition newRoomGate;
@@ -154,33 +158,24 @@ public class RoomFactory
     if ((fromGate = from.GetGatewayTo(newRoom)) == null)
     {
       BipolarConsole.AllLog("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found");
-      return;
+      yield break;
+      //return;
     }
     if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
     {
       BipolarConsole.AllLog("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found");
-      return;
+      yield break;
+      //return;
     }
-
-    //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
-    Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.position;
-    Vector3 fromGateWorldRotation = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.eulerAngles;
 
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
+    roomParentObject.SetActive(false);
     _instancedObjects.RegisterRoom(newRoom, roomParentObject);
 
     //Orients the parent object to the new room gateway, as their centers will coincide
     roomParentObject.transform.eulerAngles = newRoomGate.eulerAngles;
 
-    //Instances all objects in room definition, in a position relative 
-    //to the newRoomGate (The local origin)
-    foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
-    {
-      GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
-
-      _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
-    }
     //Instances all gateways in room definition, in a position relative 
     //to the newRoomGate (The local origin)
     foreach (RoomObjectGatewayDefinition gate in newRoom.gateways)
@@ -190,9 +185,25 @@ public class RoomFactory
       _instancedObjects.RegisterObjectInRoom(newRoom, gate, instancedObject);
     }
 
+    //Instances all objects in room definition, in a position relative 
+    //to the newRoomGate (The local origin)
+    foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
+    {
+      GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
+
+      _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
+      yield return null;
+    }
+
+    //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
+    Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.position;
+    Vector3 fromGateWorldRotation = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.eulerAngles;
+
     //Positions and orients the parent object to match and connect with the from room gateway
     roomParentObject.transform.position = fromGateWorldPosition;
     roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
+
+    roomParentObject.SetActiveRecursively(true);
   }
 
   /// <summary>
@@ -202,7 +213,7 @@ public class RoomFactory
   private GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
 
-    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath);
+    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath,active:false);
 
     instancedObject.transform.localPosition = WorldPositionInRelationTo(obj.position, relativeOrigin);
     instancedObject.transform.localScale = obj.scale;
