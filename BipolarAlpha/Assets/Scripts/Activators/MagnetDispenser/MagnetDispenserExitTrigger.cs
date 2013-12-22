@@ -16,7 +16,7 @@ public class MagnetDispenserExitTrigger : MonoBehaviour {
     {
       this.transform.parent.GetComponentInChildren<MagnetDispenserGenerator>().Reset();
 
-      this.transform.parent.GetComponentInChildren<DispenserActivator>().Deactivate();
+      //this.transform.parent.GetComponentInChildren<DispenserActivator>().Deactivate();
     }
   }
 

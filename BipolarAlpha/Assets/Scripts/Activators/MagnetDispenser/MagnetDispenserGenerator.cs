@@ -23,7 +23,7 @@ public class MagnetDispenserGenerator : MonoBehaviour
     if (this.transform.rigidbody.angularVelocity.magnitude > _activationThreshold && _canBeActivated)
     {
       _canBeActivated = false;
-      this.transform.parent.transform.parent.GetComponentInChildren<DispenserActivator>().Activate();
+      this.transform.parent.transform.parent.GetComponentInChildren<DispenserAnimationActivator>().Activate();
     }
   }
 

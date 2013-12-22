@@ -16,7 +16,7 @@ public abstract class Circuit : MonoBehaviour, Activator
 {
   #region private fields
   // Dictionary that associates the Unique identifier of an input (Key) with its boolean state (Value)
-  private Dictionary<int, bool> _inputs;
+  private Dictionary<Circuit, bool> _inputs;
   
   // List that keeps track of available circuit outputs
   // Must be set-up with Unity Editor
@@ -35,6 +35,31 @@ public abstract class Circuit : MonoBehaviour, Activator
   protected GameObject _activatedLightsParent = null;
   #endregion
 
+  #region public properties
+  // Getter for circuit outputs. Usefull for circuit serialization
+  public List<Circuit> outputs
+  {
+    get
+    {
+      return _outputs;
+    }
+  }
+
+  // Getter for circuit inputs. Usefull for circuit serialization
+  public List<Circuit> inputs
+  {
+    get
+    {
+      List<Circuit> inputs = new List<Circuit>();
+      foreach(Circuit c in _inputs.Keys)
+      {
+        inputs.Add(c);
+      }
+      return inputs;
+    }
+  }
+  #endregion
+
   #region private properties
   // counter Variable and Counter property
   // Are used on Circuit creation to acess unique identifiers
@@ -50,14 +75,18 @@ public abstract class Circuit : MonoBehaviour, Activator
   #region Circuit Constructor
   public Circuit()
   {
-    _inputs = new Dictionary<int, bool>();
+    _inputs = new Dictionary<Circuit, bool>();
     _outputs = new List<Circuit>();
     _identifier = IncrCounter;
   }
 
-  private void Start()
+  private void Awake()
   {
     PropagateToOutputs();
+  }
+
+  private void Start()
+  {
     if (_state)
     { 
       TurnOnLights(); 
@@ -133,11 +162,11 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// <param name="state">Binary state recieved by the circuit</param>
   /// <param name="inputID">Identifier of input</param>
   /// </summary>
-  public bool Input(bool state, int inputID)
+  public bool Input(bool state, Circuit inputCircuit)
   {
     //BipolarConsole.IvoLog(CircuitName() + _identifier + " Input:" + state + " sent by " + inputID);
     //Add input to dictionary
-	  _inputs[inputID] = state;
+    _inputs[inputCircuit] = state;
 	 
      //Infer Logic from operation and call Activate and Deactivate
      bool[] inputsArray = new bool[_inputs.Count];
@@ -163,7 +192,10 @@ public abstract class Circuit : MonoBehaviour, Activator
     //BipolarConsole.IvoLog(CircuitName()+_identifier + " Output:" + _state);
     foreach (Circuit c in _outputs)
     {
-      c.Input(output, _identifier);
+      if (!(c == null))
+      {
+        c.Input(output, this);
+      }
     }
   }
   

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <RoomDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <roomName>FurnaceRoom</roomName>
+  <roomName>TestFurnaceRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
@@ -12,7 +12,7 @@
       <scale>
         <x>0.859999955</x>
         <y>0.859999955</y>
-        <z>0.9895434</z>
+        <z>0.989543259</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -67,11 +67,11 @@
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/FurnaceRoomCircuitSystem-0</objectPrefabPath>
+      <objectPrefabPath>Prefabs/CircuitSystems/TestFurnaceRoomCircuitSystem-0</objectPrefabPath>
       <position>
-        <x>-20.9379845</x>
-        <y>27.7488937</y>
-        <z>0.026407633</z>
+        <x>-21.0919189</x>
+        <y>27.7899113</y>
+        <z>0.114873648</z>
       </position>
       <scale>
         <x>1</x>
@@ -85,13 +85,13 @@
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator 1/RotatingMagnetAxis/RotatingMagnetSlab2/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator 1/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
@@ -146,7 +146,7 @@
       <scale>
         <x>0.859999955</x>
         <y>0.859999955</y>
-        <z>0.9895434</z>
+        <z>0.989543259</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -165,7 +165,7 @@
       <scale>
         <x>0.859999955</x>
         <y>0.859999955</y>
-        <z>0.9895434</z>
+        <z>0.9895433</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -203,7 +203,7 @@
       <scale>
         <x>0.859999955</x>
         <y>0.859999955</y>
-        <z>0.9895434</z>
+        <z>0.989543259</z>
       </scale>
       <eulerAngles>
         <x>0</x>
