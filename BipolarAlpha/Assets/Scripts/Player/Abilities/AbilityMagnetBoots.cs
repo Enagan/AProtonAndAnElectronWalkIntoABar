@@ -1,12 +1,10 @@
-﻿//Owner Rui
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 
 /// <summary>
-/// AbilityStickMagnet provides use of a player's single directional magnet, and permiting sticking to magnets,
-/// as well, as releasing a sticked magnet
+/// AbilityMagnetBoots provides use of a player's magnet boots
 /// </summary>
 public class AbilityMagnetBoots : Ability
 {
