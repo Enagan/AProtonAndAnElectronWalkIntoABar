@@ -15,6 +15,11 @@ public class AbilityMagnetBoots : AbilityUseMagnet
   /// <summary>
   /// Constructor for AbilityMagnetBoots
   /// </summary>
+  public AbilityMagnetBoots(PlayerMagnet playerMagnet, PlayerController player)
+    : base(playerMagnet, player)
+  {
+  }
+
   public AbilityMagnetBoots(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
     : base(playerMagnet,playerCamera,player)
   {

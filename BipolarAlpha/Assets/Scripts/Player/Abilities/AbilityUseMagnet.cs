@@ -30,10 +30,19 @@ public class AbilityUseMagnet : Ability
   /// Constructor for AbilityUseMagnet
   /// </summary>
 
+  public AbilityUseMagnet(PlayerMagnet playerMagnet, PlayerController player)
+  {
+     
+    this._playerMagnet = playerMagnet;
+    this._playerCamera = player.getPlayerCamera();
+    this._player = player;
+    _animHandler = player.GetComponent<AnimationRootHandler>();
+  }
+
   public AbilityUseMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
   {
     if (_playerMagnet) Debug.Log("Its not null!");
-    this._playerMagnet = playerMagnet;
+       this._playerMagnet = playerMagnet;
     this._playerCamera = playerCamera;
     this._player = player;
     _animHandler = player.GetComponent<AnimationRootHandler>();

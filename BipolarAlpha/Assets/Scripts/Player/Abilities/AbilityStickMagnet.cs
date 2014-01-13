@@ -31,6 +31,12 @@ public class AbilityStickMagnet : AbilityUseMagnet
   /// <summary>
   /// Constructor for AbilityStickMagnet
   /// </summary>
+
+  public AbilityStickMagnet(PlayerMagnet playerMagnet, PlayerController player)
+    : base(playerMagnet, player)
+  { }
+
+
   public AbilityStickMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player) :base(playerMagnet, playerCamera, player) 
   {}
 

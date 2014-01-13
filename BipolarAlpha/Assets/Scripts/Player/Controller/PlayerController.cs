@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPauseListener
 {
 
@@ -65,6 +66,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   #endregion
 
   private GameObject mainCamera;
+
+
   //This dictionary holds the players' currently usable abilities and their cooresponding activation keys
   private Dictionary<string, Ability> _usableAbilities = new Dictionary<string, Ability>();
 
@@ -97,6 +100,12 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       return _magnetCollidingWith;
     }
   }
+
+   public Camera getPlayerCamera()
+  {
+     return this.GetComponentInChildren<Camera>();
+  }
+
 
   #endregion
 
@@ -242,8 +251,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
 
     //MagneticBoots ability (Q and E)
-    _usableAbilities.Add("Boot1", new AbilityMagnetBoots(GameObject.Find("LeftBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera, this));
-    _usableAbilities.Add("Boot2", new AbilityMagnetBoots(GameObject.Find("RightBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera,this));
+  //  _usableAbilities.Add("Boot1", new AbilityMagnetBoots(GameObject.Find("LeftBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera, this));
+  //  _usableAbilities.Add("Boot2", new AbilityMagnetBoots(GameObject.Find("RightBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera,this));
 
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
