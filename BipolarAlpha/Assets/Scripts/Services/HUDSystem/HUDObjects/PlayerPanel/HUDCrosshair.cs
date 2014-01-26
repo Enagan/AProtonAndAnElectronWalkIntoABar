@@ -72,11 +72,15 @@ public class HUDCrosshair : HUDObject {
   private bool fireRaycast()
   {
     RaycastHit hit;
-    if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))
+    if (_camera!=null && _camera.gameObject.active)
     {
-      return hit.collider.gameObject.GetComponentInChildren<MagneticForce>().isActivated;
+      if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))
+      {
+        return hit.collider.gameObject.GetComponentInChildren<MagneticForce>().isActivated;
+      }
     }
     return false;
+
   }
   #endregion
 }

@@ -18,6 +18,7 @@ public class RoomDefinition
   // Gateways possess the name of the room they link to
   private List<RoomObjectGatewayDefinition> _gateways = new List<RoomObjectGatewayDefinition>();
 
+  
   /// <summary>
   /// The name of the room
   /// </summary>

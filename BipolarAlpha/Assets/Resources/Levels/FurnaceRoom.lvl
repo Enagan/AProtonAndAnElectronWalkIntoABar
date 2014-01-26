@@ -67,38 +67,6 @@
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/FurnaceRoomCircuitSystem-0</objectPrefabPath>
-      <position>
-        <x>-20.9379845</x>
-        <y>27.7488937</y>
-        <z>0.026407633</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-      </complexStates>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/ElevatorInvisiCollider</objectPrefabPath>
       <position>
         <x>-14.360054</x>
@@ -294,6 +262,37 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Cutscenes/CutsceneHandler</objectPrefabPath>
+      <position>
+        <x>0.19084549</x>
+        <y>3.962656</y>
+        <z>-0.0258167982</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>3.4508965</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneLocalHandlerComplexState">
+          <objectNameInHierarchy>CutsceneHandler</objectNameInHierarchy>
+          <cutsceneName>FurnaceIntro</cutsceneName>
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>CutsceneCam</objectNameInHierarchy>
+          <animationName>FurnaceEntranceCameraCutscene</animationName>
+          <delay>0</delay>
+          <optionalChild />
+          <cutsceneName>FurnaceIntro</cutsceneName>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>
@@ -541,6 +540,33 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/TestPrefabs/TestBarrel</objectPrefabPath>
+      <position>
+        <x>-0.632142663</x>
+        <y>3.03412533</y>
+        <z>-1.08302212</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>357.575256</x>
+        <y>207.99556</y>
+        <z>2.03471255</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>TestBarrel</objectNameInHierarchy>
+          <animationName>BarrelTest</animationName>
+          <delay>0</delay>
+          <optionalChild> </optionalChild>
+          <cutsceneName>FurnaceIntro</cutsceneName>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/[TEST]Light</objectPrefabPath>

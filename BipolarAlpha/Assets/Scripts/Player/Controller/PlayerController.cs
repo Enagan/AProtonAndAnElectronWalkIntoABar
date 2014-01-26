@@ -101,10 +101,17 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     }
   }
 
-   public Camera getPlayerCamera()
+  public Camera getPlayerCamera()
   {
      return this.GetComponentInChildren<Camera>();
   }
+
+
+   public AudioListener getPlayerAudioListener()
+   {
+     return this.GetComponentInChildren<AudioListener>();
+   }
+
 
 
   #endregion

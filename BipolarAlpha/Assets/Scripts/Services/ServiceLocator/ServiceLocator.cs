@@ -27,6 +27,8 @@ public class ServiceLocator
 
   private static CheckPointSystem _checkpointSystem= new CheckPointSystem();
 
+  private static CutsceneManager _cutsceneManager = new CutsceneManager();
+
   //--- Access functions
   //- Get<SystemInterfaceName>()
   //    Access functions to the available services/systems
@@ -100,6 +102,17 @@ public class ServiceLocator
   {
     return _checkpointSystem;
   }
+
+  /// <summary>
+  /// Returns the current implementation of the cutscene manager 
+  /// </summary>
+  public static CutsceneManager GetCutsceneManager()
+  {
+    return _cutsceneManager;
+  }
+
+
+
   #endregion
 
 
@@ -176,5 +189,14 @@ public class ServiceLocator
   {
     _checkpointSystem = checkpointSystem;
   }
+
+  /// <summary>
+  /// Changes the current implementation of the cutscene Manager to the specified/provided implementation
+  /// </summary>
+  public static void ProvideCutsceneManager(CutsceneManager cutsceneManager)
+  {
+    _cutsceneManager = cutsceneManager;
+  }
+
   #endregion
 }

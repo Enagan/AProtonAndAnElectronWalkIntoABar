@@ -226,6 +226,7 @@ public class RoomFactory
       Transform objectWithComplexState = instancedObject.transform.Find(complexState.objectNameInHierarchy);
       IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
       scriptToLoadComplexState.LoadComplexState(complexState);
+      
     }
 
     return instancedObject;
