@@ -1,26 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// CutsceneElement stores information necessary to link Animations to a cutscene
+/// This is achieved by the IHasComplexState and the CutsceneManager, registration is handled automatically
+/// All AnimationHandlers need to be a CutsceneElement before being added to a cutscene
+/// One CutsceneElement per animation
+/// </summary>
 [RequireComponent(typeof(AnimationChildHandler))]
-public class CutsceneElement : MonoBehaviour, IHasComplexState {
+public class CutsceneElement : MonoBehaviour, IHasComplexState
+{
 
+  #region private variables
+
+  // Name of Cutscene/CutsceneHandler for this animation/element combination
   [SerializeField]
   string _cutsceneName = "";
 
+  // Name of animation to be called by this element's animationHandler
   [SerializeField]
   string _animationName = "";
 
+  // Delay for animation to start during cutscene
   [SerializeField]
   int _delay = 0;
 
+  // Name of child if element is a roothandler and animation belongs to a childhandler
   [SerializeField]
   string _optionalChildName = "";
+
+  #endregion
+
+  #region start method
 
   void Start()
   {
     AnimationChildHandler animHandler = this.GetComponent<AnimationChildHandler>();
     ServiceLocator.GetCutsceneManager().registerElement(_cutsceneName, animHandler, _animationName, _delay, _optionalChildName);
   }
+
+  #endregion
 
   #region Complex State methods
 

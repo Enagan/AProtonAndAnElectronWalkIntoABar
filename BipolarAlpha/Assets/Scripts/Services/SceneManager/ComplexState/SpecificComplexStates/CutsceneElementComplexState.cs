@@ -8,17 +8,24 @@ using System.Collections;
 public class CutsceneElementComplexState : ComplexState
 {
 
+  #region private variables
+
+  //Name of animation for cutscene in element's animation
   private string _animationName;
 
+  // Delay for start of animation
   private int _delay;
 
-  /// <summary>
-  /// In case element is a root handler and animation is for child
-  /// </summary>
+  // In case element is a rootAnimationHandler and animation is meant for its child
   private string _optionalChild;
 
  // handler/cutscene name
  private string _cutsceneName;
+
+
+  #endregion
+
+ #region property getters/setters
 
  public string animationName
  {
@@ -68,6 +75,10 @@ public class CutsceneElementComplexState : ComplexState
     }
   }
 
+ #endregion
+
+  #region complex state required methods
+
   public override string GetComplexStateName()
   {
     return "CutsceneElement";
@@ -80,4 +91,7 @@ public class CutsceneElementComplexState : ComplexState
   public CutsceneElementComplexState() : base() { }
 
   public CutsceneElementComplexState(GameObject complexStateSourceObject) : base(complexStateSourceObject) { }
+
+  #endregion
+
 }

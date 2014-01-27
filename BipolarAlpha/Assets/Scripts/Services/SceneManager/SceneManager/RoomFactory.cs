@@ -223,8 +223,16 @@ public class RoomFactory
 
     foreach (ComplexState complexState in obj.complexStates)
     {
-      Transform objectWithComplexState = instancedObject.transform.Find(complexState.objectNameInHierarchy);
-      IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+      string stateName = complexState.GetComplexStateName();
+
+      
+      IHasComplexState scriptToLoadComplexState = ((instancedObject.transform).GetComponent(stateName)  as IHasComplexState);
+      if(scriptToLoadComplexState == null) // then its in his children
+      {
+        Transform objectWithComplexState =  instancedObject.transform.Find(complexState.objectNameInHierarchy);
+        scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+      }
+      
       scriptToLoadComplexState.LoadComplexState(complexState);
       
     }

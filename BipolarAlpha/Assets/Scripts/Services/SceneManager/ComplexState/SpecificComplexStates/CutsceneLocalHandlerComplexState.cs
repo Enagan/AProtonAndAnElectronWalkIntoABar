@@ -7,9 +7,17 @@ using System.Collections;
 /// </summary>
 public class CutsceneLocalHandlerComplexState : ComplexState
 {
-
+  #region private fields
+  
+  // Name of Cutscene
   private string _cutsceneName;
 
+  // Radius for Sphere Collision
+  private float _collisionRadius;
+
+  #endregion
+
+  #region property getters/setters
 
   public string cutsceneName
   {
@@ -22,6 +30,22 @@ public class CutsceneLocalHandlerComplexState : ComplexState
       _cutsceneName = value;
     }
   }
+
+  public float collisionRadius
+  {
+    get
+    {
+      return _collisionRadius;
+    }
+    set
+    {
+      _collisionRadius = value;
+    }
+  }
+  #endregion
+
+  #region complex state methods
+
   public override string GetComplexStateName()
   {
     return "CutsceneLocalHandler";
@@ -34,4 +58,6 @@ public class CutsceneLocalHandlerComplexState : ComplexState
   public CutsceneLocalHandlerComplexState() : base() { }
 
   public CutsceneLocalHandlerComplexState(GameObject complexStateSourceObject) : base(complexStateSourceObject) { }
+
+  #endregion
 }
