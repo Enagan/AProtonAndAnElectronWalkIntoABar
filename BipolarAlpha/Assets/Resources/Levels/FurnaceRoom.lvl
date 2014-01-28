@@ -288,9 +288,18 @@
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>CutsceneCam</objectNameInHierarchy>
-          <animationName>FurnaceEntranceCameraCutscene</animationName>
-          <delay>0</delay>
-          <optionalChild />
+          <animationNames>
+            <string>FurnaceEntranceCameraCutscene</string>
+            <string>FurnaceEntranceCameraCutscene2</string>
+          </animationNames>
+          <delays>
+            <int>0</int>
+            <int>2</int>
+          </delays>
+          <optionalChilds>
+            <string />
+            <string />
+          </optionalChilds>
           <cutsceneName>FurnaceIntro</cutsceneName>
         </ComplexState>
       </complexStates>

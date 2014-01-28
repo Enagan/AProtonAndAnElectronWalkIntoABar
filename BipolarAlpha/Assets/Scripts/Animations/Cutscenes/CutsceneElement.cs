@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 /// <summary>
 /// CutsceneElement stores information necessary to link Animations to a cutscene
 /// This is achieved by the IHasComplexState and the CutsceneManager, registration is handled automatically
 /// All AnimationHandlers need to be a CutsceneElement before being added to a cutscene
-/// One CutsceneElement per animation
+/// One CutsceneElement per cutscene, but many animations
 /// </summary>
 [RequireComponent(typeof(AnimationChildHandler))]
 public class CutsceneElement : MonoBehaviour, IHasComplexState
@@ -19,15 +19,18 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
 
   // Name of animation to be called by this element's animationHandler
   [SerializeField]
-  string _animationName = "";
+  List<string> _animationNames = new List<string>();
+  
 
   // Delay for animation to start during cutscene
   [SerializeField]
-  int _delay = 0;
+  List<int> _delays = new List<int>();
+  
 
   // Name of child if element is a roothandler and animation belongs to a childhandler
   [SerializeField]
-  string _optionalChildName = "";
+  List<string> _childNames = new List<string>();
+
 
   #endregion
 
@@ -36,7 +39,13 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
   void Start()
   {
     AnimationChildHandler animHandler = this.GetComponent<AnimationChildHandler>();
-    ServiceLocator.GetCutsceneManager().registerElement(_cutsceneName, animHandler, _animationName, _delay, _optionalChildName);
+    
+    // Find minimum common value
+    int count = Mathf.Min(Mathf.Min(_animationNames.Count, _delays.Count), _childNames.Count);
+    for (int i = 0; i < count; i++)
+    {
+      ServiceLocator.GetCutsceneManager().registerElement(_cutsceneName, animHandler, _animationNames[i], _delays[i], _childNames[i]);
+    }
   }
 
   #endregion
@@ -49,9 +58,9 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
     // saves this instance cutsceneName
     CutsceneElementComplexState state = new CutsceneElementComplexState(this.gameObject);
     state.cutsceneName = _cutsceneName;
-    state.animationName = _animationName;
-    state.delay = _delay;
-    state.optionalChild = _optionalChildName;
+    state.animationNames = _animationNames;
+    state.delays = _delays;
+    state.optionalChilds = _childNames;
 
     return state;
   }
@@ -68,9 +77,9 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
     // loads this instance's fields
 
     _cutsceneName = elementState.cutsceneName;
-    _animationName = elementState.animationName;
-    _delay = elementState.delay;
-    _optionalChildName = elementState.optionalChild;
+    _animationNames = elementState.animationNames;
+    _delays = elementState.delays;
+    _childNames = elementState.optionalChilds;
   }
 
   public ComplexState UpdateComplexState(ComplexState state)
@@ -81,9 +90,9 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
     }
     CutsceneElementComplexState specificState = (state as CutsceneElementComplexState);
     specificState.cutsceneName = _cutsceneName;
-    specificState.animationName = _animationName;
-    specificState.delay = _delay;
-    specificState.optionalChild = _optionalChildName;
+    specificState.animationNames = _animationNames;
+    specificState.delays = _delays;
+    specificState.optionalChilds = _childNames;
 
     return specificState;
   }

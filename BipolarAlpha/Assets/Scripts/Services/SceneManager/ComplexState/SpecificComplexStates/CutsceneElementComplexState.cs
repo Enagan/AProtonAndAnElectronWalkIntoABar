@@ -1,6 +1,7 @@
 ﻿// by Ivo
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Complex State of the CutsceneElement Class
@@ -11,55 +12,55 @@ public class CutsceneElementComplexState : ComplexState
   #region private variables
 
   //Name of animation for cutscene in element's animation
-  private string _animationName;
+  private List<string> _animationNames;
 
   // Delay for start of animation
-  private int _delay;
+  private List<int> _delays;
 
   // In case element is a rootAnimationHandler and animation is meant for its child
-  private string _optionalChild;
+  private List<string> _optionalChilds;
 
  // handler/cutscene name
- private string _cutsceneName;
+  private string _cutsceneName;
 
 
   #endregion
 
  #region property getters/setters
 
- public string animationName
+  public List<string> animationNames
  {
    get
    {
-     return _animationName;
+     return _animationNames;
    }
    set
    {
-     _animationName = value;
+     _animationNames = value;
    }
  }
 
- public int delay
+ public List<int> delays
  {
    get
    {
-     return _delay;
+     return _delays;
    }
    set
    {
-     _delay = value;
+     _delays = value;
    }
  }
 
- public string optionalChild
+ public List<string> optionalChilds
  {
    get
    {
-     return _optionalChild;
+     return _optionalChilds;
    }
    set
    {
-     _optionalChild = value;
+     _optionalChilds = value;
    }
  }
 
