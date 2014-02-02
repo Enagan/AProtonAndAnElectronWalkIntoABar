@@ -12,7 +12,7 @@ public class CutsceneManager
   #region private variables
 
   // Dictionary with available cutscene handlers
-  private Dictionary<string, CutsceneLocalHandler> registeredCutscenes = new Dictionary<string, CutsceneLocalHandler>();
+  private Dictionary<string, AnimationLocalHandler> registeredCutscenes = new Dictionary<string, AnimationLocalHandler>();
   
   // Dictionary with cutsceneElements who asked to be registered before their cutscene handler was made available
   private Dictionary<string, ArrayList> unregisteredElements = new Dictionary<string, ArrayList>();
@@ -22,7 +22,7 @@ public class CutsceneManager
   #region Handler and Element registering methods
 
   // Registers a cutscene handler and registers on it cutscene elements if available
-  public void registerCutsceneHandler(CutsceneLocalHandler handler)
+  public void registerCutsceneHandler(AnimationLocalHandler handler)
   {
 
     string name = handler.cutsceneName;

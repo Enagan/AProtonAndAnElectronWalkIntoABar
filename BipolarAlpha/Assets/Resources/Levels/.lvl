@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<RoomDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomName />
+  <objectsInRoom>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>2.07527566</y>
+        <z>-7.421763E-07</z>
+      </position>
+      <scale>
+        <x>4.076524</x>
+        <y>4.076524</y>
+        <z>4.076524</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+  </objectsInRoom>
+  <gateways />
+</RoomDefinition>

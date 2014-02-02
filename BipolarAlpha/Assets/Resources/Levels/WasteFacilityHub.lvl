@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<RoomDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomName>WasteFacilityHub</roomName>
+  <objectsInRoom>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/WasteFacilityHub</objectPrefabPath>
+      <position>
+        <x>-12.1307869</x>
+        <y>-8.411876</y>
+        <z>0.350634575</z>
+      </position>
+      <scale>
+        <x>2</x>
+        <y>2</y>
+        <z>2</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+  </objectsInRoom>
+  <gateways>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>-4.03758526</x>
+        <y>-2.36637425</y>
+        <z>0.36961174</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>270</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>GarbageBinRoom</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+  </gateways>
+</RoomDefinition>
