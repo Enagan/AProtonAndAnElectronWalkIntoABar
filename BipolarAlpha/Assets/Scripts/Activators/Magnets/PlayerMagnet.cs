@@ -118,6 +118,7 @@ public class PlayerMagnet : MagneticForce
     RaycastHit hit;
     if (Physics.Raycast(start, direction, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))  
     {
+
       Transform otherTransform = hit.collider.gameObject.transform;
       MagneticForce otherMagneticForce = (MagneticForce) otherTransform.FindChild("Magnetism").GetComponent("MagneticForce");
       _currentHitPoint = hit.point;
@@ -128,18 +129,17 @@ public class PlayerMagnet : MagneticForce
         otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
-      BipolarConsole.EnganaLog("WUT");
       return this; // leave handling for the ability
     }
-    else if(snapingToMagnet)
-    {
-      return this;
-    }
-    else 
-    {
+    else    {
       _magnetHitPoint = Vector3.zero;
       _currentHitPoint = Vector3.zero;
       base.NoLongerAffectingMagnets();
+    }
+
+    if (snapingToMagnet)
+    {
+        return this;
     }
 
     return null; //Maybe change this
