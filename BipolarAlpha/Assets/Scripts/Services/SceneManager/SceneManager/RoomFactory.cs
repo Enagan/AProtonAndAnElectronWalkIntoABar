@@ -141,6 +141,7 @@ public class RoomFactory
     }
 
     roomParentObject.SetActiveRecursively(true);
+    room.constructionFinished = true;
   }
 
   /// <summary>
@@ -150,6 +151,7 @@ public class RoomFactory
   /// </summary>
   private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
   {
+
     RoomObjectGatewayDefinition fromGate;
     RoomObjectGatewayDefinition newRoomGate;
 
@@ -168,6 +170,10 @@ public class RoomFactory
       //return;
     }
 
+    while (!from.constructionFinished)
+    {
+      yield return new WaitForSeconds(0.4f);
+    }
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
     roomParentObject.SetActive(false);
@@ -190,9 +196,8 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
-
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
-      yield return null;
+      yield return new WaitForSeconds(0.2f);
     }
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
@@ -204,6 +209,7 @@ public class RoomFactory
     roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
 
     roomParentObject.SetActiveRecursively(true);
+    newRoom.constructionFinished = true;
   }
 
   /// <summary>
