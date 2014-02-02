@@ -12,6 +12,8 @@ public class RoomDefinition
 {
   private string _roomName;
 
+  private bool _constructionFinished = false;
+
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
 
   // Gateways are treated like special objects because they are in charge of transitioning between rooms
@@ -61,6 +63,21 @@ public class RoomDefinition
     set
     {
       _gateways = value;
+    }
+  }
+
+  /// <summary>
+  /// Is the construction done
+  /// </summary>
+  public bool constructionFinished
+  {
+    get
+    {
+      return _constructionFinished;
+    }
+    set
+    {
+      _constructionFinished = value;
     }
   }
 

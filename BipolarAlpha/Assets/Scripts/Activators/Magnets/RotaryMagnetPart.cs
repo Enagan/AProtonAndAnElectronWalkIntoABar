@@ -2,14 +2,18 @@
 using UnityEngine;
 using System.Collections;
 /// <summary>
-/// Class used on both negative and positive parts of a rotary magnet
+/// Class used on both parts of a rotary magnet
 /// </summary>
 public class RotaryMagnetPart : MagneticForce
 {
 
+    [SerializeField]
+    private float rotationDrag;
+
     public override void Start()
     {
         base.Start();
+        rotationDrag = 30000.0f;
 
         if (parentToAffect == this.transform.parent.gameObject)
         {
@@ -28,7 +32,6 @@ public class RotaryMagnetPart : MagneticForce
         {
             Vector3 localForceDirection = this.transform.position - otherMagnet.transform.position;
 
-            //this.transform.InverseTransformPoint(otherMagnet.transform.position); // represent's the currect object position on local coordinations
             localForceDirection.Normalize();
 
             if (otherMagnet.charge == this.charge)
@@ -44,12 +47,8 @@ public class RotaryMagnetPart : MagneticForce
             float totalForce = getTotalForce(otherMagnet);
 
             Vector3 localTorque = rotationDir * totalForce * Time.deltaTime;
-            //totalForce * (1 - localForceDirection.y) * Time.deltaTime
-            //magnetBody.AddForceAtPosition(totalForce * localForceDirection, hit);
 
-            //magnetBody.AddForceAtPosition(totalForce * localForceDirection * Time.deltaTime, hit);
-
-            magnetBody.AddTorque(localTorque); // apply torque only on the local y axis of the rotary magnet
+            magnetBody.AddTorque(localTorque / rotationDrag ); // apply torque only on the local y axis of the rotary magnet
 
         }
     }
