@@ -482,4 +482,5 @@
       <connectedToRoom>TestingFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
+  <constructionFinished>false</constructionFinished>
 </RoomDefinition>

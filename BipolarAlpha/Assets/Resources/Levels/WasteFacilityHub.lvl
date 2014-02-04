@@ -44,4 +44,5 @@
       <connectedToRoom>GarbageBinRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
+  <constructionFinished>false</constructionFinished>
 </RoomDefinition>

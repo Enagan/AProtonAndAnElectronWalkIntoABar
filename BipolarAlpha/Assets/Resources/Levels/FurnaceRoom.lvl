@@ -3,6 +3,38 @@
   <roomName>FurnaceRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/CircuitSystems/FurnaceRoomCircuitSystem-0</objectPrefabPath>
+      <position>
+        <x>-20.4526672</x>
+        <y>27.765379</y>
+        <z>-0.0619489476</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Scenery/Hexagonal Door</objectPrefabPath>
       <position>
         <x>-22.9228268</x>
@@ -60,38 +92,6 @@
       <complexStates>
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-      </complexStates>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/FurnaceRoomCircuitSystem-0</objectPrefabPath>
-      <position>
-        <x>-20.9379845</x>
-        <y>27.7488937</y>
-        <z>0.026407633</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
@@ -663,5 +663,6 @@
       <connectedToRoom>TestingFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
+  <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
 </RoomDefinition>

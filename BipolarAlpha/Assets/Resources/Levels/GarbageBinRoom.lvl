@@ -128,4 +128,5 @@
       <connectedToRoom>WasteFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
+  <constructionFinished>false</constructionFinished>
 </RoomDefinition>
