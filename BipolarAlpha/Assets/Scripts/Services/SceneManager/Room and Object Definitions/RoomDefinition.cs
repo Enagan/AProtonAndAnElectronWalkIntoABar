@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Xml.Serialization;
 
 /// <summary>
 /// Room definition represents a room.
@@ -15,6 +16,9 @@ public class RoomDefinition
   private bool _constructionFinished = false;
 
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
+
+  private Dictionary<int, List<MeshCollider>> _meshColliders = new Dictionary<int, List<MeshCollider>>();
+  private int _maxDepth = 0;
 
   // Gateways are treated like special objects because they are in charge of transitioning between rooms
   // Gateways possess the name of the room they link to
@@ -63,6 +67,33 @@ public class RoomDefinition
     set
     {
       _gateways = value;
+    }
+  }
+
+  /// <summary>
+  /// All the mesh colliders in a room
+  /// </summary>
+  [XmlIgnore]
+  public Dictionary<int, List<MeshCollider>> meshColliders
+  {
+    get
+    {
+      return _meshColliders;
+    }
+  }
+
+  /// <summary>
+  /// Max Children depth with mesh colliders
+  /// </summary>
+  public int maxDepth
+  {
+    get
+    {
+      return _maxDepth;
+    }
+    set
+    {
+      _maxDepth = value;
     }
   }
 

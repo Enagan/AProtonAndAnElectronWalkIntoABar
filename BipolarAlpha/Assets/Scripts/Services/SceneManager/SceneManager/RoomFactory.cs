@@ -10,7 +10,9 @@ using System.Collections.Generic;
 /// </summary>
 public class RoomFactory
 {
+  private const int MAX_VERTICES_INSTANCED_IN_A_FRAME = 50;
   private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
+
 
   #region [Public Methods] Room Creation, Destruction and Definition Update
   /// <summary>
@@ -104,6 +106,8 @@ public class RoomFactory
     {
       GameObject toDestroy = _instancedObjects.getRoomParentObject(roomDef);
       _instancedObjects.RemoveRoomFromRegistry(roomDef);
+      roomDef.meshColliders.Clear();
+      roomDef.maxDepth = 0;
       GameObject.Destroy(toDestroy);
     }
     else
@@ -196,9 +200,13 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
+      FindAllMeshColliders(newRoom,instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
-      yield return new WaitForSeconds(0.2f);
+      yield return new WaitForSeconds(0.1f);
     }
+
+
+    
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
     Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.position;
@@ -209,6 +217,28 @@ public class RoomFactory
     roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
 
     roomParentObject.SetActiveRecursively(true);
+
+    int vertexInstanced = 0;
+    for (int i = newRoom.maxDepth; i >= 0; i--)
+    {
+      List<MeshCollider> colliders = newRoom.meshColliders[i];
+      foreach (MeshCollider col in colliders)
+      {
+        if (col == null)
+        {
+          continue;
+        }
+        if (vertexInstanced > MAX_VERTICES_INSTANCED_IN_A_FRAME)
+        {
+          yield return new WaitForEndOfFrame();
+          vertexInstanced = 0;
+        }
+        col.enabled = true;
+        vertexInstanced += col.sharedMesh.vertexCount;
+      }
+
+    }
+
     newRoom.constructionFinished = true;
   }
 
@@ -261,6 +291,37 @@ public class RoomFactory
   private Vector3 OppositeVector(Vector3 vec)
   {
     return new Vector3(-vec.x, vec.y + 180, -vec.z);
+  }
+
+  /// <summary>
+  /// Returns the opposite vector, keeping the up vector intact
+  /// </summary>
+  private void FindAllMeshColliders(RoomDefinition room, GameObject obj,int depth = 0)
+  {
+    room.maxDepth = room.maxDepth < depth ? depth : room.maxDepth;
+    Dictionary<int, List<MeshCollider>> _meshColliders = room.meshColliders;
+
+    List<MeshCollider> colliders;
+
+    if (!_meshColliders.TryGetValue(depth, out colliders))
+    {
+      colliders = new List<MeshCollider>();
+      _meshColliders.Add(depth,colliders);
+    }
+
+    MeshCollider collider = obj.GetComponent<MeshCollider>();
+    if (collider)
+    {
+      colliders.Add(collider);
+      collider.enabled = false;
+    }
+
+    foreach (Transform trans in obj.transform)
+    {
+      FindAllMeshColliders(room,trans.gameObject, depth + 1);
+    } 
+
+
   }
 
   #endregion
