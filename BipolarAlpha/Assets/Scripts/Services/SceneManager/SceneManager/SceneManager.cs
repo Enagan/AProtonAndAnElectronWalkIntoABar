@@ -143,7 +143,14 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     {
       foreach (RoomObjectGatewayDefinition gate in root.gateways)
       {
-        CreateRoomTree(_allRooms[gate.connectedToRoom], currentDepth + 1, root);
+        if (_allRooms.ContainsKey(gate.connectedToRoom))
+        {
+          CreateRoomTree(_allRooms[gate.connectedToRoom], currentDepth + 1, root);
+        }
+        else
+        {
+          BipolarConsole.AllLog("Room " + gate.connectedToRoom + " not found in Save State Definition");
+        }
       }
     }
   }
