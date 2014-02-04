@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <roomPaths>
-	<string>Assets/Resources/Levels/GarbageBinRoom.lvl</string>
-	<string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
+	<string>Assets/Resources/Levels/FurnaceRoom.lvl</string>
+	<string>Assets/Resources/Levels/TestingFacilityHub.lvl</string>
   </roomPaths>
-  <activeRoom>GarbageBinRoom</activeRoom>
+  <activeRoom>FurnaceRoom</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>

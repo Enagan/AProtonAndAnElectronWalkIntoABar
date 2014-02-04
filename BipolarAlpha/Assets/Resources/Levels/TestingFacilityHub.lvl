@@ -414,4 +414,5 @@
       <connectedToRoom>PhysicalAptitudeRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
+  <constructionFinished>false</constructionFinished>
 </RoomDefinition>
