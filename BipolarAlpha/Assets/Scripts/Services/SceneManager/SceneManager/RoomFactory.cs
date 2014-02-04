@@ -140,11 +140,12 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in room.gateways)
     {
       GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
-
+      FindAllMeshColliders(room, instancedObject);
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
     roomParentObject.SetActiveRecursively(true);
+    ActivateAllMeshColliders(room);
     room.constructionFinished = true;
   }
 
@@ -195,6 +196,9 @@ public class RoomFactory
       _instancedObjects.RegisterObjectInRoom(newRoom, gate, instancedObject);
     }
 
+    //Clear previous meshes colliders
+    newRoom.meshColliders.Clear();
+
     //Instances all objects in room definition, in a position relative 
     //to the newRoomGate (The local origin)
     foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
@@ -219,9 +223,15 @@ public class RoomFactory
     roomParentObject.SetActiveRecursively(true);
 
     int vertexInstanced = 0;
+
     for (int i = newRoom.maxDepth; i >= 0; i--)
     {
-      List<MeshCollider> colliders = newRoom.meshColliders[i];
+      List<MeshCollider> colliders;
+      if (!newRoom.meshColliders.TryGetValue(i, out colliders))
+      {
+        continue;
+      }
+
       foreach (MeshCollider col in colliders)
       {
         if (col == null)
@@ -319,10 +329,31 @@ public class RoomFactory
     foreach (Transform trans in obj.transform)
     {
       FindAllMeshColliders(room,trans.gameObject, depth + 1);
-    } 
-
+    }
 
   }
+
+  /// <summary>
+  /// Activates all mesh colliders
+  /// </summary>
+  private void ActivateAllMeshColliders(RoomDefinition room)
+  {
+    int depth = room.maxDepth;
+    for (int i = room.maxDepth; i >= 0; i--)
+    {
+      List<MeshCollider> colliders;
+      if (!room.meshColliders.TryGetValue(i, out colliders))
+      {
+        continue;
+      }
+
+      colliders.ForEach(col => col.enabled = true);
+    }
+  }
+
+
+
+
 
   #endregion
 

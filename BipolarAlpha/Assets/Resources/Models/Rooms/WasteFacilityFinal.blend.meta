@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: c0b2e35626d462544b52c13e7f55bab2
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Cylinder_000
     100002: Cylinder_001
@@ -135,6 +135,8 @@ ModelImporter:
     100258: WasteDisposalUnit_005
     100260: WasteFacility
     100262: //RootNode
+    100264: HexaMesh_MeshPart4
+    100266: HexaMesh_MeshPart5
     400000: Cylinder_000
     400002: Cylinder_001
     400004: Cylinder_002
@@ -267,6 +269,8 @@ ModelImporter:
     400258: WasteDisposalUnit_005
     400260: WasteFacility
     400262: //RootNode
+    400264: HexaMesh_MeshPart4
+    400266: HexaMesh_MeshPart5
     2300000: Cylinder_000
     2300002: Cylinder_001
     2300004: Cylinder_002
@@ -397,6 +401,8 @@ ModelImporter:
     2300254: WasteDisposalUnit_004
     2300256: WasteDisposalUnit_005
     2300258: WasteFacility
+    2300260: HexaMesh_MeshPart4
+    2300262: HexaMesh_MeshPart5
     3300000: Cylinder_000
     3300002: Cylinder_001
     3300004: Cylinder_002
@@ -527,6 +533,8 @@ ModelImporter:
     3300254: WasteDisposalUnit_004
     3300256: WasteDisposalUnit_005
     3300258: WasteFacility
+    3300260: HexaMesh_MeshPart4
+    3300262: HexaMesh_MeshPart5
     4300000: Cylinder_106
     4300002: Cylinder_105
     4300004: Cylinder_104
@@ -657,6 +665,8 @@ ModelImporter:
     4300254: HexaMesh_MeshPart1
     4300256: HexaMesh_MeshPart2
     4300258: HexaMesh_MeshPart3
+    4300260: HexaMesh_MeshPart4
+    4300262: HexaMesh_MeshPart5
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -710,4 +720,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  additionalBone: 0
   userData: 
