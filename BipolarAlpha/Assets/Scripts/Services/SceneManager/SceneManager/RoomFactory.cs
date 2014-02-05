@@ -132,7 +132,7 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in room.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, Vector3.zero);
-
+      FindAllMeshColliders(room, instancedObject);
       _instancedObjects.RegisterObjectInRoom(room, obj, instancedObject);
     }
 
@@ -140,7 +140,6 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in room.gateways)
     {
       GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
-      FindAllMeshColliders(room, instancedObject);
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
@@ -346,7 +345,7 @@ public class RoomFactory
       {
         continue;
       }
-
+      Debug.Log(colliders.Count);
       colliders.ForEach(col => col.enabled = true);
     }
   }
