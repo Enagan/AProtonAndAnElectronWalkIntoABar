@@ -17,7 +17,7 @@ public class RoomDefinition
 
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
 
-  private Dictionary<int, List<MeshCollider>> _meshColliders = new Dictionary<int, List<MeshCollider>>();
+  private Dictionary<int, List<Collider>> _colliders = new Dictionary<int, List<Collider>>();
   private int _maxDepth = 0;
 
   // Gateways are treated like special objects because they are in charge of transitioning between rooms
@@ -74,11 +74,11 @@ public class RoomDefinition
   /// All the mesh colliders in a room
   /// </summary>
   [XmlIgnore]
-  public Dictionary<int, List<MeshCollider>> meshColliders
+  public Dictionary<int, List<Collider>> colliders
   {
     get
     {
-      return _meshColliders;
+      return _colliders;
     }
   }
 

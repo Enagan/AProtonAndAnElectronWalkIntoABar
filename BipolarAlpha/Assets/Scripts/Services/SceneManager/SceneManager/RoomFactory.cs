@@ -106,7 +106,7 @@ public class RoomFactory
     {
       GameObject toDestroy = _instancedObjects.getRoomParentObject(roomDef);
       _instancedObjects.RemoveRoomFromRegistry(roomDef);
-      roomDef.meshColliders.Clear();
+      roomDef.colliders.Clear();
       roomDef.maxDepth = 0;
       GameObject.Destroy(toDestroy);
     }
@@ -132,7 +132,7 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in room.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, Vector3.zero);
-      FindAllMeshColliders(room, instancedObject);
+      FindAllColliders(room, instancedObject);
       _instancedObjects.RegisterObjectInRoom(room, obj, instancedObject);
     }
 
@@ -144,7 +144,7 @@ public class RoomFactory
     }
 
     roomParentObject.SetActiveRecursively(true);
-    ActivateAllMeshColliders(room);
+    ActivateAllColliders(room);
     room.constructionFinished = true;
   }
 
@@ -196,14 +196,14 @@ public class RoomFactory
     }
 
     //Clear previous meshes colliders
-    newRoom.meshColliders.Clear();
+    newRoom.colliders.Clear();
 
     //Instances all objects in room definition, in a position relative 
     //to the newRoomGate (The local origin)
     foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
-      FindAllMeshColliders(newRoom,instancedObject);
+      FindAllColliders(newRoom,instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
       yield return new WaitForSeconds(0.1f);
     }
@@ -221,29 +221,23 @@ public class RoomFactory
 
     roomParentObject.SetActiveRecursively(true);
 
-    int vertexInstanced = 0;
 
     for (int i = newRoom.maxDepth; i >= 0; i--)
     {
-      List<MeshCollider> colliders;
-      if (!newRoom.meshColliders.TryGetValue(i, out colliders))
+      List<Collider> cols;
+      if (!newRoom.colliders.TryGetValue(i, out cols))
       {
         continue;
       }
 
-      foreach (MeshCollider col in colliders)
+      foreach (Collider col in cols)
       {
         if (col == null)
         {
           continue;
         }
-        if (vertexInstanced > MAX_VERTICES_INSTANCED_IN_A_FRAME)
-        {
-          yield return new WaitForEndOfFrame();
-          vertexInstanced = 0;
-        }
+        yield return new WaitForSeconds(0.3f);
         col.enabled = true;
-        vertexInstanced += col.sharedMesh.vertexCount;
       }
 
     }
@@ -305,17 +299,17 @@ public class RoomFactory
   /// <summary>
   /// Returns the opposite vector, keeping the up vector intact
   /// </summary>
-  private void FindAllMeshColliders(RoomDefinition room, GameObject obj,int depth = 0)
+  private void FindAllColliders(RoomDefinition room, GameObject obj,int depth = 0)
   {
     room.maxDepth = room.maxDepth < depth ? depth : room.maxDepth;
-    Dictionary<int, List<MeshCollider>> _meshColliders = room.meshColliders;
+    Dictionary<int, List<Collider>> cols = room.colliders;
 
-    List<MeshCollider> colliders;
+    List<Collider> colliders;
 
-    if (!_meshColliders.TryGetValue(depth, out colliders))
+    if (!cols.TryGetValue(depth, out colliders))
     {
-      colliders = new List<MeshCollider>();
-      _meshColliders.Add(depth,colliders);
+      colliders = new List<Collider>();
+      cols.Add(depth, colliders);
     }
 
     MeshCollider collider = obj.GetComponent<MeshCollider>();
@@ -327,7 +321,7 @@ public class RoomFactory
 
     foreach (Transform trans in obj.transform)
     {
-      FindAllMeshColliders(room,trans.gameObject, depth + 1);
+      FindAllColliders(room,trans.gameObject, depth + 1);
     }
 
   }
@@ -335,18 +329,17 @@ public class RoomFactory
   /// <summary>
   /// Activates all mesh colliders
   /// </summary>
-  private void ActivateAllMeshColliders(RoomDefinition room)
+  private void ActivateAllColliders(RoomDefinition room)
   {
     int depth = room.maxDepth;
     for (int i = room.maxDepth; i >= 0; i--)
     {
-      List<MeshCollider> colliders;
-      if (!room.meshColliders.TryGetValue(i, out colliders))
+      List<Collider> cols;
+      if (!room.colliders.TryGetValue(i, out cols))
       {
         continue;
       }
-      Debug.Log(colliders.Count);
-      colliders.ForEach(col => col.enabled = true);
+      cols.ForEach(col => col.enabled = true);
     }
   }
 
