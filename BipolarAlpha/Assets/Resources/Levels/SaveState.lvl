@@ -6,6 +6,7 @@
 	<string>Assets/Resources/Levels/PhysicalAptitudeRoom.lvl</string>
 	<string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
 	<string>Assets/Resources/Levels/GarbageBinRoom.lvl</string>
+	<string>Assets/Resources/Levels/DisposalElevator.lvl</string>
   </roomPaths>
   <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
