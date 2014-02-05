@@ -251,8 +251,9 @@ public class RoomFactory
         {
           continue;
         }
-        yield return new WaitForSeconds(0.3f);
         col.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+
       }
 
     }
