@@ -4,8 +4,10 @@
 	<string>Assets/Resources/Levels/FurnaceRoom.lvl</string>
 	<string>Assets/Resources/Levels/TestingFacilityHub.lvl</string>
 	<string>Assets/Resources/Levels/PhysicalAptitudeRoom.lvl</string>
+	<string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
+	<string>Assets/Resources/Levels/GarbageBinRoom.lvl</string>
   </roomPaths>
-  <activeRoom>TestingFacilityHub</activeRoom>
+  <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>
