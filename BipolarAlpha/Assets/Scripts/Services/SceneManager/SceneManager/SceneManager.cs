@@ -16,7 +16,6 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
   private RoomDefinition _activeRoom;
   private List<RoomDefinition> _currentlyCreatedRooms = new List<RoomDefinition>();
-  private List<RoomDefinition> _roomBeingCreated = new List<RoomDefinition>();
   private Dictionary<string,RoomDefinition> _allRooms = new Dictionary<string,RoomDefinition>();
   private List<RoomDefinition> _roomInQueueToDeletion = new List<RoomDefinition>();
 
