@@ -16,8 +16,8 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
   private RoomDefinition _activeRoom;
   private List<RoomDefinition> _currentlyCreatedRooms = new List<RoomDefinition>();
-  private List<RoomDefinition> _roomBeingCreated = new List<RoomDefinition>();
   private Dictionary<string,RoomDefinition> _allRooms = new Dictionary<string,RoomDefinition>();
+  private List<RoomDefinition> _roomInQueueToDeletion = new List<RoomDefinition>();
 
   private RoomFactory _roomFactory = new RoomFactory();
 
@@ -57,6 +57,24 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
     ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL3");
 	}
+
+  private void Update()
+  {
+    RoomDefinition roomToDelete = null;
+    foreach(RoomDefinition roomDef in _roomInQueueToDeletion)
+    {
+      if (!roomDef.inConstruction)
+      {
+        roomToDelete = roomDef;
+      }
+    }
+
+    if (roomToDelete != null)
+    {
+      _roomInQueueToDeletion.Remove(roomToDelete);
+      _roomFactory.DestroyRoom(roomToDelete);
+    }
+  }
 
   #region Room Creation and Deletion
   /// <summary>
@@ -113,8 +131,16 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
         //state right before deletion
         RoomDefinition updatedDef = _roomFactory.UpdateRoomDefinition(oldRoomDef);
         _allRooms[updatedDef.roomName] = updatedDef;
-        //Destroy the room
-        _roomFactory.DestroyRoom(oldRoomDef);
+
+        //Destroy the room if it's not in construction
+        if (oldRoomDef.inConstruction)
+        {
+          _roomInQueueToDeletion.Add(oldRoomDef);
+        }
+        else
+        {
+          _roomFactory.DestroyRoom(oldRoomDef);
+        }
       }
     }
   }

@@ -138,6 +138,7 @@ public class RoomFactory
   /// </summary>
   private void CreateFirstRoom(RoomDefinition room)
   {
+    room.inConstruction = true;
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(room.roomName);
     roomParentObject.SetActive(false);
@@ -161,6 +162,7 @@ public class RoomFactory
     roomParentObject.SetActiveRecursively(true);
     ActivateAllColliders(room);
     room.constructionFinished = true;
+    room.inConstruction = false;
   }
 
   /// <summary>
@@ -170,6 +172,7 @@ public class RoomFactory
   /// </summary>
   private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
   {
+    newRoom.inConstruction = true;
 
     RoomObjectGatewayDefinition fromGate;
     RoomObjectGatewayDefinition newRoomGate;
@@ -191,7 +194,7 @@ public class RoomFactory
 
     while (!from.constructionFinished)
     {
-      yield return new WaitForSeconds(0.4f);
+      yield return new WaitForSeconds(0.5f);
     }
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
@@ -221,10 +224,7 @@ public class RoomFactory
       FindAllColliders(newRoom,instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
       yield return new WaitForSeconds(0.1f);
-    }
-
-
-    
+    }  
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
     Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.position;
@@ -251,13 +251,15 @@ public class RoomFactory
         {
           continue;
         }
-        yield return new WaitForSeconds(0.3f);
         col.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+
       }
 
     }
 
     newRoom.constructionFinished = true;
+    newRoom.inConstruction = false;
   }
 
   /// <summary>
@@ -342,7 +344,7 @@ public class RoomFactory
   }
 
   /// <summary>
-  /// Activates all mesh colliders
+  /// Activates all colliders
   /// </summary>
   private void ActivateAllColliders(RoomDefinition room)
   {
