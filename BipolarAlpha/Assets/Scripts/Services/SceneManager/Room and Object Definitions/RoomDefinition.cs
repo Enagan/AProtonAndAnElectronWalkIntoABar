@@ -14,6 +14,7 @@ public class RoomDefinition
   private string _roomName;
 
   private bool _constructionFinished = false;
+  private bool _inConstruction = false;
 
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
 
@@ -109,6 +110,21 @@ public class RoomDefinition
     set
     {
       _constructionFinished = value;
+    }
+  }
+
+  /// <summary>
+  /// Is currently in construction
+  /// </summary>
+  public bool inConstruction
+  {
+    get
+    {
+      return _inConstruction;
+    }
+    set
+    {
+      _inConstruction = value;
     }
   }
 
