@@ -19,7 +19,57 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
-      <complexStates />
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor7</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor6</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor5</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor4</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor2</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor8</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor1</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
@@ -46,4 +96,5 @@
   </gateways>
   <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
+  <inConstruction>false</inConstruction>
 </RoomDefinition>

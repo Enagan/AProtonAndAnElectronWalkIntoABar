@@ -26,6 +26,8 @@ public class CutsceneManager
   {
 
     string name = handler.cutsceneName;
+    if (registeredCutscenes.ContainsKey(name))
+      registeredCutscenes.Remove(name);
     registeredCutscenes.Add(name, handler); // Add local cutscenehandler
 
     if (unregisteredElements.ContainsKey(name)) // if elements were added before localhandler had a chance to register
