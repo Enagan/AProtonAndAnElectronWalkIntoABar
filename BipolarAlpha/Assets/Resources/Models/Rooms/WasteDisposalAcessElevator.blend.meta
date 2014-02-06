@@ -42,6 +42,15 @@ ModelImporter:
     100072: Pipeline_014_MeshPart1
     100074: WalkwaysToElevator
     100076: //RootNode
+    100078: HexaMeshWall_001_MeshPart3
+    100080: HexaMeshWall_002_MeshPart2
+    100082: HexaMeshWall_004_MeshPart0
+    100084: HexaMeshWall_004_MeshPart1
+    100086: Pipeline_011_MeshPart0
+    100088: Pipeline_011_MeshPart1
+    100090: Pipeline_012_MeshPart2
+    100092: Pipeline_013_MeshPart2
+    100094: Pipeline_014_MeshPart2
     400000: Cube_001
     400002: Cube_002
     400004: Cube_003
@@ -81,6 +90,15 @@ ModelImporter:
     400072: Pipeline_014_MeshPart1
     400074: WalkwaysToElevator
     400076: //RootNode
+    400078: HexaMeshWall_001_MeshPart3
+    400080: HexaMeshWall_002_MeshPart2
+    400082: HexaMeshWall_004_MeshPart0
+    400084: HexaMeshWall_004_MeshPart1
+    400086: Pipeline_011_MeshPart0
+    400088: Pipeline_011_MeshPart1
+    400090: Pipeline_012_MeshPart2
+    400092: Pipeline_013_MeshPart2
+    400094: Pipeline_014_MeshPart2
     2300000: Cube_001
     2300002: Cube_002
     2300004: Cube_003
@@ -114,6 +132,15 @@ ModelImporter:
     2300060: Pipeline_014_MeshPart1
     2300062: WalkwaysToElevator
     2300064: //RootNode
+    2300066: HexaMeshWall_001_MeshPart3
+    2300068: HexaMeshWall_002_MeshPart2
+    2300070: HexaMeshWall_004_MeshPart0
+    2300072: HexaMeshWall_004_MeshPart1
+    2300074: Pipeline_011_MeshPart0
+    2300076: Pipeline_011_MeshPart1
+    2300078: Pipeline_012_MeshPart2
+    2300080: Pipeline_013_MeshPart2
+    2300082: Pipeline_014_MeshPart2
     3300000: Cube_001
     3300002: Cube_002
     3300004: Cube_003
@@ -147,6 +174,15 @@ ModelImporter:
     3300060: Pipeline_014_MeshPart1
     3300062: WalkwaysToElevator
     3300064: //RootNode
+    3300066: HexaMeshWall_001_MeshPart3
+    3300068: HexaMeshWall_002_MeshPart2
+    3300070: HexaMeshWall_004_MeshPart0
+    3300072: HexaMeshWall_004_MeshPart1
+    3300074: Pipeline_011_MeshPart0
+    3300076: Pipeline_011_MeshPart1
+    3300078: Pipeline_012_MeshPart2
+    3300080: Pipeline_013_MeshPart2
+    3300082: Pipeline_014_MeshPart2
     4300000: ElevatorAccess
     4300002: WalkwaysToElevator
     4300004: Pipeline_014_MeshPart0
@@ -180,6 +216,15 @@ ModelImporter:
     4300060: Cube_004
     4300062: Cube_003
     4300064: Cube_002
+    4300066: Pipeline_014_MeshPart2
+    4300068: Pipeline_013_MeshPart2
+    4300070: Pipeline_012_MeshPart2
+    4300072: Pipeline_011_MeshPart0
+    4300074: Pipeline_011_MeshPart1
+    4300076: HexaMeshWall_004_MeshPart0
+    4300078: HexaMeshWall_004_MeshPart1
+    4300080: HexaMeshWall_002_MeshPart2
+    4300082: HexaMeshWall_001_MeshPart3
     6400000: Cube_001
     6400002: Cube_002
     6400004: Cube_003
@@ -213,6 +258,15 @@ ModelImporter:
     6400060: Pipeline_014_MeshPart1
     6400062: WalkwaysToElevator
     6400064: //RootNode
+    6400066: HexaMeshWall_001_MeshPart3
+    6400068: HexaMeshWall_002_MeshPart2
+    6400070: HexaMeshWall_004_MeshPart0
+    6400072: HexaMeshWall_004_MeshPart1
+    6400074: Pipeline_011_MeshPart0
+    6400076: Pipeline_011_MeshPart1
+    6400078: Pipeline_012_MeshPart2
+    6400080: Pipeline_013_MeshPart2
+    6400082: Pipeline_014_MeshPart2
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -235,7 +289,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -265,5 +319,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   userData: 
