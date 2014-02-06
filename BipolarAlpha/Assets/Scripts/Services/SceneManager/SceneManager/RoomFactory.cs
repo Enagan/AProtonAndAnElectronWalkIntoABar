@@ -55,8 +55,23 @@ public class RoomFactory
           foreach (ComplexState complexState in objs.Key.complexStates)
           {
             Transform objectWithComplexState = objs.Value.transform.Find(complexState.objectNameInHierarchy);
-            IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
-            updatedComplexStates.Add(scriptToLoadComplexState.UpdateComplexState(complexState));
+            if (objectWithComplexState)
+            {
+              IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+              if (!(scriptToLoadComplexState == null))
+              {
+                updatedComplexStates.Add(scriptToLoadComplexState.UpdateComplexState(complexState));
+              }
+              else
+              {
+                BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+              }
+              
+            }
+            else
+            {
+              BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+            }
           }
 
           objs.Key.position = objs.Value.transform.position;
