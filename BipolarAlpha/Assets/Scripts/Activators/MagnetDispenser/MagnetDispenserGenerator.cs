@@ -31,5 +31,6 @@ public class MagnetDispenserGenerator : MonoBehaviour
   {
     this.transform.rigidbody.angularVelocity = Vector3.zero;
     _canBeActivated = true;
+    this.transform.parent.transform.parent.GetComponentInChildren<DispenserAnimationActivator>().Deactivate();
 }
 }
