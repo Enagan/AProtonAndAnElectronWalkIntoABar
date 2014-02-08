@@ -201,4 +201,5 @@
   </gateways>
   <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
+  <inConstruction>false</inConstruction>
 </RoomDefinition>

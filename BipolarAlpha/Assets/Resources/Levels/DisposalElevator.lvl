@@ -69,6 +69,24 @@
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>GameObject/StaticLowNegativeMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>StaticLowNegativeMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>StaticLowPositiveMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>

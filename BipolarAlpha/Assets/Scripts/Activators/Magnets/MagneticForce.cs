@@ -15,6 +15,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     private static float DISTANT_FORCE_CUTOFF = 0.5f;
 
     //ToDo - Needs fine tuning // Change these 3 variables to const
+    private static float VERY_LOW_FORCE_FACTOR = 75.0f;
     private static float LOW_FORCE_FACTOR = 100.0f;
     private static float MEDIUM_FORCE_FACTOR = 250.0f;
     private static float HIGH_FORCE_FACTOR = 1000.0f;
@@ -31,7 +32,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     [SerializeField]
     private bool _isHoldable = false;
 
-    public enum Force { LOW, MEDIUM, HIGH };
+    public enum Force {VERY_LOW, LOW, MEDIUM, HIGH };
     public enum Charge { NEGATIVE, POSITIVE };
     [SerializeField]
     private Force _force = Force.MEDIUM;
@@ -100,6 +101,10 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         get { return _affectingMagnets; }
     }
 
+    public float very_low_force_factor
+    {
+      get { return VERY_LOW_FORCE_FACTOR; }
+    }
     public float low_force_factor
     {
         get { return LOW_FORCE_FACTOR; }
@@ -413,6 +418,9 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         float result = DUMMY_FORCE;
         switch (force)
         {
+            case Force.VERY_LOW:
+                result = VERY_LOW_FORCE_FACTOR;
+                break;
             case Force.LOW:
                 result = LOW_FORCE_FACTOR;
                 break;
@@ -426,6 +434,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
                 //throw exception perhaps
                 break;
         }
+        //BipolarConsole.AllLog("Force Applied " + result);
         return result;
     }
 
@@ -437,9 +446,24 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         MagneticForceComplexState state = new MagneticForceComplexState(this.gameObject);
         state.isActive = _isActivated;
         state.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
-        state.magnetForce = _force == Force.LOW ?
-                                  0 : _force == Force.MEDIUM ?
-                                            1 : 2;
+        int tosave=0;
+        switch (_force)
+        {
+          case Force.VERY_LOW:
+            tosave = 0;
+            break;
+          case Force.LOW:
+            tosave = 1;
+            break;
+          case Force.MEDIUM:
+            tosave = 2;
+            break;
+          case Force.HIGH:
+            tosave = 3;
+            break;
+
+        }
+        state.magnetForce = tosave;
 
         return state;
     }
@@ -454,8 +478,26 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         MagneticForceComplexState magneticState = ((MagneticForceComplexState)state);
 
         _isActivated = magneticState.isActive;
-        _force = magneticState.magnetForce == 0 ? Force.LOW : magneticState.magnetForce == 1 ? Force.MEDIUM : Force.HIGH;
         _charge = magneticState.magnetCharge == 0 ? Charge.NEGATIVE : Charge.POSITIVE;
+
+        Force tosave = Force.VERY_LOW;
+        switch (magneticState.magnetForce)
+        {
+          case 0:
+            tosave = Force.VERY_LOW;
+            break;
+          case 1:
+            tosave = Force.LOW;
+            break;
+          case 2:
+            tosave = Force.MEDIUM;
+            break;
+          case 3:
+            tosave = Force.HIGH;
+            break;
+
+        }
+        _force = tosave;
 
         InitLights();
     }
@@ -469,9 +511,26 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         MagneticForceComplexState specificState = (state as MagneticForceComplexState);
         specificState.isActive = _isActivated;
         specificState.magnetCharge = _charge == Charge.POSITIVE ? 1 : 0;
-        specificState.magnetForce = _force == Force.LOW ?
-                                  0 : _force == Force.MEDIUM ?
-                                            1 : 2;
+
+        int tosave = 0;
+        switch (_force)
+        {
+          case Force.VERY_LOW:
+            tosave = 0;
+            break;
+          case Force.LOW:
+            tosave = 1;
+            break;
+          case Force.MEDIUM:
+            tosave = 2;
+            break;
+          case Force.HIGH:
+            tosave = 3;
+            break;
+
+        }
+        specificState.magnetForce = tosave;
+        
         return specificState;
     }
 

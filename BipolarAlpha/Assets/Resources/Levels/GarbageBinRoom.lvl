@@ -48,7 +48,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
+          <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -61,7 +61,7 @@
         <z>0.00111556053</z>
       </position>
       <scale>
-        <x>0.444283128</x>
+        <x>0.4442831</x>
         <y>0.461588562</y>
         <z>0.444935322</z>
       </scale>
@@ -130,4 +130,5 @@
   </gateways>
   <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
+  <inConstruction>false</inConstruction>
 </RoomDefinition>
