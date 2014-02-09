@@ -106,6 +106,26 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
+        <x>10.1959229</x>
+        <y>21.6663666</y>
+        <z>-0.04149753</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>90.00001</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
         <x>10.2352753</x>
         <y>-11.7373543</y>
         <z>-0.04149753</z>
@@ -117,7 +137,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270</y>
+        <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
