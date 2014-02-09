@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<RoomDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomName>RobotApprovalConveyor</roomName>
+  <objectsInRoom>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyor</objectPrefabPath>
+      <position>
+        <x>18.4878235</x>
+        <y>2.92967319</y>
+        <z>4.95858955</z>
+      </position>
+      <scale>
+        <x>8.455261</x>
+        <y>14.8175573</y>
+        <z>12.2294445</z>
+      </scale>
+      <eulerAngles>
+        <x>3.41509462E-06</x>
+        <y>270</y>
+        <z>90</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>BlueRobotHolder/Magnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>RedRobotHolder/Magnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+  </objectsInRoom>
+  <gateways>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>18.2002926</x>
+        <y>-3.086282</y>
+        <z>-3.12416458</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>DisposalElevator</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+  </gateways>
+  <maxDepth>0</maxDepth>
+  <constructionFinished>false</constructionFinished>
+  <inConstruction>false</inConstruction>
+</RoomDefinition>

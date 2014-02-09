@@ -12,6 +12,7 @@ public class LiftActivator : MonoBehaviour, Activator
   // Possible Elevator states
   enum ElevatorState
   {
+    Initial, // In its initial state elevator is stuck midway
     Up, // Elevator reached top floor
     Down, // Elevator reached bottom floor
     Descending, // Elevator is descending, can or not be still
@@ -23,7 +24,7 @@ public class LiftActivator : MonoBehaviour, Activator
   #region private variables
 
   // Variable saving elevator state
-  private ElevatorState _state = ElevatorState.Down;
+  private ElevatorState _state = ElevatorState.Initial;
 
   // AnimationRootHandler for quick accessing animations
   private AnimationRootHandler _animHandler;
@@ -40,7 +41,7 @@ public class LiftActivator : MonoBehaviour, Activator
 
   #region Activator methods
 
-  public void Activate() // Activated by generator should go up if possible and resume if already ascending
+  public void Activate() // Activated by generator should go down if possible and resume if already descending
   {
     if (_animHandler == null)
       _animHandler = GetComponent<AnimationRootHandler>();
@@ -49,16 +50,16 @@ public class LiftActivator : MonoBehaviour, Activator
     {
       switch (_state) 
       {
-       case ElevatorState.Down: // In Initial state go down
-          _animHandler.playAnimation("Lift up");
+       case ElevatorState.Initial: // In Initial state go down
+          _animHandler.playAnimation("Lift down");
           _animHandler.playChildAnimation("LiftLights", "LiftLightsSwirl");
-          _state = ElevatorState.Ascending;
+          _state = ElevatorState.Descending;
           break;
-       case ElevatorState.Ascending: // Was descending, resume descent
+       case ElevatorState.Descending: // Was descending, resume descent
          Animation anim= _animHandler.getAnimation();
          anim.enabled = true;
          break;
-        case ElevatorState.Up: // Do nothing
+        case ElevatorState.Down: // Do nothing
         default:
           break;
        // TODO other states
@@ -72,13 +73,14 @@ public class LiftActivator : MonoBehaviour, Activator
     {
       switch (_state)
       {
+        case ElevatorState.Initial: 
         case ElevatorState.Down:
         default:
           break; // does nothing
 
-        case ElevatorState.Ascending: // Stop animation
+        case ElevatorState.Descending: // Stop animation
           Animation anim = _animHandler.getAnimation(); 
-          if (anim.IsPlaying("Lift up"))
+          if (anim.IsPlaying("Lift down"))
           {
             anim.enabled = false;  //will stop playing but won't jump back to begnning
           }
