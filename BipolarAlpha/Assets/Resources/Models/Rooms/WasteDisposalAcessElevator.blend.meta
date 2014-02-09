@@ -51,6 +51,11 @@ ModelImporter:
     100090: Pipeline_012_MeshPart2
     100092: Pipeline_013_MeshPart2
     100094: Pipeline_014_MeshPart2
+    100096: Cylinder_002
+    100098: Cylinder_003
+    100100: Cylinder_004
+    100102: Cylinder_005
+    100104: Cylinder_006
     400000: Cube_001
     400002: Cube_002
     400004: Cube_003
@@ -99,6 +104,11 @@ ModelImporter:
     400090: Pipeline_012_MeshPart2
     400092: Pipeline_013_MeshPart2
     400094: Pipeline_014_MeshPart2
+    400096: Cylinder_002
+    400098: Cylinder_003
+    400100: Cylinder_004
+    400102: Cylinder_005
+    400104: Cylinder_006
     2300000: Cube_001
     2300002: Cube_002
     2300004: Cube_003
@@ -141,6 +151,11 @@ ModelImporter:
     2300078: Pipeline_012_MeshPart2
     2300080: Pipeline_013_MeshPart2
     2300082: Pipeline_014_MeshPart2
+    2300084: Cylinder_002
+    2300086: Cylinder_003
+    2300088: Cylinder_004
+    2300090: Cylinder_005
+    2300092: Cylinder_006
     3300000: Cube_001
     3300002: Cube_002
     3300004: Cube_003
@@ -183,6 +198,11 @@ ModelImporter:
     3300078: Pipeline_012_MeshPart2
     3300080: Pipeline_013_MeshPart2
     3300082: Pipeline_014_MeshPart2
+    3300084: Cylinder_002
+    3300086: Cylinder_003
+    3300088: Cylinder_004
+    3300090: Cylinder_005
+    3300092: Cylinder_006
     4300000: ElevatorAccess
     4300002: WalkwaysToElevator
     4300004: Pipeline_014_MeshPart0
@@ -225,6 +245,11 @@ ModelImporter:
     4300078: HexaMeshWall_004_MeshPart1
     4300080: HexaMeshWall_002_MeshPart2
     4300082: HexaMeshWall_001_MeshPart3
+    4300084: Cylinder_006
+    4300086: Cylinder_005
+    4300088: Cylinder_004
+    4300090: Cylinder_003
+    4300092: Cylinder_002
     6400000: Cube_001
     6400002: Cube_002
     6400004: Cube_003
