@@ -3,16 +3,16 @@
   <roomName>DisposalElevator</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/ElevatorRoom</objectPrefabPath>
+      <objectPrefabPath>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</objectPrefabPath>
       <position>
         <x>0</x>
         <y>0</y>
         <z>0</z>
       </position>
       <scale>
-        <x>2</x>
-        <y>2.15</y>
-        <z>2</z>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -21,68 +21,80 @@
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor7</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor7</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor6</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor6</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor5</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor5</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor4</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor4</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor2</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor2</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor8</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor8</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>BarredDoor1</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/BarredDoor1</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>GameObject/StaticLowNegativeMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/GameObject/StaticLowNegativeMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>StaticLowNegativeMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Elevator Room/Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Elevator Room/StaticLowNegativeMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>StaticLowPositiveMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Elevator Room/StaticLowPositiveMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
           <magnetCharge>1</magnetCharge>
