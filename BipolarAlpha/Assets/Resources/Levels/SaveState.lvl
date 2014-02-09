@@ -7,7 +7,6 @@
 	<string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
 	<string>Assets/Resources/Levels/GarbageBinRoom.lvl</string>
 	<string>Assets/Resources/Levels/DisposalElevator.lvl</string>
-	<string>Assets/Resources/Levels/RobotApprovalConveyor.lvl</string>
   </roomPaths>
   <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
