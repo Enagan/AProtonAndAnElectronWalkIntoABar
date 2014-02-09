@@ -3,6 +3,32 @@
   <roomName>DisposalElevator</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <position>
+        <x>-2.42899084</x>
+        <y>-20.9801636</y>
+        <z>-4.24876</z>
+      </position>
+      <scale>
+        <x>0.8</x>
+        <y>0.8</y>
+        <z>0.799999952</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0.7137386</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/Elevator Room</objectPrefabPath>
       <position>
         <x>0</x>
@@ -20,6 +46,116 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <position>
+        <x>-4.9687233</x>
+        <y>-7.000188</y>
+        <z>0.05986494</z>
+      </position>
+      <scale>
+        <x>0.8</x>
+        <y>0.8</y>
+        <z>0.7999999</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0.7137386</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <position>
+        <x>-2.42899084</x>
+        <y>6.983536</y>
+        <z>4.356017</z>
+      </position>
+      <scale>
+        <x>0.8</x>
+        <y>0.8</y>
+        <z>0.7999999</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0.7137386</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</objectPrefabPath>
+      <position>
+        <x>5.39557552</x>
+        <y>26.3788834</y>
+        <z>4.10514</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <position>
+        <x>2.46945143</x>
+        <y>-30.3360023</y>
+        <z>-4.153773</z>
+      </position>
+      <scale>
+        <x>0.8</x>
+        <y>0.8</y>
+        <z>0.8</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0.7137386</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
