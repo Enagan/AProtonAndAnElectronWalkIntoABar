@@ -55,9 +55,9 @@
         <z>0.05986494</z>
       </position>
       <scale>
-        <x>0.8</x>
-        <y>0.8</y>
-        <z>0.7999999</z>
+        <x>0.953941166</x>
+        <y>0.953941166</y>
+        <z>0.953941166</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -102,9 +102,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</objectPrefabPath>
       <position>
-        <x>5.39557552</x>
-        <y>26.3788834</y>
-        <z>4.10514</z>
+        <x>5.47927</x>
+        <y>26.5971985</y>
+        <z>4.10734749</z>
       </position>
       <scale>
         <x>1</x>

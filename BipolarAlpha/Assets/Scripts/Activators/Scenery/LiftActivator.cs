@@ -32,9 +32,10 @@ public class LiftActivator : MonoBehaviour, Activator
 
   #region monobehavior methods
 
-  void Start () {
+  void Start()
+  {
     _animHandler = GetComponent<AnimationRootHandler>();
-	}
+  }
 
   #endregion
 
@@ -47,21 +48,21 @@ public class LiftActivator : MonoBehaviour, Activator
 
     if (_animHandler != null)
     {
-      switch (_state) 
+      switch (_state)
       {
-       case ElevatorState.Down: // In Initial state go down
+        case ElevatorState.Down: // In Initial state go down
           _animHandler.playAnimation("Lift up");
           _animHandler.playChildAnimation("LiftLights", "LiftLightsSwirl");
           _state = ElevatorState.Ascending;
           break;
-       case ElevatorState.Ascending: // Was descending, resume descent
-         Animation anim= _animHandler.getAnimation();
-         anim.enabled = true;
-         break;
+        case ElevatorState.Ascending: // Was descending, resume descent
+          Animation anim = _animHandler.getAnimation();
+          anim.enabled = true;
+          break;
         case ElevatorState.Up: // Do nothing
         default:
           break;
-       // TODO other states
+        // TODO other states
       }
     }
   }
@@ -77,7 +78,7 @@ public class LiftActivator : MonoBehaviour, Activator
           break; // does nothing
 
         case ElevatorState.Ascending: // Stop animation
-          Animation anim = _animHandler.getAnimation(); 
+          Animation anim = _animHandler.getAnimation();
           if (anim.IsPlaying("Lift up"))
           {
             anim.enabled = false;  //will stop playing but won't jump back to begnning

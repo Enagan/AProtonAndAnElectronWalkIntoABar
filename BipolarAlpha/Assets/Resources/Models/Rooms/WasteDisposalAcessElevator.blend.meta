@@ -292,11 +292,6 @@ ModelImporter:
     6400078: Pipeline_012_MeshPart2
     6400080: Pipeline_013_MeshPart2
     6400082: Pipeline_014_MeshPart2
-    6400084: Cylinder_002
-    6400086: Cylinder_003
-    6400088: Cylinder_004
-    6400090: Cylinder_005
-    6400092: Cylinder_006
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -319,7 +314,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
