@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<RoomDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomName>SPAAAACE</roomName>
+  <objectsInRoom>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/Sunlight</objectPrefabPath>
+      <position>
+        <x>104.7722</x>
+        <y>66.74334</y>
+        <z>29.78321</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>31.1872311</x>
+        <y>291.788147</y>
+        <z>337.454</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+  </objectsInRoom>
+  <gateways />
+  <maxDepth>0</maxDepth>
+  <constructionFinished>false</constructionFinished>
+  <inConstruction>false</inConstruction>
+</RoomDefinition>

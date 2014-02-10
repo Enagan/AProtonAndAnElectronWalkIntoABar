@@ -7,8 +7,9 @@
 	<string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
 	<string>Assets/Resources/Levels/GarbageBinRoom.lvl</string>
 	<string>Assets/Resources/Levels/DisposalElevator.lvl</string>
+	<string>Assets/Resources/Levels/SPAAAACE.lvl</string>
   </roomPaths>
-  <activeRoom>GarbageBinRoom</activeRoom>
+  <activeRoom>SPAAAACE</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>
