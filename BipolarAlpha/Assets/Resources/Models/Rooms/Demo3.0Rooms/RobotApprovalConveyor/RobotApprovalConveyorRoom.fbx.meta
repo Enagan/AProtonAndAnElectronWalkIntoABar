@@ -15,6 +15,11 @@ ModelImporter:
     100018: //RootNode
     100020: RobotConveyorBelt
     100022: ScannerPilon1
+    100024: BlueRobotHolder
+    100026: GarbageChute3_002
+    100028: GarbageChute3_003
+    100030: GarbageChuteEntrance
+    100032: Scanner
     400000: Cylinder_024
     400002: Pipeline_015
     400004: Pipeline_015_MeshPart0
@@ -27,6 +32,11 @@ ModelImporter:
     400018: //RootNode
     400020: RobotConveyorBelt
     400022: ScannerPilon1
+    400024: BlueRobotHolder
+    400026: GarbageChute3_002
+    400028: GarbageChute3_003
+    400030: GarbageChuteEntrance
+    400032: Scanner
     2300000: Cylinder_024
     2300002: Pipeline_015_MeshPart0
     2300004: Pipeline_015_MeshPart1
@@ -36,6 +46,12 @@ ModelImporter:
     2300012: RedRobotHolder
     2300014: RobotConveyorBelt
     2300016: ScannerPilon1
+    2300018: BlueRobotHolder
+    2300020: GarbageChute3_002
+    2300022: GarbageChute3_003
+    2300024: GarbageChuteEntrance
+    2300026: //RootNode
+    2300028: Scanner
     3300000: Cylinder_024
     3300002: Pipeline_015_MeshPart0
     3300004: Pipeline_015_MeshPart1
@@ -45,6 +61,12 @@ ModelImporter:
     3300012: RedRobotHolder
     3300014: RobotConveyorBelt
     3300016: ScannerPilon1
+    3300018: BlueRobotHolder
+    3300020: GarbageChute3_002
+    3300022: GarbageChute3_003
+    3300024: GarbageChuteEntrance
+    3300026: //RootNode
+    3300028: Scanner
     4300000: RobotConveyorBelt
     4300002: Pipeline_016_MeshPart0
     4300004: Pipeline_016_MeshPart1
@@ -54,6 +76,11 @@ ModelImporter:
     4300012: ScannerPilon1
     4300014: Cylinder_024
     4300016: RedRobotHolder
+    4300018: GarbageChuteEntrance
+    4300020: GarbageChute3_003
+    4300022: GarbageChute3_002
+    4300024: Scanner
+    4300026: BlueRobotHolder
     9500000: //RootNode
   materials:
     importMaterials: 1
