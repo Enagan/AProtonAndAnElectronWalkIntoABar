@@ -22,6 +22,44 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WhiteCeilingLight</objectPrefabPath>
+      <position>
+        <x>-0.08650887</x>
+        <y>4.70632648</y>
+        <z>1.67727375</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>90</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WhiteCeilingLight</objectPrefabPath>
+      <position>
+        <x>-0.08650887</x>
+        <y>4.70632648</y>
+        <z>-2.13529229</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>90</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE</objectPrefabPath>
       <position>
         <x>0</x>
@@ -35,6 +73,25 @@
       </scale>
       <eulerAngles>
         <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Lightning/WhiteCeilingLight</objectPrefabPath>
+      <position>
+        <x>-0.08650887</x>
+        <y>4.70632648</y>
+        <z>-5.938302</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>90</x>
         <y>0</y>
         <z>0</z>
       </eulerAngles>
