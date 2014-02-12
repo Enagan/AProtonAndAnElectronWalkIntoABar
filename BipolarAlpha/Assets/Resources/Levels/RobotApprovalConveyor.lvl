@@ -3,45 +3,89 @@
   <roomName>RobotApprovalConveyor</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyor</objectPrefabPath>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorScanner</objectPrefabPath>
       <position>
-        <x>18.4878235</x>
-        <y>2.92967319</y>
-        <z>4.95858955</z>
+        <x>6.648343</x>
+        <y>12.277153</y>
+        <z>7.167786</z>
       </position>
       <scale>
-        <x>8.455261</x>
-        <y>14.8175573</y>
-        <z>12.2294445</z>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
       </scale>
       <eulerAngles>
-        <x>3.41509462E-06</x>
-        <y>270</y>
-        <z>90</z>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
       </eulerAngles>
-      <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>BlueRobotHolder/Magnet/MagnetPart/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>2</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>RedRobotHolder/Magnet/MagnetPart/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>2</magnetForce>
-          <magnetCharge>1</magnetCharge>
-        </ComplexState>
-      </complexStates>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRoom</objectPrefabPath>
+      <position>
+        <x>6.87435341</x>
+        <y>14.5992746</y>
+        <z>4.08217</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRejectionHatch</objectPrefabPath>
+      <position>
+        <x>6.69512939</x>
+        <y>8.582508</y>
+        <z>4.083149</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
+      <position>
+        <x>6.70844841</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>18.2002926</x>
-        <y>-3.086282</y>
-        <z>-3.12416458</z>
+        <x>6.52795172</x>
+        <y>8.307556</y>
+        <z>-4.432935</z>
       </position>
       <scale>
         <x>1</x>
