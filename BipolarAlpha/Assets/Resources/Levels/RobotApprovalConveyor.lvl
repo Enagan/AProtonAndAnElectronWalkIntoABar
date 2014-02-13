@@ -3,25 +3,6 @@
   <roomName>RobotApprovalConveyor</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
-      <position>
-        <x>16.915144</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
-      </position>
-      <scale>
-        <x>160</x>
-        <y>160</y>
-        <z>160</z>
-      </scale>
-      <eulerAngles>
-        <x>270</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorScanner</objectPrefabPath>
       <position>
         <x>6.648343</x>
@@ -39,6 +20,32 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
+      <position>
+        <x>16.915144</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRoom</objectPrefabPath>
@@ -63,7 +70,7 @@
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRejectionHatch</objectPrefabPath>
       <position>
         <x>6.69512939</x>
-        <y>8.582508</y>
+        <y>8.325827</y>
         <z>4.083149</z>
       </position>
       <scale>
@@ -95,7 +102,14 @@
         <y>0</y>
         <z>0</z>
       </eulerAngles>
-      <complexStates />
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
@@ -103,8 +117,8 @@
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
         <x>6.52795172</x>
-        <y>8.307556</y>
-        <z>-4.432935</z>
+        <y>8.889541</y>
+        <z>-3.79353571</z>
       </position>
       <scale>
         <x>1</x>
@@ -113,11 +127,11 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>180.000015</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>DisposalElevator</connectedToRoom>
+      <connectedToRoom>GarbageBinRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>

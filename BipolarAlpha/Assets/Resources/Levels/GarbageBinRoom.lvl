@@ -3,6 +3,63 @@
   <roomName>GarbageBinRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/BlueCompactor</objectPrefabPath>
+      <position>
+        <x>5.59463</x>
+        <y>-1.41886127</y>
+        <z>0.000746760052</z>
+      </position>
+      <scale>
+        <x>-0.05871003</x>
+        <y>-3.850158</y>
+        <z>-2.942544</z>
+      </scale>
+      <eulerAngles>
+        <x>90</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/GarbageBinRoom</objectPrefabPath>
+      <position>
+        <x>-0.366690516</x>
+        <y>0.08413005</y>
+        <z>1.17616264E-06</z>
+      </position>
+      <scale>
+        <x>780</x>
+        <y>780</y>
+        <z>780</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/RedCompactor</objectPrefabPath>
+      <position>
+        <x>-6.484812</x>
+        <y>-1.42009735</y>
+        <z>-0.00354154967</z>
+      </position>
+      <scale>
+        <x>-0.05871003</x>
+        <y>-3.85015774</y>
+        <z>-2.94254422</z>
+      </scale>
+      <eulerAngles>
+        <x>90</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
       <position>
         <x>-1.42617083</x>
@@ -30,9 +87,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>-0.0589084253</x>
-        <y>9.073206</y>
-        <z>-0.0290664434</z>
+        <x>-0.391674161</x>
+        <y>9.150626</y>
+        <z>0.123215795</z>
       </position>
       <scale>
         <x>0.6</x>
@@ -86,25 +143,6 @@
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom</objectPrefabPath>
-      <position>
-        <x>0.0563378334</x>
-        <y>0.8783467</y>
-        <z>-2.17846946E-07</z>
-      </position>
-      <scale>
-        <x>7</x>
-        <y>7</y>
-        <z>7</z>
-      </scale>
-      <eulerAngles>
-        <x>270</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
@@ -125,7 +163,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>WasteFacilityHub</connectedToRoom>
+      <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
