@@ -159,11 +159,11 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>90.00001</y>
+        <y>270</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
+      <connectedToRoom>WasteFacilityHub</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>

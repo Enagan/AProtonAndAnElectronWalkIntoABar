@@ -3,25 +3,6 @@
   <roomName>WasteFacilityHub</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/WasteFacilityHub</objectPrefabPath>
-      <position>
-        <x>-12.1307869</x>
-        <y>-8.411876</y>
-        <z>0.350634575</z>
-      </position>
-      <scale>
-        <x>2</x>
-        <y>2</y>
-        <z>2</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
         <x>17.7637444</x>
@@ -47,6 +28,25 @@
           <cutsceneName />
         </ComplexState>
       </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/WasteFacilityHub/WasteDisposalHub</objectPrefabPath>
+      <position>
+        <x>10.6761608</x>
+        <y>-0.660696745</y>
+        <z>0.300943136</z>
+      </position>
+      <scale>
+        <x>200</x>
+        <y>200</y>
+        <z>200</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
@@ -172,7 +172,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>270</y>
+        <y>90.00001</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
@@ -192,7 +192,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>90.00001</y>
+        <y>270</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />

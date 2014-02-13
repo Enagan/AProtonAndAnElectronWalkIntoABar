@@ -1,11 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Services\SceneManager\SceneManager\SceneManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Services\SceneManager\Definition Creator\RoomDefinitionCreator.cs">
     <Files>
-      <File FileName="Assets\Scripts\Services\SceneManager\Room and Object Definitions\ComplexState\IHasComplexState.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Services\THROWAWAYSystems\BaseSystem.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Services\SaveSystem\SaveSystem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameplayObjects\GatewayTriggerScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Services\SceneManager\SceneManager\RoomFactory.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Services\SceneManager\SceneManager\SceneManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Activators\Circuits\Circuit.cs" Line="1" Column="1" />
@@ -17,6 +15,7 @@
       <File FileName="Assets\Scripts\Activators\Magnets\MagneticForce.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player\Controller\PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Activators\Circuits\CircuitRepeater.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Services\SceneManager\Definition Creator\RoomDefinitionCreator.cs" Line="181" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

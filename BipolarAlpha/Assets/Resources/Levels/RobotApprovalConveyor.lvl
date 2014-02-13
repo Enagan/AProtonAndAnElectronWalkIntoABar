@@ -127,11 +127,11 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>180.000015</y>
+        <y>0</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>GarbageBinRoom</connectedToRoom>
+      <connectedToRoom>DisposalElevator</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
