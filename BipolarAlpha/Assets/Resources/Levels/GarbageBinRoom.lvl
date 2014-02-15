@@ -5,7 +5,7 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/BlueCompactor</objectPrefabPath>
       <position>
-        <x>5.59463</x>
+        <x>3.02849817</x>
         <y>-1.41886127</y>
         <z>0.000746760052</z>
       </position>
@@ -43,7 +43,7 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/RedCompactor</objectPrefabPath>
       <position>
-        <x>-6.484812</x>
+        <x>-3.47572112</x>
         <y>-1.42009735</y>
         <z>-0.00354154967</z>
       </position>
