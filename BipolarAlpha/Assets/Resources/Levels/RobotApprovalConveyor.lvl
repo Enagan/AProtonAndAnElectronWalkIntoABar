@@ -116,6 +116,26 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
+        <x>41.7279053</x>
+        <y>12.3120632</y>
+        <z>4.097961</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>90.00001</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>SPAAAACE</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
         <x>6.52795172</x>
         <y>8.889541</y>
         <z>-3.79353571</z>
