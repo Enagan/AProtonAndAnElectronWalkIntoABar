@@ -19,6 +19,7 @@ public class RoomDefinition
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
 
   private Dictionary<int, List<Collider>> _colliders = new Dictionary<int, List<Collider>>();
+  private List<Renderer> _renderers = new List<Renderer>();
   private int _maxDepth = 0;
 
   // Gateways are treated like special objects because they are in charge of transitioning between rooms
@@ -53,6 +54,22 @@ public class RoomDefinition
     set
     {
       _objectsInRoom = value;
+    }
+  }
+
+  /// <summary>
+  /// List with all renderers in the room
+  /// </summary>
+  [XmlIgnore]
+  public List<Renderer> renderers
+  {
+    get
+    {
+      return _renderers;
+    }
+    set
+    {
+      _renderers = value;
     }
   }
 

@@ -148,7 +148,7 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in room.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, Vector3.zero);
-      FindAllColliders(room, instancedObject);
+      FindCollidersAndRenderers(room, instancedObject);
       _instancedObjects.RegisterObjectInRoom(room, obj, instancedObject);
     }
 
@@ -160,7 +160,7 @@ public class RoomFactory
     }
 
     roomParentObject.SetActiveRecursively(true);
-    ActivateAllColliders(room);
+    ActivateCollidersAndRenderers(room);
     room.constructionFinished = true;
     room.inConstruction = false;
   }
@@ -221,7 +221,7 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
-      FindAllColliders(newRoom,instancedObject);
+      FindCollidersAndRenderers(newRoom,instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
       yield return new WaitForSeconds(0.1f);
     }  
@@ -256,6 +256,12 @@ public class RoomFactory
 
       }
 
+    }
+
+    foreach (Renderer renderer in newRoom.renderers)
+    {
+      renderer.enabled = true;
+      yield return new WaitForEndOfFrame();
     }
 
     newRoom.constructionFinished = true;
@@ -314,9 +320,9 @@ public class RoomFactory
   }
 
   /// <summary>
-  /// Returns the opposite vector, keeping the up vector intact
+  /// Finds all colliders and renderers and saves them into the room instance
   /// </summary>
-  private void FindAllColliders(RoomDefinition room, GameObject obj,int depth = 0)
+  private void FindCollidersAndRenderers(RoomDefinition room, GameObject obj,int depth = 0)
   {
     room.maxDepth = room.maxDepth < depth ? depth : room.maxDepth;
     Dictionary<int, List<Collider>> cols = room.colliders;
@@ -336,17 +342,23 @@ public class RoomFactory
       collider.enabled = false;
     }
 
+    Renderer renderer = obj.GetComponent<Renderer>();
+    if (renderer)
+    {
+      room.renderers.Add(renderer);
+    }
+
     foreach (Transform trans in obj.transform)
     {
-      FindAllColliders(room,trans.gameObject, depth + 1);
+      FindCollidersAndRenderers(room, trans.gameObject, depth + 1);
     }
 
   }
 
   /// <summary>
-  /// Activates all colliders
+  /// Activates all colliders and renderers
   /// </summary>
-  private void ActivateAllColliders(RoomDefinition room)
+  private void ActivateCollidersAndRenderers(RoomDefinition room)
   {
     int depth = room.maxDepth;
     for (int i = room.maxDepth; i >= 0; i--)
@@ -358,6 +370,8 @@ public class RoomFactory
       }
       cols.ForEach(col => col.enabled = true);
     }
+
+    room.renderers.ForEach(renderer => renderer.enabled = true);
   }
 
 
