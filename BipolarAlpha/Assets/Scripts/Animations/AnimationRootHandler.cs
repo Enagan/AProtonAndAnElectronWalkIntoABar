@@ -135,8 +135,13 @@ public class AnimationRootHandler : AnimationChildHandler
   public void playChildAnimation(string childName,string clipName)
   {
     string key = getAnimChildrenKey(clipName, childName);
-    AnimationChildHandler child = _animChildren[key];
-    child.playAnimation(clipName);
+    if (_animChildren.ContainsKey(key))
+    {
+      AnimationChildHandler child = _animChildren[key];
+      child.playAnimation(clipName);
+    }
+    else
+      BipolarConsole.AllLog("Child "+ key + " Not Found in Animation Hierarchy");
   }
 
   // Returns Animation component in child
