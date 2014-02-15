@@ -60,7 +60,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE</objectPrefabPath>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/SPAAAACE</objectPrefabPath>
       <position>
         <x>0</x>
         <y>0</y>
@@ -98,7 +98,28 @@
       <complexStates />
     </RoomObjectDefinition>
   </objectsInRoom>
-  <gateways />
+  <gateways>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>-3.40690446</x>
+        <y>1.95549369</y>
+        <z>19.56494</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+  </gateways>
   <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
   <inConstruction>false</inConstruction>
