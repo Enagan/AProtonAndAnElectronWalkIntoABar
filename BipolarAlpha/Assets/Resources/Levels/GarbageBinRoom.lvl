@@ -60,6 +60,25 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/Lights/GarbageBinRoomLights</objectPrefabPath>
+      <position>
+        <x>-11.4762592</x>
+        <y>3.48064613</y>
+        <z>0.146784544</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
       <position>
         <x>-1.42617083</x>

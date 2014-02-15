@@ -30,6 +30,25 @@
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/Lights/WasteDisposalLights</objectPrefabPath>
+      <position>
+        <x>11.7044468</x>
+        <y>-3.994729</y>
+        <z>1.98859215</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/WasteFacilityHub/WasteDisposalHub</objectPrefabPath>
       <position>
         <x>10.6761608</x>

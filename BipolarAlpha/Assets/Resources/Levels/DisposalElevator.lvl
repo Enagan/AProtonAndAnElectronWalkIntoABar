@@ -24,7 +24,7 @@
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
-          <magnetCharge>0</magnetCharge>
+          <magnetCharge>1</magnetCharge>
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -82,7 +82,7 @@
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
-          <magnetCharge>1</magnetCharge>
+          <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -108,7 +108,7 @@
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
-          <magnetCharge>0</magnetCharge>
+          <magnetCharge>1</magnetCharge>
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -153,7 +153,7 @@
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
-          <magnetCharge>1</magnetCharge>
+          <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -161,7 +161,7 @@
       <objectPrefabPath>Prefabs/LevelScenery/DisposalElevator/Lights</objectPrefabPath>
       <position>
         <x>-5.34730768</x>
-        <y>0.5453415</y>
+        <y>0.401133537</y>
         <z>-4.31483841</z>
       </position>
       <scale>
