@@ -102,9 +102,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>-3.40690446</x>
-        <y>1.95549369</y>
-        <z>19.56494</z>
+        <x>-3.281579</x>
+        <y>-0.5797665</y>
+        <z>27.0467587</z>
       </position>
       <scale>
         <x>1</x>
@@ -113,7 +113,7 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>180.000015</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
