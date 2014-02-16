@@ -85,6 +85,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   private void setActiveRoom(string roomName)
   {
+    BipolarConsole.LousadaLog(roomName);
     RoomDefinition roomToCreate;
     //Search for room in the loaded rooms Dictionary
     if ((roomToCreate = _allRooms[roomName]) == null)
