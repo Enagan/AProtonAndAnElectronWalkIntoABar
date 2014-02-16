@@ -15,10 +15,10 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     private static float DISTANT_FORCE_CUTOFF = 0.5f;
 
     //ToDo - Needs fine tuning // Change these 3 variables to const
-    private static float VERY_LOW_FORCE_FACTOR = 75.0f;
+    private static float VERY_LOW_FORCE_FACTOR = 50.0f;
     private static float LOW_FORCE_FACTOR = 100.0f;
     private static float MEDIUM_FORCE_FACTOR = 250.0f;
-    private static float HIGH_FORCE_FACTOR = 1000.0f;
+    private static float HIGH_FORCE_FACTOR = 700.0f;
 
     #endregion
 
