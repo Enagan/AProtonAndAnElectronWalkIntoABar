@@ -3,6 +3,33 @@
   <roomName>DisposalElevator</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <position>
+        <x>-2.74712062</x>
+        <y>-23.67823</y>
+        <z>-4.156895</z>
+      </position>
+      <scale>
+        <x>0.46077925</x>
+        <y>0.4787271</y>
+        <z>0.461455584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
         <x>-7.9388504</x>
@@ -57,6 +84,33 @@
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <position>
+        <x>-2.74712062</x>
+        <y>-10.4968433</y>
+        <z>-4.156895</z>
+      </position>
+      <scale>
+        <x>0.46077925</x>
+        <y>0.4787271</y>
+        <z>0.461455584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -132,6 +186,87 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <position>
+        <x>-2.74712062</x>
+        <y>-17.0801678</y>
+        <z>-4.156895</z>
+      </position>
+      <scale>
+        <x>0.46077925</x>
+        <y>0.4787271</y>
+        <z>0.461455584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <position>
+        <x>-2.74712062</x>
+        <y>-36.8670845</y>
+        <z>-4.156895</z>
+      </position>
+      <scale>
+        <x>0.46077925</x>
+        <y>0.4787271</y>
+        <z>0.461455584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <position>
+        <x>-2.74712062</x>
+        <y>-43.5206375</y>
+        <z>-4.156895</z>
+      </position>
+      <scale>
+        <x>0.46077925</x>
+        <y>0.4787271</y>
+        <z>0.461455584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
         <x>-2.710789</x>
@@ -175,6 +310,33 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <position>
+        <x>-2.74712062</x>
+        <y>-30.2422581</y>
+        <z>-4.156895</z>
+      </position>
+      <scale>
+        <x>0.46077925</x>
+        <y>0.4787271</y>
+        <z>0.461455584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds />
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
