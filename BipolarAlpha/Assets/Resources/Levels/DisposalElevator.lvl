@@ -37,9 +37,9 @@
         <z>-8.959899</z>
       </position>
       <scale>
-        <x>0.696662664</x>
-        <y>0.696662664</y>
-        <z>0.696662664</z>
+        <x>0.753458738</x>
+        <y>0.753458738</y>
+        <z>0.753458738</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -58,9 +58,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</objectPrefabPath>
       <position>
-        <x>-1.133666</x>
-        <y>-0.487297863</y>
-        <z>0.708993435</z>
+        <x>-1.73660278</x>
+        <y>-0.475724965</y>
+        <z>1.04684436</z>
       </position>
       <scale>
         <x>1</x>
@@ -122,9 +122,9 @@
         <z>-3.900753</z>
       </position>
       <scale>
-        <x>0.716758668</x>
-        <y>0.716758668</y>
-        <z>0.7114054</z>
+        <x>0.753458738</x>
+        <y>0.753458738</y>
+        <z>0.753458738</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -274,9 +274,9 @@
         <z>-8.939962</z>
       </position>
       <scale>
-        <x>0.6832652</x>
-        <y>0.6832652</y>
-        <z>0.6832651</z>
+        <x>0.753458738</x>
+        <y>0.753458738</y>
+        <z>0.753458738</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -343,9 +343,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>5.48539734</x>
+        <x>15.3271122</x>
         <y>-5.286871</y>
-        <z>-4.133935</z>
+        <z>-4.133934</z>
       </position>
       <scale>
         <x>1.07</x>
