@@ -20,20 +20,20 @@ public class ScriptBatch : MonoBehaviour
       return;
     }
     //Deletes any existing instances OffMeshLink the FileShare to Behaviour copied, for any fresh instalation
-    FileUtil.DeleteFileOrDirectory(path + "/BipolarAlpha_Data/Managed/I18N.dll");
-    FileUtil.DeleteFileOrDirectory(path + "/BipolarAlpha_Data/Managed/I18N.West.dll");
-    FileUtil.DeleteFileOrDirectory(path + "/BipolarAlpha_Data/Levels");
-    FileUtil.DeleteFileOrDirectory(path + "/BipolarAlpha_Data/Saves");
+    FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.dll");
+    FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.West.dll");
+    FileUtil.DeleteFileOrDirectory(path + "/Levels");
+    FileUtil.DeleteFileOrDirectory(path + "/Saves");
 
     //Copies over DLL files and XMLs
-    FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.dll", path + "/BipolarAlpha_Data/Managed/I18N.dll");
-    FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.West.dll", path + "/BipolarAlpha_Data/Managed/I18N.West.dll");
-    FileUtil.CopyFileOrDirectory("Assets/Resources/Levels", path + "/BipolarAlpha_Data/Levels");
+    FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.dll", path + "/Managed/I18N.dll");
+    FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.West.dll", path + "/Managed/I18N.West.dll");
+    FileUtil.CopyFileOrDirectory("Assets/Resources/Levels", path + "/Levels");
 
     //Updates SaveState.lvl file, which contains path names for .lvl files
-    string text = File.ReadAllText(path + "/BipolarAlpha_Data/Levels/SaveState.lvl");
-    string replaced = text.Replace("Assets/Resources", "BipolarAlpha_Data");
-    File.WriteAllText(path + "/BipolarAlpha_Data/Levels/SaveState.lvl", replaced);
+    string text = File.ReadAllText(path + "/Levels/SaveState.lvl");
+    string replaced = text.Replace("Assets/Resources", "");
+    File.WriteAllText(path + "/Levels/SaveState.lvl", replaced);
 
     BipolarConsole.AllLog("Project Successfully Built!");
 

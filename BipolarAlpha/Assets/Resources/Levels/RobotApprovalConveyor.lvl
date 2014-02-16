@@ -3,6 +3,25 @@
   <roomName>RobotApprovalConveyor</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/Lights/RobotApprovalConveyorRoomLights</objectPrefabPath>
+      <position>
+        <x>14.4606905</x>
+        <y>13.6256313</y>
+        <z>0.241000652</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorScanner</objectPrefabPath>
       <position>
         <x>6.648343</x>
