@@ -5,9 +5,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/BlueCompactor</objectPrefabPath>
       <position>
-        <x>3.02849817</x>
-        <y>-1.41886127</y>
-        <z>0.000746760052</z>
+        <x>2.626276</x>
+        <y>-1.41886139</y>
+        <z>1.73707521</z>
       </position>
       <scale>
         <x>-0.05871003</x>
@@ -16,7 +16,7 @@
       </scale>
       <eulerAngles>
         <x>90</x>
-        <y>180.000015</y>
+        <y>149.813278</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
@@ -24,9 +24,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/GarbageBinRoom</objectPrefabPath>
       <position>
-        <x>-0.366690516</x>
-        <y>0.08413005</y>
-        <z>1.17616264E-06</z>
+        <x>-0.3081208</x>
+        <y>0.08413029</y>
+        <z>0.02926334</z>
       </position>
       <scale>
         <x>780</x>
@@ -35,7 +35,7 @@
       </scale>
       <eulerAngles>
         <x>270</x>
-        <y>0</y>
+        <y>329.8133</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
@@ -43,9 +43,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/RedCompactor</objectPrefabPath>
       <position>
-        <x>-3.47572112</x>
+        <x>-2.99375725</x>
         <y>-1.42009735</y>
-        <z>-0.00354154967</z>
+        <z>-1.53708327</z>
       </position>
       <scale>
         <x>-0.05871003</x>
@@ -54,7 +54,7 @@
       </scale>
       <eulerAngles>
         <x>90</x>
-        <y>0</y>
+        <y>329.8133</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
@@ -62,9 +62,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/Lights/GarbageBinRoomLights</objectPrefabPath>
       <position>
-        <x>-11.4762592</x>
-        <y>3.48064613</y>
-        <z>0.146784544</z>
+        <x>-9.98494</x>
+        <y>3.48064661</y>
+        <z>-5.4299674</z>
       </position>
       <scale>
         <x>1</x>
@@ -72,18 +72,18 @@
         <z>1</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
+        <x>5.281015E-05</x>
+        <y>329.813263</y>
+        <z>-1.42426807E-05</z>
       </eulerAngles>
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
       <position>
-        <x>-1.42617083</x>
+        <x>-1.65627325</x>
         <y>6.13966131</y>
-        <z>0.859843135</z>
+        <z>0.2397809</z>
       </position>
       <scale>
         <x>1</x>
@@ -91,9 +91,9 @@
         <z>1</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
+        <x>5.281015E-05</x>
+        <y>329.813263</y>
+        <z>-1.42426807E-05</z>
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="AnimationLocalHandlerComplexState">
@@ -106,9 +106,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>-0.391674161</x>
+        <x>-0.391673654</x>
         <y>9.150626</y>
-        <z>0.123215795</z>
+        <z>0.123215005</z>
       </position>
       <scale>
         <x>0.6</x>
@@ -116,9 +116,9 @@
         <z>0.6</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>180.000015</z>
+        <x>5.28101446E-05</x>
+        <y>329.813263</y>
+        <z>180</z>
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="MagneticForceComplexState">
@@ -132,9 +132,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>6.733923</x>
+        <x>5.82902336</x>
         <y>7.574711</y>
-        <z>0.00111556053</z>
+        <z>3.60056281</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -142,9 +142,9 @@
         <z>0.461455584</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
+        <x>5.281015E-05</x>
+        <y>329.813263</y>
+        <z>-1.42426807E-05</z>
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="CutsceneElementComplexState">
@@ -167,9 +167,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>6.95961761</x>
+        <x>6.004709</x>
         <y>5.924635</y>
-        <z>0.0397037379</z>
+        <z>3.7474</z>
       </position>
       <scale>
         <x>1</x>
@@ -177,9 +177,9 @@
         <z>1</z>
       </scale>
       <eulerAngles>
-        <x>0</x>
-        <y>270</y>
-        <z>0</z>
+        <x>-1.42427052E-05</x>
+        <y>239.813248</y>
+        <z>-5.281015E-05</z>
       </eulerAngles>
       <complexStates />
       <connectedToRoom>WasteFacilityHub</connectedToRoom>
