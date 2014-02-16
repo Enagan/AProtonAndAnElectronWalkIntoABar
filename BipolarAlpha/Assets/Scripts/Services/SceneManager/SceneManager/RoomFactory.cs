@@ -257,7 +257,7 @@ public class RoomFactory
           continue;
         }
         col.enabled = true;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForEndOfFrame();
 
       }
 
