@@ -236,6 +236,11 @@ public class RoomFactory
 
     roomParentObject.SetActiveRecursively(true);
 
+    foreach (Renderer renderer in newRoom.renderers)
+    {
+      renderer.enabled = true;
+      yield return new WaitForEndOfFrame();
+    }
 
     for (int i = newRoom.maxDepth; i >= 0; i--)
     {
@@ -252,17 +257,13 @@ public class RoomFactory
           continue;
         }
         col.enabled = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.05f);
 
       }
 
     }
 
-    foreach (Renderer renderer in newRoom.renderers)
-    {
-      renderer.enabled = true;
-      yield return new WaitForEndOfFrame();
-    }
+
 
     newRoom.constructionFinished = true;
     newRoom.inConstruction = false;
