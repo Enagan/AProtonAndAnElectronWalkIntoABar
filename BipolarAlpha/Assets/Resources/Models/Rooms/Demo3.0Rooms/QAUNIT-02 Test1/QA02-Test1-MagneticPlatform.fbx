@@ -10,10 +10,10 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2014
 		Month: 02
-		Day: 16
-		Hour: 19
-		Minute: 47
-		Second: 05
+		Day: 18
+		Hour: 20
+		Minute: 28
+		Second: 24
 		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins build 20070228"
@@ -21,7 +21,7 @@ FBXHeaderExtension:  {
 		FlagPLE: 0
 	}
 }
-CreationTime: "2014-02-16 19:47:05:000"
+CreationTime: "2014-02-18 20:28:24:000"
 Creator: "Blender version 2.69 (sub 0)"
 
 ; Object definitions
@@ -29,12 +29,12 @@ Creator: "Blender version 2.69 (sub 0)"
 
 Definitions:  {
 	Version: 100
-	Count: 7
+	Count: 9
 	ObjectType: "Model" {
-		Count: 1
+		Count: 3
 	}
 	ObjectType: "Geometry" {
-		Count: 1
+		Count: 3
 	}
 	ObjectType: "Material" {
 		Count: 5
@@ -165,21 +165,20 @@ Objects:  {
 		          -0.864493,0.574410,0.255235,-0.864493,0.574410,0.085078,-0.864493,0.574410,-0.085078,-0.864493,0.574410,-0.255235
 		PolygonVertexIndex: 87,1,3,-89,88,3,5,-93,92,5,7,-97,96,7,9,-101,48,51,12,-23,104,11,1,-88,100,9,11,-105,36,39,23,-14,
 		                    22,12,24,-35,13,23,35,-26,39,41,21,-24,52,48,22,-21,41,43,19,-22,54,52,20,-19,43,45,17,-20,56,54,18,-17,
-		                    45,47,15,-18,58,56,16,-15,47,36,13,-16,51,58,14,-13,27,25,35,33,31,-30,24,26,28,30,32,-35,23,21,33,-36,
-		                    20,22,34,-33,21,19,31,-34,18,20,32,-31,19,17,29,-32,16,18,30,-29,17,15,27,-30,14,16,28,-27,15,13,25,-28,
-		                    12,14,26,-25,1,11,38,-38,45,43,67,-70,11,9,40,-39,52,54,78,-77,9,7,42,-41,47,45,69,-72,7,5,44,-43,
-		                    54,56,80,-79,5,3,46,-45,36,47,71,-61,3,1,37,-47,37,38,62,-62,10,0,50,-50,56,58,82,-81,8,10,49,-54,
-		                    49,50,74,-74,6,8,53,-56,38,40,64,-63,4,6,55,-58,58,51,75,-83,2,4,57,-60,53,49,73,-78,0,2,59,-51,
-		                    40,42,66,-65,61,62,63,-61,62,64,65,-64,64,66,67,-66,66,68,69,-68,68,70,71,-70,70,61,60,-72,73,74,75,-73,
-		                    77,73,72,-77,79,77,76,-79,81,79,78,-81,83,81,80,-83,74,83,82,-76,43,41,65,-68,48,52,76,-73,41,39,63,-66,
-		                    51,48,72,-76,50,59,83,-75,39,36,60,-64,59,57,81,-84,46,37,61,-71,57,55,79,-82,44,46,70,-69,55,53,77,-80,
-		                    42,44,68,-67,0,84,91,-3,86,105,129,-111,85,86,89,-91,94,98,122,-119,2,91,95,-5,107,103,127,-132,90,89,93,-95,
-		                    92,96,120,-117,4,95,99,-7,91,84,108,-116,94,93,97,-99,105,101,125,-130,6,99,103,-9,98,102,126,-123,98,97,101,-103,
-		                    89,86,110,-114,10,107,84,-1,96,100,124,-121,106,105,86,-86,95,91,115,-120,8,103,107,-11,93,89,113,-118,102,101,105,-107,
-		                    106,85,109,-131,108,109,114,-116,110,111,112,-114,115,114,118,-120,113,112,116,-118,119,118,122,-124,117,116,120,-122,123,122,126,-128,
-		                    121,120,124,-126,131,130,109,-109,129,128,111,-111,127,126,130,-132,125,124,128,-130,88,92,116,-113,84,107,131,-109,90,94,118,-115,
-		                    87,88,112,-112,101,97,121,-126,100,104,128,-125,85,90,114,-110,103,99,123,-128,102,106,130,-127,97,93,117,-122,104,87,111,-129,
-		                    99,95,119,-124
+		                    45,47,15,-18,58,56,16,-15,47,36,13,-16,51,58,14,-13,23,21,33,-36,20,22,34,-33,21,19,31,-34,18,20,32,-31,
+		                    19,17,29,-32,16,18,30,-29,17,15,27,-30,14,16,28,-27,15,13,25,-28,12,14,26,-25,1,11,38,-38,45,43,67,-70,
+		                    11,9,40,-39,52,54,78,-77,9,7,42,-41,47,45,69,-72,7,5,44,-43,54,56,80,-79,5,3,46,-45,36,47,71,-61,
+		                    3,1,37,-47,37,38,62,-62,10,0,50,-50,56,58,82,-81,8,10,49,-54,49,50,74,-74,6,8,53,-56,38,40,64,-63,
+		                    4,6,55,-58,58,51,75,-83,2,4,57,-60,53,49,73,-78,0,2,59,-51,40,42,66,-65,61,62,63,-61,62,64,65,-64,
+		                    64,66,67,-66,66,68,69,-68,68,70,71,-70,70,61,60,-72,73,74,75,-73,77,73,72,-77,79,77,76,-79,81,79,78,-81,
+		                    83,81,80,-83,74,83,82,-76,43,41,65,-68,48,52,76,-73,41,39,63,-66,51,48,72,-76,50,59,83,-75,39,36,60,-64,
+		                    59,57,81,-84,46,37,61,-71,57,55,79,-82,44,46,70,-69,55,53,77,-80,42,44,68,-67,0,84,91,-3,86,105,129,-111,
+		                    85,86,89,-91,94,98,122,-119,2,91,95,-5,107,103,127,-132,90,89,93,-95,92,96,120,-117,4,95,99,-7,91,84,108,-116,
+		                    94,93,97,-99,105,101,125,-130,6,99,103,-9,98,102,126,-123,98,97,101,-103,89,86,110,-114,10,107,84,-1,96,100,124,-121,
+		                    106,105,86,-86,95,91,115,-120,8,103,107,-11,93,89,113,-118,102,101,105,-107,106,85,109,-131,108,109,114,-116,110,111,112,-114,
+		                    115,114,118,-120,113,112,116,-118,119,118,122,-124,117,116,120,-122,123,122,126,-128,121,120,124,-126,131,130,109,-109,129,128,111,-111,
+		                    127,126,130,-132,125,124,128,-130,88,92,116,-113,84,107,131,-109,90,94,118,-115,87,88,112,-112,101,97,121,-126,100,104,128,-125,
+		                    85,90,114,-110,103,99,123,-128,102,106,130,-127,97,93,117,-122,104,87,111,-129,99,95,119,-124
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
 			Version: 101
@@ -206,9 +205,6 @@ Objects:  {
 			         0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,
 			         -0.000003,0.000000,1.000000,-0.000003,0.000000,1.000000,-0.000003,0.000000,1.000000,-0.000003,0.000000,1.000000,
 			         -0.000003,0.000000,-1.000000,-0.000003,0.000000,-1.000000,-0.000003,0.000000,-1.000000,-0.000003,0.000000,-1.000000,
-			         -0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,
-			         -0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,
-			         -0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,
 			         1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,
 			         1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,
 			         0.798395,0.602134,-0.000000,0.798395,0.602134,-0.000000,0.798395,0.602134,-0.000000,0.798395,0.602134,-0.000000,
@@ -321,8 +317,228 @@ Objects:  {
 			Name: ""
 			MappingInformationType: "ByPolygon"
 			ReferenceInformationType: "IndexToDirect"
-			Materials: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,1,1,
-			           1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0
+			Materials: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,1,1,1,1,
+			           1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+		}
+	}
+	Model: "Model::LowerMagneticPlaque", "Mesh" {
+		Version: 232
+		Properties60:  {
+			Property: "QuaternionInterpolate", "bool", "",0
+			Property: "Visibility", "Visibility", "A+",1
+			Property: "Lcl Translation", "Lcl Translation", "A+",0.000000119209290,0.000000000000000,-0.000000476837158
+			Property: "Lcl Rotation", "Lcl Rotation", "A+",-0.000000911522240,-0.000000000000004,-0.000000455761171
+			Property: "Lcl Scaling", "Lcl Scaling", "A+",1.000000000000000,1.000000119209290,1.000000000000000
+			Property: "RotationOffset", "Vector3D", "",0,0,0
+			Property: "RotationPivot", "Vector3D", "",0,0,0
+			Property: "ScalingOffset", "Vector3D", "",0,0,0
+			Property: "ScalingPivot", "Vector3D", "",0,0,0
+			Property: "TranslationActive", "bool", "",0
+			Property: "TranslationMin", "Vector3D", "",0,0,0
+			Property: "TranslationMax", "Vector3D", "",0,0,0
+			Property: "TranslationMinX", "bool", "",0
+			Property: "TranslationMinY", "bool", "",0
+			Property: "TranslationMinZ", "bool", "",0
+			Property: "TranslationMaxX", "bool", "",0
+			Property: "TranslationMaxY", "bool", "",0
+			Property: "TranslationMaxZ", "bool", "",0
+			Property: "RotationOrder", "enum", "",0
+			Property: "RotationSpaceForLimitOnly", "bool", "",0
+			Property: "AxisLen", "double", "",10
+			Property: "PreRotation", "Vector3D", "",0,0,0
+			Property: "PostRotation", "Vector3D", "",0,0,0
+			Property: "RotationActive", "bool", "",0
+			Property: "RotationMin", "Vector3D", "",0,0,0
+			Property: "RotationMax", "Vector3D", "",0,0,0
+			Property: "RotationMinX", "bool", "",0
+			Property: "RotationMinY", "bool", "",0
+			Property: "RotationMinZ", "bool", "",0
+			Property: "RotationMaxX", "bool", "",0
+			Property: "RotationMaxY", "bool", "",0
+			Property: "RotationMaxZ", "bool", "",0
+			Property: "RotationStiffnessX", "double", "",0
+			Property: "RotationStiffnessY", "double", "",0
+			Property: "RotationStiffnessZ", "double", "",0
+			Property: "MinDampRangeX", "double", "",0
+			Property: "MinDampRangeY", "double", "",0
+			Property: "MinDampRangeZ", "double", "",0
+			Property: "MaxDampRangeX", "double", "",0
+			Property: "MaxDampRangeY", "double", "",0
+			Property: "MaxDampRangeZ", "double", "",0
+			Property: "MinDampStrengthX", "double", "",0
+			Property: "MinDampStrengthY", "double", "",0
+			Property: "MinDampStrengthZ", "double", "",0
+			Property: "MaxDampStrengthX", "double", "",0
+			Property: "MaxDampStrengthY", "double", "",0
+			Property: "MaxDampStrengthZ", "double", "",0
+			Property: "PreferedAngleX", "double", "",0
+			Property: "PreferedAngleY", "double", "",0
+			Property: "PreferedAngleZ", "double", "",0
+			Property: "InheritType", "enum", "",0
+			Property: "ScalingActive", "bool", "",0
+			Property: "ScalingMin", "Vector3D", "",1,1,1
+			Property: "ScalingMax", "Vector3D", "",1,1,1
+			Property: "ScalingMinX", "bool", "",0
+			Property: "ScalingMinY", "bool", "",0
+			Property: "ScalingMinZ", "bool", "",0
+			Property: "ScalingMaxX", "bool", "",0
+			Property: "ScalingMaxY", "bool", "",0
+			Property: "ScalingMaxZ", "bool", "",0
+			Property: "GeometricTranslation", "Vector3D", "",0,0,0
+			Property: "GeometricRotation", "Vector3D", "",0,0,0
+			Property: "GeometricScaling", "Vector3D", "",1,1,1
+			Property: "LookAtProperty", "object", ""
+			Property: "UpVectorProperty", "object", ""
+			Property: "Show", "bool", "",1
+			Property: "NegativePercentShapeSupport", "bool", "",1
+			Property: "DefaultAttributeIndex", "int", "",0
+			Property: "Color", "Color", "A",0.8,0.8,0.8
+			Property: "Size", "double", "",100
+			Property: "Look", "enum", "",1
+		}
+		MultiLayer: 0
+		MultiTake: 1
+		Shading: Y
+		Culling: "CullingOff"
+		Vertices: -0.002064,1.579751,-0.720695,0.779185,0.450268,-0.720695,0.779185,-0.450019,-0.720695,-0.002064,-1.572747,-0.720695,
+		          -0.791755,-0.525661,-0.720695,-0.791755,0.525911,-0.720695
+		PolygonVertexIndex: 0,1,2,3,4,-6
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: -0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000,
+			         -0.000000,0.000000,-1.000000,-0.000000,0.000000,-1.000000
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygon"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: 4
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+		}
+	}
+	Model: "Model::UpperMagneticPlaque", "Mesh" {
+		Version: 232
+		Properties60:  {
+			Property: "QuaternionInterpolate", "bool", "",0
+			Property: "Visibility", "Visibility", "A+",1
+			Property: "Lcl Translation", "Lcl Translation", "A+",0.000000119209290,0.000000000000000,-0.000000476837158
+			Property: "Lcl Rotation", "Lcl Rotation", "A+",-0.000000911522240,-0.000000000000004,-0.000000455761171
+			Property: "Lcl Scaling", "Lcl Scaling", "A+",1.000000000000000,1.000000119209290,1.000000000000000
+			Property: "RotationOffset", "Vector3D", "",0,0,0
+			Property: "RotationPivot", "Vector3D", "",0,0,0
+			Property: "ScalingOffset", "Vector3D", "",0,0,0
+			Property: "ScalingPivot", "Vector3D", "",0,0,0
+			Property: "TranslationActive", "bool", "",0
+			Property: "TranslationMin", "Vector3D", "",0,0,0
+			Property: "TranslationMax", "Vector3D", "",0,0,0
+			Property: "TranslationMinX", "bool", "",0
+			Property: "TranslationMinY", "bool", "",0
+			Property: "TranslationMinZ", "bool", "",0
+			Property: "TranslationMaxX", "bool", "",0
+			Property: "TranslationMaxY", "bool", "",0
+			Property: "TranslationMaxZ", "bool", "",0
+			Property: "RotationOrder", "enum", "",0
+			Property: "RotationSpaceForLimitOnly", "bool", "",0
+			Property: "AxisLen", "double", "",10
+			Property: "PreRotation", "Vector3D", "",0,0,0
+			Property: "PostRotation", "Vector3D", "",0,0,0
+			Property: "RotationActive", "bool", "",0
+			Property: "RotationMin", "Vector3D", "",0,0,0
+			Property: "RotationMax", "Vector3D", "",0,0,0
+			Property: "RotationMinX", "bool", "",0
+			Property: "RotationMinY", "bool", "",0
+			Property: "RotationMinZ", "bool", "",0
+			Property: "RotationMaxX", "bool", "",0
+			Property: "RotationMaxY", "bool", "",0
+			Property: "RotationMaxZ", "bool", "",0
+			Property: "RotationStiffnessX", "double", "",0
+			Property: "RotationStiffnessY", "double", "",0
+			Property: "RotationStiffnessZ", "double", "",0
+			Property: "MinDampRangeX", "double", "",0
+			Property: "MinDampRangeY", "double", "",0
+			Property: "MinDampRangeZ", "double", "",0
+			Property: "MaxDampRangeX", "double", "",0
+			Property: "MaxDampRangeY", "double", "",0
+			Property: "MaxDampRangeZ", "double", "",0
+			Property: "MinDampStrengthX", "double", "",0
+			Property: "MinDampStrengthY", "double", "",0
+			Property: "MinDampStrengthZ", "double", "",0
+			Property: "MaxDampStrengthX", "double", "",0
+			Property: "MaxDampStrengthY", "double", "",0
+			Property: "MaxDampStrengthZ", "double", "",0
+			Property: "PreferedAngleX", "double", "",0
+			Property: "PreferedAngleY", "double", "",0
+			Property: "PreferedAngleZ", "double", "",0
+			Property: "InheritType", "enum", "",0
+			Property: "ScalingActive", "bool", "",0
+			Property: "ScalingMin", "Vector3D", "",1,1,1
+			Property: "ScalingMax", "Vector3D", "",1,1,1
+			Property: "ScalingMinX", "bool", "",0
+			Property: "ScalingMinY", "bool", "",0
+			Property: "ScalingMinZ", "bool", "",0
+			Property: "ScalingMaxX", "bool", "",0
+			Property: "ScalingMaxY", "bool", "",0
+			Property: "ScalingMaxZ", "bool", "",0
+			Property: "GeometricTranslation", "Vector3D", "",0,0,0
+			Property: "GeometricRotation", "Vector3D", "",0,0,0
+			Property: "GeometricScaling", "Vector3D", "",1,1,1
+			Property: "LookAtProperty", "object", ""
+			Property: "UpVectorProperty", "object", ""
+			Property: "Show", "bool", "",1
+			Property: "NegativePercentShapeSupport", "bool", "",1
+			Property: "DefaultAttributeIndex", "int", "",0
+			Property: "Color", "Color", "A",0.8,0.8,0.8
+			Property: "Size", "double", "",100
+			Property: "Look", "enum", "",1
+		}
+		MultiLayer: 0
+		MultiTake: 1
+		Shading: Y
+		Culling: "CullingOff"
+		Vertices: -0.002064,1.579751,0.720695,0.779185,0.450268,0.720695,0.779185,-0.450019,0.720695,-0.002064,-1.572747,0.720695,
+		          -0.791755,-0.525661,0.720695,-0.791755,0.525911,0.720695
+		PolygonVertexIndex: 1,0,5,4,3,-3
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: -0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,
+			         -0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygon"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: 4
 		}
 		Layer: 0 {
 			Version: 100
@@ -491,10 +707,18 @@ Objects:  {
 		Version: 100
 		Properties60:  {
 		}
-		NbPoseNodes: 1
+		NbPoseNodes: 3
 		PoseNode:  {
 			Node: "Model::MagPlatform"
 			Matrix: 0.000000271830658,0.000000000000000,-2.135278940200806,0.000000000000000,-3.600506305694580,0.000000000000000,-0.000000161209073,0.000000000000000,0.000000000000000,0.249745681881905,0.000000000000000,0.000000000000000,-6.037103176116943,1.136155843734741,-23.675903320312500,1.000000000000000
+		}
+		PoseNode:  {
+			Node: "Model::LowerMagneticPlaque"
+			Matrix: 0.000000329111344,-0.000000007946442,-2.135278940200806,0.000000000000000,-3.600506305694580,-0.000000000000001,-0.000000161209073,0.000000000000000,0.000000000000000,0.249745681881905,0.000000000000000,0.000000000000000,-6.037103176116943,1.136155843734741,-23.675901412963867,1.000000000000000
+		}
+		PoseNode:  {
+			Node: "Model::UpperMagneticPlaque"
+			Matrix: 0.000000329111344,-0.000000007946442,-2.135278940200806,0.000000000000000,-3.600506305694580,-0.000000000000001,-0.000000161209073,0.000000000000000,0.000000000000000,0.249745681881905,0.000000000000000,0.000000000000000,-6.037103176116943,1.136155843734741,-23.675901412963867,1.000000000000000
 		}
 	}
 	GlobalSettings:  {
@@ -516,6 +740,10 @@ Objects:  {
 
 Relations:  {
 	Model: "Model::MagPlatform", "Mesh" {
+	}
+	Model: "Model::LowerMagneticPlaque", "Mesh" {
+	}
+	Model: "Model::UpperMagneticPlaque", "Mesh" {
 	}
 	Model: "Model::Producer Perspective", "Camera" {
 	}
@@ -550,11 +778,23 @@ Relations:  {
 
 Connections:  {
 	Connect: "OO", "Model::MagPlatform", "Model::Scene"
+	Connect: "OO", "Model::LowerMagneticPlaque", "Model::MagPlatform"
+	Connect: "OO", "Model::UpperMagneticPlaque", "Model::MagPlatform"
 	Connect: "OO", "Material::BlackStructuralIron", "Model::MagPlatform"
 	Connect: "OO", "Material::BluePlastic", "Model::MagPlatform"
 	Connect: "OO", "Material::Luminescent", "Model::MagPlatform"
 	Connect: "OO", "Material::RedPlastic_002", "Model::MagPlatform"
 	Connect: "OO", "Material::Steel", "Model::MagPlatform"
+	Connect: "OO", "Material::BlackStructuralIron", "Model::LowerMagneticPlaque"
+	Connect: "OO", "Material::BluePlastic", "Model::LowerMagneticPlaque"
+	Connect: "OO", "Material::Luminescent", "Model::LowerMagneticPlaque"
+	Connect: "OO", "Material::RedPlastic_002", "Model::LowerMagneticPlaque"
+	Connect: "OO", "Material::Steel", "Model::LowerMagneticPlaque"
+	Connect: "OO", "Material::BlackStructuralIron", "Model::UpperMagneticPlaque"
+	Connect: "OO", "Material::BluePlastic", "Model::UpperMagneticPlaque"
+	Connect: "OO", "Material::Luminescent", "Model::UpperMagneticPlaque"
+	Connect: "OO", "Material::RedPlastic_002", "Model::UpperMagneticPlaque"
+	Connect: "OO", "Material::Steel", "Model::UpperMagneticPlaque"
 }
 ;Takes and animation section
 ;----------------------------------------------------

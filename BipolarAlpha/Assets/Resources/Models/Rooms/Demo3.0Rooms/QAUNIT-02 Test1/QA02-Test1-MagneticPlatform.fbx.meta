@@ -4,10 +4,20 @@ ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: LowerMagneticPlaque
+    100004: UpperMagneticPlaque
     400000: //RootNode
+    400002: LowerMagneticPlaque
+    400004: UpperMagneticPlaque
     2300000: //RootNode
+    2300002: LowerMagneticPlaque
+    2300004: UpperMagneticPlaque
     3300000: //RootNode
+    3300002: LowerMagneticPlaque
+    3300004: UpperMagneticPlaque
     4300000: MagPlatform
+    4300002: LowerMagneticPlaque
+    4300004: UpperMagneticPlaque
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -59,6 +69,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 
