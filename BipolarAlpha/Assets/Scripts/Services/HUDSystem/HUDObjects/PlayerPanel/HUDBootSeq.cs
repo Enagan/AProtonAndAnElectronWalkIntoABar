@@ -14,10 +14,8 @@ public class HUDBootSeq : HUDObject{
     private Rect texturePosition;
 
     private bool onBootSeq;
-    private float delay = 20.0f;
-    private float characterDelay = 0.015f;
+    private float characterDelay = 0.005f;
 
-    private float nextUsage;
     private float nextCharacterTimer;
     private Rect textArea;
 
@@ -37,7 +35,6 @@ public class HUDBootSeq : HUDObject{
       textArea = new Rect(Screen.width / 80, Screen.height / 50, Screen.width - Screen.width / 20, Screen.height - Screen.height / 20);
 
       onBootSeq = true;
-      nextUsage = Time.time + delay;
       nextCharacterTimer = Time.time + characterDelay;
 
       // Set text style
@@ -51,12 +48,6 @@ public class HUDBootSeq : HUDObject{
   {
       if (onBootSeq)
       {
-          if (Time.time > nextUsage)
-          {
-              onBootSeq = false;
-              return;
-          }
-
           TextAnimation();
 
           GUI.DrawTexture(texturePosition, textureBlack);
@@ -80,7 +71,7 @@ public class HUDBootSeq : HUDObject{
           {
               if (fullText.StartsWith("\n\n\n\n") || fullText.StartsWith(".["))
               {
-                  nextCharacterTimer = Time.time + characterDelay * 100;
+                  nextCharacterTimer = Time.time + characterDelay * 200;
 
               }
               else
@@ -90,6 +81,12 @@ public class HUDBootSeq : HUDObject{
               displayText += fullText.Substring(0,1);
               fullText = fullText.Remove(0,1);
           }
+      }
+      else
+      {
+          onBootSeq = false;
+          Application.LoadLevel("Main");
+
       }
   }
     

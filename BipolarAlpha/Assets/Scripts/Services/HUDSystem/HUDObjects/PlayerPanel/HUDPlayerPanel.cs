@@ -18,10 +18,6 @@ public class HUDPlayerPanel : HUDPanel {
     HUDAdvisorRoutine advisor = new HUDAdvisorRoutine(2);
     addHUDObject(advisor);
 
-    HUDBootSeq bootUpSeq = new HUDBootSeq(2);
-    addHUDObject(bootUpSeq);
-    
-
   }
   #endregion
 	

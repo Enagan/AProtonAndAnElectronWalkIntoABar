@@ -18,6 +18,14 @@ public class HUDSystem : MonoBehaviour, IPauseListener
   //Bolean that indicates whether game is paused or not, any class dependent on pause should implement IPlayerAbilityPauseListener
   private bool _isGamePaused=false;
   #endregion
+
+  public void StartBootUpSequence()
+  {
+      HUDBootSeq bootUpSeq = new HUDBootSeq(0);
+      _HUDMain.addHUDObject(bootUpSeq);
+  }
+
+  
 	
   #region MonoBehaviour methods
   void Start () 

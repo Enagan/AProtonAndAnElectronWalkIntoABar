@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour {
   }
 
  void ChangeScene() {
-   Application.LoadLevel("Main");
+     Application.LoadLevel("BootSequence");
      }
 }
 
