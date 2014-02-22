@@ -19,20 +19,26 @@ public class ScriptBatch : MonoBehaviour
     {
       return;
     }
+    BipolarConsole.AllLog(Application.dataPath);
     //Deletes any existing instances OffMeshLink the FileShare to Behaviour copied, for any fresh instalation
     FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.dll");
     FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.West.dll");
     FileUtil.DeleteFileOrDirectory(path + "/Levels");
     FileUtil.DeleteFileOrDirectory(path + "/Saves");
+    FileUtil.DeleteFileOrDirectory(path + "/GUI/Text");
+
+    //Creates directory for GUI stuff
+    System.IO.Directory.CreateDirectory(path + "/GUI/Text");
 
     //Copies over DLL files and XMLs
     FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.dll", path + "/Managed/I18N.dll");
     FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.West.dll", path + "/Managed/I18N.West.dll");
     FileUtil.CopyFileOrDirectory("Assets/Resources/Levels", path + "/Levels");
+    FileUtil.CopyFileOrDirectory("Assets/Resources/GUI/Text/strings.xml", path + "/GUI/Text/strings.xml");
 
     //Updates SaveState.lvl file, which contains path names for .lvl files
     string text = File.ReadAllText(path + "/Levels/SaveState.lvl");
-    string replaced = text.Replace("Assets/Resources", "");
+    string replaced = text.Replace("Assets/Resources", path);
     File.WriteAllText(path + "/Levels/SaveState.lvl", replaced);
 
     BipolarConsole.AllLog("Project Successfully Built!");

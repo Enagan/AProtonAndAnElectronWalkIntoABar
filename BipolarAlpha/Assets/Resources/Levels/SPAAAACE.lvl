@@ -3,16 +3,35 @@
   <roomName>SPAAAACE</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <objectPrefabPath>Prefabs/Lightning/Sunlight</objectPrefabPath>
       <position>
-        <x>-19.0983829</x>
-        <y>-30.9092522</y>
-        <z>-39.096447</z>
+        <x>104.7722</x>
+        <y>66.74334</y>
+        <z>29.78321</z>
       </position>
       <scale>
         <x>1</x>
         <y>1</y>
-        <z>1.02528822</z>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>31.1872311</x>
+        <y>291.788147</y>
+        <z>337.454</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>-2.135207</x>
+        <y>0.626198053</y>
+        <z>-38.8525848</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -37,82 +56,6 @@
         <x>0</x>
         <y>0</y>
         <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
-      <position>
-        <x>36.2677765</x>
-        <y>0.626198053</y>
-        <z>-39.096447</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1.02528822</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
-      <position>
-        <x>-40.8110847</x>
-        <y>0.626198053</y>
-        <z>-39.096447</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1.02528822</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
-      <position>
-        <x>-2.135207</x>
-        <y>0.626198053</y>
-        <z>-38.8525848</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/Sunlight</objectPrefabPath>
-      <position>
-        <x>104.7722</x>
-        <y>66.74334</y>
-        <z>29.78321</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>31.1872311</x>
-        <y>291.788147</y>
-        <z>337.454</z>
       </eulerAngles>
       <complexStates />
     </RoomObjectDefinition>
@@ -155,6 +98,25 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>-40.8110847</x>
+        <y>0.626198053</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/SPAAAACE</objectPrefabPath>
       <position>
         <x>0</x>
@@ -165,6 +127,25 @@
         <x>1</x>
         <y>1</y>
         <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>36.2677765</x>
+        <y>0.626198053</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -192,6 +173,25 @@
       </eulerAngles>
       <complexStates />
     </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>-19.0983829</x>
+        <y>-30.9092522</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
@@ -213,6 +213,26 @@
       </eulerAngles>
       <complexStates />
       <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>-0.465837479</x>
+        <y>-2.811745</y>
+        <z>-68.5624542</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>QA-UNIT02Test1</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
