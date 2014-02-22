@@ -3,6 +3,94 @@
   <roomName>QA-UNIT02Test2</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>PlayerPrefab/Player</objectPrefabPath>
+      <position>
+        <x>-2.33140469</x>
+        <y>0.284964085</y>
+        <z>-2.47441244</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Camera/Left Player Magnet/Left Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Camera/Right Player Magnet/Right Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetBoots/LeftMagnetBoot/LeftBootMagnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetBoots/RightMagnetBoot/RightBootMagnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
+      <position>
+        <x>-1.32790256</x>
+        <y>-2.347365</y>
+        <z>8.111755</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="AnimationLocalHandlerComplexState">
+          <objectNameInHierarchy>AnimationTriggerHandler</objectNameInHierarchy>
+          <cutsceneName>GarbageBinOpenDoor</cutsceneName>
+          <collisionRadius>1</collisionRadius>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <position>
+        <x>-4.24264431</x>
+        <y>1.05508947</y>
+        <z>-0.85466063</z>
+      </position>
+      <scale>
+        <x>0.1</x>
+        <y>4.2</y>
+        <z>14.57</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test2/QA2T2</objectPrefabPath>
       <position>
         <x>0</x>
@@ -20,6 +108,66 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <position>
+        <x>4.398426</x>
+        <y>1.05508947</y>
+        <z>-0.85466063</z>
+      </position>
+      <scale>
+        <x>0.1</x>
+        <y>4.2</y>
+        <z>14.57</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/CircuitSystems/QA-UNIT02Test2CircuitSystem-0</objectPrefabPath>
+      <position>
+        <x>12.5101671</x>
+        <y>-2.846659</y>
+        <z>-25.8957214</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>HexagonDoorExit</objectNameInHierarchy>
+          <animationNames />
+          <delays />
+          <optionalChilds>
+            <string />
+          </optionalChilds>
+          <cutsceneName />
+        </ComplexState>
+      </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways />
