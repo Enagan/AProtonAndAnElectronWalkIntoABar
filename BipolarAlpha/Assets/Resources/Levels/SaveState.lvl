@@ -9,6 +9,8 @@
 	<string>Assets/Resources/Levels/DisposalElevator.lvl</string>
 	<string>Assets/Resources/Levels/RobotApprovalConveyor.lvl</string>
 	<string>Assets/Resources/Levels/SPAAAACE.lvl</string>
+	<string>Assets/Resources/Levels/QA-UNIT02Test1.lvl</string>
+	<string>Assets/Resources/Levels/QA-UNIT02Test2.lvl</string>
   </roomPaths>
   <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
