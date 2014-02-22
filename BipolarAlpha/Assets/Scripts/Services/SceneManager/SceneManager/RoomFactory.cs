@@ -10,7 +10,7 @@ using System.Collections.Generic;
 /// </summary>
 public class RoomFactory
 {
-  private const int MAX_VERTICES_INSTANCED_IN_A_FRAME = 50;
+  private const float WAIT_TIME = 0.1f;
   private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
 
@@ -236,12 +236,7 @@ public class RoomFactory
 
     roomParentObject.SetActiveRecursively(true);
 
-    foreach (Renderer renderer in newRoom.renderers)
-    {
-      renderer.enabled = true;
-      yield return new WaitForEndOfFrame();
-    }
-
+    float lastTime = 0;
     for (int i = newRoom.maxDepth; i >= 0; i--)
     {
       List<Collider> cols;
@@ -249,19 +244,28 @@ public class RoomFactory
       {
         continue;
       }
-
       foreach (Collider col in cols)
       {
-        if (col == null)
+        for (float acumulatedTime = WAIT_TIME; acumulatedTime <= WAIT_TIME; acumulatedTime += acumulatedTime)
         {
-          continue;
+          col.enabled = true;
         }
-        col.enabled = true;
-        //yield return new WaitForEndOfFrame();
+
 
       }
 
     }
+    foreach (Renderer renderer in newRoom.renderers)
+    {
+      for (float acumulatedTime = WAIT_TIME; acumulatedTime <= WAIT_TIME; acumulatedTime += acumulatedTime)
+      {
+        renderer.enabled = true;
+      }
+      lastTime = Time.time;
+      yield return new WaitForSeconds(WAIT_TIME);
+    }
+
+
 
 
 
