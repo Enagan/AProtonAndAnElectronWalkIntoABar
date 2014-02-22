@@ -19,6 +19,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     private static float LOW_FORCE_FACTOR = 100.0f;
     private static float MEDIUM_FORCE_FACTOR = 250.0f;
     private static float HIGH_FORCE_FACTOR = 700.0f;
+    private static float VERY_HIGH_FORCE_FACTOR = 1500.0f;
 
     #endregion
 
@@ -32,7 +33,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     [SerializeField]
     private bool _isHoldable = false;
 
-    public enum Force {VERY_LOW, LOW, MEDIUM, HIGH };
+    public enum Force { VERY_LOW, LOW, MEDIUM, HIGH, VERY_HIGH};
     public enum Charge { NEGATIVE, POSITIVE };
     [SerializeField]
     private Force _force = Force.MEDIUM;
@@ -118,6 +119,11 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     public float high_force_factor
     {
         get { return HIGH_FORCE_FACTOR; }
+    }
+
+    public float very_high_force_factor
+    {
+      get { return VERY_HIGH_FORCE_FACTOR; }
     }
     #endregion
 
@@ -430,6 +436,9 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             case Force.HIGH:
                 result = HIGH_FORCE_FACTOR;
                 break;
+            case Force.VERY_HIGH:
+                result = VERY_HIGH_FORCE_FACTOR;
+                break;
             default:
                 //throw exception perhaps
                 break;
@@ -460,6 +469,9 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             break;
           case Force.HIGH:
             tosave = 3;
+            break;
+          case Force.VERY_HIGH:
+            tosave = 4;
             break;
 
         }
@@ -495,6 +507,9 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
           case 3:
             tosave = Force.HIGH;
             break;
+          case 4:
+            tosave = Force.VERY_HIGH;
+            break;
 
         }
         _force = tosave;
@@ -525,6 +540,9 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             tosave = 2;
             break;
           case Force.HIGH:
+            tosave = 3;
+            break;
+          case Force.VERY_HIGH:
             tosave = 3;
             break;
 
