@@ -57,8 +57,13 @@ public class AbilityUseMagnet : Ability
   /// </summary> 
   public virtual void Use(PlayerController caller, string key = null)
   {
-    //For first use defines which arm abillity reffers to
-    setArm(key);
+  
+      /* Moved by Lousada on 22/02/2014 to correct a bug. If you see this and all is fine delete it
+   
+       //For first use defines which arm abillity reffers to
+       setArm(key);
+    
+       */
 
     //Applies magnetic forces
     ApplyForces(caller, _playerCamera.transform.forward);
@@ -73,7 +78,11 @@ public class AbilityUseMagnet : Ability
 
   public virtual void KeyDown(string key = null)
   {
-    //Activates magnet
+
+     //For first use defines which arm abillity reffers to
+     setArm(key);
+
+     //Activates magnet
     _playerMagnet.isActivated = true;
     UseAnimation(key);
   }

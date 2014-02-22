@@ -161,7 +161,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>2</magnetForce>
+          <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
         </ComplexState>
       </complexStates>

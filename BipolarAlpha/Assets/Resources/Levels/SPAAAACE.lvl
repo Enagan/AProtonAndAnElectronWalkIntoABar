@@ -3,6 +3,101 @@
   <roomName>SPAAAACE</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>-19.0983829</x>
+        <y>-30.9092522</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>13.9796886</x>
+        <y>-30.9092522</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>36.2677765</x>
+        <y>0.626198053</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>-40.8110847</x>
+        <y>0.626198053</y>
+        <z>-39.096447</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1.02528822</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <position>
+        <x>-2.135207</x>
+        <y>0.626198053</y>
+        <z>-38.8525848</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Lightning/Sunlight</objectPrefabPath>
       <position>
         <x>104.7722</x>
