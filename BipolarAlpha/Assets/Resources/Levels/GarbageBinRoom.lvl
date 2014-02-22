@@ -106,9 +106,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>-0.391880065</x>
+        <x>-0.391885042</x>
         <y>9.150626</y>
-        <z>-0.03129904</z>
+        <z>-0.035325475</z>
       </position>
       <scale>
         <x>0.6</x>
