@@ -40,7 +40,7 @@ public class StringRetrievalSystem
     }
     else
     {
-      _stringPath = "BipolarAlpha_Data/GUI/Text/";
+      _stringPath = Application.dataPath + "/GUI/Text/";
     }
 
     string fileLocation = _stringPath + _fileName;

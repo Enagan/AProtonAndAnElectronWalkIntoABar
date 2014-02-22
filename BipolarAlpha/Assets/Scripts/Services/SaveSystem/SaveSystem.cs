@@ -82,11 +82,11 @@ public class SaveSystem : MonoBehaviour
   {
     if (Application.isEditor)
     {
-      _rootPath = "Assets/Resources/Levels/";
+      _rootPath = "Assets/Resources/Levels";
     }
     else
     {
-      _rootPath = "BipolarAlpha_Data/Levels/";
+      _rootPath = Application.dataPath+ "/Levels/";
     }
 
     ServiceLocator.ProvideSaveSystem(this);
