@@ -46,6 +46,7 @@ public class SaveSystem : MonoBehaviour
   {
     SaveState saveState = XMLSerializer.Deserialize<SaveState>(saveStatePath);
 
+    Debug.Log(saveStatePath);
     if (saveState == null)
     {
       throw new BipolarExceptionSaveStateNotFound("No Save State was found");
@@ -82,11 +83,11 @@ public class SaveSystem : MonoBehaviour
   {
     if (Application.isEditor)
     {
-      _rootPath = "Assets/Resources/Levels";
+      _rootPath = "Assets/Resources/Levels/";
     }
     else
     {
-      _rootPath = Application.dataPath+ "/Levels/";
+      _rootPath = Application.dataPath + "/Levels/";
     }
 
     ServiceLocator.ProvideSaveSystem(this);
