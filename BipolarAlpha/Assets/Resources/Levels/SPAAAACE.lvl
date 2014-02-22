@@ -197,6 +197,26 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
+        <x>-0.5011797</x>
+        <y>-2.80878258</y>
+        <z>-68.61254</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>QA-UNIT02Test1</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
         <x>-3.281579</x>
         <y>-0.6473074</y>
         <z>26.6949024</z>

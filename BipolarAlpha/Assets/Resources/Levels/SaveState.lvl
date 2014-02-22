@@ -11,8 +11,9 @@
 	<string>Assets/Resources/Levels/SPAAAACE.lvl</string>
 	<string>Assets/Resources/Levels/QA-UNIT02Test1.lvl</string>
 	<string>Assets/Resources/Levels/QA-UNIT02Test2.lvl</string>
+
   </roomPaths>
-  <activeRoom>GarbageBinRoom</activeRoom>
+  <activeRoom>SPAAAACE</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>

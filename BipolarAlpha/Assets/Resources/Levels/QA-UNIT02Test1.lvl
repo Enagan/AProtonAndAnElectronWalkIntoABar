@@ -6,7 +6,7 @@
       <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test1/QA-UNIT02Test1</objectPrefabPath>
       <position>
         <x>0</x>
-        <y>0</y>
+        <y>3.61496162</y>
         <z>0</z>
       </position>
       <scale>
@@ -21,8 +21,201 @@
       </eulerAngles>
       <complexStates />
     </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/Lights/QA-Unit02Test1</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>16.9860516</y>
+        <z>-25.5286427</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <position>
+        <x>-4.286897</x>
+        <y>3.944416</y>
+        <z>1.53946269</z>
+      </position>
+      <scale>
+        <x>0.1</x>
+        <y>4.923976</y>
+        <z>15.3520584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <position>
+        <x>0.007128015</x>
+        <y>14.0243244</y>
+        <z>-6.885944</z>
+      </position>
+      <scale>
+        <x>0.1</x>
+        <y>4.923976</y>
+        <z>6.16082</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>90.00001</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test1/Platforms</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="WeightPlatformComplexState">
+          <objectNameInHierarchy>WeightPlatform2</objectNameInHierarchy>
+          <startHeight>12.38714</startHeight>
+          <floorHeight>-3.4</floorHeight>
+          <restingHeight>6</restingHeight>
+          <acceleration>0.01</acceleration>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform2/QA02-Test1-MagneticPlatform/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform2/QA02-Test1-MagneticPlatform/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="WeightPlatformComplexState">
+          <objectNameInHierarchy>WeightPlatform4</objectNameInHierarchy>
+          <startHeight>14.38714</startHeight>
+          <floorHeight>-3.4</floorHeight>
+          <restingHeight>6</restingHeight>
+          <acceleration>0.01</acceleration>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform4/QA02-Test1-MagneticPlatform/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>0</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform4/QA02-Test1-MagneticPlatform/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="WeightPlatformComplexState">
+          <objectNameInHierarchy>WeightPlatform1</objectNameInHierarchy>
+          <startHeight>14.38714</startHeight>
+          <floorHeight>-2.8</floorHeight>
+          <restingHeight>14</restingHeight>
+          <acceleration>0.01</acceleration>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform1/QA02-Test1-MagneticPlatform/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform1/QA02-Test1-MagneticPlatform/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="WeightPlatformComplexState">
+          <objectNameInHierarchy>WeightPlatform3</objectNameInHierarchy>
+          <startHeight>14.38714</startHeight>
+          <floorHeight>-3.4</floorHeight>
+          <restingHeight>6</restingHeight>
+          <acceleration>0.01</acceleration>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform3/QA02-Test1-MagneticPlatform/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>WeightPlatform3/QA02-Test1-MagneticPlatform/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <position>
+        <x>4.82629633</x>
+        <y>3.944416</y>
+        <z>1.53946269</z>
+      </position>
+      <scale>
+        <x>0.1</x>
+        <y>4.923976</y>
+        <z>15.3520584</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
   </objectsInRoom>
-  <gateways />
+  <gateways>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>-0.407945633</x>
+        <y>0.0918362141</y>
+        <z>36.2776756</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>180.000015</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>SPAAAACE</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+  </gateways>
   <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
   <inConstruction>false</inConstruction>
