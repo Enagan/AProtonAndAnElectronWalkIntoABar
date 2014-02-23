@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<RoomDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <roomName>QA-UNIT02Test3</roomName>
+  <objectsInRoom>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+  </objectsInRoom>
+  <gateways />
+  <maxDepth>0</maxDepth>
+  <constructionFinished>false</constructionFinished>
+  <inConstruction>false</inConstruction>
+</RoomDefinition>
