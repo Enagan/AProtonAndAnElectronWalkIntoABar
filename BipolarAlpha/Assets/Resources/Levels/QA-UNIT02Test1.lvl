@@ -120,14 +120,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>2.35678148</x>
+        <x>2.52942133</x>
         <y>17.6956673</y>
-        <z>-12.92762</z>
+        <z>-12.5373745</z>
       </position>
       <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
+        <x>0.7658578</x>
+        <y>0.7658578</y>
+        <z>0.7658578</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -242,7 +242,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform2/QA02-Test1-MagneticPlatform2/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>4</magnetForce>
+          <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
@@ -255,7 +255,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform3/QA02-Test1-MagneticPlatform3/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>4</magnetForce>
+          <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">

@@ -20,6 +20,11 @@ public class RoomFactoryInstancedObjectsRegistry
   /// </summary>
   public void RegisterRoom(RoomDefinition room, GameObject roomParentObject)
   {
+    if(_instancedRegistry.ContainsKey(room))
+    {
+      BipolarConsole.AllLog("Error: Room " + room.roomName + " already registered in the registry. Perhaps a room is not being cleaned on deletion?");
+      return;
+    }
     _instancedRegistry.Add(room,
                           new KeyValuePair<GameObject, Dictionary<RoomObjectDefinition, GameObject>>(
                             roomParentObject,
