@@ -120,7 +120,7 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>6.33001</x>
+        <x>2.35678148</x>
         <y>17.6956673</y>
         <z>-12.92762</z>
       </position>
@@ -228,9 +228,9 @@
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform2</objectNameInHierarchy>
-          <startHeight>12.38714</startHeight>
-          <floorHeight>-3.4</floorHeight>
-          <restingHeight>6</restingHeight>
+          <startHeight>68</startHeight>
+          <floorHeight>53.5</floorHeight>
+          <restingHeight>60</restingHeight>
           <acceleration>0.01</acceleration>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
@@ -247,9 +247,9 @@
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform3</objectNameInHierarchy>
-          <startHeight>14.38714</startHeight>
-          <floorHeight>-3.4</floorHeight>
-          <restingHeight>6</restingHeight>
+          <startHeight>70</startHeight>
+          <floorHeight>53.5</floorHeight>
+          <restingHeight>60</restingHeight>
           <acceleration>0.01</acceleration>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
@@ -266,9 +266,9 @@
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform4</objectNameInHierarchy>
-          <startHeight>14.38714</startHeight>
-          <floorHeight>-3.4</floorHeight>
-          <restingHeight>6</restingHeight>
+          <startHeight>70</startHeight>
+          <floorHeight>53.5</floorHeight>
+          <restingHeight>62</restingHeight>
           <acceleration>0.01</acceleration>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
