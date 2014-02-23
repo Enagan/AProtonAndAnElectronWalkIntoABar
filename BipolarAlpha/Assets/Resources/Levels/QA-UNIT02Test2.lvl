@@ -3,68 +3,11 @@
   <roomName>QA-UNIT02Test2</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
-      <position>
-        <x>-0.06876579</x>
-        <y>-3.16671014</y>
-        <z>-26.2720661</z>
-      </position>
-      <scale>
-        <x>29.8493366</x>
-        <y>8.440737</y>
-        <z>0.07154779</z>
-      </scale>
-      <eulerAngles>
-        <x>6.081364</x>
-        <y>334.731781</y>
-        <z>350.012573</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
-      <position>
-        <x>-0.06876579</x>
-        <y>-3.16671014</y>
-        <z>-26.2720661</z>
-      </position>
-      <scale>
-        <x>29.8493347</x>
-        <y>8.440737</y>
-        <z>0.0715477839</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>25.0780239</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
-      <position>
-        <x>0.134448767</x>
-        <y>-3.336668</y>
-        <z>-25.1294746</z>
-      </position>
-      <scale>
-        <x>29.8493347</x>
-        <y>8.440737</y>
-        <z>0.0715477839</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>90.00001</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/QA-UNIT02Test2CircuitSystem-0</objectPrefabPath>
       <position>
-        <x>-6.295439</x>
-        <y>-2.90230441</y>
-        <z>-15.0500736</z>
+        <x>6.22576237</x>
+        <y>-2.80759645</y>
+        <z>-15.0901947</z>
       </position>
       <scale>
         <x>1</x>
@@ -89,38 +32,6 @@
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-      </complexStates>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/QA-UNIT02Test2CircuitSystem-1</objectPrefabPath>
-      <position>
-        <x>-12.49535</x>
-        <y>-2.874214</y>
-        <z>-25.9642754</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates>
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
@@ -170,28 +81,29 @@
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>QA-UNIT02Test2CircuitSystem-0/Generator1/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>QA-UNIT02Test2CircuitSystem-0/Generator1/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>QA-UNIT02Test2CircuitSystem-0/Generator6/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>QA-UNIT02Test2CircuitSystem-0/Generator6/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>HexagonDoorExit</objectNameInHierarchy>
+          <animationNames>
+            <string>HexDoor2Open</string>
+          </animationNames>
+          <delays>
+            <int>0</int>
+          </delays>
+          <optionalChilds>
+            <string />
+          </optionalChilds>
+          <cutsceneName />
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -220,25 +132,6 @@
         <x>-16.4789371</x>
         <y>3.15725756</y>
         <z>-9.042019</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test2/QA2T2</objectPrefabPath>
-      <position>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
       </position>
       <scale>
         <x>1</x>
@@ -304,9 +197,9 @@
         <z>-8.962616</z>
       </position>
       <scale>
-        <x>1.43386686</x>
-        <y>1.43386686</y>
-        <z>1.43386686</z>
+        <x>1.42955363</x>
+        <y>1.42955363</y>
+        <z>1.42955363</z>
       </scale>
       <eulerAngles>
         <x>0</x>
