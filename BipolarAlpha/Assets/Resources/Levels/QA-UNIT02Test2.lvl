@@ -3,6 +3,63 @@
   <roomName>QA-UNIT02Test2</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
+      <position>
+        <x>-0.06876579</x>
+        <y>-3.16671014</y>
+        <z>-26.2720661</z>
+      </position>
+      <scale>
+        <x>29.8493366</x>
+        <y>8.440737</y>
+        <z>0.07154779</z>
+      </scale>
+      <eulerAngles>
+        <x>6.081364</x>
+        <y>334.731781</y>
+        <z>350.012573</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
+      <position>
+        <x>-0.06876579</x>
+        <y>-3.16671014</y>
+        <z>-26.2720661</z>
+      </position>
+      <scale>
+        <x>29.8493347</x>
+        <y>8.440737</y>
+        <z>0.0715477839</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>25.0780239</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
+      <position>
+        <x>0.134448767</x>
+        <y>-3.336668</y>
+        <z>-25.1294746</z>
+      </position>
+      <scale>
+        <x>29.8493347</x>
+        <y>8.440737</y>
+        <z>0.0715477839</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>90.00001</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/QA-UNIT02Test2CircuitSystem-0</objectPrefabPath>
       <position>
         <x>-6.295439</x>
@@ -236,6 +293,39 @@
           <objectNameInHierarchy>AnimationTriggerHandler</objectNameInHierarchy>
           <cutsceneName>QATest2Door</cutsceneName>
           <collisionRadius>1</collisionRadius>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/StaticScenery/HexagonDoor</objectPrefabPath>
+      <position>
+        <x>0.0488177426</x>
+        <y>-0.44558</y>
+        <z>-8.962616</z>
+      </position>
+      <scale>
+        <x>1.43386686</x>
+        <y>1.43386686</y>
+        <z>1.43386686</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>90.00001</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>HexagonDoor</objectNameInHierarchy>
+          <animationNames>
+            <string>HexDoor2Open</string>
+          </animationNames>
+          <delays>
+            <int>0</int>
+          </delays>
+          <optionalChilds>
+            <string />
+          </optionalChilds>
+          <cutsceneName>QATest2Door</cutsceneName>
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
