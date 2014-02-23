@@ -10,7 +10,8 @@ using System.Collections.Generic;
 /// </summary>
 public class RoomFactory
 {
-  private const float WAIT_TIME = 0.01f;
+  private const float COL_WAIT_TIME = 0.2f;
+  private const float RENDER_WAIT_TIME = 0.05f;
   private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
 
@@ -47,45 +48,45 @@ public class RoomFactory
     if (_instancedObjects.RoomIsRegistered(roomDef))
     {
       List<RoomObjectDefinition> updatedDefs = new List<RoomObjectDefinition>();
-      List<RoomObjectGatewayDefinition> updatedGates= new List<RoomObjectGatewayDefinition>();
-      
+      List<RoomObjectGatewayDefinition> updatedGates = new List<RoomObjectGatewayDefinition>();
+
       foreach (KeyValuePair<RoomObjectDefinition, GameObject> objs in _instancedObjects.GetAllGameObjectsFromRoom(roomDef))
       {
-          List<ComplexState> updatedComplexStates = new List<ComplexState>();
-          foreach (ComplexState complexState in objs.Key.complexStates)
+        List<ComplexState> updatedComplexStates = new List<ComplexState>();
+        foreach (ComplexState complexState in objs.Key.complexStates)
+        {
+          Transform objectWithComplexState = objs.Value.transform.Find(complexState.objectNameInHierarchy);
+          if (objectWithComplexState)
           {
-            Transform objectWithComplexState = objs.Value.transform.Find(complexState.objectNameInHierarchy);
-            if (objectWithComplexState)
+            IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+            if (!(scriptToLoadComplexState == null))
             {
-              IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
-              if (!(scriptToLoadComplexState == null))
-              {
-                updatedComplexStates.Add(scriptToLoadComplexState.UpdateComplexState(complexState));
-              }
-              else
-              {
-                BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
-              }
-              
+              updatedComplexStates.Add(scriptToLoadComplexState.UpdateComplexState(complexState));
             }
             else
             {
-              BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+              BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
             }
-          }
 
-          objs.Key.position = objs.Value.transform.position;
-          objs.Key.eulerAngles = objs.Value.transform.eulerAngles;
-          objs.Key.complexStates = updatedComplexStates;
-
-          if (!(objs.Key is RoomObjectGatewayDefinition))
-          {
-            updatedDefs.Add(objs.Key);
           }
           else
           {
-            updatedGates.Add(objs.Key as RoomObjectGatewayDefinition);
+            BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
           }
+        }
+
+        objs.Key.position = objs.Value.transform.position;
+        objs.Key.eulerAngles = objs.Value.transform.eulerAngles;
+        objs.Key.complexStates = updatedComplexStates;
+
+        if (!(objs.Key is RoomObjectGatewayDefinition))
+        {
+          updatedDefs.Add(objs.Key);
+        }
+        else
+        {
+          updatedGates.Add(objs.Key as RoomObjectGatewayDefinition);
+        }
       }
 
       roomDef.objectsInRoom = updatedDefs;
@@ -122,6 +123,7 @@ public class RoomFactory
       GameObject toDestroy = _instancedObjects.getRoomParentObject(roomDef);
       _instancedObjects.RemoveRoomFromRegistry(roomDef);
       roomDef.colliders.Clear();
+      roomDef.renderers.Clear();
       roomDef.maxDepth = 0;
       GameObject.Destroy(toDestroy);
     }
@@ -221,10 +223,10 @@ public class RoomFactory
     foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
     {
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
-      FindCollidersAndRenderers(newRoom,instancedObject);
+      FindCollidersAndRenderers(newRoom, instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
       yield return new WaitForSeconds(0.1f);
-    }  
+    }
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
     Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.position;
@@ -236,7 +238,8 @@ public class RoomFactory
 
     roomParentObject.SetActiveRecursively(true);
 
-    float lastTime = 0;
+    float lastTime = Time.time;
+    float accumulatedTime = 0;
     for (int i = newRoom.maxDepth; i >= 0; i--)
     {
       List<Collider> cols;
@@ -244,32 +247,41 @@ public class RoomFactory
       {
         continue;
       }
+
+
       foreach (Collider col in cols)
       {
-        for (float acumulatedTime = WAIT_TIME; acumulatedTime > 0; acumulatedTime -= acumulatedTime)
+        col.enabled = true;
+        if (accumulatedTime <= 0)
         {
-          col.enabled = true;
+          lastTime = Time.time;
+          yield return new WaitForSeconds(COL_WAIT_TIME);
+          accumulatedTime = Time.time - lastTime;
         }
-        lastTime = Time.time;
-        yield return new WaitForSeconds(WAIT_TIME);
-
-
+        else
+        {
+          accumulatedTime -= COL_WAIT_TIME;
+        }
       }
-
     }
-    foreach (Renderer renderer in newRoom.renderers)
+
+    lastTime = Time.time;
+    accumulatedTime = 0;
+    foreach (Renderer ren in newRoom.renderers)
     {
-      for (float acumulatedTime = WAIT_TIME; acumulatedTime > 0; acumulatedTime -= acumulatedTime)
+      ren.enabled = true;
+      if (accumulatedTime <= 0)
       {
-        renderer.enabled = true;
+        lastTime = Time.time;
+        yield return new WaitForSeconds(RENDER_WAIT_TIME);
+        accumulatedTime = Time.time - lastTime;
+
       }
-      lastTime = Time.time;
-      yield return new WaitForSeconds(WAIT_TIME);
+      else
+      {
+        accumulatedTime -= RENDER_WAIT_TIME;
+      }
     }
-
-
-
-
 
     newRoom.constructionFinished = true;
     newRoom.inConstruction = false;
@@ -282,7 +294,7 @@ public class RoomFactory
   private GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
 
-    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath,active:false);
+    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath, active: false);
 
     instancedObject.transform.localPosition = WorldPositionInRelationTo(obj.position, relativeOrigin);
     instancedObject.transform.localScale = obj.scale;
@@ -294,16 +306,16 @@ public class RoomFactory
     {
       string stateName = complexState.GetComplexStateName();
 
-      
-      IHasComplexState scriptToLoadComplexState = ((instancedObject.transform).GetComponent(stateName)  as IHasComplexState);
-      if(scriptToLoadComplexState == null) // then its in his children
+
+      IHasComplexState scriptToLoadComplexState = ((instancedObject.transform).GetComponent(stateName) as IHasComplexState);
+      if (scriptToLoadComplexState == null) // then its in his children
       {
-        Transform objectWithComplexState =  instancedObject.transform.Find(complexState.objectNameInHierarchy);
+        Transform objectWithComplexState = instancedObject.transform.Find(complexState.objectNameInHierarchy);
         scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
       }
-      
+
       scriptToLoadComplexState.LoadComplexState(complexState);
-      
+
     }
 
     return instancedObject;
@@ -329,7 +341,7 @@ public class RoomFactory
   /// <summary>
   /// Finds all colliders and renderers and saves them into the room instance
   /// </summary>
-  private void FindCollidersAndRenderers(RoomDefinition room, GameObject obj,int depth = 0)
+  private void FindCollidersAndRenderers(RoomDefinition room, GameObject obj, int depth = 0)
   {
     room.maxDepth = room.maxDepth < depth ? depth : room.maxDepth;
     Dictionary<int, List<Collider>> cols = room.colliders;
@@ -385,7 +397,8 @@ public class RoomFactory
 
 
 
+
   #endregion
 
-  
+
 }

@@ -46,7 +46,6 @@ public class SaveSystem : MonoBehaviour
   {
     SaveState saveState = XMLSerializer.Deserialize<SaveState>(saveStatePath);
 
-    Debug.Log(saveStatePath);
     if (saveState == null)
     {
       throw new BipolarExceptionSaveStateNotFound("No Save State was found");
