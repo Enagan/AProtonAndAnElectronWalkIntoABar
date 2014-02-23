@@ -166,13 +166,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonDoor</objectPrefabPath>
       <position>
         <x>0.1267083</x>
-        <y>10.239994</y>
+        <y>10.90453</y>
         <z>-49.33774</z>
       </position>
       <scale>
-        <x>1.0450387</x>
-        <y>1.0450387</y>
-        <z>1.0450387</z>
+        <x>1.41118646</x>
+        <y>1.41118646</y>
+        <z>1.41118646</z>
       </scale>
       <eulerAngles>
         <x>0</x>

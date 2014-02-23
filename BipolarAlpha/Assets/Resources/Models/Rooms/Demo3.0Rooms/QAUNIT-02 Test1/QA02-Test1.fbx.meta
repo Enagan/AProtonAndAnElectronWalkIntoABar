@@ -86,6 +86,50 @@ ModelImporter:
     100160: RobotRegisterForTest
     100162: RoomName
     100164: RoomNameSign
+    100166: Camera_0
+    100168: Computer_1
+    100170: Computer_3
+    100172: ComputerDial001_3
+    100174: ComputerDial002_3
+    100176: ComputerDial4
+    100178: ComputerDial5
+    100180: ComputerDial_1
+    100182: ComputerDial_3
+    100184: Computerinput2_3
+    100186: Computerinput4
+    100188: Computerinput_1
+    100190: Computerinput_3
+    100192: ComputerPipe_1
+    100194: ComputerPipe_5
+    100196: ComputerPipe_6
+    100198: ComputerPipe_7
+    100200: ComputerProgress_1
+    100202: ComputerProgress_3
+    100204: Cylinder_1
+    100206: Cylinder_1_MeshPart0
+    100208: Cylinder_1_MeshPart1
+    100210: Cylinder_1_MeshPart2
+    100212: Cylinder_1_MeshPart3
+    100214: DoorFrame_4
+    100216: HexaMesh_1
+    100218: HexaMesh_1_MeshPart0
+    100220: HexaMesh_1_MeshPart1
+    100222: HexaMesh_1_MeshPart2
+    100224: HexaMesh_1_MeshPart3
+    100226: HexaMesh_1_MeshPart4
+    100228: HexaMesh_1_MeshPart5
+    100230: LowerMagneticPlaque_0
+    100232: MagPlatform_0
+    100234: Point_0
+    100236: QA02-Test3
+    100238: RoomName_1
+    100240: RoomNameSign_1
+    100242: Spot_0
+    100244: Spot_2
+    100246: Spot_3
+    100248: Spot_4
+    100250: UpperMagneticPlaque_0
+    100252: DoorFrame_002
     400000: CeilingLights_1
     400002: Computer_4
     400004: Computer_5
@@ -169,6 +213,50 @@ ModelImporter:
     400160: RobotRegisterForTest
     400162: RoomName
     400164: RoomNameSign
+    400166: Camera_0
+    400168: Computer_1
+    400170: Computer_3
+    400172: ComputerDial001_3
+    400174: ComputerDial002_3
+    400176: ComputerDial4
+    400178: ComputerDial5
+    400180: ComputerDial_1
+    400182: ComputerDial_3
+    400184: Computerinput2_3
+    400186: Computerinput4
+    400188: Computerinput_1
+    400190: Computerinput_3
+    400192: ComputerPipe_1
+    400194: ComputerPipe_5
+    400196: ComputerPipe_6
+    400198: ComputerPipe_7
+    400200: ComputerProgress_1
+    400202: ComputerProgress_3
+    400204: Cylinder_1
+    400206: Cylinder_1_MeshPart0
+    400208: Cylinder_1_MeshPart1
+    400210: Cylinder_1_MeshPart2
+    400212: Cylinder_1_MeshPart3
+    400214: DoorFrame_4
+    400216: HexaMesh_1
+    400218: HexaMesh_1_MeshPart0
+    400220: HexaMesh_1_MeshPart1
+    400222: HexaMesh_1_MeshPart2
+    400224: HexaMesh_1_MeshPart3
+    400226: HexaMesh_1_MeshPart4
+    400228: HexaMesh_1_MeshPart5
+    400230: LowerMagneticPlaque_0
+    400232: MagPlatform_0
+    400234: Point_0
+    400236: QA02-Test3
+    400238: RoomName_1
+    400240: RoomNameSign_1
+    400242: Spot_0
+    400244: Spot_2
+    400246: Spot_3
+    400248: Spot_4
+    400250: UpperMagneticPlaque_0
+    400252: DoorFrame_002
     2300000: CeilingLights_1
     2300002: Computer_4
     2300004: Computer_5
@@ -248,6 +336,42 @@ ModelImporter:
     2300152: RobotRegisterForTest
     2300154: RoomName
     2300156: RoomNameSign
+    2300158: Computer_1
+    2300160: Computer_3
+    2300162: ComputerDial001_3
+    2300164: ComputerDial002_3
+    2300166: ComputerDial4
+    2300168: ComputerDial5
+    2300170: ComputerDial_1
+    2300172: ComputerDial_3
+    2300174: Computerinput2_3
+    2300176: Computerinput4
+    2300178: Computerinput_1
+    2300180: Computerinput_3
+    2300182: ComputerPipe_1
+    2300184: ComputerPipe_5
+    2300186: ComputerPipe_6
+    2300188: ComputerPipe_7
+    2300190: ComputerProgress_1
+    2300192: ComputerProgress_3
+    2300194: Cylinder_1_MeshPart0
+    2300196: Cylinder_1_MeshPart1
+    2300198: Cylinder_1_MeshPart2
+    2300200: Cylinder_1_MeshPart3
+    2300202: DoorFrame_4
+    2300204: HexaMesh_1_MeshPart0
+    2300206: HexaMesh_1_MeshPart1
+    2300208: HexaMesh_1_MeshPart2
+    2300210: HexaMesh_1_MeshPart3
+    2300212: HexaMesh_1_MeshPart4
+    2300214: HexaMesh_1_MeshPart5
+    2300216: LowerMagneticPlaque_0
+    2300218: MagPlatform_0
+    2300220: QA02-Test3
+    2300222: RoomName_1
+    2300224: RoomNameSign_1
+    2300226: UpperMagneticPlaque_0
+    2300228: DoorFrame_002
     3300000: CeilingLights_1
     3300002: Computer_4
     3300004: Computer_5
@@ -327,6 +451,42 @@ ModelImporter:
     3300152: RobotRegisterForTest
     3300154: RoomName
     3300156: RoomNameSign
+    3300158: Computer_1
+    3300160: Computer_3
+    3300162: ComputerDial001_3
+    3300164: ComputerDial002_3
+    3300166: ComputerDial4
+    3300168: ComputerDial5
+    3300170: ComputerDial_1
+    3300172: ComputerDial_3
+    3300174: Computerinput2_3
+    3300176: Computerinput4
+    3300178: Computerinput_1
+    3300180: Computerinput_3
+    3300182: ComputerPipe_1
+    3300184: ComputerPipe_5
+    3300186: ComputerPipe_6
+    3300188: ComputerPipe_7
+    3300190: ComputerProgress_1
+    3300192: ComputerProgress_3
+    3300194: Cylinder_1_MeshPart0
+    3300196: Cylinder_1_MeshPart1
+    3300198: Cylinder_1_MeshPart2
+    3300200: Cylinder_1_MeshPart3
+    3300202: DoorFrame_4
+    3300204: HexaMesh_1_MeshPart0
+    3300206: HexaMesh_1_MeshPart1
+    3300208: HexaMesh_1_MeshPart2
+    3300210: HexaMesh_1_MeshPart3
+    3300212: HexaMesh_1_MeshPart4
+    3300214: HexaMesh_1_MeshPart5
+    3300216: LowerMagneticPlaque_0
+    3300218: MagPlatform_0
+    3300220: QA02-Test3
+    3300222: RoomName_1
+    3300224: RoomNameSign_1
+    3300226: UpperMagneticPlaque_0
+    3300228: DoorFrame_002
     4300000: QA02-Test3
     4300002: PreChamber_1
     4300004: EntranceTreadmill_1
@@ -407,6 +567,41 @@ ModelImporter:
     4300154: HexaMesh_MeshPart5
     4300156: HexaMeshSuport1
     4300158: Hexameshsupport2
+    4300160: MagPlatform_0
+    4300162: LowerMagneticPlaque_0
+    4300164: UpperMagneticPlaque_0
+    4300166: RoomNameSign_1
+    4300168: RoomName_1
+    4300170: Computer_3
+    4300172: ComputerProgress_3
+    4300174: ComputerPipe_5
+    4300176: ComputerPipe_6
+    4300178: Computerinput2_3
+    4300180: Computerinput_3
+    4300182: ComputerDial002_3
+    4300184: ComputerDial001_3
+    4300186: ComputerDial_3
+    4300188: Computer_1
+    4300190: ComputerDial_1
+    4300192: ComputerDial4
+    4300194: ComputerDial5
+    4300196: Computerinput_1
+    4300198: Computerinput4
+    4300200: ComputerPipe_7
+    4300202: ComputerPipe_1
+    4300204: ComputerProgress_1
+    4300206: Cylinder_1_MeshPart0
+    4300208: Cylinder_1_MeshPart1
+    4300210: Cylinder_1_MeshPart2
+    4300212: Cylinder_1_MeshPart3
+    4300214: DoorFrame_4
+    4300216: HexaMesh_1_MeshPart0
+    4300218: HexaMesh_1_MeshPart1
+    4300220: HexaMesh_1_MeshPart2
+    4300222: HexaMesh_1_MeshPart3
+    4300224: HexaMesh_1_MeshPart4
+    4300226: HexaMesh_1_MeshPart5
+    4300228: DoorFrame_002
     9500000: //RootNode
   materials:
     importMaterials: 1
