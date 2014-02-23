@@ -12,15 +12,17 @@ public class HexaDoorActivator : MonoBehaviour, Activator {
 
   public void Activate()
   {
-    
-    Animation anim = _handler.getAnimation();
-    anim["HexDoor2Open"].speed = 1;
-    if (!anim.IsPlaying("HexDoor2Open"))
+    if (_handler)
     {
-      anim["HexDoor2Open"].time = 0;
-      _handler.playAnimation("HexDoor2Open");
+      Animation anim = _handler.getAnimation();
+      anim["HexDoor2Open"].speed = 1;
+      if (!anim.IsPlaying("HexDoor2Open"))
+      {
+        anim["HexDoor2Open"].time = 0;
+        _handler.playAnimation("HexDoor2Open");
+      }
+      isOpen = true;
     }
-    isOpen = true;
   }
 
   public void Deactivate()
