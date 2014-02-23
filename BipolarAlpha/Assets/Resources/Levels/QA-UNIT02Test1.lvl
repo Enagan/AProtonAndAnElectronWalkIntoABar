@@ -120,14 +120,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
       <position>
-        <x>6.33001</x>
+        <x>2.52942133</x>
         <y>17.6956673</y>
-        <z>-12.92762</z>
+        <z>-12.5373745</z>
       </position>
       <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
+        <x>0.7658578</x>
+        <y>0.7658578</y>
+        <z>0.7658578</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -166,13 +166,13 @@
       <objectPrefabPath>Prefabs/StaticScenery/HexagonDoor</objectPrefabPath>
       <position>
         <x>0.1267083</x>
-        <y>10.239994</y>
+        <y>10.90453</y>
         <z>-49.33774</z>
       </position>
       <scale>
-        <x>1.0450387</x>
-        <y>1.0450387</y>
-        <z>1.0450387</z>
+        <x>1.41118646</x>
+        <y>1.41118646</y>
+        <z>1.41118646</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -228,9 +228,9 @@
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform2</objectNameInHierarchy>
-          <startHeight>12.38714</startHeight>
-          <floorHeight>-3.4</floorHeight>
-          <restingHeight>6</restingHeight>
+          <startHeight>68</startHeight>
+          <floorHeight>53.5</floorHeight>
+          <restingHeight>60</restingHeight>
           <acceleration>0.01</acceleration>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
@@ -242,20 +242,20 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform2/QA02-Test1-MagneticPlatform2/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>4</magnetForce>
+          <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform3</objectNameInHierarchy>
-          <startHeight>14.38714</startHeight>
-          <floorHeight>-3.4</floorHeight>
-          <restingHeight>6</restingHeight>
+          <startHeight>70</startHeight>
+          <floorHeight>53.5</floorHeight>
+          <restingHeight>60</restingHeight>
           <acceleration>0.01</acceleration>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform3/QA02-Test1-MagneticPlatform3/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>4</magnetForce>
+          <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
@@ -266,9 +266,9 @@
         </ComplexState>
         <ComplexState xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform4</objectNameInHierarchy>
-          <startHeight>14.38714</startHeight>
-          <floorHeight>-3.4</floorHeight>
-          <restingHeight>6</restingHeight>
+          <startHeight>70</startHeight>
+          <floorHeight>53.5</floorHeight>
+          <restingHeight>62</restingHeight>
           <acceleration>0.01</acceleration>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">

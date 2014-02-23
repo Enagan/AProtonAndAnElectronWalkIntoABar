@@ -3,6 +3,188 @@
   <roomName>RobotApprovalConveyor</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
+      <position>
+        <x>37.10437</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
+      <position>
+        <x>23.0803185</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
+      <position>
+        <x>-0.37472707</x>
+        <y>8.812104</y>
+        <z>3.99644279</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>10.3599825</x>
+        <y>317.96875</y>
+        <z>99.0513458</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
+      <position>
+        <x>14.33512</x>
+        <y>8.766117</y>
+        <z>4.11485</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>6.92811346</x>
+        <y>90</y>
+        <z>248.898575</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
+      <position>
+        <x>29.4459648</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
+      <position>
+        <x>2.85025215</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
+      <position>
+        <x>-7.402114</x>
+        <y>14.5594988</y>
+        <z>4.084864</z>
+      </position>
+      <scale>
+        <x>160</x>
+        <y>160</y>
+        <z>160</z>
+      </scale>
+      <eulerAngles>
+        <x>270</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>3</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorScanner</objectPrefabPath>
       <position>
         <x>6.648343</x>
@@ -88,7 +270,7 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
       <position>
-        <x>6.70844841</x>
+        <x>11.7197</x>
         <y>14.5594988</y>
         <z>4.084864</z>
       </position>
