@@ -10,7 +10,7 @@ public class HUDBootSeq : HUDObject{
 
     // Current and stored tooltips
     private string displayText = "";
-    private string fullText = "MAGBOT9000 Control System v4.85.6.1 [Feb 24 2087] \n\n\n\nBooting...\n\n\n\nMAGBOT9000 was not shut down properly. Initiating full systems check.\n\n\n\nHUD System...[OK]\n\nHand Magnet System...[OK]\n\nArm Control System...[OK]\n\nLocomotor System...[OK]\n\n\n\nAll Systems OK\n\n\n\nActivating HUD";
+    private string fullText = "MAGBOT9000 Control System v4.85.6.1 [Feb 24 2045] \n\n\n\nBooting...\n\n\n\nConsulting WebTimeServer for time update...[Connection failed] \n\nUnable to determine current year\n\n\n\nMAGBOT9000 was not shut down properly. Initiating full systems check.\n\n\n\nHUD System...[OK]\n\nHand Magnet System...[OK]\n\nArm Control System...[OK]\n\nLocomotor System...[OK]\n\n\n\nAll Systems OK\n\n\n\nActivating HUD";
     private Rect texturePosition;
 
     private bool onBootSeq;
@@ -69,9 +69,9 @@ public class HUDBootSeq : HUDObject{
 
           if (Time.time > nextCharacterTimer)
           {
-              if (fullText.StartsWith("\n\n\n\n") || fullText.StartsWith(".["))
+              if (fullText.StartsWith("\n\n") || fullText.StartsWith(".["))
               {
-                  nextCharacterTimer = Time.time + characterDelay * 200;
+                  nextCharacterTimer = Time.time + characterDelay * 100;
 
               }
               else

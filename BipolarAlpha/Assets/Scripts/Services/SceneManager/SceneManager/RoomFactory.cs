@@ -10,7 +10,7 @@ using System.Collections.Generic;
 /// </summary>
 public class RoomFactory
 {
-  private const float WAIT_TIME = 0.1f;
+  private const float WAIT_TIME = 0.01f;
   private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
 
@@ -246,10 +246,12 @@ public class RoomFactory
       }
       foreach (Collider col in cols)
       {
-        for (float acumulatedTime = WAIT_TIME; acumulatedTime <= WAIT_TIME; acumulatedTime += acumulatedTime)
+        for (float acumulatedTime = WAIT_TIME; acumulatedTime > 0; acumulatedTime -= acumulatedTime)
         {
           col.enabled = true;
         }
+        lastTime = Time.time;
+        yield return new WaitForSeconds(WAIT_TIME);
 
 
       }
@@ -257,7 +259,7 @@ public class RoomFactory
     }
     foreach (Renderer renderer in newRoom.renderers)
     {
-      for (float acumulatedTime = WAIT_TIME; acumulatedTime <= WAIT_TIME; acumulatedTime += acumulatedTime)
+      for (float acumulatedTime = WAIT_TIME; acumulatedTime > 0; acumulatedTime -= acumulatedTime)
       {
         renderer.enabled = true;
       }
