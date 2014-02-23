@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: cbab3904f26ffb04d991f99e7aaa591e
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Cylinder
+    100002: Cylinder_001
+    100004: DoorFrame
+    100006: DoorFrame_001
+    100008: //RootNode
+    100010: CommandCenter
+    100012: RailgunRoomWalls
+    100014: ComputerPipe
+    100016: ComputerPipe_01
+    100018: DoorFrame_01
+    100020: FieldGenerator
+    100022: FieldGenerator_01
+    100024: PowerCellHallway
+    100026: Cylinder_MeshPart0
+    100028: Cylinder_MeshPart1
+    100030: Cylinder_MeshPart2
+    100032: Cylinder_MeshPart3
+    100034: PowerCellHallway_001
+    400000: Cylinder
+    400002: Cylinder_001
+    400004: DoorFrame
+    400006: DoorFrame_001
+    400008: //RootNode
+    400010: CommandCenter
+    400012: RailgunRoomWalls
+    400014: ComputerPipe
+    400016: ComputerPipe_01
+    400018: DoorFrame_01
+    400020: FieldGenerator
+    400022: FieldGenerator_01
+    400024: PowerCellHallway
+    400026: Cylinder_MeshPart0
+    400028: Cylinder_MeshPart1
+    400030: Cylinder_MeshPart2
+    400032: Cylinder_MeshPart3
+    400034: PowerCellHallway_001
+    2300000: Cylinder
+    2300002: Cylinder_001
+    2300004: DoorFrame
+    2300006: DoorFrame_001
+    2300008: CommandCenter
+    2300010: RailgunRoomWalls
+    2300012: ComputerPipe
+    2300014: ComputerPipe_01
+    2300016: DoorFrame_01
+    2300018: FieldGenerator
+    2300020: FieldGenerator_01
+    2300022: PowerCellHallway
+    2300024: Cylinder_MeshPart0
+    2300026: Cylinder_MeshPart1
+    2300028: Cylinder_MeshPart2
+    2300030: Cylinder_MeshPart3
+    2300032: PowerCellHallway_001
+    3300000: Cylinder
+    3300002: Cylinder_001
+    3300004: DoorFrame
+    3300006: DoorFrame_001
+    3300008: CommandCenter
+    3300010: RailgunRoomWalls
+    3300012: ComputerPipe
+    3300014: ComputerPipe_01
+    3300016: DoorFrame_01
+    3300018: FieldGenerator
+    3300020: FieldGenerator_01
+    3300022: PowerCellHallway
+    3300024: Cylinder_MeshPart0
+    3300026: Cylinder_MeshPart1
+    3300028: Cylinder_MeshPart2
+    3300030: Cylinder_MeshPart3
+    3300032: PowerCellHallway_001
+    4300000: DoorFrame_001
+    4300002: Cylinder_001
+    4300004: Cylinder
+    4300006: DoorFrame
+    4300008: CommandCenter
+    4300010: RailgunRoomWalls
+    4300012: DoorFrame_01
+    4300014: ComputerPipe
+    4300016: ComputerPipe_01
+    4300018: FieldGenerator_01
+    4300020: FieldGenerator
+    4300022: PowerCellHallway
+    4300024: PowerCellHallway_001
+    4300026: Cylinder_MeshPart0
+    4300028: Cylinder_MeshPart1
+    4300030: Cylinder_MeshPart2
+    4300032: Cylinder_MeshPart3
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 0
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

@@ -8,6 +8,17 @@ using System.Collections.Generic;
 /// </summary>
 public class CircuitActivateActivator : Circuit
 {
+  private void Start()
+  {
+    if (_state)
+    {
+      TurnOnLights();
+    }
+    else
+    {
+      TurnOffLights();
+    }
+  }
 
   #region Activator Methods
   /// <summary>
@@ -33,6 +44,8 @@ public class CircuitActivateActivator : Circuit
         act.Activate();
       }
     }
+
+    TurnOnLights();
   }
 
   /// <summary>
@@ -41,7 +54,7 @@ public class CircuitActivateActivator : Circuit
   public override void Deactivate()
   {
     // Calls the components' deactivate method
-    _state = true;
+    _state = false;
 
     // Fetches all Activators in the hierarchy of this object
     List<Activator> actvs = BipolarUtilityFunctions.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
@@ -58,6 +71,8 @@ public class CircuitActivateActivator : Circuit
         act.Deactivate();
       }
     }
+
+    TurnOffLights();
   }
   #endregion
 

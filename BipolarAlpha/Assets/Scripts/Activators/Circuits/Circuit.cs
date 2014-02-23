@@ -126,7 +126,7 @@ public abstract class Circuit : MonoBehaviour, Activator
   }
 
 
-  private void TurnOnLights()
+  protected void TurnOnLights()
   {
     if (_activatedLightsParent == null)
     {
@@ -139,7 +139,7 @@ public abstract class Circuit : MonoBehaviour, Activator
     }
   }
 
-  private void TurnOffLights()
+  protected void TurnOffLights()
   {
     if (_activatedLightsParent == null)
     {

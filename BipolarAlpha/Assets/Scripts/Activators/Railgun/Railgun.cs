@@ -23,12 +23,12 @@ public class Railgun : MonoBehaviour, Activator
   }
   #endregion
 
-  void Activator.Activate()
+  public void Activate()
   {
     _isActivated = true;
   }
 
-  void Activator.Deactivate()
+  public void Deactivate()
   {
     _isActivated = false;
   }

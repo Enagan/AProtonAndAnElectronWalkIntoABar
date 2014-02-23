@@ -26,7 +26,8 @@ public class CircuitOR : Circuit
       }
       if (state)
       {
-        ServiceLocator.GetAudioSystem().PlayQuickSFX("CircuitOn",this.gameObject.transform.position,5);
+        if(ServiceLocator.GetAudioSystem())
+           ServiceLocator.GetAudioSystem().PlayQuickSFX("CircuitOn",this.gameObject.transform.position,5);
       }
       return state;
     }
