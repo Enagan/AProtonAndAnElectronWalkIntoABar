@@ -54,9 +54,9 @@
         <z>-6.898573</z>
       </position>
       <scale>
-        <x>1.43386686</x>
-        <y>1.43386686</y>
-        <z>1.43386686</z>
+        <x>1.42955363</x>
+        <y>1.42955363</y>
+        <z>1.42955363</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -170,9 +170,9 @@
         <z>-49.33774</z>
       </position>
       <scale>
-        <x>1.07540011</x>
-        <y>1.07540011</y>
-        <z>1.07540011</z>
+        <x>1.0450387</x>
+        <y>1.0450387</y>
+        <z>1.0450387</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -181,7 +181,7 @@
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>HexagonDoor</objectNameInHierarchy>
+          <objectNameInHierarchy>HexagonDoor2</objectNameInHierarchy>
           <animationNames>
             <string>HexDoor2Open</string>
           </animationNames>
