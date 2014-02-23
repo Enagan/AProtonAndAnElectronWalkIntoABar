@@ -48,6 +48,10 @@ public class RotaryMagnetPart : MagneticForce
 
             Vector3 localTorque = rotationDir * totalForce * Time.deltaTime;
 
+            if(localTorque != null && 
+              !float.IsNaN(localTorque.x)  
+              &&  !float.IsNaN(localTorque.y) 
+               &&  !float.IsNaN(localTorque.z) && rotationDrag!= 0) 
             magnetBody.AddTorque(localTorque / rotationDrag ); // apply torque only on the local y axis of the rotary magnet
 
         }
