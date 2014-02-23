@@ -3,25 +3,6 @@
   <roomName>RobotApprovalConveyor</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/Lights/RobotApprovalConveyorRoomLights</objectPrefabPath>
-      <position>
-        <x>14.4606905</x>
-        <y>13.6256313</y>
-        <z>0.241000652</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorScanner</objectPrefabPath>
       <position>
         <x>6.648343</x>
@@ -130,14 +111,33 @@
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/Lights/RobotApprovalConveyorRoomLights</objectPrefabPath>
+      <position>
+        <x>14.4606905</x>
+        <y>13.6256313</y>
+        <z>0.241000652</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>41.7279053</x>
-        <y>12.3017406</y>
-        <z>4.086234</z>
+        <x>37.21786</x>
+        <y>12.3120632</y>
+        <z>4.121772</z>
       </position>
       <scale>
         <x>1</x>
