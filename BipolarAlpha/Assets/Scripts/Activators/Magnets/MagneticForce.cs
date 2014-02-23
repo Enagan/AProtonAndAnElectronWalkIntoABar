@@ -44,6 +44,9 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     private GameObject _magnetLightsParent = null;
 
     [SerializeField]
+    private bool _isReverted = false;
+
+    [SerializeField]
     protected GameObject parentToAffect = null;
 
     private List<MagneticForce> _affectingMagnets = new List<MagneticForce>();
@@ -82,6 +85,14 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         set
         {
             _isMoveable = value;
+        }
+    }
+
+    public bool isReverted
+    {
+        get
+        {
+            return _isReverted;
         }
     }
 
@@ -231,6 +242,29 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             }
         }
     }
+    #endregion
+
+
+    #region Utilities
+    /// <summary>
+    /// Function that reverts the magnets charge  
+    /// </summary>
+    public void RevertCharge() 
+    {
+        if (_charge == Charge.NEGATIVE)
+        {
+            _charge = Charge.POSITIVE;
+        }
+        else
+        {
+            _charge = Charge.NEGATIVE;
+        }
+
+        InitLights();
+
+        _isReverted = !_isReverted;
+    }
+
     #endregion
 
     #region Magnet Incluence Management
