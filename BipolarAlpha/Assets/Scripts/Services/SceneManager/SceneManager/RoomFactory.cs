@@ -355,14 +355,14 @@ public class RoomFactory
     }
 
     MeshCollider collider = obj.GetComponent<MeshCollider>();
-    if (collider)
+    if (collider && !collider.enabled)
     {
       colliders.Add(collider);
       collider.enabled = false;
     }
 
     Renderer renderer = obj.GetComponent<Renderer>();
-    if (renderer)
+    if (renderer && !renderer.enabled)
     {
       room.renderers.Add(renderer);
     }
