@@ -41,6 +41,7 @@ public class Railgun : MonoBehaviour, Activator
     {
       other.rigidbody.AddForce( -1 * this.transform.right * FORCEMULTIPLIER, ForceMode.Force);
       ForceComponent.applyForce(other.gameObject, -1 * this.transform.right * FORCEMULTIPLIER, 5.0f);
+      ServiceLocator.GetAudioSystem().PlayQuickSFX("ship-fire3",transform.position,1);
     }
   }
 }

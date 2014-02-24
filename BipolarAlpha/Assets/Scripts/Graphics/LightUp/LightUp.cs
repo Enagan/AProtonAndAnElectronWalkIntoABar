@@ -2,7 +2,7 @@
 using UnityEngine;
 //using UnityEditor;
 
-class LightUp : MonoBehaviour
+class LightUp : MonoBehaviour, Activator
 {
   #region private fields
   // Stores the associated light object
@@ -10,7 +10,10 @@ class LightUp : MonoBehaviour
 
   // Stores the associated light's intensity
   private float _lightIntensity;
+  
+  private bool isActivated;
   #endregion
+
 
   void Start()
   {
@@ -21,9 +24,12 @@ class LightUp : MonoBehaviour
 
   public void TurnOn()
   {
-    foreach (Light light in _associatedLight)
+    if(isActivated)
     {
-      light.intensity = _lightIntensity;
+      foreach (Light light in _associatedLight)
+      {
+        light.intensity = _lightIntensity;
+      }
     }
   }
 
@@ -33,6 +39,8 @@ class LightUp : MonoBehaviour
       {
         light.intensity = 0;
       }
+
+    isActivated=false;
   }
 
   private void OnTriggerEnter(Collider other)
@@ -43,5 +51,20 @@ class LightUp : MonoBehaviour
   private void OnTriggerExit(Collider other)
   {
     TurnOff();
+  }
+
+  void Activator.Activate()
+  {
+    BipolarConsole.AllLog("Activating Light");
+
+      
+    isActivated = true;
+  }
+
+  void Activator.Deactivate()
+  {
+    BipolarConsole.AllLog("Deactivating Light");
+    isActivated = false;
+      
   }
 }
