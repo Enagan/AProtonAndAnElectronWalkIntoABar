@@ -984,12 +984,12 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>-0.124660611</x>
+        <x>0.3402468</x>
         <y>-3.113324</y>
         <z>-67.49296</z>
       </position>
       <scale>
-        <x>2.87</x>
+        <x>1</x>
         <y>1.32</y>
         <z>1</z>
       </scale>
