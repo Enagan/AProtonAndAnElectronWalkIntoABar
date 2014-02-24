@@ -55,7 +55,6 @@ class LightUp : MonoBehaviour, Activator
 
   void Activator.Activate()
   {
-    BipolarConsole.AllLog("Activating Light");
 
       
     isActivated = true;
@@ -63,7 +62,7 @@ class LightUp : MonoBehaviour, Activator
 
   void Activator.Deactivate()
   {
-    BipolarConsole.AllLog("Deactivating Light");
+
     isActivated = false;
       
   }
