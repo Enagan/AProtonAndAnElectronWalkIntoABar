@@ -19,6 +19,7 @@ public class HUDBootSeq : HUDObject{
     private float nextCharacterTimer;
     private Rect textArea;
 
+    private bool nextIsLine = true;
     #endregion
 
 	  #region HUD methods
@@ -69,14 +70,21 @@ public class HUDBootSeq : HUDObject{
 
           if (Time.time > nextCharacterTimer)
           {
+
               if (fullText.StartsWith("\n\n") || fullText.StartsWith(".["))
               {
                   nextCharacterTimer = Time.time + characterDelay * 100;
-
+                  nextIsLine = true;
               }
               else
               {
+                if (nextIsLine)
+                {
+                  nextIsLine = false;
+                  ServiceLocator.GetAudioSystem().PlayQuickSFX("digital type", new Vector3(0, 0, 0), 1);
+                }
                   nextCharacterTimer = Time.time + characterDelay;
+
               }
               displayText += fullText.Substring(0,1);
               fullText = fullText.Remove(0,1);

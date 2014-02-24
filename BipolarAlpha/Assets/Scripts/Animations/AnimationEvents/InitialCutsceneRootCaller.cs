@@ -22,7 +22,7 @@ public class InitialCutsceneRootCaller : MonoBehaviour {
 
   public void moveBots()
   {
-    
+    ServiceLocator.GetAudioSystem().PlayQuickSFX("rolling_meta_conveyor_belt", new Vector3(-29, 28, 17), 1f);
     
     for (int i = 0; i <= _botCount; i++)
     {
@@ -45,14 +45,19 @@ public class InitialCutsceneRootCaller : MonoBehaviour {
   }
   public void acceptBot()
   {
+    
     _roomHandler.playChildAnimation("Scanner", "InitialScanner");
     _roomHandler.playChildAnimation("Lights1", "InitialCutsceneAcceptBot");
     _roomHandler.playChildAnimation("Lights2", "InitialCutsceneAcceptBot");
   }
 
+  public void acceptBotSound()
+  {
+    ServiceLocator.GetAudioSystem().PlayQuickSFX("htranchant", new Vector3(-29, 28, 17), 1f);
+  }
   public void rejectBot()
   {
-
+   
     _roomHandler.playChildAnimation("GarbageHatch", "GarbageHatch");
     _roomHandler.playChildAnimation("BrokenBot", "InitialCutsceneDropRobot");
     _roomHandler.playChildAnimation("PlayerHolder", "InitialCameraLookAtBotAnim");
@@ -61,6 +66,7 @@ public class InitialCutsceneRootCaller : MonoBehaviour {
 
   public void rejectPlayer()
   {
+    ServiceLocator.GetAudioSystem().PlayQuickSFX("military_alarm_noise", new Vector3(-29, 28, 17), 1f);
     _roomHandler.playChildAnimation("GarbageHatch", "GarbageHatch");
     _roomHandler.playChildAnimation("PlayerHolder", "InitialCutsceneDropCamera");
     _roomHandler.playChildAnimation("Lights1", "InitialCutsceneRejectBot");

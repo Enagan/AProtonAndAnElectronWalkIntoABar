@@ -55,7 +55,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     //instance the first room, temporary
     setActiveRoom(_initState.Key);
 
-    ServiceLocator.GetAudioSystem().PlayMusic("Bipolar - LVL3");
+    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z_audio_cephlon-majlis_al_jinn");
 	}
 
   private void Update()
