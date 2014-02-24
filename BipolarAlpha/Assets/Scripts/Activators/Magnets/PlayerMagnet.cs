@@ -17,7 +17,7 @@ public class PlayerMagnet : MagneticForce
   private bool _snapingToMagnet = false;
 
   private bool _isAvailable = true;
-  private int _raycastMask = ~( (1 << 8) | (1 << 13));  //Ignore objects in layer 8 (Magnetic Force) and 13 (Triggers)
+  private int _raycastMask = ~( (1 << 8) | (1 << 13) | (1 << 15));  //Ignore objects in layer 8 (Magnetic Force) and 13 (Triggers) and 15 (Magnetic Blockers)
 
   [SerializeField]
   private Light _hittingMagnetLight = null;

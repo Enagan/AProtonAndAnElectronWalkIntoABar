@@ -9,49 +9,53 @@ using System.Collections.Generic;
 public class CircuitANDRevertMagnet : Circuit
 {
 
-    [SerializeField]
-    MagneticForce targetMagneticForce;
+  [SerializeField]
+  MagneticForce targetMagneticForce;
 
   #region Circuit Methods
 
 
-    public override void Activate()
+  public override void Activate()
+  {
+    base.Activate();
+    if (targetMagneticForce)
     {
-        base.Activate();
-        targetMagneticForce.RevertCharge();
-
+      targetMagneticForce.RevertCharge();
     }
 
-    public override void Deactivate()
-    {
-        base.Deactivate();
-        if (targetMagneticForce.isReverted)
-        {
-            targetMagneticForce.RevertCharge();
-        }
 
-    }
-    /// <summary>
-    /// Method used to infer circuit output by looking at input
-    /// This method is overriden to infer using the logical operation AND
-    /// <param name="inputsArray">Binary input for the circuit</param>
-    /// </summary>
-   protected override bool LogicOperation(bool[] inputsArray)
+  }
+
+  public override void Deactivate()
+  {
+    base.Deactivate();
+    if (targetMagneticForce && targetMagneticForce.isReverted)
     {
-      bool state = true;
-      foreach (bool b in inputsArray)
-      {
-        state = state && b;
-      }
-      return state;
+      targetMagneticForce.RevertCharge();
     }
 
-   /// <summary>
-   /// Method that returns each circuit Name, used for debug
-   /// </summary>
-   public override string CircuitName()
-   {
-     return "ANDRevertMagnet";
-   }
-   #endregion
+  }
+  /// <summary>
+  /// Method used to infer circuit output by looking at input
+  /// This method is overriden to infer using the logical operation AND
+  /// <param name="inputsArray">Binary input for the circuit</param>
+  /// </summary>
+  protected override bool LogicOperation(bool[] inputsArray)
+  {
+    bool state = true;
+    foreach (bool b in inputsArray)
+    {
+      state = state && b;
+    }
+    return state;
+  }
+
+  /// <summary>
+  /// Method that returns each circuit Name, used for debug
+  /// </summary>
+  public override string CircuitName()
+  {
+    return "ANDRevertMagnet";
+  }
+  #endregion
 }

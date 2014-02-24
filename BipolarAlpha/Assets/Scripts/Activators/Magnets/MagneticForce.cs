@@ -322,16 +322,13 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             bool magneticBlockerFound = false;
             Vector3 thisPosition = this.transform.position;
             Vector3 otherPosition = other.transform.position;
-            RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition, otherPosition));
+            int blockerLayer = 1 << 15; //magnetic block layer we only want to check for blockers
+            RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition, otherPosition), blockerLayer);
 
             foreach (RaycastHit singleHit in hits)  //Checks for magnetic blockers between MagneticForces
             {
-                if (singleHit.collider.gameObject.tag == "MagneticBlocker")
-                {
-                    magneticBlockerFound = true;
-                    break;
-                }
-
+                magneticBlockerFound = true;
+                break;
             }
             if (!magneticBlockerFound)
             {
