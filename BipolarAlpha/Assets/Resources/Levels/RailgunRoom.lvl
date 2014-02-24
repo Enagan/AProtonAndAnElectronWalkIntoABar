@@ -41,6 +41,25 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/RailgunRoom/SceneChanger</objectPrefabPath>
+      <position>
+        <x>101.2708</x>
+        <y>-2.543673</y>
+        <z>-1.53756714</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
       <position>
         <x>-13.7851925</x>
