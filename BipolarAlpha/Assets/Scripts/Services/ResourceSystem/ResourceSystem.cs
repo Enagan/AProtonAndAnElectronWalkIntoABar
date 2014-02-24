@@ -35,6 +35,8 @@ public class ResourceSystem : MonoBehaviour
     // Loads the requested object from the resources
     GameObject prefab = Resources.Load(pathName, typeof(GameObject)) as GameObject;
 
+    BipolarConsole.AllLog("Breaking at " + pathName);
+
     // Creates a new instance of the requested object
     GameObject prefabInstance = GameObject.Instantiate(prefab) as GameObject;
     newPrefabList.Add(prefabInstance);
