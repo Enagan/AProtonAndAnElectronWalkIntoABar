@@ -14,7 +14,7 @@
 	<string>Assets/Resources/Levels/QA-UNIT02Test3.lvl</string>
 	<string>Assets/Resources/Levels/RailgunRoom.lvl</string>
   </roomPaths>
-  <activeRoom>QA-UNIT02Test1</activeRoom>
+  <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
     <x>0</x>
     <y>0</y>
