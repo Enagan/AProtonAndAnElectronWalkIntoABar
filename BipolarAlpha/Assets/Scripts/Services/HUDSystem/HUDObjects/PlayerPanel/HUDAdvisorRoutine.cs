@@ -109,6 +109,12 @@ public class HUDAdvisorRoutine : HUDObject, IPlayerRoomChangeListner {
           fullText = "You will now begin test 3 of Quality Assurance\t\n";
       }
 
+      if (fullText != "")
+      {
+          Vector3 position = GameObject.Find("Player").transform.position;
+          ServiceLocator.GetAudioSystem().PlayQuickSFX("digital type",position , 1f);
+      }
+
       _currentlyDisplayedTip = "";
       nextCharacterTimer = Time.time + characterDelay * 150;
       TextAnimation();
