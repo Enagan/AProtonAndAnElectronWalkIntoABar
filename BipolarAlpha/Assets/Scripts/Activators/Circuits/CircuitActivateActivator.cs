@@ -90,6 +90,7 @@ public class CircuitActivateActivator : Circuit
     {
       state = state || b;
     }
+    BipolarConsole.AllLog(name + "returning" + state);
     return state;
   }
 
