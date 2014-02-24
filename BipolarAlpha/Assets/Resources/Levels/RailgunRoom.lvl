@@ -3,7 +3,7 @@
   <roomName>RailgunRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Models/Rooms/Demo3.0Rooms/RailgunRoom/RailgunRoom.fbx</objectPrefabPath>
+      <objectPrefabPath>Prefabs/LevelScenery/RailgunRoom/RailgunRoom</objectPrefabPath>
       <position>
         <x>0</x>
         <y>0</y>
@@ -208,7 +208,28 @@
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
-  <gateways />
+  <gateways>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>14.0143538</x>
+        <y>-3.03666425</y>
+        <z>48.00035</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>QA-UNIT02Test2</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+  </gateways>
   <maxDepth>0</maxDepth>
   <constructionFinished>false</constructionFinished>
   <inConstruction>false</inConstruction>

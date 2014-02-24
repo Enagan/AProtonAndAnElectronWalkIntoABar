@@ -242,7 +242,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>QA-UNIT02Test3</connectedToRoom>
+      <connectedToRoom>RailgunRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>

@@ -3,25 +3,6 @@
   <roomName>QA-UNIT02Test3</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3Lights</objectPrefabPath>
-      <position>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates />
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
       <position>
         <x>-12.8156586</x>
@@ -72,6 +53,25 @@
           <magnetCharge>1</magnetCharge>
         </ComplexState>
       </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3Lights</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>

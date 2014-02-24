@@ -14,10 +14,10 @@
 	<string>Assets/Resources/Levels/QA-UNIT02Test3.lvl</string>
 	<string>Assets/Resources/Levels/RailgunRoom.lvl</string>
   </roomPaths>
-  <activeRoom>RailgunRoom</activeRoom>
+  <activeRoom>QA-UNIT02Test1</activeRoom>
   <playerPosition>
     <x>0</x>
-    <y>-4</y>
+    <y>0</y>
     <z>0</z>
   </playerPosition>
   <playerRotation>
