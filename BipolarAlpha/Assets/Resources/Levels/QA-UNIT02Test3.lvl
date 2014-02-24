@@ -969,8 +969,8 @@
         <z>7.38787556</z>
       </position>
       <scale>
-        <x>2.87</x>
-        <y>1.32</y>
+        <x>1</x>
+        <y>1</y>
         <z>1</z>
       </scale>
       <eulerAngles>
@@ -980,6 +980,26 @@
       </eulerAngles>
       <complexStates />
       <connectedToRoom>QA-UNIT02Test2</connectedToRoom>
+    </RoomObjectGatewayDefinition>
+    <RoomObjectGatewayDefinition>
+      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <position>
+        <x>-0.124660611</x>
+        <y>-3.113324</y>
+        <z>-67.49296</z>
+      </position>
+      <scale>
+        <x>2.87</x>
+        <y>1.32</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+      <connectedToRoom>RailgunRoom</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>

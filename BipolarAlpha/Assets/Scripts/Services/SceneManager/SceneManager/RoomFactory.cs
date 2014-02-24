@@ -174,6 +174,7 @@ public class RoomFactory
   /// </summary>
   private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
   {
+    
     newRoom.inConstruction = true;
 
     RoomObjectGatewayDefinition fromGate;
