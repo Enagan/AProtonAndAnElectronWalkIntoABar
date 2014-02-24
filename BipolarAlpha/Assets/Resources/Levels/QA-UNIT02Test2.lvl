@@ -227,7 +227,7 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>0.7613567</x>
+        <x>0.103972673</x>
         <y>-2.79727077</y>
         <z>-42.9100761</z>
       </position>
@@ -242,7 +242,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>RailgunRoom</connectedToRoom>
+      <connectedToRoom>QA-UNIT02Test3</connectedToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>

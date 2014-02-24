@@ -242,11 +242,11 @@
       </scale>
       <eulerAngles>
         <x>0</x>
-        <y>0</y>
+        <y>180.000015</y>
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>QA-UNIT02Test2</connectedToRoom>
+      <connectedToRoom>QA-UNIT02Test3</connectedToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
