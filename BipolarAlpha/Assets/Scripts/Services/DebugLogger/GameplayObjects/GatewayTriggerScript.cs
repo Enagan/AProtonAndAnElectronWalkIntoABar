@@ -30,8 +30,8 @@ public class GatewayTriggerScript : MonoBehaviour {
   {
     if (other.tag == "Player")
     {
-      
-      ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
+
+      ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z_audio_cephlon-majlis_al_jinn");
       ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
     }
     else if (other.tag == "MovableObject")

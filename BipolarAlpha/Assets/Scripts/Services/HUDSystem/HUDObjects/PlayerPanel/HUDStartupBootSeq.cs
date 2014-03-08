@@ -14,7 +14,6 @@ public class HUDStartupBootSeq : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Escape))
         {
             Application.LoadLevel("Main");
-
         }
 	}
 }

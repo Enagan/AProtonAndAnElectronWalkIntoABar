@@ -55,7 +55,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     //instance the first room, temporary
     setActiveRoom(_initState.Key);
 
-    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z_audio_cephlon-majlis_al_jinn");
+    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
 	}
 
   private void Update()
@@ -74,6 +74,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       _roomInQueueToDeletion.Remove(roomToDelete);
       _roomFactory.DestroyRoom(roomToDelete);
     }
+
   }
 
   #region Room Creation and Deletion

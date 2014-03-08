@@ -162,7 +162,7 @@ public class AudioSystem : MonoBehaviour
         PlayNextMusic();
         _currentFadeEffect = Fade.IN;
       }
-      if (_musicSource.volume >= 1)
+      if (_musicSource.volume >= 0.15f)
       {
         _currentFadeEffect = Fade.NONE;
       }
