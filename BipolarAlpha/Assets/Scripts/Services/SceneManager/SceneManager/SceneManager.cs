@@ -162,6 +162,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     //Otherwise instance room based in the previous "parent" room
     else
     {
+      _roomInQueueToDeletion.Remove(root);
       _roomFactory.CreateRoom(root, parent);
       _currentlyCreatedRooms.Add(root);
     }
