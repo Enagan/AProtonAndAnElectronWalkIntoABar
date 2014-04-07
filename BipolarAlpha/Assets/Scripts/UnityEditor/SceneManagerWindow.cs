@@ -17,6 +17,11 @@ public class SceneManagerWindow : EditorWindow
   Dictionary<string, string> allRooms = new Dictionary<string,string>();
 
   float roomListUpdateClock = 0;
+  float compilationSuccessLabelTimeOut = 0;
+
+
+  bool loadRoomFoldoutStatus = false;
+  bool roomActionFoldoutStatus = false;
 
   // Add menu item named "My Window" to the Window menu
   [MenuItem("Window/Scene Manager Editor")]
@@ -37,6 +42,16 @@ public class SceneManagerWindow : EditorWindow
     {
       roomListUpdateClock = 0.0f;
     }
+
+    if(compilationSuccessLabelTimeOut > 0)
+    {
+      compilationSuccessLabelTimeOut -= Time.deltaTime * 1000;
+    }
+    else
+    {
+      compilationSuccessLabelTimeOut = 0;
+    }
+
   }
 
   void OnGUI()
@@ -44,52 +59,99 @@ public class SceneManagerWindow : EditorWindow
     title = "Scene Manager Editor";
 
     GUILayout.Label("Scene Manager Editor", EditorStyles.boldLabel);
-    GUILayout.Label("Load Rooms", EditorStyles.boldLabel);
+    //
+    LoadRoomsGUI();
 
-    filterRoomListString = EditorGUILayout.TextField("Filter Rooms", filterRoomListString);
-
-    List<string> filteredRoomList = new List<string>();
-    foreach (KeyValuePair<string, string> room in allRooms)
-    {
-      string roomName = room.Key;
-      if (roomName.Contains(filterRoomListString) || filterRoomListString.Equals(""))
-      {
-        filteredRoomList.Add(roomName);
-      }
-    }
-
-    float maxHeight = Mathf.Min(filteredRoomList.Count * 18.2f, 300);
-
-    _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
-
-    foreach (string roomName in filteredRoomList)
-    {
-      bool isPressed = EditorGUILayout.ToggleLeft(roomName, currentlyPressed.Equals(roomName));
-      if (isPressed)
-        currentlyPressed = roomName;
-    }
-
-    EditorGUILayout.EndScrollView();
-
-    if (GUILayout.Button("Load Room", GUILayout.Width(Mathf.Max(position.width / 2, 100))))
-    {
-      bool success = EditorApplication.OpenScene(allRooms[currentlyPressed]);
-      if (success)
-        currentlyLoadedRoom = currentlyPressed;
-    }
-    if (GUILayout.Button("Refresh Rooms", GUILayout.Width(Mathf.Max(position.width/2,100))))
-    {
-      allRooms = getAllRooms();
-    }
-
-    GUILayout.Label("----------------------------------------------------------------------", EditorStyles.boldLabel);
-    GUILayout.Label("Loaded Room: " + currentlyLoadedRoom, EditorStyles.boldLabel);
+    //GUILayout.Label("----------------------------------------------------------------------", EditorStyles.boldLabel);
+    EditorGUILayout.Separator();
+    RoomActionsGUI();
   }
 
 
+  void LoadRoomsGUI()
+  {
+    loadRoomFoldoutStatus = EditorGUILayout.Foldout(loadRoomFoldoutStatus, "Load Rooms");
+
+    if (loadRoomFoldoutStatus)
+    {
+      filterRoomListString = EditorGUILayout.TextField("Filter Rooms", filterRoomListString);
+
+      List<string> filteredRoomList = new List<string>();
+      foreach (KeyValuePair<string, string> room in allRooms)
+      {
+        string roomName = room.Key;
+        if (roomName.Contains(filterRoomListString) || filterRoomListString.Equals(""))
+        {
+          filteredRoomList.Add(roomName);
+        }
+      }
+
+      float maxHeight = Mathf.Min(filteredRoomList.Count * 18.2f, 300);
+
+      _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+
+      foreach (string roomName in filteredRoomList)
+      {
+        bool isPressed = EditorGUILayout.ToggleLeft(roomName, currentlyPressed.Equals(roomName));
+        if (isPressed)
+          currentlyPressed = roomName;
+      }
+
+      EditorGUILayout.EndScrollView();
+
+      EditorGUILayout.BeginHorizontal();
+
+      if (GUILayout.Button("Load Room", GUILayout.Width(Mathf.Max((position.width - 10) / 2, 100))))
+      {
+        bool success = EditorApplication.OpenScene(allRooms[currentlyPressed]);
+        if (success)
+          currentlyLoadedRoom = currentlyPressed;
+      }
+      if (GUILayout.Button("Refresh Rooms", GUILayout.Width(Mathf.Max((position.width - 10) / 2, 100))))
+      {
+        allRooms = getAllRooms();
+      }
+
+      EditorGUILayout.EndHorizontal();
+    }
+  }
+
+  void RoomActionsGUI()
+  {
+    if (currentlyLoadedRoom.Equals("<No valid room is loaded>"))
+      roomActionFoldoutStatus = false;
+    else
+      roomActionFoldoutStatus = true;
+    EditorGUILayout.Foldout(roomActionFoldoutStatus, "Loaded Room: " + currentlyLoadedRoom);
+    if(roomActionFoldoutStatus)
+    {
+      if(compilationSuccessLabelTimeOut>0)
+        GUILayout.Label("Serialization Success!", EditorStyles.boldLabel);
+
+      if (GUILayout.Button("Serialize Current Room", GUILayout.Width(Mathf.Max(position.width - 10, 100))))
+        if (SerializeCurrentRoom())
+        {
+          compilationSuccessLabelTimeOut = 10;
+        }
+
+
+    }
+
+    //GUILayout.Label(, EditorStyles.boldLabel);
+  }
+
+  bool SerializeCurrentRoom()
+  {
+    RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
+    roomDefMaker._roomName = "DerpTestin";
+    roomDefMaker.SerializeRoom();
+    return true;
+  }
+
   void OnHierarchyChange()
   {
-    if (currentlyLoadedRoom.Equals("<No valid room is loaded>") || (allRooms.ContainsKey(currentlyLoadedRoom) && !allRooms[currentlyLoadedRoom].Equals(EditorApplication.currentScene)))
+    if (currentlyLoadedRoom.Equals("<No valid room is loaded>") || 
+      (allRooms.ContainsKey(currentlyLoadedRoom) && !allRooms[currentlyLoadedRoom].Equals(EditorApplication.currentScene)))
     {
       if (allRooms.ContainsValue(EditorApplication.currentScene))
       {

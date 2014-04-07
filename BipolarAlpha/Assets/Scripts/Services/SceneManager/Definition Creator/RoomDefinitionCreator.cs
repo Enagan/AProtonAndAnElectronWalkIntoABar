@@ -11,17 +11,22 @@ using UnityEditor;
 public class RoomDefinitionCreator : MonoBehaviour 
 {
   [SerializeField]
-  private string _roomName = "";
+  public string _roomName = "";
   private int circuitSystemCounter = 0;
 
   private List<GameObject> _objectsInRoom = new List<GameObject>();
 
 	private void Start () 
   {
+    SerializeRoom();
+	}
+
+  public void SerializeRoom()
+  {
     _objectsInRoom = ReadScene();
     RoomDefinition roomDef = createRoomDefinition(_roomName, _objectsInRoom);
     XMLSerializer.Serialize<RoomDefinition>(roomDef, "Assets/Resources/Levels/" + roomDef.roomName + ".lvl");
-	}
+  }
 
   /// <summary>
   /// Reads the current scene and returns all currently instanced parent objects.
