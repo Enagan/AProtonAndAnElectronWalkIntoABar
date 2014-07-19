@@ -28,7 +28,7 @@ public class ScanShaderAuxScript : MonoBehaviour, IPlayerAbilityScanListener
 
   public void ListenPlayerScan(bool isScanning)
   {
-    BipolarConsole.AllLog("SCANNING");
+    Debug.Log("SCANNING");
     if (isScanning)
       renderer.material = _ScanMat;
     else

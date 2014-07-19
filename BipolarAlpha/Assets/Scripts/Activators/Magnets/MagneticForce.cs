@@ -474,7 +474,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
                 //throw exception perhaps
                 break;
         }
-        //BipolarConsole.AllLog("Force Applied " + result);
+        //Debug.Log("Force Applied " + result);
         return result;
     }
 

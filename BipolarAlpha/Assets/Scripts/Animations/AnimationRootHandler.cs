@@ -141,7 +141,7 @@ public class AnimationRootHandler : AnimationChildHandler
       child.playAnimation(clipName);
     }
     else
-      BipolarConsole.AllLog("Child "+ key + " Not Found in Animation Hierarchy");
+      Debug.Log("Child "+ key + " Not Found in Animation Hierarchy");
   }
 
   // Returns Animation component in child
@@ -181,12 +181,12 @@ public class AnimationRootHandler : AnimationChildHandler
   //Dumps into console all animations in RootHandler and respective children
   private void dumpAnimations()
   {
-    BipolarConsole.AllLog("<Dumping Animations in ROOT:" + childName);
+    Debug.Log("<Dumping Animations in ROOT:" + childName);
     foreach (string key in _animChildren.Keys)
     {
-      BipolarConsole.AllLog(key);
+      Debug.Log(key);
     }
-    BipolarConsole.AllLog("Dump end>");
+    Debug.Log("Dump end>");
   }
 
   #endregion

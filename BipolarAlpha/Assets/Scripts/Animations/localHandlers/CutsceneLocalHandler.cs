@@ -49,7 +49,7 @@ public class CutsceneLocalHandler : AnimationLocalHandler
 
       if (other.tag == "Player") // check if collided entity is player
       {
-        BipolarConsole.AllLog("Player in cutscene");
+        Debug.Log("Player in cutscene");
         this.GetComponent<Collider>().enabled = false; // stop future collisions
 
 

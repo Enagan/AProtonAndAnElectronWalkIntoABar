@@ -139,11 +139,15 @@ public class SceneManagerWindow : EditorWindow
 
     //GUILayout.Label(, EditorStyles.boldLabel);
   }
+  void GatewaysInRoomAction()
+  {
+    
+  }
 
   bool SerializeCurrentRoom()
   {
     RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
-    roomDefMaker._roomName = "DerpTestin";
+    roomDefMaker._roomName = currentlyLoadedRoom;
     roomDefMaker.SerializeRoom();
     return true;
   }

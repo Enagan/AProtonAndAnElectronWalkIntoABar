@@ -11,10 +11,10 @@ public abstract class AwardPlayerAbility : MonoBehaviour {
 	// When collided with player adds him an ability using the awardAbility method
  void OnTriggerEnter(Collider other)
  {
-    BipolarConsole.AllLog("Collided");
+    Debug.Log("Collided");
      if(other.tag == "Player")
      {
-       BipolarConsole.AllLog("Collided with player");
+       Debug.Log("Collided with player");
        PlayerController player = other.GetComponent<PlayerController>();
        awardAbility(player);
        gameObject.SetActive(false);

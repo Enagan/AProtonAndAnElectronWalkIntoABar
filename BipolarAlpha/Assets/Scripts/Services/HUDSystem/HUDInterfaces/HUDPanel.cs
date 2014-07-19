@@ -77,12 +77,12 @@ public abstract class HUDPanel : HUDObject {
   public void dumpHUDObjects()
   {
     int i = 0;
-    BipolarConsole.AllLog("Dumping HUDPanel");
+    Debug.Log("Dumping HUDPanel");
     foreach (HUDObject obj in _HUDObjects)
     {
       if (obj != null)
       {
-        BipolarConsole.AllLog(i+":"+obj);
+        Debug.Log(i+":"+obj);
       }
     }
   }

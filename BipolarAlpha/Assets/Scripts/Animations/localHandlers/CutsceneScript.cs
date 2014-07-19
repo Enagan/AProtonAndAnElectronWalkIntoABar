@@ -181,7 +181,7 @@ public class CutsceneScript : MonoBehaviour
       string str = "Handler " + token.handler.name + " registered for animation " + token.animationName + " after " + token.delay ;
       if(token.childName != null)
         str += " childName " + token.childName;
-      BipolarConsole.AllLog( str);
+      Debug.Log( str);
     }
   }
 
