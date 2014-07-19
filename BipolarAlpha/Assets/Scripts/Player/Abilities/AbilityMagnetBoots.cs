@@ -42,7 +42,6 @@ public class AbilityMagnetBoots : Ability
 
   public void KeyUp(string key = null)
   {
-    BipolarConsole.LousadaLog("HAI!!");
     _magnetBoots.Deactivate();
   }
 
