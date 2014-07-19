@@ -22,7 +22,7 @@ public class RoomFactoryInstancedObjectsRegistry
   {
     if(_instancedRegistry.ContainsKey(room))
     {
-      BipolarConsole.AllLog("Error: Room " + room.roomName + " already registered in the registry. Perhaps a room is not being cleaned on deletion?");
+      Debug.Log("Error: Room " + room.roomName + " already registered in the registry. Perhaps a room is not being cleaned on deletion?");
       return;
     }
     _instancedRegistry.Add(room,
@@ -42,7 +42,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      BipolarConsole.AllLog("Error: Object addition to room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Object addition to room " + roomDef.roomName + " failed. Room does not exist in registry");
     }
   }
 
@@ -57,7 +57,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      BipolarConsole.AllLog("Error: Removal of room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Removal of room " + roomDef.roomName + " failed. Room does not exist in registry");
     }
   }
   /// <summary>
@@ -71,7 +71,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      BipolarConsole.AllLog("Error: Removal of object " + objectDef.objectPrefabPath + " failed. Room does not exist in registry");
+      Debug.Log("Error: Removal of object " + objectDef.objectPrefabPath + " failed. Room does not exist in registry");
     }
   }
   #endregion
@@ -88,7 +88,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      BipolarConsole.AllLog("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
       return null;
     }
   }
@@ -110,10 +110,10 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      BipolarConsole.AllLog("Error: Object Definition retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Object Definition retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
       return null;
     }
-    BipolarConsole.AllLog("Error: Could not find object definition in registry");
+    Debug.Log("Error: Could not find object definition in registry");
     return null;
   }
 
@@ -128,7 +128,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      BipolarConsole.AllLog("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
       return null;
     }
   }

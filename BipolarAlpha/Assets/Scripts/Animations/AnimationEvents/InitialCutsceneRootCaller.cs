@@ -31,7 +31,7 @@ public class InitialCutsceneRootCaller : MonoBehaviour {
         robot = "PlayerHolder";
       else
         robot = "Rob" + i;
-        BipolarConsole.AllLog("Moving" + robot);
+        Debug.Log("Moving" + robot);
       if(i != 0)
         if(Random.Range(0,100)<50)
           _handler.playChildAnimation(robot, "InitialCutsceneNormalHolders");

@@ -61,7 +61,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 		if(other.tag == "Player" && !_hasPlayer)
     {
       this.Activate();
-      BipolarConsole.AllLog(gameObject.name);
+      Debug.Log(gameObject.name);
 
     }
 	}
@@ -188,7 +188,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
   {
     if (!_hasPlayer)
     {
-       BipolarConsole.AllLog("Found Player");
+       Debug.Log("Found Player");
         _hasPlayer = true;
         _speed = 0;
     }
@@ -200,7 +200,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
     if (_hasPlayer)
     {
       
-      BipolarConsole.AllLog("Lost Player");
+      Debug.Log("Lost Player");
       _hasPlayer = false;
       _startHeight = transform.position.y;
     }

@@ -11,7 +11,6 @@ public class BarredDoorSound : MonoBehaviour {
 
   void playDoorSound()
   {
-    BipolarConsole.AllLog("printing");
     ServiceLocator.GetAudioSystem().PlayQuickSFX("Door",transform.position,1);
   }
 

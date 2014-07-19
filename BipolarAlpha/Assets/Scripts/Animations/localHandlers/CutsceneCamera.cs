@@ -42,7 +42,7 @@ public class CutsceneCamera : MonoBehaviour
   // Animation Events are added in the Animation Pane by right clicking above the key's line
   private void finishAnim()
   {
-    BipolarConsole.AllLog("CutsceneEnded");
+    Debug.Log("CutsceneEnded");
     //manager finishes animation and returns control to player
 
     ((CutsceneLocalHandler)transform.parent.GetComponent<CutsceneLocalHandler>()).switchCamera();

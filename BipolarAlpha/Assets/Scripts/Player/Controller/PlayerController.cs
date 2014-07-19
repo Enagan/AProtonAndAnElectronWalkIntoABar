@@ -237,6 +237,17 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     _usableAbilities[key] = ability;
   }
 
+  public void addStickyMagnetAbilities()
+  {
+    Camera playerCamera = this.GetComponentInChildren<Camera>();
+    if(_usableAbilities.ContainsKey("Fire1"))
+      _usableAbilities.Remove("Fire1");
+    if(_usableAbilities.ContainsKey("Fire2"))
+      _usableAbilities.Remove("Fire2");
+    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
+  }
+
   #region Players' Private Methods
 
   /// <summary>
@@ -249,13 +260,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
     //_usableAbilities.Add("Jump", new AbilityJump());
-    //_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
-    //_usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
+    _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
 
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
-
-    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
-    _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
 
     //MagneticBoots ability (space)
    // _usableAbilities.Add("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), playerCamera, this));
@@ -268,6 +276,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     //Pause Game
     _usableAbilities.Add("Menu", new AbilityPauseGame());
   }
+
+
   #endregion
   /// <summary>
   /// Removes the ability which can be activated with the specified key

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Runtime.CompilerServices; 
 
 public enum Devs { ENGANA, LOUSADA, HUGO, IVO, RUI }
 
@@ -12,8 +13,26 @@ public enum Devs { ENGANA, LOUSADA, HUGO, IVO, RUI }
 /// Bipolar Console depends upon the BipolarDevID static constants to determine which dev is running the code
 /// and showing the appropriate messages
 /// </summary>
-public class BipolarConsole
+public class BipolarConsole : MonoBehaviour
 {
+
+  public string output = "";
+  public string stack = "";
+  private void Start()
+  {
+    Application.RegisterLogCallbackThreaded(HandleLog);
+    /*Debug.Log("Handle Log registered");*/
+  }
+  void OnDisable()
+  {
+    Application.RegisterLogCallback(null);
+  }
+  void HandleLog(string logString, string stackTrace, LogType type)
+  {
+    output = logString;
+    stack = stackTrace;
+    logString = "Stuff" + logString;
+  }
   #region Core Functions
 
   /// Log <summary>
@@ -37,7 +56,7 @@ public class BipolarConsole
   public static void ExceptionLog(UnityException exception, Object objectSource = null)
   {
 #if UNITY_EDITOR
-    Debug.LogException(exception, objectSource);
+//    Debug.LogException(exception, objectSource);
 #endif
   }
 

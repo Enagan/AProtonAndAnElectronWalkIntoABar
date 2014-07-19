@@ -51,7 +51,7 @@ public class CheckPointSystem : ICheckPointRegisterListener
    
     player.transform.position = _currentCheckpoint.savedPlayerPosition;
     player.transform.eulerAngles = _currentCheckpoint.savedPlayerRotation;
-    //BipolarConsole.AllLog("Respawning at "+ player.transform.position + " - with rot "+ player.transform.eulerAngles  );
+    //Debug.Log("Respawning at "+ player.transform.position + " - with rot "+ player.transform.eulerAngles  );
   }
 
  #endregion
