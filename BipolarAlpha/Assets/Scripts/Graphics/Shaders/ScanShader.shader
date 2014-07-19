@@ -75,7 +75,7 @@
 		     
 		     	
 			 float4 modCol = tex2D(_NoiseTex,float2(i.tex.xy)*(-_Time));	     
-		     return float4(0.0,texCol.x+modCol.x*0.1,0.0,_BlendAlpha);
+		     return float4((texCol.x+modCol.x*0.1)*_ScanColor.x,(texCol.x+modCol.x*0.1)*_ScanColor.y,(texCol.x+modCol.x*0.1)*_ScanColor.z,_BlendAlpha);
 
 	
 		    }
