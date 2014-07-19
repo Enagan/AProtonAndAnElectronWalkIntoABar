@@ -65,6 +65,9 @@ public class SceneManagerWindow : EditorWindow
 
     GUILayout.Label("Scene Manager Editor", EditorStyles.boldLabel);
     //
+
+    GameStartState();
+
     LoadRoomsGUI();
 
     //GUILayout.Label("----------------------------------------------------------------------", EditorStyles.boldLabel);
@@ -73,11 +76,13 @@ public class SceneManagerWindow : EditorWindow
 
     GatewaysInRoomAction();
 
+
   }
 
 
   void LoadRoomsGUI()
   {
+    GUILayout.Label("Room Loader", EditorStyles.boldLabel);
     loadRoomFoldoutStatus = EditorGUILayout.Foldout(loadRoomFoldoutStatus, "Load Rooms");
 
     if (loadRoomFoldoutStatus)
@@ -126,6 +131,8 @@ public class SceneManagerWindow : EditorWindow
 
   void RoomActionsGUI()
   {
+    GUILayout.Label("Loaded Room Actions", EditorStyles.boldLabel);
+
     if (currentlyLoadedRoom.Equals("<No valid room is loaded>"))
       roomActionFoldoutStatus = false;
     else
@@ -159,7 +166,7 @@ public class SceneManagerWindow : EditorWindow
       foreach (object thisObject in allObjects)
       {
         GameObject castObject = ((GameObject)thisObject);
-        if (castObject.activeInHierarchy && castObject.transform.parent == null && BipolarUtilityFunctions.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
+        if (castObject.activeInHierarchy && castObject.transform.parent == null && BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
         {
           Gateways.Add(castObject);
         }
@@ -172,7 +179,7 @@ public class SceneManagerWindow : EditorWindow
       {
         if (gate != null)
         {
-          GatewayTriggerScript gateTrigger = BipolarUtilityFunctions.GetComponentsInHierarchy<GatewayTriggerScript>(gate.transform)[0];
+          GatewayTriggerScript gateTrigger = BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(gate.transform)[0];
           GUILayout.BeginHorizontal();
 
           GUILayout.Label(" - " + gate.name);
@@ -228,11 +235,17 @@ public class SceneManagerWindow : EditorWindow
     }
   }
 
+  void GameStartState()
+  {
+    GUILayout.Label("Game Start State", EditorStyles.boldLabel);
+  }
+
   bool SerializeCurrentRoom()
   {
     RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
-    roomDefMaker._roomName = currentlyLoadedRoom;
+    roomDefMaker._roomName = currentlyLoadedRoom.Substring(currentlyLoadedRoom.IndexOf(":") + 2);
     roomDefMaker.SerializeRoom();
+    Debug.Log("Room " + roomDefMaker._roomName + " Successefully serialized");
     return true;
   }
 
