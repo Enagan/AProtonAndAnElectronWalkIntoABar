@@ -19,7 +19,7 @@ public class ScriptBatch : MonoBehaviour
     {
       return;
     }
-    BipolarConsole.AllLog(Application.dataPath);
+    UnityEngine.Debug.Log(Application.dataPath);
     //Deletes any existing instances OffMeshLink the FileShare to Behaviour copied, for any fresh instalation
     FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.dll");
     FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.West.dll");
@@ -41,7 +41,7 @@ public class ScriptBatch : MonoBehaviour
     string replaced = text.Replace("Assets/Resources", path);
     File.WriteAllText(path + "/Levels/SaveState.lvl", replaced);
 
-    BipolarConsole.AllLog("Project Successfully Built!");
+    UnityEngine.Debug.Log("Project Successfully Built!");
 
     /*
     string[] levels = {"Main.unity"};

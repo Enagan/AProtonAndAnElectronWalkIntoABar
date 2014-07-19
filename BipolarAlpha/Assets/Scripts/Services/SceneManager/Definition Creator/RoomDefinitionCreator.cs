@@ -148,7 +148,14 @@ public class RoomDefinitionCreator : MonoBehaviour
         }
       }
 
-    }    
+    }   
+ 
+    // Cleanup created circuit systems
+    foreach (GameObject obj in createdCircuitSystems)
+    {
+      DestroyImmediate(obj);
+    }
+
     return roomDef;
   }
 

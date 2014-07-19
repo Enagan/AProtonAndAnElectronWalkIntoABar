@@ -90,7 +90,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     //Search for room in the loaded rooms Dictionary
     if ((roomToCreate = _allRooms[roomName]) == null)
     {
-      BipolarConsole.AllLog("Error: room " + roomName + " does not exist in knowledgebase.");
+      Debug.Log("Error: room " + roomName + " does not exist in knowledgebase.");
       //TODO should throw exception
       return;
     }
@@ -177,7 +177,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
         }
         else
         {
-          BipolarConsole.AllLog("Room " + gate.connectedToRoom + " not found in Save State Definition");
+          Debug.Log("Room " + gate.connectedToRoom + " not found in Save State Definition");
         }
       }
     }
