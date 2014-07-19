@@ -1,16 +1,20 @@
-﻿using UnityEngine;
+﻿  
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
+
 public class SceneManagerWindow : EditorWindow
 {
+  const float SIZE_OF_ELEMENT_IN_LIST = 18.5f;
 
   string filterRoomListString = "";
   string currentlyLoadedRoom = "<noRoom>";
 
-  Vector2 _scrollPosition;
+  Vector2 _roomListScrollPosition;
+  Vector2 _gatewaysScrollPosition;
 
   string currentlyPressed = "";
 
@@ -22,6 +26,7 @@ public class SceneManagerWindow : EditorWindow
 
   bool loadRoomFoldoutStatus = false;
   bool roomActionFoldoutStatus = false;
+  bool gatewaysFoldoutStatus = true;
 
   // Add menu item named "My Window" to the Window menu
   [MenuItem("Window/Scene Manager Editor")]
@@ -65,6 +70,9 @@ public class SceneManagerWindow : EditorWindow
     //GUILayout.Label("----------------------------------------------------------------------", EditorStyles.boldLabel);
     EditorGUILayout.Separator();
     RoomActionsGUI();
+
+    GatewaysInRoomAction();
+
   }
 
 
@@ -86,9 +94,9 @@ public class SceneManagerWindow : EditorWindow
         }
       }
 
-      float maxHeight = Mathf.Min(filteredRoomList.Count * 18.2f, 300);
+      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
-      _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+      _roomListScrollPosition = EditorGUILayout.BeginScrollView(_roomListScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
 
       foreach (string roomName in filteredRoomList)
       {
@@ -141,7 +149,83 @@ public class SceneManagerWindow : EditorWindow
   }
   void GatewaysInRoomAction()
   {
-    
+    gatewaysFoldoutStatus = EditorGUILayout.Foldout(gatewaysFoldoutStatus, "Gateways in room:");
+    if (roomActionFoldoutStatus && gatewaysFoldoutStatus)
+    {
+      List<GameObject> Gateways = new List<GameObject>();
+
+      object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
+
+      foreach (object thisObject in allObjects)
+      {
+        GameObject castObject = ((GameObject)thisObject);
+        if (castObject.activeInHierarchy && castObject.transform.parent == null && BipolarUtilityFunctions.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
+        {
+          Gateways.Add(castObject);
+        }
+      }
+
+      float maxHeight = Mathf.Min(Gateways.Count * 5 * allRooms.Keys.Count * SIZE_OF_ELEMENT_IN_LIST, 20 * SIZE_OF_ELEMENT_IN_LIST);
+      _gatewaysScrollPosition = EditorGUILayout.BeginScrollView(_gatewaysScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+
+      foreach (GameObject gate in Gateways)
+      {
+        if (gate != null)
+        {
+          GatewayTriggerScript gateTrigger = BipolarUtilityFunctions.GetComponentsInHierarchy<GatewayTriggerScript>(gate.transform)[0];
+          GUILayout.BeginHorizontal();
+
+          GUILayout.Label(" - " + gate.name);
+
+
+          if (GUILayout.Button("Select"))
+          {
+            //SceneView.currentDrawingSceneView.AlignViewToObject(gate.transform);
+            Selection.activeGameObject = gate;
+          }
+
+          GUILayout.EndHorizontal();
+
+          GUILayout.BeginHorizontal();
+          GUILayout.Label("  To");
+          gateTrigger.connectsTo = EditorGUILayout.TextArea(gateTrigger.connectsTo, GUILayout.Width(position.width / 2));
+
+          bool isConnected = false;
+          string gatewayConnectedTo = "";
+          foreach (string roomName in allRooms.Keys)
+          {
+            string simpleRoomName = roomName.Substring(roomName.IndexOf(":") + 2);
+            isConnected = isConnected || gateTrigger.connectsTo.Equals(simpleRoomName);
+            if (gateTrigger.connectsTo.Equals(simpleRoomName))
+              gatewayConnectedTo = roomName;
+          }
+
+          if (GUILayout.Button("Goto") && isConnected)
+          {
+            bool success = EditorApplication.OpenScene(allRooms[gatewayConnectedTo]);
+            if (success)
+              currentlyLoadedRoom = currentlyPressed;
+          }
+
+          GUILayout.EndHorizontal();
+
+          GUIStyle style = new GUIStyle();
+          if (isConnected)
+          {
+            style.normal.textColor = Color.green;
+            GUILayout.Label("   Connected!", style);
+          }
+
+          else
+          {
+            style.normal.textColor = Color.red;
+            GUILayout.Label("   Connection Error!", style);
+          }
+
+        }
+      }
+      EditorGUILayout.EndScrollView();
+    }
   }
 
   bool SerializeCurrentRoom()
