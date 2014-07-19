@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   {
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
-    _usableAbilities.Add("Jump", new AbilityJump());
+    //_usableAbilities.Add("Jump", new AbilityJump());
     //_usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
     //_usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
 
@@ -257,9 +257,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
     _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
 
-    //MagneticBoots ability (Q and E)
-  //  _usableAbilities.Add("Boot1", new AbilityMagnetBoots(GameObject.Find("LeftBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera, this));
-  //  _usableAbilities.Add("Boot2", new AbilityMagnetBoots(GameObject.Find("RightBootMagnetism").GetComponent<PlayerMagnet>(), playerCamera,this));
+    //MagneticBoots ability (space)
+   // _usableAbilities.Add("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), playerCamera, this));
 
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);

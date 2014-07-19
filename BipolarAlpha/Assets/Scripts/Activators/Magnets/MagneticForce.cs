@@ -57,11 +57,19 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     public Force force
     {
         get { return _force; }
+
     }
 
     public Charge charge
     {
-        get { return _charge; }
+      get
+      {
+        return _charge;
+      }
+      set
+      {
+        _charge = value;
+      }
     }
 
     public bool isActivated
@@ -155,6 +163,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         TurnOffLights();
     }
 
+
     public virtual void Start()
     {
         InitLights();
@@ -183,7 +192,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     /// <summary>
     /// Changes the associated lights according to the magnet's charge
     /// </summary>
-    private void InitLights()
+    public void InitLights()
     {
         float g = 52f / 255f;
         float b = 174f / 255f;
@@ -221,7 +230,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     }
 
 
-    private void TurnOnLights()
+    public void TurnOnLights()
     {
         if (_magnetLightsParent != null)
         {
@@ -232,7 +241,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         }
     }
 
-    private void TurnOffLights()
+    public void TurnOffLights()
     {
         if (_magnetLightsParent != null)
         {
@@ -392,6 +401,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         float totalForce = getTotalForce(otherMagnet);
         magnetBody.AddForce(totalForce * forceDirection * Time.deltaTime, ForceMode.Force);
     }
+
 
 
     /// <summary>
