@@ -17,6 +17,8 @@ public class SceneManagerWindow : EditorWindow
 
   string currentlyPressed = "";
 
+  string activeSceneBeforePlayWasPressed = null;
+
   Dictionary<string, string> allRooms = new Dictionary<string,string>();
 
   float bigVariablesUpdateTimeout = 0.0f;
@@ -43,11 +45,6 @@ public class SceneManagerWindow : EditorWindow
     EditorWindow.GetWindow(typeof(SceneManagerWindow));
   }
 
-  void Start()
-  {
-    
-  }
-
   void Update()
   {
     if (Application.isEditor)
@@ -66,8 +63,6 @@ public class SceneManagerWindow : EditorWindow
     if(bigVariablesUpdateTimeout == 0)
     {
       allRooms = getAllRooms();
-      if (_initialWorldState != null)
-        XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
     }
     bigVariablesUpdateTimeout += Time.deltaTime*1000;
     if (bigVariablesUpdateTimeout >= TIME_TO_UPDATE_BIG_VARIABLES)
@@ -93,12 +88,23 @@ public class SceneManagerWindow : EditorWindow
 
     //_fullWindowScrollView = EditorGUILayout.BeginScrollView(_fullWindowScrollView, GUILayout.Width(position.width));
 
-    GameStartState();
-    EditorGUILayout.Separator();
-    LoadRoomsGUI();
-    EditorGUILayout.Separator();
-    RoomActionsGUI();
-    GatewaysInRoomAction();
+    if (EditorApplication.isPlayingOrWillChangePlaymode)
+      GUILayout.Label("Scene Manager Editor\n disabled while in play mode.\n\nClick here to refresh\n if you stopped play mode", EditorStyles.boldLabel);
+    else
+    {
+      if (activeSceneBeforePlayWasPressed != null)
+      {
+        EditorApplication.OpenScene(activeSceneBeforePlayWasPressed);
+        activeSceneBeforePlayWasPressed = null;
+      }
+
+      GameStartState();
+      EditorGUILayout.Separator();
+      LoadRoomsGUI();
+      EditorGUILayout.Separator();
+      RoomActionsGUI();
+      GatewaysInRoomAction();
+    }
 
     //EditorGUILayout.EndScrollView();
   }
@@ -300,6 +306,23 @@ public class SceneManagerWindow : EditorWindow
         float zRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.z, GUILayout.Width(position.width * 0.9f / 3));
         _initialWorldState.playerRotation = new Vector3(xRot, yRot, zRot);
         GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save Changes") && isConnected)
+        {
+          if (_initialWorldState != null)
+            XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
+        }
+        if (GUILayout.Button("Revert Changes"))
+        {
+            _initialWorldState = XMLSerializer.Deserialize<SaveState>(_rootPath + "SaveState.lvl");
+        }
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Play Bipolar") && isConnected)
+        {
+          PlayGame();
+        }
       }
     }
   }
@@ -350,6 +373,21 @@ public class SceneManagerWindow : EditorWindow
     }
       
     return resultDict;
+  }
+
+  void PlayGame()
+  {
+    if (_initialWorldState != null)
+      XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
+
+    string playingFromScene = EditorApplication.currentScene;
+
+    bool success = EditorApplication.OpenScene("Assets/Scenes/Main/Main.unity");
+    if (success)
+    {
+      EditorApplication.isPlaying = true;
+      activeSceneBeforePlayWasPressed = playingFromScene;
+    }
   }
   #endregion
 }
