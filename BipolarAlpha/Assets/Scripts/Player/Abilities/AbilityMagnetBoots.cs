@@ -6,41 +6,50 @@ using System.Collections.Generic;
 /// <summary>
 /// AbilityMagnetBoots provides use of a player's magnet boots
 /// </summary>
-public class AbilityMagnetBoots : AbilityUseMagnet
+public class AbilityMagnetBoots : Ability
 {
   #region private fields
+  protected PlayerController _player;
+  protected MagnetBoots _magnetBoots;
+  protected Camera _playerCamera;
 
   #endregion
 
   /// <summary>
   /// Constructor for AbilityMagnetBoots
   /// </summary>
-  public AbilityMagnetBoots(PlayerMagnet playerMagnet, PlayerController player)
-    : base(playerMagnet, player)
+  public AbilityMagnetBoots(MagnetBoots magnetBoots, Camera playerCamera, PlayerController player)
   {
+    this._magnetBoots = magnetBoots;
+    this._player = player;
+    this._playerCamera = playerCamera;
+
   }
 
-  public AbilityMagnetBoots(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
-    : base(playerMagnet,playerCamera,player)
-  {
-  }
 
-  public override void Use(PlayerController caller, string key = null)
+  public void Use(PlayerController caller, string key = null)
   {
     //Does this every Update when pressing the ability button
-    ApplyForces(caller, Vector3.down);
+    MagneticForce force = _magnetBoots.FireRayCast(_playerCamera.transform.position);
+
+    //Apply force on player
+    if (force != null)
+    {
+      force.ApplyOtherMagnetsForces(caller.rigidbody);
+    }
+
+    }
+
+  public void KeyUp(string key = null)
+  {
+    _magnetBoots.Deactivate();
   }
 
-  public override void KeyUp(string key = null)
+  public void KeyDown(string key = null)
   {
-    _playerMagnet.isActivated = false;
-    _playerMagnet.DisableMagnetHitHaloLight();
-  }
+    _magnetBoots.isActivated = true;
+    _magnetBoots.Activate();
 
-  public override void KeyDown(string key = null)
-  {
-    _playerMagnet.isActivated = true;
-    _playerMagnet.EnableMagnetHitHaloLight();
   }
 
 }

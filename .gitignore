@@ -11,6 +11,7 @@
 *.sln
 *.suo
 *.stackdump
+*.userprefs
 *BipolarDevID.cs
 *BipolarDevID.meta
 BipolarAlpha/ClassDiagram1.cd
