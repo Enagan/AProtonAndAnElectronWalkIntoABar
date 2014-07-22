@@ -135,7 +135,7 @@ public class SceneManagerWindow : EditorWindow
 
         if (_roomsToLoadIntoGameFoldout)
         {
-          float maxHeight = Mathf.Min(_roomsSelectedForLoadIntoGame.Count * SIZE_OF_ELEMENT_IN_LIST, 5 * SIZE_OF_ELEMENT_IN_LIST);
+          float maxHeight = Mathf.Min(_roomsSelectedForLoadIntoGame.Count * SIZE_OF_ELEMENT_IN_LIST, 10 * SIZE_OF_ELEMENT_IN_LIST);
           _roomsToLoadIntoGameScrollPosition = EditorGUILayout.BeginScrollView(_roomsToLoadIntoGameScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
 
           Dictionary<string, bool> tempDict = new Dictionary<string, bool>();
