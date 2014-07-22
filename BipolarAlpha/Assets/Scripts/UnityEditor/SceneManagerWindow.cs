@@ -172,7 +172,7 @@ public class SceneManagerWindow : EditorWindow
         popUpPosition = EditorGUILayout.Popup(popUpPosition, presentableFoldoutStrings.ToArray());
 
         if(loadableFoldoutStrings.Count > 0)
-          _initialWorldState.activeRoom = loadableFoldoutStrings[popUpPosition];//EditorGUILayout.TextArea(_initialWorldState.activeRoom, GUILayout.Width(position.width / 2));
+          _initialWorldState.activeRoom = loadableFoldoutStrings[popUpPosition];
 
         GUILayout.EndHorizontal();
 
@@ -234,16 +234,26 @@ public class SceneManagerWindow : EditorWindow
 
       float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
-      _roomListScrollPosition = EditorGUILayout.BeginScrollView(_roomListScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
 
-      foreach (string roomName in filteredRoomList)
-      {
-        bool isPressed = EditorGUILayout.ToggleLeft(roomName, _currentlyPressed.Equals(roomName));
-        if (isPressed)
-          _currentlyPressed = roomName;
-      }
+      int popUpPosition = filteredRoomList.IndexOf(_currentlyPressed);
+      if (popUpPosition > filteredRoomList.Count || popUpPosition == -1)
+        popUpPosition = 0;
 
-      EditorGUILayout.EndScrollView();
+      popUpPosition = EditorGUILayout.Popup(popUpPosition, filteredRoomList.ToArray());
+
+      if (filteredRoomList.Count > 0)
+        _currentlyPressed = filteredRoomList[popUpPosition];
+
+      //_roomListScrollPosition = EditorGUILayout.BeginScrollView(_roomListScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+
+      //foreach (string roomName in filteredRoomList)
+      //{
+      //  bool isPressed = EditorGUILayout.ToggleLeft(roomName, _currentlyPressed.Equals(roomName));
+      //  if (isPressed)
+      //    _currentlyPressed = roomName;
+      //}
+
+      //EditorGUILayout.EndScrollView();
 
       EditorGUILayout.BeginHorizontal();
 
