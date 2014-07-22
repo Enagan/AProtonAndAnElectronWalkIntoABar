@@ -65,13 +65,13 @@ public class RoomFactory
             }
             else
             {
-              BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+              Debug.Log("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
             }
 
           }
           else
           {
-            BipolarConsole.EnganaLog("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+            Debug.Log("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
           }
         }
 
@@ -96,7 +96,7 @@ public class RoomFactory
     }
     else
     {
-      BipolarConsole.AllLog("Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
       return null;
     }
   }
@@ -129,7 +129,7 @@ public class RoomFactory
     }
     else
     {
-      BipolarConsole.AllLog("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry");
+      Debug.Log("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry");
     }
   }
   #endregion
@@ -184,13 +184,13 @@ public class RoomFactory
     //TODO Exceptioning
     if ((fromGate = from.GetGatewayTo(newRoom)) == null)
     {
-      BipolarConsole.AllLog("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found");
+      Debug.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found");
       yield break;
       //return;
     }
     if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
     {
-      BipolarConsole.AllLog("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found");
+      Debug.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found");
       yield break;
       //return;
     }

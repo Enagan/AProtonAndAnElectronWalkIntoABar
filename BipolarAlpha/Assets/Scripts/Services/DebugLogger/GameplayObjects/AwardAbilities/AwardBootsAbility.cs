@@ -12,8 +12,7 @@ public class AwardBootsAbility : AwardPlayerAbility {
   /// </summary>
   public override void awardAbility(PlayerController player)
   {
-    BipolarConsole.AllLog("Awarding Boots Ability");
-    player.AddAbility("Boot1", new AbilityMagnetBoots(GameObject.Find("LeftBootMagnetism").GetComponent<PlayerMagnet>(), player));
-    player.AddAbility("Boot2", new AbilityMagnetBoots(GameObject.Find("RightBootMagnetism").GetComponent<PlayerMagnet>(), player));
+    Debug.Log("Awarding Boots Ability");
+    player.AddAbility("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), player.getPlayerCamera(), player));
   }
 }

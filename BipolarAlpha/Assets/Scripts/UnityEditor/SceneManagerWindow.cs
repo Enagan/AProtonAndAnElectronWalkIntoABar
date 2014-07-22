@@ -1,27 +1,41 @@
-﻿using UnityEngine;
+﻿  
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
+
 public class SceneManagerWindow : EditorWindow
 {
+  const float SIZE_OF_ELEMENT_IN_LIST = 18.5f;
+  const float TIME_TO_UPDATE_BIG_VARIABLES = 5.0f;
 
   string filterRoomListString = "";
   string currentlyLoadedRoom = "<noRoom>";
-
-  Vector2 _scrollPosition;
+  string _rootPath = "";
 
   string currentlyPressed = "";
 
+  string activeSceneBeforePlayWasPressed = null;
+
   Dictionary<string, string> allRooms = new Dictionary<string,string>();
 
-  float roomListUpdateClock = 0;
+  float bigVariablesUpdateTimeout = 0.0f;
   float compilationSuccessLabelTimeOut = 0;
 
+  SaveState _initialWorldState = null;
 
+  // Foldouts
   bool loadRoomFoldoutStatus = false;
   bool roomActionFoldoutStatus = false;
+  bool gatewaysFoldoutStatus = true;
+  bool gameStateFoldoutStatus = true;
+
+  // Scroll Positions
+  Vector2 _fullWindowScrollView;
+  Vector2 _roomListScrollPosition;
+  Vector2 _gatewaysScrollPosition;
 
   // Add menu item named "My Window" to the Window menu
   [MenuItem("Window/Scene Manager Editor")]
@@ -33,14 +47,27 @@ public class SceneManagerWindow : EditorWindow
 
   void Update()
   {
-    if(roomListUpdateClock == 0)
+    if (Application.isEditor)
+    {
+      _rootPath = "Assets/Resources/Levels/";
+    }
+    else
+    {
+      _rootPath = Application.dataPath + "/Levels/";
+    }
+
+    if (_initialWorldState == null)
+      _initialWorldState = XMLSerializer.Deserialize<SaveState>(_rootPath + "SaveState.lvl");
+
+
+    if(bigVariablesUpdateTimeout == 0)
     {
       allRooms = getAllRooms();
     }
-    roomListUpdateClock += Time.deltaTime*1000;
-    if(roomListUpdateClock >= 5.0f)
+    bigVariablesUpdateTimeout += Time.deltaTime*1000;
+    if (bigVariablesUpdateTimeout >= TIME_TO_UPDATE_BIG_VARIABLES)
     {
-      roomListUpdateClock = 0.0f;
+      bigVariablesUpdateTimeout = 0.0f;
     }
 
     if(compilationSuccessLabelTimeOut > 0)
@@ -57,19 +84,35 @@ public class SceneManagerWindow : EditorWindow
   void OnGUI()
   {
     title = "Scene Manager Editor";
-
     GUILayout.Label("Scene Manager Editor", EditorStyles.boldLabel);
-    //
-    LoadRoomsGUI();
 
-    //GUILayout.Label("----------------------------------------------------------------------", EditorStyles.boldLabel);
-    EditorGUILayout.Separator();
-    RoomActionsGUI();
+    //_fullWindowScrollView = EditorGUILayout.BeginScrollView(_fullWindowScrollView, GUILayout.Width(position.width));
+
+    if (EditorApplication.isPlayingOrWillChangePlaymode)
+      GUILayout.Label("Scene Manager Editor\n disabled while in play mode.\n\nClick here to refresh\n if you stopped play mode", EditorStyles.boldLabel);
+    else
+    {
+      if (activeSceneBeforePlayWasPressed != null)
+      {
+        EditorApplication.OpenScene(activeSceneBeforePlayWasPressed);
+        activeSceneBeforePlayWasPressed = null;
+      }
+
+      GameStartState();
+      EditorGUILayout.Separator();
+      LoadRoomsGUI();
+      EditorGUILayout.Separator();
+      RoomActionsGUI();
+      GatewaysInRoomAction();
+    }
+
+    //EditorGUILayout.EndScrollView();
   }
 
-
+  #region Option Pannels
   void LoadRoomsGUI()
   {
+    GUILayout.Label("Room Loader", EditorStyles.boldLabel);
     loadRoomFoldoutStatus = EditorGUILayout.Foldout(loadRoomFoldoutStatus, "Load Rooms");
 
     if (loadRoomFoldoutStatus)
@@ -86,9 +129,9 @@ public class SceneManagerWindow : EditorWindow
         }
       }
 
-      float maxHeight = Mathf.Min(filteredRoomList.Count * 18.2f, 300);
+      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
-      _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+      _roomListScrollPosition = EditorGUILayout.BeginScrollView(_roomListScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
 
       foreach (string roomName in filteredRoomList)
       {
@@ -118,6 +161,8 @@ public class SceneManagerWindow : EditorWindow
 
   void RoomActionsGUI()
   {
+    GUILayout.Label("Loaded Room Actions", EditorStyles.boldLabel);
+
     if (currentlyLoadedRoom.Equals("<No valid room is loaded>"))
       roomActionFoldoutStatus = false;
     else
@@ -139,12 +184,157 @@ public class SceneManagerWindow : EditorWindow
 
     //GUILayout.Label(, EditorStyles.boldLabel);
   }
+  void GatewaysInRoomAction()
+  {
+    gatewaysFoldoutStatus = EditorGUILayout.Foldout(gatewaysFoldoutStatus, "Gateways in room:");
+    if (roomActionFoldoutStatus && gatewaysFoldoutStatus)
+    {
+      List<GameObject> Gateways = new List<GameObject>();
 
+      object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
+
+      foreach (object thisObject in allObjects)
+      {
+        GameObject castObject = ((GameObject)thisObject);
+        if (castObject.activeInHierarchy && castObject.transform.parent == null && BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
+        {
+          Gateways.Add(castObject);
+        }
+      }
+
+      float maxHeight = Mathf.Min(Gateways.Count * 2 * SIZE_OF_ELEMENT_IN_LIST, 20 * SIZE_OF_ELEMENT_IN_LIST);
+      _gatewaysScrollPosition = EditorGUILayout.BeginScrollView(_gatewaysScrollPosition, GUILayout.MaxHeight(maxHeight+20), GUILayout.Width(position.width));
+
+      foreach (GameObject gate in Gateways)
+      {
+        if (gate != null)
+        {
+          GatewayTriggerScript gateTrigger = BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(gate.transform)[0];
+          GUILayout.BeginHorizontal();
+
+          GUILayout.Label(" - " + gate.name);
+
+
+          if (GUILayout.Button("Select"))
+          {
+            //SceneView.currentDrawingSceneView.AlignViewToObject(gate.transform);
+            Selection.activeGameObject = gate;
+          }
+
+          GUILayout.EndHorizontal();
+
+          GUILayout.BeginHorizontal();
+          GUILayout.Label("  To");
+          gateTrigger.connectsTo = EditorGUILayout.TextArea(gateTrigger.connectsTo, GUILayout.Width(position.width / 2));
+
+          bool isConnected = false;
+          string gatewayConnectedTo = "";
+          foreach (string roomName in allRooms.Keys)
+          {
+            string simpleRoomName = roomName.Substring(roomName.IndexOf(":") + 2);
+            isConnected = isConnected || gateTrigger.connectsTo.Equals(simpleRoomName);
+            if (gateTrigger.connectsTo.Equals(simpleRoomName))
+              gatewayConnectedTo = roomName;
+          }
+
+          if (GUILayout.Button("Goto") && isConnected)
+          {
+            bool success = EditorApplication.OpenScene(allRooms[gatewayConnectedTo]);
+            if (success)
+              currentlyLoadedRoom = currentlyPressed;
+          }
+
+          GUILayout.EndHorizontal();
+
+          if (!isConnected)
+          {
+            GUIStyle style = new GUIStyle();
+            style.normal.textColor = Color.red;
+            GUILayout.Label("   Invalid Room Name!", style);
+          }
+
+        }
+      }
+      EditorGUILayout.EndScrollView();
+    }
+  }
+
+  void GameStartState()
+  {
+    GUILayout.Label("Game Start State", EditorStyles.boldLabel);
+    gameStateFoldoutStatus = EditorGUILayout.Foldout(gameStateFoldoutStatus, "Game Start Params");
+    if (gameStateFoldoutStatus)
+    {
+      if (_initialWorldState == null)
+      {
+        GUILayout.Label("Loading data from savestate...");
+      }
+      else
+      {
+        GUILayout.Label("Starting room ");
+        GUILayout.BeginHorizontal();
+        _initialWorldState.activeRoom = EditorGUILayout.TextArea(_initialWorldState.activeRoom, GUILayout.Width(position.width / 2));
+
+        bool isConnected = false;
+        foreach (string roomName in allRooms.Keys)
+        {
+          string simpleRoomName = roomName.Substring(roomName.IndexOf(":") + 2);
+          isConnected = isConnected || _initialWorldState.activeRoom.Equals(simpleRoomName);
+        }
+
+        if (!isConnected)
+        {
+          GUIStyle style = new GUIStyle();
+          style.normal.textColor = Color.red;
+          GUILayout.Label("Invalid Room Name!", style);
+        }
+        GUILayout.EndHorizontal();
+
+        GUILayout.Label("Player Start Position");
+        GUILayout.BeginHorizontal();
+        float xPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.x, GUILayout.Width(position.width * 0.9f / 3));
+        float yPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.y, GUILayout.Width(position.width * 0.9f / 3));
+        float zPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.z, GUILayout.Width(position.width * 0.9f / 3));
+        _initialWorldState.playerPosition = new Vector3(xPos, yPos, zPos);
+        GUILayout.EndHorizontal();
+
+
+        GUILayout.Label("Player Start Rotation");
+        GUILayout.BeginHorizontal();
+        float xRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.x, GUILayout.Width(position.width * 0.9f / 3));
+        float yRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.y, GUILayout.Width(position.width * 0.9f / 3));
+        float zRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.z, GUILayout.Width(position.width * 0.9f / 3));
+        _initialWorldState.playerRotation = new Vector3(xRot, yRot, zRot);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save Changes") && isConnected)
+        {
+          if (_initialWorldState != null)
+            XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
+        }
+        if (GUILayout.Button("Revert Changes"))
+        {
+            _initialWorldState = XMLSerializer.Deserialize<SaveState>(_rootPath + "SaveState.lvl");
+        }
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Play Bipolar") && isConnected)
+        {
+          PlayGame();
+        }
+      }
+    }
+  }
+
+#endregion
+  #region Actuators
   bool SerializeCurrentRoom()
   {
     RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
-    roomDefMaker._roomName = "DerpTestin";
+    roomDefMaker._roomName = currentlyLoadedRoom.Substring(currentlyLoadedRoom.IndexOf(":") + 2);
     roomDefMaker.SerializeRoom();
+    Debug.Log("Room " + roomDefMaker._roomName + " Successefully serialized");
     return true;
   }
 
@@ -185,4 +375,19 @@ public class SceneManagerWindow : EditorWindow
     return resultDict;
   }
 
+  void PlayGame()
+  {
+    if (_initialWorldState != null)
+      XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
+
+    string playingFromScene = EditorApplication.currentScene;
+
+    bool success = EditorApplication.OpenScene("Assets/Scenes/Main/Main.unity");
+    if (success)
+    {
+      EditorApplication.isPlaying = true;
+      activeSceneBeforePlayWasPressed = playingFromScene;
+    }
+  }
+  #endregion
 }

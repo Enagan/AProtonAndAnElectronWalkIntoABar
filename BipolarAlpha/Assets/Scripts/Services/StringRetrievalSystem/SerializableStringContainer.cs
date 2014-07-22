@@ -51,7 +51,7 @@ public class SerializableStringContainer
 
     foreach (SerializableStringToken token in _stringAssets)
     {
-      //  BipolarConsole.AllLog("Dict["+token.key+"] = " +token.stringAsset); // For Debugging Strings input
+      //  Debug.Log("Dict["+token.key+"] = " +token.stringAsset); // For Debugging Strings input
       dict[token.key] = token.stringAsset;
     }
     return dict;

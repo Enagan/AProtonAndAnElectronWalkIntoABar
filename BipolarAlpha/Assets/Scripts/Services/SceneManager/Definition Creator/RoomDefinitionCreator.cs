@@ -8,7 +8,7 @@ using UnityEditor;
 /// <summary>
 /// The Room definition creator creates and serializes to a file all the prefab objects present in the scene where it's placed
 /// </summary>
-public class RoomDefinitionCreator : MonoBehaviour 
+public class RoomDefinitionCreator
 {
   [SerializeField]
   public string _roomName = "";
@@ -79,10 +79,10 @@ public class RoomDefinitionCreator : MonoBehaviour
       path = path.Replace("Assets/Resources/", "");
 
       //Checks if the current object has any circuits in its hierarchy
-      if(BipolarUtilityFunctions.GetComponentsInHierarchy<Circuit>(obj.transform).Count > 0)
+      if(BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform).Count > 0)
       {
         //Check if any of those is a generator. In case it is, we need to generate a circuit system prefab to keep the circuit connections
-        List<CircuitGenerator> checkForGenerators = BipolarUtilityFunctions.GetComponentsInHierarchy<CircuitGenerator>(obj.transform);
+        List<CircuitGenerator> checkForGenerators = BPUtil.GetComponentsInHierarchy<CircuitGenerator>(obj.transform);
         if (checkForGenerators.Count > 0)
         {
           //List of objects which are part of the current circuit system tree
@@ -116,7 +116,7 @@ public class RoomDefinitionCreator : MonoBehaviour
         {
           //In case there is no generator, we check if the circuits are disabled, because if they are, the object used might be just for scenery
           bool allInactive = true;
-          foreach(Circuit c in BipolarUtilityFunctions.GetComponentsInHierarchy<Circuit>(obj.transform))
+          foreach(Circuit c in BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform))
           {
             if(c.enabled)
             {
@@ -148,7 +148,18 @@ public class RoomDefinitionCreator : MonoBehaviour
         }
       }
 
-    }    
+    }   
+ 
+    // Cleanup created circuit systems
+    foreach (GameObject obj in createdCircuitSystems)
+    {
+      foreach (GameObject children in BPUtil.GetDirectChildren(obj))
+      {
+        children.transform.parent = null;
+      }
+      GameObject.DestroyImmediate(obj);
+    }
+
     return roomDef;
   }
 
@@ -163,7 +174,7 @@ public class RoomDefinitionCreator : MonoBehaviour
                                     obj.transform.eulerAngles);
 
     ///Gets all instances of IHasComplexState Scripts in the given object's Hierarchy tree and generates their complex state definitions
-    foreach (IHasComplexState hasComplexState in BipolarUtilityFunctions.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
+    foreach (IHasComplexState hasComplexState in BPUtil.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
     {
       def.AddComplexState(hasComplexState.WriteComplexState());
     }
