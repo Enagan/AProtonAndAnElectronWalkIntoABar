@@ -11,31 +11,37 @@ public class SceneManagerWindow : EditorWindow
   const float SIZE_OF_ELEMENT_IN_LIST = 18.5f;
   const float TIME_TO_UPDATE_BIG_VARIABLES = 5.0f;
 
-  string filterRoomListString = "";
-  string currentlyLoadedRoom = "<noRoom>";
+  string _filterRoomListString = "";
+  string _currentlyLoadedRoom = "<noRoom>";
   string _rootPath = "";
 
-  string currentlyPressed = "";
+  string _currentlyPressed = "";
 
-  string activeSceneBeforePlayWasPressed = null;
+  string _activeSceneBeforePlayWasPressed = null;
 
-  Dictionary<string, string> allRooms = new Dictionary<string,string>();
+  Dictionary<string, string> _allRooms = new Dictionary<string,string>();
+  Dictionary<string, bool> _roomsSelectedForLoadIntoGame = new Dictionary<string, bool>();
 
-  float bigVariablesUpdateTimeout = 0.0f;
-  float compilationSuccessLabelTimeOut = 0;
+  float _bigVariablesUpdateTimeout = 0.0f;
+  float _compilationSuccessLabelTimeOut = 0;
 
   SaveState _initialWorldState = null;
 
   // Foldouts
-  bool loadRoomFoldoutStatus = false;
-  bool roomActionFoldoutStatus = false;
-  bool gatewaysFoldoutStatus = true;
-  bool gameStateFoldoutStatus = true;
+  bool _loadRoomFoldoutStatus = false;
+  bool _roomActionFoldoutStatus = false;
+  bool _gatewaysFoldoutStatus = true;
+  bool _gameStateFoldoutStatus = true;
+  bool _roomsToLoadIntoGameFoldout = false;
 
   // Scroll Positions
   Vector2 _fullWindowScrollView;
   Vector2 _roomListScrollPosition;
   Vector2 _gatewaysScrollPosition;
+  Vector2 _roomsToLoadIntoGameScrollPosition;
+
+  // Popup Positions
+  int _gameStateStartRoomPopup = 0;
 
   // Add menu item named "My Window" to the Window menu
   [MenuItem("Window/Scene Manager Editor")]
@@ -56,27 +62,29 @@ public class SceneManagerWindow : EditorWindow
       _rootPath = Application.dataPath + "/Levels/";
     }
 
-    if (_initialWorldState == null)
-      _initialWorldState = XMLSerializer.Deserialize<SaveState>(_rootPath + "SaveState.lvl");
-
-
-    if(bigVariablesUpdateTimeout == 0)
+    if (_initialWorldState == null || _roomsSelectedForLoadIntoGame.Count == 0)
     {
-      allRooms = getAllRooms();
-    }
-    bigVariablesUpdateTimeout += Time.deltaTime*1000;
-    if (bigVariablesUpdateTimeout >= TIME_TO_UPDATE_BIG_VARIABLES)
-    {
-      bigVariablesUpdateTimeout = 0.0f;
+      resetGameState();
     }
 
-    if(compilationSuccessLabelTimeOut > 0)
+
+    if(_bigVariablesUpdateTimeout == 0)
     {
-      compilationSuccessLabelTimeOut -= Time.deltaTime * 1000;
+      _allRooms = getAllRooms();
+    }
+    _bigVariablesUpdateTimeout += Time.deltaTime*1000;
+    if (_bigVariablesUpdateTimeout >= TIME_TO_UPDATE_BIG_VARIABLES)
+    {
+      _bigVariablesUpdateTimeout = 0.0f;
+    }
+
+    if(_compilationSuccessLabelTimeOut > 0)
+    {
+      _compilationSuccessLabelTimeOut -= Time.deltaTime * 1000;
     }
     else
     {
-      compilationSuccessLabelTimeOut = 0;
+      _compilationSuccessLabelTimeOut = 0;
     }
 
   }
@@ -92,10 +100,10 @@ public class SceneManagerWindow : EditorWindow
       GUILayout.Label("Scene Manager Editor\n disabled while in play mode.\n\nClick here to refresh\n if you stopped play mode", EditorStyles.boldLabel);
     else
     {
-      if (activeSceneBeforePlayWasPressed != null)
+      if (_activeSceneBeforePlayWasPressed != null)
       {
-        EditorApplication.OpenScene(activeSceneBeforePlayWasPressed);
-        activeSceneBeforePlayWasPressed = null;
+        EditorApplication.OpenScene(_activeSceneBeforePlayWasPressed);
+        _activeSceneBeforePlayWasPressed = null;
       }
 
       GameStartState();
@@ -110,20 +118,115 @@ public class SceneManagerWindow : EditorWindow
   }
 
   #region Option Pannels
+
+  void GameStartState()
+  {
+    GUILayout.Label("Game Start State", EditorStyles.boldLabel);
+    _gameStateFoldoutStatus = EditorGUILayout.Foldout(_gameStateFoldoutStatus, "Game Start Params");
+    if (_gameStateFoldoutStatus)
+    {
+      if (_initialWorldState == null)
+      {
+        GUILayout.Label("Loading data from savestate...");
+      }
+      else
+      {
+        _roomsToLoadIntoGameFoldout = EditorGUILayout.Foldout(_roomsToLoadIntoGameFoldout, "Rooms to load into game");
+
+        if (_roomsToLoadIntoGameFoldout)
+        {
+          float maxHeight = Mathf.Min(_roomsSelectedForLoadIntoGame.Count * SIZE_OF_ELEMENT_IN_LIST, 10 * SIZE_OF_ELEMENT_IN_LIST);
+          _roomsToLoadIntoGameScrollPosition = EditorGUILayout.BeginScrollView(_roomsToLoadIntoGameScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+
+          Dictionary<string, bool> tempDict = new Dictionary<string, bool>();
+          foreach (KeyValuePair<string,bool> roomSelected in _roomsSelectedForLoadIntoGame)
+          {
+            bool isSelected = EditorGUILayout.ToggleLeft(roomSelected.Key, roomSelected.Value);
+            tempDict.Add(roomSelected.Key, isSelected);
+          }
+          _roomsSelectedForLoadIntoGame = new Dictionary<string, bool>(tempDict);
+
+          EditorGUILayout.EndScrollView();
+
+        }
+
+        GUILayout.Label("Starting room ");
+        GUILayout.BeginHorizontal();
+
+        List<string> presentableFoldoutStrings = new List<string>();
+        List<string> loadableFoldoutStrings = new List<string>();
+        foreach (string roomName in _roomsSelectedForLoadIntoGame.Keys)
+        {
+          if (_roomsSelectedForLoadIntoGame[roomName])
+          {
+            string simpleRoomName = roomName.Substring(roomName.IndexOf(":") + 2);
+            loadableFoldoutStrings.Add(simpleRoomName);
+            presentableFoldoutStrings.Add(roomName);
+          }
+        }
+
+        int popUpPosition = loadableFoldoutStrings.IndexOf(_initialWorldState.activeRoom);
+        if (popUpPosition > loadableFoldoutStrings.Count || popUpPosition == -1)
+          popUpPosition = 0;
+
+        popUpPosition = EditorGUILayout.Popup(popUpPosition, presentableFoldoutStrings.ToArray());
+
+        if(loadableFoldoutStrings.Count > 0)
+          _initialWorldState.activeRoom = loadableFoldoutStrings[popUpPosition];
+
+        GUILayout.EndHorizontal();
+
+        GUILayout.Label("Player Start Position");
+        GUILayout.BeginHorizontal();
+        float xPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.x, GUILayout.Width(position.width * 0.9f / 3));
+        float yPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.y, GUILayout.Width(position.width * 0.9f / 3));
+        float zPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.z, GUILayout.Width(position.width * 0.9f / 3));
+        _initialWorldState.playerPosition = new Vector3(xPos, yPos, zPos);
+        GUILayout.EndHorizontal();
+
+
+        GUILayout.Label("Player Start Rotation");
+        GUILayout.BeginHorizontal();
+        float xRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.x, GUILayout.Width(position.width * 0.9f / 3));
+        float yRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.y, GUILayout.Width(position.width * 0.9f / 3));
+        float zRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.z, GUILayout.Width(position.width * 0.9f / 3));
+        _initialWorldState.playerRotation = new Vector3(xRot, yRot, zRot);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save Changes"))
+        {
+          if (_initialWorldState != null)
+            saveGameState();
+        }
+        if (GUILayout.Button("Revert Changes"))
+        {
+          resetGameState();
+        }
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Play Bipolar"))
+        {
+          PlayGame();
+        }
+      }
+    }
+  }
+
   void LoadRoomsGUI()
   {
     GUILayout.Label("Room Loader", EditorStyles.boldLabel);
-    loadRoomFoldoutStatus = EditorGUILayout.Foldout(loadRoomFoldoutStatus, "Load Rooms");
+    _loadRoomFoldoutStatus = EditorGUILayout.Foldout(_loadRoomFoldoutStatus, "Load Rooms");
 
-    if (loadRoomFoldoutStatus)
+    if (_loadRoomFoldoutStatus)
     {
-      filterRoomListString = EditorGUILayout.TextField("Filter Rooms", filterRoomListString);
+      _filterRoomListString = EditorGUILayout.TextField("Filter Rooms", _filterRoomListString);
 
       List<string> filteredRoomList = new List<string>();
-      foreach (KeyValuePair<string, string> room in allRooms)
+      foreach (KeyValuePair<string, string> room in _allRooms)
       {
         string roomName = room.Key;
-        if (roomName.Contains(filterRoomListString) || filterRoomListString.Equals(""))
+        if (roomName.Contains(_filterRoomListString) || _filterRoomListString.Equals(""))
         {
           filteredRoomList.Add(roomName);
         }
@@ -131,28 +234,38 @@ public class SceneManagerWindow : EditorWindow
 
       float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
-      _roomListScrollPosition = EditorGUILayout.BeginScrollView(_roomListScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
 
-      foreach (string roomName in filteredRoomList)
-      {
-        bool isPressed = EditorGUILayout.ToggleLeft(roomName, currentlyPressed.Equals(roomName));
-        if (isPressed)
-          currentlyPressed = roomName;
-      }
+      int popUpPosition = filteredRoomList.IndexOf(_currentlyPressed);
+      if (popUpPosition > filteredRoomList.Count || popUpPosition == -1)
+        popUpPosition = 0;
 
-      EditorGUILayout.EndScrollView();
+      popUpPosition = EditorGUILayout.Popup(popUpPosition, filteredRoomList.ToArray());
+
+      if (filteredRoomList.Count > 0)
+        _currentlyPressed = filteredRoomList[popUpPosition];
+
+      //_roomListScrollPosition = EditorGUILayout.BeginScrollView(_roomListScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+
+      //foreach (string roomName in filteredRoomList)
+      //{
+      //  bool isPressed = EditorGUILayout.ToggleLeft(roomName, _currentlyPressed.Equals(roomName));
+      //  if (isPressed)
+      //    _currentlyPressed = roomName;
+      //}
+
+      //EditorGUILayout.EndScrollView();
 
       EditorGUILayout.BeginHorizontal();
 
       if (GUILayout.Button("Load Room", GUILayout.Width(Mathf.Max((position.width - 10) / 2, 100))))
       {
-        bool success = EditorApplication.OpenScene(allRooms[currentlyPressed]);
+        bool success = EditorApplication.OpenScene(_allRooms[_currentlyPressed]);
         if (success)
-          currentlyLoadedRoom = currentlyPressed;
+          _currentlyLoadedRoom = _currentlyPressed;
       }
       if (GUILayout.Button("Refresh Rooms", GUILayout.Width(Mathf.Max((position.width - 10) / 2, 100))))
       {
-        allRooms = getAllRooms();
+        _allRooms = getAllRooms();
       }
 
       EditorGUILayout.EndHorizontal();
@@ -163,20 +276,20 @@ public class SceneManagerWindow : EditorWindow
   {
     GUILayout.Label("Loaded Room Actions", EditorStyles.boldLabel);
 
-    if (currentlyLoadedRoom.Equals("<No valid room is loaded>"))
-      roomActionFoldoutStatus = false;
+    if (_currentlyLoadedRoom.Equals("<No valid room is loaded>"))
+      _roomActionFoldoutStatus = false;
     else
-      roomActionFoldoutStatus = true;
-    EditorGUILayout.Foldout(roomActionFoldoutStatus, "Loaded Room: " + currentlyLoadedRoom);
-    if(roomActionFoldoutStatus)
+      _roomActionFoldoutStatus = true;
+    EditorGUILayout.Foldout(_roomActionFoldoutStatus, "Loaded Room: " + _currentlyLoadedRoom);
+    if(_roomActionFoldoutStatus)
     {
-      if(compilationSuccessLabelTimeOut>0)
+      if(_compilationSuccessLabelTimeOut>0)
         GUILayout.Label("Serialization Success!", EditorStyles.boldLabel);
 
       if (GUILayout.Button("Serialize Current Room", GUILayout.Width(Mathf.Max(position.width - 10, 100))))
         if (SerializeCurrentRoom())
         {
-          compilationSuccessLabelTimeOut = 10;
+          _compilationSuccessLabelTimeOut = 10;
         }
 
 
@@ -186,8 +299,8 @@ public class SceneManagerWindow : EditorWindow
   }
   void GatewaysInRoomAction()
   {
-    gatewaysFoldoutStatus = EditorGUILayout.Foldout(gatewaysFoldoutStatus, "Gateways in room:");
-    if (roomActionFoldoutStatus && gatewaysFoldoutStatus)
+    _gatewaysFoldoutStatus = EditorGUILayout.Foldout(_gatewaysFoldoutStatus, "Gateways in room:");
+    if (_roomActionFoldoutStatus && _gatewaysFoldoutStatus)
     {
       List<GameObject> Gateways = new List<GameObject>();
 
@@ -225,23 +338,36 @@ public class SceneManagerWindow : EditorWindow
 
           GUILayout.BeginHorizontal();
           GUILayout.Label("  To");
-          gateTrigger.connectsTo = EditorGUILayout.TextArea(gateTrigger.connectsTo, GUILayout.Width(position.width / 2));
-
+          //gateTrigger.connectsTo = EditorGUILayout.TextArea(gateTrigger.connectsTo, GUILayout.Width(position.width / 2));
           bool isConnected = false;
           string gatewayConnectedTo = "";
-          foreach (string roomName in allRooms.Keys)
+          List<string> loadableFoldoutRoomNames = new List<string>();
+          foreach (string roomName in _allRooms.Keys)
           {
             string simpleRoomName = roomName.Substring(roomName.IndexOf(":") + 2);
+            loadableFoldoutRoomNames.Add(simpleRoomName);
             isConnected = isConnected || gateTrigger.connectsTo.Equals(simpleRoomName);
             if (gateTrigger.connectsTo.Equals(simpleRoomName))
               gatewayConnectedTo = roomName;
           }
 
+          int popUpPosition = loadableFoldoutRoomNames.IndexOf(gateTrigger.connectsTo);
+          if (popUpPosition > loadableFoldoutRoomNames.Count || popUpPosition == -1)
+            popUpPosition = 0;
+
+          popUpPosition = EditorGUILayout.Popup(popUpPosition, loadableFoldoutRoomNames.ToArray());
+
+          string previousGatewayConnection = gateTrigger.connectsTo;
+          if (loadableFoldoutRoomNames.Count > 0)
+            gateTrigger.connectsTo = loadableFoldoutRoomNames[popUpPosition];
+          if (!previousGatewayConnection.Equals(gateTrigger.connectsTo))
+            EditorUtility.SetDirty(gateTrigger);
+
           if (GUILayout.Button("Goto") && isConnected)
           {
-            bool success = EditorApplication.OpenScene(allRooms[gatewayConnectedTo]);
+            bool success = EditorApplication.OpenScene(_allRooms[gatewayConnectedTo]);
             if (success)
-              currentlyLoadedRoom = currentlyPressed;
+              _currentlyLoadedRoom = _currentlyPressed;
           }
 
           GUILayout.EndHorizontal();
@@ -259,80 +385,12 @@ public class SceneManagerWindow : EditorWindow
     }
   }
 
-  void GameStartState()
-  {
-    GUILayout.Label("Game Start State", EditorStyles.boldLabel);
-    gameStateFoldoutStatus = EditorGUILayout.Foldout(gameStateFoldoutStatus, "Game Start Params");
-    if (gameStateFoldoutStatus)
-    {
-      if (_initialWorldState == null)
-      {
-        GUILayout.Label("Loading data from savestate...");
-      }
-      else
-      {
-        GUILayout.Label("Starting room ");
-        GUILayout.BeginHorizontal();
-        _initialWorldState.activeRoom = EditorGUILayout.TextArea(_initialWorldState.activeRoom, GUILayout.Width(position.width / 2));
-
-        bool isConnected = false;
-        foreach (string roomName in allRooms.Keys)
-        {
-          string simpleRoomName = roomName.Substring(roomName.IndexOf(":") + 2);
-          isConnected = isConnected || _initialWorldState.activeRoom.Equals(simpleRoomName);
-        }
-
-        if (!isConnected)
-        {
-          GUIStyle style = new GUIStyle();
-          style.normal.textColor = Color.red;
-          GUILayout.Label("Invalid Room Name!", style);
-        }
-        GUILayout.EndHorizontal();
-
-        GUILayout.Label("Player Start Position");
-        GUILayout.BeginHorizontal();
-        float xPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.x, GUILayout.Width(position.width * 0.9f / 3));
-        float yPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.y, GUILayout.Width(position.width * 0.9f / 3));
-        float zPos = EditorGUILayout.FloatField(_initialWorldState.playerPosition.z, GUILayout.Width(position.width * 0.9f / 3));
-        _initialWorldState.playerPosition = new Vector3(xPos, yPos, zPos);
-        GUILayout.EndHorizontal();
-
-
-        GUILayout.Label("Player Start Rotation");
-        GUILayout.BeginHorizontal();
-        float xRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.x, GUILayout.Width(position.width * 0.9f / 3));
-        float yRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.y, GUILayout.Width(position.width * 0.9f / 3));
-        float zRot = EditorGUILayout.FloatField(_initialWorldState.playerRotation.z, GUILayout.Width(position.width * 0.9f / 3));
-        _initialWorldState.playerRotation = new Vector3(xRot, yRot, zRot);
-        GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Save Changes") && isConnected)
-        {
-          if (_initialWorldState != null)
-            XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
-        }
-        if (GUILayout.Button("Revert Changes"))
-        {
-            _initialWorldState = XMLSerializer.Deserialize<SaveState>(_rootPath + "SaveState.lvl");
-        }
-        GUILayout.EndHorizontal();
-
-        if (GUILayout.Button("Play Bipolar") && isConnected)
-        {
-          PlayGame();
-        }
-      }
-    }
-  }
-
 #endregion
   #region Actuators
   bool SerializeCurrentRoom()
   {
     RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
-    roomDefMaker._roomName = currentlyLoadedRoom.Substring(currentlyLoadedRoom.IndexOf(":") + 2);
+    roomDefMaker._roomName = _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2);
     roomDefMaker.SerializeRoom();
     Debug.Log("Room " + roomDefMaker._roomName + " Successefully serialized");
     return true;
@@ -340,24 +398,24 @@ public class SceneManagerWindow : EditorWindow
 
   void OnHierarchyChange()
   {
-    if (currentlyLoadedRoom.Equals("<No valid room is loaded>") || 
-      (allRooms.ContainsKey(currentlyLoadedRoom) && !allRooms[currentlyLoadedRoom].Equals(EditorApplication.currentScene)))
+    if (_currentlyLoadedRoom.Equals("<No valid room is loaded>") || 
+      (_allRooms.ContainsKey(_currentlyLoadedRoom) && !_allRooms[_currentlyLoadedRoom].Equals(EditorApplication.currentScene)))
     {
-      if (allRooms.ContainsValue(EditorApplication.currentScene))
+      if (_allRooms.ContainsValue(EditorApplication.currentScene))
       {
-        foreach (string key in allRooms.Keys)
+        foreach (string key in _allRooms.Keys)
         {
-          if (allRooms[key].Equals(EditorApplication.currentScene))
+          if (_allRooms[key].Equals(EditorApplication.currentScene))
           {
-            currentlyPressed = key;
-            currentlyLoadedRoom = currentlyPressed;
+            _currentlyPressed = key;
+            _currentlyLoadedRoom = _currentlyPressed;
             break;
           }
         }
       }
       else
       {
-        currentlyLoadedRoom = "<No valid room is loaded>";
+        _currentlyLoadedRoom = "<No valid room is loaded>";
       }
     }
   }
@@ -378,7 +436,7 @@ public class SceneManagerWindow : EditorWindow
   void PlayGame()
   {
     if (_initialWorldState != null)
-      XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
+      saveGameState();
 
     string playingFromScene = EditorApplication.currentScene;
 
@@ -386,8 +444,35 @@ public class SceneManagerWindow : EditorWindow
     if (success)
     {
       EditorApplication.isPlaying = true;
-      activeSceneBeforePlayWasPressed = playingFromScene;
+      _activeSceneBeforePlayWasPressed = playingFromScene;
     }
+  }
+
+  void resetGameState()
+  {
+    _initialWorldState = XMLSerializer.Deserialize<SaveState>(_rootPath + "SaveState.lvl");
+    _roomsSelectedForLoadIntoGame.Clear();
+    foreach (string room in _allRooms.Keys)
+    {
+      string simpleRoomName = room.Substring(room.IndexOf(":") + 2);
+      string resourceFolderPath = "Assets/Resources/Levels/" + simpleRoomName + ".lvl";
+      _roomsSelectedForLoadIntoGame.Add(room, _initialWorldState.roomPaths.Contains(resourceFolderPath));
+    }
+  }
+
+  void saveGameState()
+  {
+    _initialWorldState.roomPaths.Clear();
+    foreach (KeyValuePair<string,bool> roomSelected in _roomsSelectedForLoadIntoGame)
+    {
+      if (roomSelected.Value)
+      {
+        string simpleRoomName = roomSelected.Key.Substring(roomSelected.Key.IndexOf(":") + 2);
+        string resourceFolderPath = "Assets/Resources/Levels/" + simpleRoomName + ".lvl";
+        _initialWorldState.roomPaths.Add(resourceFolderPath);
+      }
+    }
+    XMLSerializer.Serialize<SaveState>(_initialWorldState, _rootPath + "SaveState.lvl");
   }
   #endregion
 }
