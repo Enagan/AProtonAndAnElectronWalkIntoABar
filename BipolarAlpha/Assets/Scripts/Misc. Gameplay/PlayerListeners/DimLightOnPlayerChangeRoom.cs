@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Listner for Player Room Change Events in any room and dims light after he leaves the room
@@ -9,12 +10,12 @@ public class DimLightOnPlayerChangeRoom : MonoBehaviour, IPlayerRoomChangeListne
 
   // Room Name that contains light
   [SerializeField]
-  private string _RoomName;
+  private List<string> _RoomNames;
 
   private Light _light = null;
 
   [SerializeField]
-  private const float _timeToDim = 5.0f;
+  private float _timeToDim = 2.0f;
 
   private float _diffIntensity = 0.0f;
   private float _startIntensity;
@@ -25,6 +26,9 @@ public class DimLightOnPlayerChangeRoom : MonoBehaviour, IPlayerRoomChangeListne
     if(_light != null)
       _startIntensity = _light.intensity;
     _light.intensity = 0.0f;
+
+    ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
+
   }
 
   public void ListenPlayerRoomChange(string newRoomName)
@@ -32,7 +36,14 @@ public class DimLightOnPlayerChangeRoom : MonoBehaviour, IPlayerRoomChangeListne
     if (_light == null)
       return;
 
-    if (newRoomName == _RoomName)
+    bool found = false;
+
+    foreach (string roomName in _RoomNames)
+    {
+      found = found || roomName == newRoomName;
+    }
+
+    if (found)
     {
       // should undim
       _diffIntensity = _startIntensity / _timeToDim;
@@ -42,16 +53,15 @@ public class DimLightOnPlayerChangeRoom : MonoBehaviour, IPlayerRoomChangeListne
       // should dim
       _diffIntensity = -_startIntensity / _timeToDim;
     }
-
+    
   }
 
   void Update()
   {
     float delta = Time.deltaTime;
-    if (_diffIntensity < 0.0f)
+    if (_diffIntensity > 0.0f)
     {
       if (_light.intensity == 0.0f)
-        BipolarConsole.AllLog("UnDimming");
 
       _light.intensity += _diffIntensity * delta;
       if(_light.intensity >= _startIntensity)
@@ -60,14 +70,13 @@ public class DimLightOnPlayerChangeRoom : MonoBehaviour, IPlayerRoomChangeListne
         _diffIntensity = 0;
       }
     }
-    else if (_diffIntensity > 0.0f)
+    else if (_diffIntensity < 0.0f)
     {
       if (_light.intensity == 0.0f)
-        BipolarConsole.AllLog("Dimming");
       _light.intensity += _diffIntensity * delta;
-      if (_light.intensity <= _startIntensity)
+      if (_light.intensity <= 0)
       {
-        _light.intensity = _startIntensity;
+        _light.intensity = 0;
         _diffIntensity = 0;
       }
     }
