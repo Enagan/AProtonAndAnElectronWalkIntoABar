@@ -202,8 +202,8 @@ public class SceneManagerWindow : EditorWindow
         }
       }
 
-      float maxHeight = Mathf.Min(Gateways.Count * 5 * allRooms.Keys.Count * SIZE_OF_ELEMENT_IN_LIST, 20 * SIZE_OF_ELEMENT_IN_LIST);
-      _gatewaysScrollPosition = EditorGUILayout.BeginScrollView(_gatewaysScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
+      float maxHeight = Mathf.Min(Gateways.Count * 2 * SIZE_OF_ELEMENT_IN_LIST, 20 * SIZE_OF_ELEMENT_IN_LIST);
+      _gatewaysScrollPosition = EditorGUILayout.BeginScrollView(_gatewaysScrollPosition, GUILayout.MaxHeight(maxHeight+20), GUILayout.Width(position.width));
 
       foreach (GameObject gate in Gateways)
       {
