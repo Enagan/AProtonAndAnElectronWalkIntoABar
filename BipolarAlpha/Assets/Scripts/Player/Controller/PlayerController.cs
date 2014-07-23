@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
     //MagneticBoots ability (space)
-   // _usableAbilities.Add("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), playerCamera, this));
+    _usableAbilities.Add("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), playerCamera, this));
 
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
