@@ -21,9 +21,13 @@ public class ConveyorSystem : MonoBehaviour, Activator {
   private Vector3 _scaleAdjustment = new Vector3(1.0f, 1.0f, 1.0f);
 
   [SerializeField]
-  private Vector3 _rotationAdjustmentAxis = new Vector3(0.0f, 0.0f, 0.0f);
+  private float _rotationAdjustmentXX = 0.0f;
+
   [SerializeField]
-  private float _rotationAdjustmentAngle = 0.0f;
+  private float _rotationAdjustmentYY = 0.0f;
+
+  [SerializeField]
+  private float _rotationAdjustmentZZ = 0.0f;
 
   private Vector3 _startPos;
   private Vector3 _endPos;
@@ -44,7 +48,10 @@ public class ConveyorSystem : MonoBehaviour, Activator {
     {
       _unitStorage[i] = (GameObject)Instantiate(_unitPrefab, _startPos +  _movementDirection* unitSpacing * i + _positionAdjustment, new Quaternion());
       _unitStorage[i].transform.localScale += _scaleAdjustment;
-      _unitStorage[i].transform.Rotate(_rotationAdjustmentAxis, _rotationAdjustmentAngle);
+      _unitStorage[i].transform.Rotate(Vector3.right, _rotationAdjustmentXX);
+      _unitStorage[i].transform.Rotate(Vector3.up, _rotationAdjustmentYY);
+      _unitStorage[i].transform.Rotate(Vector3.forward, _rotationAdjustmentZZ);
+
     }
 
 	}
