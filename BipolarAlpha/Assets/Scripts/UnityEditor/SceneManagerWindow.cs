@@ -87,6 +87,12 @@ public class SceneManagerWindow : EditorWindow
       _compilationSuccessLabelTimeOut = 0;
     }
 
+    if (!EditorApplication.isPlayingOrWillChangePlaymode && _activeSceneBeforePlayWasPressed != null)
+    {
+      EditorApplication.OpenScene(_activeSceneBeforePlayWasPressed);
+      _activeSceneBeforePlayWasPressed = null;
+    }
+
   }
 
   void OnGUI()
@@ -100,18 +106,12 @@ public class SceneManagerWindow : EditorWindow
       GUILayout.Label("Scene Manager Editor\n disabled while in play mode.\n\nClick here to refresh\n if you stopped play mode", EditorStyles.boldLabel);
     else
     {
-      if (_activeSceneBeforePlayWasPressed != null)
-      {
-        EditorApplication.OpenScene(_activeSceneBeforePlayWasPressed);
-        _activeSceneBeforePlayWasPressed = null;
-      }
-
-      GameStartState();
-      EditorGUILayout.Separator();
-      LoadRoomsGUI();
-      EditorGUILayout.Separator();
-      RoomActionsGUI();
-      GatewaysInRoomAction();
+        GameStartState();
+        EditorGUILayout.Separator();
+        LoadRoomsGUI();
+        EditorGUILayout.Separator();
+        RoomActionsGUI();
+        GatewaysInRoomAction();
     }
 
     //EditorGUILayout.EndScrollView();
@@ -389,11 +389,15 @@ public class SceneManagerWindow : EditorWindow
   #region Actuators
   bool SerializeCurrentRoom()
   {
-    RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
-    roomDefMaker._roomName = _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2);
-    roomDefMaker.SerializeRoom();
-    Debug.Log("Room " + roomDefMaker._roomName + " Successefully serialized");
-    return true;
+    if (_currentlyLoadedRoom != "<noRoom>")
+    {
+      RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
+      roomDefMaker._roomName = _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2);
+      roomDefMaker.SerializeRoom();
+      Debug.Log("Room " + roomDefMaker._roomName + " Successefully serialized");
+      return true;
+    }
+    return false;
   }
 
   void OnHierarchyChange()
