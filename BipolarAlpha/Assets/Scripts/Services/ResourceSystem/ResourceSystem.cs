@@ -35,7 +35,10 @@ public class ResourceSystem : MonoBehaviour
     // Loads the requested object from the resources
     GameObject prefab = Resources.Load(pathName, typeof(GameObject)) as GameObject;
 
-    Debug.Log("Breaking at " + pathName);
+    if (prefab == null)
+    {
+      throw new BipolarExceptionResourceNotFound("[RESOURCE SYSTEM] Cannot instantiate prefab at path " + pathName + " returned null");
+    }
 
     // Creates a new instance of the requested object
     GameObject prefabInstance = GameObject.Instantiate(prefab) as GameObject;
