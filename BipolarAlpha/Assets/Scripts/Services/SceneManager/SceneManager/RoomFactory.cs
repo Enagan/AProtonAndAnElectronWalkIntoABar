@@ -65,13 +65,13 @@ public class RoomFactory
             }
             else
             {
-              Debug.Log("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+              Debug.Log("[ROOM FACTORY] Error on room" + roomDef.roomName + ": Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
             }
 
           }
           else
           {
-            Debug.Log("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+            Debug.Log("[ROOM FACTORY] Error on room " + roomDef.roomName +  ": Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
           }
         }
 
@@ -143,7 +143,7 @@ public class RoomFactory
     room.inConstruction = true;
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(room.roomName);
-    roomParentObject.SetActive(false);
+    roomParentObject.SetActiveRecursively(false);
     _instancedObjects.RegisterRoom(room, roomParentObject);
 
     //Instances all objects present in the room definition 
@@ -201,7 +201,7 @@ public class RoomFactory
     }
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
-    roomParentObject.SetActive(false);
+    roomParentObject.SetActiveRecursively(false);
     _instancedObjects.RegisterRoom(newRoom, roomParentObject);
 
     //Orients the parent object to the new room gateway, as their centers will coincide
@@ -226,7 +226,7 @@ public class RoomFactory
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
       FindCollidersAndRenderers(newRoom, instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
-      yield return new WaitForSeconds(0.1f);
+      yield return new WaitForSeconds(0.25f);
     }
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
