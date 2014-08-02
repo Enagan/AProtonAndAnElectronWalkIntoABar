@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UnityEditor\SceneManagerWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Services\SceneManager\Definition Creator\RoomDefinitionCreator.cs">
     <Files>
-      <File FileName="Assets\Scripts\UnityEditor\SceneManagerWindow.cs" Line="190" Column="50" />
+      <File FileName="Assets\Scripts\UnityEditor\SceneManagerWindow.cs" Line="289" Column="2" />
+      <File FileName="Assets\Scripts\Services\SceneManager\Definition Creator\RoomDefinitionCreator.cs" Line="158" Column="1" />
+      <File FileName="Assets\Scripts\Utility\BipolarUtilityFunctions.cs" Line="57" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
