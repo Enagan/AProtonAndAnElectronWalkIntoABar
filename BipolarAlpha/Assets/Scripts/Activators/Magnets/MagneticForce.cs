@@ -15,12 +15,18 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     private static float DISTANT_FORCE_CUTOFF = 0.5f;
 
     //ToDo - Needs fine tuning // Change these 3 variables to const
-    private static float VERY_LOW_FORCE_FACTOR = 50.0f;
-    private static float LOW_FORCE_FACTOR = 100.0f;
-    private static float MEDIUM_FORCE_FACTOR = 250.0f;
-    private static float HIGH_FORCE_FACTOR = 700.0f;
-    private static float VERY_HIGH_FORCE_FACTOR = 1500.0f;
+//    private static float VERY_LOW_FORCE_FACTOR = 50.0f;
+ //   private static float LOW_FORCE_FACTOR = 100.0f;
+ //   private static float MEDIUM_FORCE_FACTOR = 250.0f;
+ //   private static float HIGH_FORCE_FACTOR = 700.0f;
+ //   private static float VERY_HIGH_FORCE_FACTOR = 1500.0f;
 
+
+       private static float VERY_LOW_FORCE_FACTOR = 30.0f;
+       private static float LOW_FORCE_FACTOR = 50.0f;
+       private static float MEDIUM_FORCE_FACTOR = 80.0f;
+       private static float HIGH_FORCE_FACTOR = 150.0f;
+       private static float VERY_HIGH_FORCE_FACTOR = 200.0f;
     #endregion
 
     #region MagneticForce Variables
@@ -391,7 +397,8 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         }
         else
         {
-            forceDirection = otherMagnet.transform.position - this.transform.position;
+           forceDirection = otherMagnet.transform.position - this.transform.position;
+
         }
         forceDirection.Normalize();
         if (otherMagnet.charge == this.charge)
@@ -453,8 +460,15 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             otherForceFactor = getForceValue(otherMagneticForce.force);
         }
 
-        totalForce = ((forceFactor * otherForceFactor) / (distance * distance));
-        return totalForce;
+      //  totalForce = ((forceFactor * otherForceFactor) / (distance * distance));
+      //  return totalForce;
+
+        float forceCombination = forceFactor + otherForceFactor;
+        totalForce = ((-1.0f * distance * distance * 0.3f) + forceCombination * 2) * 0.6f + (forceCombination / (distance*distance*0.01f) * 0.2f);  //inverted quadratic function + decreasing exponential
+
+
+   //s     Debug.Log(Mathf.Max(totalForce, 0.0f));
+        return Mathf.Max(totalForce, 0.0f);
     }
 
     /// <summary>

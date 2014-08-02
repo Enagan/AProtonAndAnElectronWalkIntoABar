@@ -46,7 +46,7 @@ public class RotaryMagnetPart : MagneticForce
 
             float totalForce = getTotalForce(otherMagnet);
 
-            Vector3 localTorque = rotationDir * totalForce * Time.deltaTime;
+            Vector3 localTorque = rotationDir * totalForce * Time.deltaTime * 10.0f;
 
             if(localTorque != null && 
               !float.IsNaN(localTorque.x)  
