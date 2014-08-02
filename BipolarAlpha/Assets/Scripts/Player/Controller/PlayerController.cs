@@ -48,6 +48,13 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private float _maximumVerticalRotation = 0f;
 
+  //Abilities
+  [SerializeField]
+  private bool _magBoots = false;
+
+  [SerializeField]
+  private bool _spike = false;
+
   #endregion
   #region Player State Variables
   private Quaternion _baseRotation = Quaternion.identity;
@@ -157,7 +164,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void Update()
   {
-    //This for centering the mouse for editor after pressing escape
+    //This is for centering the mouse on the editor after pressing escape
     Screen.showCursor = false;
     Screen.lockCursor = true;
 
@@ -266,8 +273,15 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
     //MagneticBoots ability (space)
-    _usableAbilities.Add("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), playerCamera, this));
+    if (_magBoots)
+    {
+      _usableAbilities.Add("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), playerCamera, this));
+    }
 
+    if (_spike)
+    {
+      addStickyMagnetAbilities();
+    }
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
 
