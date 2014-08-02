@@ -65,13 +65,13 @@ public class RoomFactory
             }
             else
             {
-              Debug.Log("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+              Debug.Log("[ROOM FACTORY] Error on room" + roomDef.roomName + ": Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
             }
 
           }
           else
           {
-            Debug.Log("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+            Debug.Log("[ROOM FACTORY] Error on room " + roomDef.roomName +  ": Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
           }
         }
 
