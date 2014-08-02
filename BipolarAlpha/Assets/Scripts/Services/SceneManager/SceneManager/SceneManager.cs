@@ -12,12 +12,18 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 {
   // Adjacent rooms instancing depth
   [SerializeField]
-  private int _adjacentInstancingDepth = 1;
+  private int _adjacentInstancingDepth = 5;
 
   private RoomDefinition _activeRoom;
   private List<RoomDefinition> _currentlyCreatedRooms = new List<RoomDefinition>();
   private Dictionary<string,RoomDefinition> _allRooms = new Dictionary<string,RoomDefinition>();
   private List<RoomDefinition> _roomInQueueToDeletion = new List<RoomDefinition>();
+
+/*#if UNITY_PRO_LICENSE
+  private RoomFactoryAsync _roomFactory = new RoomFactoryAsync();
+#else
+  private RoomFactory _roomFactory = new RoomFactory();
+#endif */
 
   private RoomFactory _roomFactory = new RoomFactory();
 
@@ -88,6 +94,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   {
     RoomDefinition roomToCreate;
     //Search for room in the loaded rooms Dictionary
+    Debug.Log (roomName);
     if ((roomToCreate = _allRooms[roomName]) == null)
     {
       Debug.Log("Error: room " + roomName + " does not exist in knowledgebase.");
@@ -173,6 +180,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       {
         if (_allRooms.ContainsKey(gate.connectedToRoom))
         {
+          Debug.Log ("creating room" + gate.connectedToRoom);
           CreateRoomTree(_allRooms[gate.connectedToRoom], currentDepth + 1, root);
         }
         else

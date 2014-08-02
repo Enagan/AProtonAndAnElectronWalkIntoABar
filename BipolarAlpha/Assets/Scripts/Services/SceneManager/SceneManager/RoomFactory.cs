@@ -12,7 +12,7 @@ public class RoomFactory
 {
   private const float COL_WAIT_TIME = 0.2f;
   private const float RENDER_WAIT_TIME = 0.05f;
-  private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
+  protected RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
 
   #region [Public Methods] Room Creation, Destruction and Definition Update
@@ -65,13 +65,13 @@ public class RoomFactory
             }
             else
             {
-              Debug.Log("[ROOM FACTORY] Error: Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+              Debug.Log("[ROOM FACTORY] Error on room" + roomDef.roomName + ": Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
             }
 
           }
           else
           {
-            Debug.Log("[ROOM FACTORY] Error: Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+            Debug.Log("[ROOM FACTORY] Error on room " + roomDef.roomName +  ": Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
           }
         }
 
@@ -143,7 +143,7 @@ public class RoomFactory
     room.inConstruction = true;
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(room.roomName);
-    roomParentObject.SetActive(false);
+    roomParentObject.SetActiveRecursively(false);
     _instancedObjects.RegisterRoom(room, roomParentObject);
 
     //Instances all objects present in the room definition 
@@ -201,7 +201,7 @@ public class RoomFactory
     }
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
-    roomParentObject.SetActive(false);
+    roomParentObject.SetActiveRecursively(false);
     _instancedObjects.RegisterRoom(newRoom, roomParentObject);
 
     //Orients the parent object to the new room gateway, as their centers will coincide
@@ -226,7 +226,7 @@ public class RoomFactory
       GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
       FindCollidersAndRenderers(newRoom, instancedObject);
       _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
-      yield return new WaitForSeconds(0.1f);
+      yield return new WaitForSeconds(0.25f);
     }
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
@@ -292,7 +292,7 @@ public class RoomFactory
   /// Instances an object from an object definition, assigning him a parent and positioning 
   /// him relative to the relativeOrigin provided, in case these arguments are used
   /// </summary>
-  private GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
+  protected GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
 
     GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath, active: false);
@@ -325,7 +325,7 @@ public class RoomFactory
   /// <summary>
   /// Returns a position in relation of another position
   /// </summary>
-  private Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition,
+  protected Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition,
     Vector3 localRelationalObjectPositon)
   {
     return (originalObjectPosition - localRelationalObjectPositon);
@@ -334,7 +334,7 @@ public class RoomFactory
   /// <summary>
   /// Returns the opposite vector, keeping the up vector intact
   /// </summary>
-  private Vector3 OppositeVector(Vector3 vec)
+  protected Vector3 OppositeVector(Vector3 vec)
   {
     return new Vector3(-vec.x, vec.y + 180, -vec.z);
   }
