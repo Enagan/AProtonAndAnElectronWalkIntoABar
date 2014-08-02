@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BipolarUtilityFunctions 
+public class BPUtil 
 {
   /// <summary>
   /// Returns all Components of type T in the entire hierarchy going down from root
@@ -25,6 +25,32 @@ public class BipolarUtilityFunctions
       extractedComponents.AddRange(GetComponentsInHierarchy<T>(child));
     }
     return extractedComponents;
+  }
+
+  public static List<GameObject> GetDirectChildren(GameObject parentObject)
+  {
+    List<GameObject> children = new List<GameObject>();
+
+    foreach (Transform childTransform in parentObject.GetComponentsInChildren<Transform>())
+    {
+      if(childTransform.parent == parentObject.transform && childTransform.parent != null)
+        children.Add(childTransform.gameObject);
+    }
+
+    return children;
+  }
+
+  public static List<GameObject> GetAllChildrenAtAnyDepth(GameObject parentObject)
+  {
+    List<GameObject> children = new List<GameObject>();
+
+    foreach (Transform childTransform in GetComponentsInHierarchy<Transform>(parentObject.transform))
+    {
+      if (childTransform.parent != null)
+        children.Add(childTransform.gameObject);
+    }
+
+    return children;
   }
 	
 }
