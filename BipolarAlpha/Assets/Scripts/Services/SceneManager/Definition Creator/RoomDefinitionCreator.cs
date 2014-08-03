@@ -8,7 +8,7 @@ using UnityEditor;
 /// <summary>
 /// The Room definition creator creates and serializes to a file all the prefab objects present in the scene where it's placed
 /// </summary>
-public class RoomDefinitionCreator
+public class RoomDefinitionCreator : MonoBehaviour
 {
   [SerializeField]
   public string _roomName = "";
@@ -19,6 +19,8 @@ public class RoomDefinitionCreator
 	private void Start () 
   {
     SerializeRoom();
+    EditorApplication.isPlaying = false;
+    Debug.Log("Room " + _roomName + " Successefully serialized");
 	}
 
   public void SerializeRoom()
@@ -89,6 +91,18 @@ public class RoomDefinitionCreator
           List<GameObject> circuitSystemObjects = new List<GameObject>();
 
           circuitSystemObjects = CircuitSystemNetworkBuilder(checkForGenerators[0]);
+
+          List<GameObject> temp = new List<GameObject>();
+          foreach (GameObject circuitObj in circuitSystemObjects)
+          {
+            if (!createdCircuitSystems.Contains(circuitObj))
+            {
+              temp.Add(circuitObj);
+            }
+            else
+              Debug.Log("Am i rejecting stuff?");
+          }
+          circuitSystemObjects = temp;
 
           //Creates an empty parent to be the prefab head
           GameObject circuitsParent = new GameObject(roomName + "CircuitSystem-" + circuitSystemCounter++);
@@ -187,6 +201,8 @@ public class RoomDefinitionCreator
   /// </summary>
   private List<GameObject> CircuitSystemNetworkBuilder(Circuit root, List<GameObject> registeredCircuits = null, Circuit rootParent = null)
   {
+    root.PropagateToOutputs();
+
     if(registeredCircuits == null)
     {
       registeredCircuits = new List<GameObject>();

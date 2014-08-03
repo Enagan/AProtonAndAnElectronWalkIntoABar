@@ -21,6 +21,31 @@
       </eulerAngles>
       <complexStates>
         <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="CutsceneElementComplexState">
+          <objectNameInHierarchy>HexagonDoorExit</objectNameInHierarchy>
+          <animationNames>
+            <string>HexDoor2Open</string>
+          </animationNames>
+          <delays>
+            <int>0</int>
+          </delays>
+          <optionalChilds>
+            <string />
+          </optionalChilds>
+          <cutsceneName />
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator1/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
@@ -33,13 +58,13 @@
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
@@ -57,18 +82,6 @@
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator4/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator4/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator5/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
@@ -81,29 +94,16 @@
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator4/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
         <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator6/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <objectNameInHierarchy>Generator4/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="CutsceneElementComplexState">
-          <objectNameInHierarchy>HexagonDoorExit</objectNameInHierarchy>
-          <animationNames>
-            <string>HexDoor2Open</string>
-          </animationNames>
-          <delays>
-            <int>0</int>
-          </delays>
-          <optionalChilds>
-            <string />
-          </optionalChilds>
-          <cutsceneName />
         </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
@@ -132,6 +132,25 @@
         <x>-16.4789371</x>
         <y>3.15725756</y>
         <z>-9.042019</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates />
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
+      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test2/QA2T2 1</objectPrefabPath>
+      <position>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
       </position>
       <scale>
         <x>1</x>
