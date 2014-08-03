@@ -1,4 +1,6 @@
 ﻿  
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
@@ -480,3 +482,5 @@ public class SceneManagerWindow : EditorWindow
   }
   #endregion
 }
+
+#endif
