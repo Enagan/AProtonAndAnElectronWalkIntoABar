@@ -129,7 +129,7 @@ public class PlayerMagnet : MagneticForce
         otherMagneticForce.AffectedBy(this);
         this.AffectedBy(otherMagneticForce);       
       }
-      return this; // leave handling for the ability
+      return otherMagneticForce; // leave handling for the ability
     }
     else    {
       _magnetHitPoint = Vector3.zero;

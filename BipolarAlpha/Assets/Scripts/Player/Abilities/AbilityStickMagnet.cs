@@ -48,9 +48,9 @@ public class AbilityStickMagnet : AbilityUseMagnet
   {
     //For first use defines which arm abillity reffers to
     setArm(key);
-    
+
     //Check if needs to release player
-    if (_canReleasePlayer || key.Contains("Release")) 
+    if (_canReleasePlayer && key.Contains("Release")) 
     {
       if (_isStuck)
       {
@@ -67,13 +67,23 @@ public class AbilityStickMagnet : AbilityUseMagnet
            unstickMagnetFromPlayer(false); // Unstick
       }
       unstickAnimation();
+      return;
     }
 
     //Apply Forces if not holding anything
     MagneticForce force = null;
 
-    if(_magnetStuckToArm == null)
-      force = ApplyForces(caller, _playerCamera.transform.forward);
+    force = ApplyForces(caller, _playerCamera.transform.forward);
+
+    // if the player is repeling the magnet it's holding
+    if (force != null && force.transform.parent.gameObject == _magnetStuckToArm && force.charge == this._playerMagnet.charge)
+    {
+     
+      unstickMagnetFromPlayer(true);
+      unstickAnimation();
+      return;
+    }
+
 
     //Check if Collisions happened
     if (force != null)
@@ -82,7 +92,7 @@ public class AbilityStickMagnet : AbilityUseMagnet
       if (caller.magnetColliding &&
        _playerMagnet.charge != caller.magnetCollidingWith.charge)
       {
-        if(caller.magnetCollidingWith.isHoldable)
+        if (caller.magnetCollidingWith.isHoldable)
         {
           //Player Holds Magnets
           stickMagnetToPlayer(caller, caller.magnetCollidingWith);
@@ -96,7 +106,9 @@ public class AbilityStickMagnet : AbilityUseMagnet
         stickAnimation();
       }
     }
+    
   }
+
 
   public override void KeyUp(string key = null)
   {
@@ -199,6 +211,8 @@ public class AbilityStickMagnet : AbilityUseMagnet
     {
       return;
     }
+
+
     //Restore previous parent
     _magnetStuckToArm.transform.parent = _previousMagnetParent;
     _previousMagnetParent = null;
@@ -207,7 +221,7 @@ public class AbilityStickMagnet : AbilityUseMagnet
 
     if (initialRepulsion)
     {
-      _magnetStuckToArm.rigidbody.AddForce(_playerCamera.transform.forward * _playerMagnet.getForceValue(_playerMagnet.force));
+      _magnetStuckToArm.rigidbody.AddForce( 3 * _playerCamera.transform.forward * _playerMagnet.getForceValue(_playerMagnet.force));
     }
     _magnetStuckToArm = null;
 

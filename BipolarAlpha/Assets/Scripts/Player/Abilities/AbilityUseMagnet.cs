@@ -57,14 +57,6 @@ public class AbilityUseMagnet : Ability
   /// </summary> 
   public virtual void Use(PlayerController caller, string key = null)
   {
-  
-      /* Moved by Lousada on 22/02/2014 to correct a bug. If you see this and all is fine delete it
-   
-       //For first use defines which arm abillity reffers to
-       setArm(key);
-    
-       */
-
     //Applies magnetic forces
     ApplyForces(caller, _playerCamera.transform.forward);
   }
@@ -142,7 +134,7 @@ public class AbilityUseMagnet : Ability
     //Apply force on player
     if (force != null)
     {
-      force.ApplyOtherMagnetsForces(caller.rigidbody);
+      _playerMagnet.ApplyOtherMagnetsForces(caller.rigidbody);
     }
 
     return force;

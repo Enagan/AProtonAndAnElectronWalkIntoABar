@@ -461,8 +461,8 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             otherForceFactor = getForceValue(otherMagneticForce.force);
         }
 
-      //  totalForce = ((forceFactor * otherForceFactor) / (distance * distance));
-      //  return totalForce;
+        //  totalForce = ((forceFactor * otherForceFactor) / (distance * distance));
+        //  return totalForce;
 
         float forceCombination = forceFactor + otherForceFactor;
         totalForce = ((-1.0f * distance * distance * 0.3f) + forceCombination * 2) * 0.6f + (forceCombination / (distance*distance*0.01f) * 0.2f);  //inverted quadratic function + decreasing exponential

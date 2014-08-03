@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private float _maximumVerticalRotation = 0f;
 
+
+  [SerializeField]
+  private float _movementLimiter = 7.0f;
+
+
   //Abilities
   [SerializeField]
   private bool _magBoots = false;
@@ -419,6 +424,14 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
     //Applies the previously calculated desired velocity adjusted for deltaTime and player acceleration
     desiredVelocity *= Time.deltaTime * _acceleration;
+
+    //limits the player movement so we dont have teleports on lag spikes
+    if (desiredVelocity.sqrMagnitude > (_movementLimiter * _movementLimiter))
+    {
+      desiredVelocity = Vector3.ClampMagnitude(desiredVelocity, _movementLimiter );
+
+    }
+
     if (airborne)
     {
       desiredVelocity *= 0.5f;
@@ -434,7 +447,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       currentVelocity.y = rigidbody.velocity.y;
       rigidbody.velocity = currentVelocity;
     }
-    
 
   }
 
