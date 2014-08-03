@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using System.Diagnostics;
 using System.IO;
@@ -12,7 +13,6 @@ public class ScriptBatch : MonoBehaviour
   [MenuItem("MyBuild/Bipolar Custom Build")]
   public static void CopyBuild()
   {
-    
     // Asks user for the generated release pathname
     string path = EditorUtility.SaveFolderPanel("Choose Location of Built Game", "", "");
     if (path.Equals(""))
@@ -57,6 +57,39 @@ public class ScriptBatch : MonoBehaviour
     proc.StartInfo.FileName = path + "BuiltGame.exe";
     proc.Start();
      * */
+  }
+
+  [PostProcessBuild]
+  public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
+  {
+    UnityEngine.Debug.Log("Running post build script");
+
+    string curatedPath = pathToBuiltProject.Remove(pathToBuiltProject.LastIndexOf(".")) + "_Data";
+
+    UnityEngine.Debug.Log(curatedPath);
+
+    //Deletes any existing instances OffMeshLink the FileShare to Behaviour copied, for any fresh instalation
+    FileUtil.DeleteFileOrDirectory(curatedPath + "/Managed/I18N.dll");
+    FileUtil.DeleteFileOrDirectory(curatedPath + "/Managed/I18N.West.dll");
+    FileUtil.DeleteFileOrDirectory(curatedPath + "/Levels");
+    FileUtil.DeleteFileOrDirectory(curatedPath + "/Saves");
+    FileUtil.DeleteFileOrDirectory(curatedPath + "/GUI/Text");
+
+    //Creates directory for GUI stuff
+    System.IO.Directory.CreateDirectory(curatedPath + "/GUI/Text");
+
+    //Copies over DLL files and XMLs
+    FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.dll", curatedPath + "/Managed/I18N.dll");
+    FileUtil.CopyFileOrDirectory("Assets/RequiredDLLs/I18N.West.dll", curatedPath + "/Managed/I18N.West.dll");
+    FileUtil.CopyFileOrDirectory("Assets/Resources/Levels", curatedPath + "/Levels");
+    FileUtil.CopyFileOrDirectory("Assets/Resources/GUI/Text/strings.xml", curatedPath + "/GUI/Text/strings.xml");
+
+    //Updates SaveState.lvl file, which contains path names for .lvl files
+    string text = File.ReadAllText(curatedPath + "/Levels/SaveState.lvl");
+    string replaced = text.Replace("Assets/Resources", curatedPath);
+    File.WriteAllText(curatedPath + "/Levels/SaveState.lvl", replaced);
+
+    UnityEngine.Debug.Log("Project Successfully Built!");
   }
 }
 #endif

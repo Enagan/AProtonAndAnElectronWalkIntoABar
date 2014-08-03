@@ -1,4 +1,6 @@
 // Made by: Engana
+#define LOG_SCENE_MANAGER
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -92,6 +94,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   private void setActiveRoom(string roomName)
   {
+#if LOG_SCENE_MANAGER
+    Debug.Log("[SCENE MANAGER] Setting room " + roomName + " as active");
+#endif
     RoomDefinition roomToCreate;
     //Search for room in the loaded rooms Dictionary
     Debug.Log (roomName);
@@ -107,7 +112,16 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     _currentlyCreatedRooms.Clear();
 
     //Order room creation starting in roomToCreate
+#if LOG_SCENE_MANAGER
+    Debug.Log("[SCENE MANAGER]------- Beggining new room instancing tree ---------");
+#endif
+
     CreateRoomTree(roomToCreate);
+
+#if LOG_SCENE_MANAGER
+    Debug.Log("[SCENE MANAGER]---------- Room tree finished instancing -----------");
+#endif
+
     //Set room as active
     _activeRoom = roomToCreate;
 
@@ -140,6 +154,10 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
         RoomDefinition updatedDef = _roomFactory.UpdateRoomDefinition(oldRoomDef);
         _allRooms[updatedDef.roomName] = updatedDef;
 
+#if LOG_SCENE_MANAGER
+        Debug.Log("[SCENE MANAGER] Deleting out of range room " + oldRoomDef.roomName);
+#endif
+
         //Destroy the room if it's not in construction
         if (oldRoomDef.inConstruction)
         {
@@ -160,15 +178,23 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   private void CreateRoomTree(RoomDefinition root, int currentDepth = 0, RoomDefinition parent = null)
   {
+
     //If a parent is not defined, room should be instanced by itself
     if (parent == null)
     {
+#if LOG_SCENE_MANAGER
+      Debug.Log("[SCENE MANAGER]   Creating ROOT room " + root.roomName);
+#endif
       _roomFactory.CreateRoom(root);
       _currentlyCreatedRooms.Add(root);
     }
     //Otherwise instance room based in the previous "parent" room
     else
     {
+          
+#if LOG_SCENE_MANAGER
+      Debug.Log("[SCENE MANAGER]   Creating ADJACENT room " + root.roomName + " adjacent to " + parent.roomName);
+#endif
       _roomInQueueToDeletion.Remove(root);
       _roomFactory.CreateRoom(root, parent);
       _currentlyCreatedRooms.Add(root);
@@ -203,6 +229,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     RoomDefinition roomToSave;
     foreach(RoomDefinition room in _allRooms.Values)
     {
+#if LOG_SCENE_MANAGER
+      Debug.Log("[SCENE MANAGER] Saving Room state for " + room.roomName );
+#endif
       roomToSave = _roomFactory.UpdateRoomDefinition(room);
       if(roomToSave == null)
       {
@@ -227,6 +256,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     List<RoomDefinition> oldRooms = new List<RoomDefinition>();
     foreach(RoomDefinition room in loadedState.Value)
     {
+#if LOG_SCENE_MANAGER
+      Debug.Log("[SCENE MANAGER] Loading Room state for " + room.roomName);
+#endif
       oldRooms.Add(_allRooms[room.roomName]);
       _allRooms[room.roomName] = room;
     }
@@ -251,6 +283,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   public void ListenPlayerRoomChange(string newRoomName)
   {
+#if LOG_SCENE_MANAGER
+    Debug.Log("[SCENE MANAGER] Player room changed to " + newRoomName + " updating instanced room tree");
+#endif
     if (newRoomName != _activeRoom.roomName)
     {
       setActiveRoom(newRoomName);
@@ -264,6 +299,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   public void ListenObjectRoomChange(string  prevRoomName, string newRoomName, GameObject objectChangedRoom)
   {
+#if LOG_SCENE_MANAGER
+    Debug.Log("[SCENE MANAGER] Movable object" + objectChangedRoom.name + " room changed from " + prevRoomName + " to " + newRoomName + " updating object definition");
+#endif
     if (newRoomName != _activeRoom.roomName)
     {
       _roomFactory.ChangeObjectRoom(_allRooms[prevRoomName], _allRooms[newRoomName], objectChangedRoom);

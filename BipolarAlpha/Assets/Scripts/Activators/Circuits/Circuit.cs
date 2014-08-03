@@ -189,7 +189,7 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// </summary>
   void PropagateToOutputs(bool output)
   {
-    //BipolarConsole.IvoLog(CircuitName()+_identifier + " Output:" + _state);
+    //Debug.Log(CircuitName() + _identifier + " Output:" + _state);
     foreach (Circuit c in _outputs)
     {
       if (!(c == null))

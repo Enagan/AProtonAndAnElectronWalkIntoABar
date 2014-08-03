@@ -1,4 +1,6 @@
 ﻿  
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
@@ -42,6 +44,8 @@ public class SceneManagerWindow : EditorWindow
 
   // Popup Positions
   int _gameStateStartRoomPopup = 0;
+
+  GameObject _instacedRoomDefCreator = null;
 
   // Add menu item named "My Window" to the Window menu
   [MenuItem("Window/Scene Manager Editor")]
@@ -91,6 +95,8 @@ public class SceneManagerWindow : EditorWindow
     {
       EditorApplication.OpenScene(_activeSceneBeforePlayWasPressed);
       _activeSceneBeforePlayWasPressed = null;
+      if (_instacedRoomDefCreator)
+        DestroyImmediate(_instacedRoomDefCreator);
     }
 
   }
@@ -391,10 +397,20 @@ public class SceneManagerWindow : EditorWindow
   {
     if (_currentlyLoadedRoom != "<noRoom>")
     {
-      RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
+      //EditorApplication.isPlaying = true;
+
+      GameObject roomDefer = new GameObject();
+
+      roomDefer.AddComponent<RoomDefinitionCreator>();
+      RoomDefinitionCreator roomDefMaker = roomDefer.GetComponent<RoomDefinitionCreator>();
+
+      //while (!EditorApplication.isPlayingOrWillChangePlaymode) { }
+
+      //RoomDefinitionCreator roomDefMaker = new RoomDefinitionCreator();
       roomDefMaker._roomName = _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2);
-      roomDefMaker.SerializeRoom();
-      Debug.Log("Room " + roomDefMaker._roomName + " Successefully serialized");
+      //roomDefMaker.SerializeRoom();
+      _instacedRoomDefCreator = roomDefer;
+      EditorApplication.isPlaying = true;
       return true;
     }
     return false;
@@ -480,3 +496,5 @@ public class SceneManagerWindow : EditorWindow
   }
   #endregion
 }
+
+#endif
