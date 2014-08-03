@@ -12,10 +12,10 @@
     <string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
     <string>Assets/Resources/Levels/Warehouse.lvl</string>
   </roomPaths>
-  <activeRoom>GarbageBinRoom</activeRoom>
+  <activeRoom>Warehouse</activeRoom>
   <playerPosition>
     <x>0</x>
-    <y>-4</y>
+    <y>0</y>
     <z>0</z>
   </playerPosition>
   <playerRotation>

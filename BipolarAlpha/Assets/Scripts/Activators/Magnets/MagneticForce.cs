@@ -174,13 +174,13 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     {
         InitLights();
         SphereCollider collider = this.GetComponent<SphereCollider>();
-
+      /*
         //If the magnetic force has a collider attached it is it's interaction area, and this should be scaled to it's strength
         if (collider != null)
         {
             collider.radius = Mathf.Sqrt(getForceValue(force) * HIGH_FORCE_FACTOR) / Mathf.Sqrt(DISTANT_FORCE_CUTOFF);
         }
-
+      */
         //If no parent is assigned then assign one's own parent
         if (parentToAffect == null)
         {
@@ -337,8 +337,8 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             bool magneticBlockerFound = false;
             Vector3 thisPosition = this.transform.position;
             Vector3 otherPosition = other.transform.position;
-            int blockerLayer = 1 << 15; //magnetic block layer we only want to check for blockers
-            RaycastHit[] hits = Physics.RaycastAll(thisPosition, otherPosition - thisPosition, Vector3.Distance(thisPosition, otherPosition), blockerLayer);
+            int blockerLayer = 1 << 15; //magnetic block layer, we only want to check for blockers
+            RaycastHit[] hits = Physics.RaycastAll(thisPosition, (otherPosition - thisPosition).normalized, Vector3.Distance(thisPosition, otherPosition), blockerLayer);
 
             foreach (RaycastHit singleHit in hits)  //Checks for magnetic blockers between MagneticForces
             {
