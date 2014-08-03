@@ -58,7 +58,7 @@ public class ScriptBatch : MonoBehaviour
     proc.Start();
      * */
   }
-
+#if UNITY_PRO_LICENSE
   [PostProcessBuild]
   public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
   {
@@ -91,5 +91,6 @@ public class ScriptBatch : MonoBehaviour
 
     UnityEngine.Debug.Log("Project Successfully Built!");
   }
+#endif
 }
 #endif

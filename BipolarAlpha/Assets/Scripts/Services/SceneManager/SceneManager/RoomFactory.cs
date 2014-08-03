@@ -393,12 +393,6 @@ public class RoomFactory
 
     room.renderers.ForEach(renderer => renderer.enabled = true);
   }
-
-
-
-
-
-
   #endregion
 
 
