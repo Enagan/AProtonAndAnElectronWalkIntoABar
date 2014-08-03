@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private bool _magnetColliding = false;
   private MagneticForce _magnetCollidingWith = null;
 
+
   #endregion
 
   private GameObject mainCamera;
@@ -164,6 +165,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void Update()
   {
+
     //This is for centering the mouse on the editor after pressing escape
     Screen.showCursor = false;
     Screen.lockCursor = true;
@@ -417,6 +419,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
     //Applies the previously calculated desired velocity adjusted for deltaTime and player acceleration
     desiredVelocity *= Time.deltaTime * _acceleration;
+    if (airborne)
+    {
+      desiredVelocity *= 0.5f;
+    }
     rigidbody.AddForce(desiredVelocity, ForceMode.VelocityChange);
 
     //Prevent the Player from exceeding maxVelocity
@@ -428,6 +434,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       currentVelocity.y = rigidbody.velocity.y;
       rigidbody.velocity = currentVelocity;
     }
+    
+
   }
 
   /// <summary>

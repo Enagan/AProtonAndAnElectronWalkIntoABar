@@ -12,7 +12,7 @@ public class RoomFactory
 {
   private const float COL_WAIT_TIME = 0.2f;
   private const float RENDER_WAIT_TIME = 0.05f;
-  private RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
+  protected RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
 
   #region [Public Methods] Room Creation, Destruction and Definition Update
@@ -292,7 +292,7 @@ public class RoomFactory
   /// Instances an object from an object definition, assigning him a parent and positioning 
   /// him relative to the relativeOrigin provided, in case these arguments are used
   /// </summary>
-  private GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
+  protected GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
 
     GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath, active: false);
@@ -325,7 +325,7 @@ public class RoomFactory
   /// <summary>
   /// Returns a position in relation of another position
   /// </summary>
-  private Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition,
+  protected Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition,
     Vector3 localRelationalObjectPositon)
   {
     return (originalObjectPosition - localRelationalObjectPositon);
@@ -334,7 +334,7 @@ public class RoomFactory
   /// <summary>
   /// Returns the opposite vector, keeping the up vector intact
   /// </summary>
-  private Vector3 OppositeVector(Vector3 vec)
+  protected Vector3 OppositeVector(Vector3 vec)
   {
     return new Vector3(-vec.x, vec.y + 180, -vec.z);
   }
