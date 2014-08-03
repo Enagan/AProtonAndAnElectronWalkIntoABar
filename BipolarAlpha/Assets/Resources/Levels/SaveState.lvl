@@ -10,12 +10,11 @@
     <string>Assets/Resources/Levels/RobotApprovalConveyor.lvl</string>
     <string>Assets/Resources/Levels/SPAAAACE.lvl</string>
     <string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
-    <string>Assets/Resources/Levels/Warehouse.lvl</string>
   </roomPaths>
-  <activeRoom>Warehouse</activeRoom>
+  <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
     <x>0</x>
-    <y>0</y>
+    <y>-4</y>
     <z>0</z>
   </playerPosition>
   <playerRotation>
