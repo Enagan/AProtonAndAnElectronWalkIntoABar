@@ -407,6 +407,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         }
         float totalForce = getTotalForce(otherMagnet);
         magnetBody.AddForce(totalForce * forceDirection * Time.deltaTime, ForceMode.Force);
+
     }
 
 
@@ -466,8 +467,13 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         float forceCombination = forceFactor + otherForceFactor;
         totalForce = ((-1.0f * distance * distance * 0.3f) + forceCombination * 2) * 0.6f + (forceCombination / (distance*distance*0.01f) * 0.2f);  //inverted quadratic function + decreasing exponential
 
+        // this is to help the player fight gravity when trying to pull itself to a magnet not on the ground
+        float dot = Vector3.Dot(otherMagneticForce.transform.up, Vector3.up * -1.0f);
+        if (!otherMagneticForce.isMoveable && dot > 0)  // of the other magnet is pointing down
+        {
+         totalForce += dot * totalForce;
+        }
 
-   //s     Debug.Log(Mathf.Max(totalForce, 0.0f));
         return Mathf.Max(totalForce, 0.0f);
     }
 
