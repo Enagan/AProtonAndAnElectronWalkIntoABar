@@ -76,14 +76,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
       <position>
-        <x>10.922658</x>
-        <y>8.77</y>
-        <z>-33.7990952</z>
+        <x>12.996686</x>
+        <y>5.570263</y>
+        <z>-36.6468658</z>
       </position>
       <scale>
-        <x>44.85</x>
+        <x>56.63566</x>
         <y>24.12</y>
-        <z>0.0715477839</z>
+        <z>4.54060173</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -191,7 +191,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -243,7 +243,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -398,7 +398,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -517,6 +517,18 @@
           <magnetForce>4</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
+          <isActive>true</isActive>
+          <magnetForce>1</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
@@ -540,7 +552,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -637,7 +649,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -715,7 +727,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>4</magnetForce>
+          <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -767,7 +779,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -851,38 +863,6 @@
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/QA-UNIT02Test3CircuitSystem-1</objectPrefabPath>
-      <position>
-        <x>-12.73936</x>
-        <y>12.798501</y>
-        <z>-59.55728</z>
-      </position>
-      <scale>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
-      </scale>
-      <eulerAngles>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </eulerAngles>
-      <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
-          <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
-          <isActive>true</isActive>
-          <magnetForce>1</magnetForce>
-          <magnetCharge>0</magnetCharge>
-        </ComplexState>
-      </complexStates>
-    </RoomObjectDefinition>
-    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/AbilityObjects/SpikePickUp</objectPrefabPath>
       <position>
         <x>0.110773504</x>
@@ -948,7 +928,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -956,14 +936,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
       <position>
-        <x>-11.2963886</x>
-        <y>8.77</y>
-        <z>-33.7990952</z>
+        <x>-12.6973133</x>
+        <y>7.0118103</y>
+        <z>-35.31082</z>
       </position>
       <scale>
-        <x>44.85</x>
+        <x>49.2980766</x>
         <y>24.12</y>
-        <z>0.0715477839</z>
+        <z>3.28366375</z>
       </scale>
       <eulerAngles>
         <x>0</x>
