@@ -151,8 +151,9 @@ public class MagnetBoots : MagneticForce
     {
       if (base.isActivated && otherMagnet.isActivated && !otherMagnet.isMoveable)
       {
-        base.ApplyForces(magnetBody, otherMagnet, Vector3.Scale(_magnetHitPoint, Vector3.up) + this.transform.position);
-
+        base.ApplyForces(magnetBody, otherMagnet, 
+                        Vector3.Scale(_magnetHitPoint, Vector3.up) + Vector3.Scale(this.transform.position, new Vector3(1.0f, 0.0f, 1.0f))); 
+                        //this is to get the point directly under the player so we only have vertical movement
       }
     }
   }
