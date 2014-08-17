@@ -19,6 +19,20 @@ public class JackedInPlayer : MonoBehaviour {
 
   private GameObject jackedInCamera;
 
+  private Console motherConsole;
+
+  public Console MotherConsole
+  {
+    get
+    {
+      return motherConsole;
+    }
+    set
+    {
+      motherConsole = value;
+      }
+    }
+  
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +55,11 @@ public class JackedInPlayer : MonoBehaviour {
     Screen.lockCursor = true;
     ManageRotation();
     ManageMovement();
+
+    if (Input.GetKeyDown(KeyCode.Q))
+    {
+      motherConsole.DeleteSpawn();
+    }
 	}
 
   private void ManageMovement()
