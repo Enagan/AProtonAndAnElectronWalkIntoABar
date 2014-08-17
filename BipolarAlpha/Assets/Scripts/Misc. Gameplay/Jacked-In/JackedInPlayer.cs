@@ -13,6 +13,9 @@ public class JackedInPlayer : MonoBehaviour {
   [SerializeField]
   private float _maximumVerticalRotation = 0f;
 
+  [SerializeField]
+  private float _movementSpeed = 5.0f;
+
 
   private GameObject jackedInCamera;
 
@@ -37,8 +40,22 @@ public class JackedInPlayer : MonoBehaviour {
     Screen.showCursor = false;
     Screen.lockCursor = true;
     ManageRotation();
-	
+    ManageMovement();
 	}
+
+  private void ManageMovement()
+  {
+    //Check for the values in the Vertical and Horizontal Axis
+    //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
+    //Values range from 1 to -1
+    float fowardMovement = Input.GetAxis("Vertical");
+    float sideMovement = Input.GetAxis("Horizontal");
+
+    this.transform.position += fowardMovement * _movementSpeed * jackedInCamera.transform.forward * Time.deltaTime;
+    this.transform.position += sideMovement * _movementSpeed * jackedInCamera.transform.right * Time.deltaTime;
+
+  }
+
 
   private void ManageRotation()
   {
