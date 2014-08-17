@@ -31,7 +31,6 @@ public class SplitWindow : EditorWindow
 
     ResizeScrollView();
 
-    GUILayout.FlexibleSpace();
 
 
 
