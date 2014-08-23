@@ -27,6 +27,7 @@ public class BipolarConsoleWindow : EditorWindow
     EditorWindow.GetWindow(typeof(BipolarConsoleWindow));
   }
 
+
   public void OnEnable()
   {
 
@@ -38,10 +39,9 @@ public class BipolarConsoleWindow : EditorWindow
     _selectedTags = new ArrayList();
     _collapsedHash = new Dictionary<string, CollapsedMessage>();
 
-   
-
     BPLog("Hello");
     BPLog("HelloTagged","A");
+    BPLog("HelloTagged", "A");
     BPLog("HelloNormal", "B",LogType.NORMAL);
     BPLog("HelloError", "B", LogType.ERROR);
     BPLog("HelloWarning", "C",LogType.WARNING);
@@ -56,11 +56,38 @@ public class BipolarConsoleWindow : EditorWindow
         _whiteTexture.SetPixel(x, y, Color.white);
  
     _whiteTexture.Apply();
-    
-    
+
+    Application.RegisterLogCallback(HandleLog);
+    Debug.Log("SOMETHIGN");
     initHeaderBar();
     
   }
+  void OnDisable()
+  {
+    Application.RegisterLogCallback(null);
+  }
+
+  protected void HandleLog(string logString, string stackTrace,UnityEngine.LogType type)
+  {
+    BipolarConsoleWindow.LogType BPType = LogType.NORMAL;
+    switch (type)
+    {
+      case UnityEngine.LogType.Assert:
+      case UnityEngine.LogType.Error:
+      case UnityEngine.LogType.Exception:
+        BPType = LogType.ERROR;
+        break;
+      case UnityEngine.LogType.Warning:
+        BPType = LogType.WARNING;
+        break;
+      case UnityEngine.LogType.Log:
+        BPType = LogType.NORMAL;
+        break;
+    }
+
+    BPLog(logString, "Default Console", BPType, stackTrace);
+  }
+
 
   void OnGUI()
   {
@@ -203,7 +230,7 @@ public class BipolarConsoleWindow : EditorWindow
 
     GUIStyle skin = GUI.skin.label;
     skin.wordWrap = true;
-    GUILayout.Label(stackTrace, skin);
+    EditorGUILayout.SelectableLabel(stackTrace, skin);
   }
     
   bool isMessageTagAvailable(string tag)
@@ -257,7 +284,12 @@ public class BipolarConsoleWindow : EditorWindow
     //EditorGUILayout.(message.type + "  " + getTimeStamp(message.stamp) + "   " + message.log + "  [" + message.tag + "] ");
     
     if (GUILayout.Button(messageStr))
-      _selectedLogMessage = message;
+    {
+      if (_selectedLogMessage.hashKey().Equals(message.hashKey()))
+        goToSelectedLog();
+      else
+        _selectedLogMessage = message;
+    }
 
       GUI.contentColor = prevColor;
   }
@@ -408,6 +440,7 @@ public class BipolarConsoleWindow : EditorWindow
   {
 
   }
+
   void warningButton()
   {
 
@@ -419,6 +452,38 @@ public class BipolarConsoleWindow : EditorWindow
   void collapseButton()
   {
 
+  }
+
+  const string ASSET_START_TOKEN = "Asset";
+  const string LINE_START_TOKEN = ":line ";
+  void goToSelectedLog()
+  {
+    
+    LogMessage selected;
+    if(_canCollapse)
+      selected = _selectedCollapsedMessage.message;
+    else
+      selected = _selectedLogMessage;
+
+    string[] stackTraces = _selectedLogMessage.stackTrace.Split('\n');
+    string lineEntry = stackTraces[stackTraces.Length - 1];
+
+    int pathStart = lineEntry.IndexOf(ASSET_START_TOKEN);
+    int pathEnd = lineEntry.IndexOf(LINE_START_TOKEN);
+    int lineStart = lineEntry.IndexOf(LINE_START_TOKEN) + LINE_START_TOKEN.Length;
+    int lineEnd = lineEntry.Length;
+
+    string path = lineEntry.Substring(pathStart, pathEnd - pathStart);
+    int line = int.Parse(lineEntry.Substring(lineStart, lineEnd - lineStart));
+    
+    if(path != null && line > 0)
+    {
+     UnityEngine.Object script = Resources.LoadAssetAtPath(path, typeof(UnityEngine.Object));
+     if (script != null)
+     {
+       AssetDatabase.OpenAsset(script.GetInstanceID(), line);
+     }
+    }
   }
 
   void clearOnPlayButton()
@@ -440,7 +505,7 @@ public class BipolarConsoleWindow : EditorWindow
 
   void saveButton()
   {
-    string name = "LogDump-" + DateTime.Now.ToLongDateString() + ".txt";
+    string name = "LogDump-" + DateTime.Now.ToLongDateString() + ".txt"; 
 
     string path = EditorUtility.SaveFilePanel
     ("Save current log dump",
@@ -525,6 +590,14 @@ public class BipolarConsoleWindow : EditorWindow
       
       return "[" + base.ToString() + "]";
     }
+
+
+    public string hashKey()
+    {
+      // key should be message + location + tag
+      return (this.log + this.tag + this.type);
+
+    }
   }
 
   bool isKeyPressed(KeyCode code)
@@ -535,6 +608,7 @@ public class BipolarConsoleWindow : EditorWindow
   }
   
   const string EMPTY_TAG = "-";
+  const string EMPTY_STACK_TRACE = "";
 
   public enum LogType
   {
@@ -555,12 +629,23 @@ public class BipolarConsoleWindow : EditorWindow
 
   public void BPLog(string log, string tag, LogType type)
   {
-    LogMessage message = new LogMessage(log, tag, type,Environment.StackTrace);
+    BPLog(log, tag, type, EMPTY_STACK_TRACE);
+  }
+
+  private void BPLog(string log, string tag, LogType type, string stackTrace)
+  {
+    LogMessage message;
+
+    if(stackTrace == EMPTY_STACK_TRACE)
+      message = new LogMessage(log, tag, type,Environment.StackTrace);
+    else
+      message = new LogMessage(log, tag, type, stackTrace);
+
     _logs.Add(message);
 
     _logCounter[(int)type]++;
 
-    string hashKey = generateHashKey(message);
+    string hashKey = message.hashKey();
 
     if (!_collapsedHash.ContainsKey(hashKey))
     {
@@ -603,12 +688,6 @@ public class BipolarConsoleWindow : EditorWindow
     }
   }
 
-  protected string generateHashKey(LogMessage message)
-  {
-    // key should be message + location + tag
-    return (message.log + message.tag);
-
-  }
 }
 
 //#endif

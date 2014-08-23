@@ -11,7 +11,7 @@ public class SplitWindow : EditorWindow
   public void OnEnable()
   {
     currentScrollViewHeight = this.position.height / 2;
-
+    
   }
 
   private void createSplitTex()
