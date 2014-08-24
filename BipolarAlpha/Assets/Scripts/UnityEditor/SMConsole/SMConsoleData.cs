@@ -129,17 +129,40 @@ public class SMConsoleData
 
   public static string getTimeStamp(DateTime time)
   {
-    string timeStamp = "[";
+    string timeStamp = "";
 
     timeStamp += time.Hour < 10 ? "0" : "";
     timeStamp += +time.Hour + ":";
     timeStamp += time.Minute < 10 ? "0" : "";
-    timeStamp += +time.Minute + "::";
+    timeStamp += +time.Minute + ":";
     timeStamp += time.Second < 10 ? "0" : "";
-    timeStamp += +time.Second + ":";
-    timeStamp += time.Millisecond + "]";
+    timeStamp += +time.Second + "::";
+    timeStamp += time.Millisecond;
 
     return timeStamp;
+  }
+
+
+  // Callback for default Debug console logs
+  public void HandleLog(string logString, string stackTrace, UnityEngine.LogType type)
+  {
+    SMLogType BPType = SMLogType.NORMAL;
+    switch (type)
+    {
+      case UnityEngine.LogType.Assert:
+      case UnityEngine.LogType.Error:
+      case UnityEngine.LogType.Exception:
+        BPType = SMLogType.ERROR;
+        break;
+      case UnityEngine.LogType.Warning:
+        BPType = SMLogType.WARNING;
+        break;
+      case UnityEngine.LogType.Log:
+        BPType = SMLogType.NORMAL;
+        break;
+    }
+
+    SMConsole.Log(logString, "Default Console", BPType);
   }
 
 }
@@ -165,7 +188,9 @@ public struct LogMessage
   public string stackTrace;
   public SMLogType type;
   public DateTime stamp;
+  public int messageID;
 
+  private static int IDCounter = 0;
   // Constructor
   public LogMessage(string log, string tag, SMLogType type, string stack)
   {
@@ -174,12 +199,18 @@ public struct LogMessage
     this.type = type;
     this.stamp = DateTime.Now;
     this.stackTrace = stack;
+    this.messageID = ++IDCounter;
   }
 
   public override string ToString()
   {
 
     return "[" + base.ToString() + "]";
+  }
+
+  public bool isEqualTo(LogMessage message)
+  {
+    return message.messageID == this.messageID;
   }
 
 

@@ -7,14 +7,37 @@ public class SMConsoleTopSection : MonoBehaviour {
 
 
   SMConsoleData _data;
+  GUISkin _buttonSkin;
+  GUISkin _buttonSkin2;
+  GUISkin _selectedButtonSkin;
+  Texture2D _logTex;
+  Texture _warningTex;
+  Texture _errorTex;
+  float _labelWidth;
+  
 
   public SMConsoleTopSection()
   {
-    _data = SMConsoleData.Instance;
-  }
 
+
+    
+    _data = SMConsoleData.Instance;
+    _buttonSkin = Resources.Load("GUI/Skins/SMConsoleSkin") as GUISkin;
+    _buttonSkin2 = Resources.Load("GUI/Skins/SMConsoleSkin2") as GUISkin;
+    _selectedButtonSkin = Resources.Load("GUI/Skins/SMConsoleSkin3") as GUISkin;
+
+    _logTex = (Texture2D)Resources.Load("GUI/Sprites/log", typeof(Texture2D));
+    _warningTex = (Texture2D)Resources.Load("GUI/Sprites/warning", typeof(Texture2D));
+    _errorTex = (Texture2D)Resources.Load("GUI/Sprites/error", typeof(Texture2D));
+    
+  }
+  
   public void drawTopSection(float width)
   {
+
+
+    _labelWidth = (width * 0.8f +3) - _logTex.width*2;
+    
     // Upper section
     GUILayout.BeginHorizontal();
 
@@ -69,14 +92,23 @@ public class SMConsoleTopSection : MonoBehaviour {
 
   void drawLogWindow()
   {
+    int logCount = 0;
     if (!_data.canCollapse)
     {
       foreach (LogMessage message in _data.showingLogs)
       {
+        logCount++;
         bool canDisplay = isMessageTypeAvailable(message.type) && isMessageTagAvailable(message.tag);
 
         if (canDisplay)
-          displayMessage(message);
+        {
+          if (_data.selectedLogMessage.isEqualTo(message))
+            displayMessage(message, _selectedButtonSkin);
+          else if (logCount % 2 == 0)
+            displayMessage(message, _buttonSkin);
+          else
+            displayMessage(message, _buttonSkin2);
+        }
       }
     }
     else
@@ -87,7 +119,16 @@ public class SMConsoleTopSection : MonoBehaviour {
         bool canDisplay = isMessageTypeAvailable(message.type) && isMessageTagAvailable(message.tag);
 
         if (canDisplay)
-          displayCollapsedMessage(entry.Value);
+        {
+          logCount++;
+          if (_data.selectedCollapsedMessage.message.hashKey() == message.hashKey())
+            displayCollapsedMessage(entry.Value, _selectedButtonSkin);
+          else if (logCount % 2 == 0)
+            displayCollapsedMessage(entry.Value,_buttonSkin);
+          else
+            displayCollapsedMessage(entry.Value, _buttonSkin2);
+          
+        }
       }
     }
 
@@ -118,50 +159,97 @@ public class SMConsoleTopSection : MonoBehaviour {
     return isAvailable;
   }
 
-  void displayCollapsedMessage(CollapsedMessage cmessage)
+  void displayCollapsedMessage(CollapsedMessage cmessage, GUISkin skin)
   {
     LogMessage message = cmessage.message;
-    if(GUILayout.Button(message.type + "   " + message.log + "  [" + message.tag + "] " + cmessage.counter,GUI.skin.label))
-      _data.selectedCollapsedMessage = cmessage;
+
+    GUILayout.BeginHorizontal();
+
+    bool selected = drawIconLabel(cmessage.message.type,skin);
+    
+    // Log
+    selected |= GUILayout.Button(message.log, skin.button, GUILayout.Width(_labelWidth*0.7f), GUILayout.Height(_logTex.height));
+
+
+    skin.button.alignment = TextAnchor.MiddleCenter;
+
+    // Counter
+    selected |= GUILayout.Button("#"+cmessage.counter, skin.button, GUILayout.Width(_labelWidth * 0.15f), GUILayout.Height(_logTex.height));
+    
+    // Tag
+    selected |= GUILayout.Button(message.tag, skin.button, GUILayout.Width(_labelWidth * 0.14f), GUILayout.Height(_logTex.height));
+
+    skin.button.alignment = TextAnchor.UpperLeft;
+
+    if(selected)
+    {
+      if (_data.selectedCollapsedMessage.message.hashKey() == cmessage.message.hashKey())
+        goToSelectedLog(cmessage.message);
+      else
+        _data.selectedCollapsedMessage = cmessage;
+    }
+
+    GUILayout.EndHorizontal();
   }
 
-  void displayMessage(LogMessage message)
+  void displayMessage(LogMessage message, GUISkin skin)
   {
-    Color prevColor = GUI.backgroundColor;
-    Color messageColor  = Color.white;
-    switch(message.type)
-    {
-      case SMLogType.WARNING:
-         messageColor = Color.yellow;
-        break;
 
-      case SMLogType.ERROR:
-        messageColor = Color.red;
-        break;
-    }
-   
-    string messageStr = message.type + "  " + SMConsoleData.getTimeStamp(message.stamp) + "   " + message.log + "  [" + message.tag + "] ";
-    GUI.contentColor = messageColor;
-    //EditorGUILayout.(message.type + "  " + SMConsoleData.getTimeStamp(message.stamp) + "   " + message.log + "  [" + message.tag + "] ");
-    
-    if (GUILayout.Button(messageStr))
+    GUILayout.BeginHorizontal();
+
+    bool selected = drawIconLabel(message.type, skin);
+
+    // The Log
+    selected |= GUILayout.Button(message.log, skin.button, GUILayout.Width(_labelWidth * 0.7f), GUILayout.Height(_logTex.height));
+
+    skin.button.alignment = TextAnchor.MiddleCenter;
+    // Timer
+    selected |= GUILayout.Button(SMConsoleData.getTimeStamp(message.stamp),skin.button, GUILayout.Width(_labelWidth * 0.15f), GUILayout.Height(_logTex.height));
+
+    // Tag
+    selected |= GUILayout.Button(message.tag, skin.button, GUILayout.Width(_labelWidth * 0.14f), GUILayout.Height(_logTex.height));
+
+    skin.button.alignment = TextAnchor.UpperLeft;
+
+    if (selected)
     {
-      if (_data.selectedLogMessage.hashKey().Equals(message.hashKey()))
-        goToSelectedLog();
+      if (_data.selectedLogMessage.isEqualTo(message))
+        goToSelectedLog(message);
       else
         _data.selectedLogMessage = message;
     }
 
-      GUI.contentColor = prevColor;
-  }
+    GUILayout.EndHorizontal();
 
+ }
+
+  bool drawIconLabel(SMLogType type, GUISkin skin)
+  {
+    Texture texture = _logTex;
+
+    switch (type)
+    {
+      case SMLogType.NORMAL:
+        texture = _logTex;
+        break;
+
+      case SMLogType.WARNING:
+        texture = _warningTex;
+        break;
+
+      case SMLogType.ERROR:
+        texture = _errorTex;
+        break;
+
+    }
+
+    return GUILayout.Button(texture, skin.button, GUILayout.Height(texture.height), GUILayout.Width(texture.width+5));
+  }
 
   const string ASSET_START_TOKEN = "Asset";
   const string LINE_START_TOKEN = ":line ";
-  void goToSelectedLog()
+  void goToSelectedLog(LogMessage selected)
   {
-    
-    LogMessage selected;
     if(_data.canCollapse)
       selected = _data.selectedCollapsedMessage.message;
     else

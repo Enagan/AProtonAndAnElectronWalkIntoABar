@@ -24,6 +24,9 @@ public class SMConsole : EditorWindow
   {
     //Show existing window instance. If one doesn't exist, make one.
     EditorWindow.GetWindow(typeof(SMConsole));
+
+    Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
+    Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
   }
 
   public void OnEnable()
@@ -36,35 +39,28 @@ public class SMConsole : EditorWindow
     _topSection = new SMConsoleTopSection();
     _splitWindow = new SMConsoleSplitWindow();
     _botSection = new SMConsoleBotSection();
+
+    SMConsole.Log("HelloWorld", "A");
+    SMConsole.Log("HelloWorld", "A");
+    SMConsole.Log("HelloWorld", "B");
+    SMConsole.Log("HelloWorld", "C",SMLogType.WARNING);
+    SMConsole.Log("HelloWorld", "C", SMLogType.NORMAL);
+    SMConsole.Log("HelloWorld", "C", SMLogType.ERROR);
+    SMConsole.Log("HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld\nHelloWorldHelloWorldHelloWorldHelloWorld\n", "E", SMLogType.ERROR);
+
+    //Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
   
+
+    Debug.Log("The system is working");
   }
 
   void OnDisable()
   {
     Application.RegisterLogCallback(null);
+    Application.RegisterLogCallbackThreaded(null);
   }
 
-  // Callback for default Debug console logs
-  public void HandleLog(string logString, string stackTrace,UnityEngine.LogType type)
-  {
-    SMLogType BPType = SMLogType.NORMAL;
-    switch (type)
-    {
-      case UnityEngine.LogType.Assert:
-      case UnityEngine.LogType.Error:
-      case UnityEngine.LogType.Exception:
-        BPType = SMLogType.ERROR;
-        break;
-      case UnityEngine.LogType.Warning:
-        BPType = SMLogType.WARNING;
-        break;
-      case UnityEngine.LogType.Log:
-        BPType = SMLogType.NORMAL;
-        break;
-    }
 
-    Log(logString, "Default Console", BPType, stackTrace);
-  }
 
   // RegisterLogCallback has a bug that only allows it to be registered from the second frame onwards
   private int frameCount = 0;
@@ -74,7 +70,7 @@ public class SMConsole : EditorWindow
     if(frameCount > MIN_REGISTER_FRAME)
       return;
     else if (frameCount == MIN_REGISTER_FRAME)
-      Application.RegisterLogCallback(HandleLog);
+      Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
     else if (frameCount < MIN_REGISTER_FRAME)
       frameCount++;
   }
@@ -82,7 +78,8 @@ public class SMConsole : EditorWindow
   // Draw Editor
   void OnGUI()
   {
-    registerDebugHandler();
+    
+    //registerDebugHandler();
 
     if (frameCount < MIN_REGISTER_FRAME)
       return;
@@ -109,7 +106,7 @@ public class SMConsole : EditorWindow
     
     GUILayout.EndVertical();
 
-  }
+   }
 
   #region static Log functions
 
