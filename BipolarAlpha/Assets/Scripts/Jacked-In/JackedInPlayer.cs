@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class JackedInPlayer : MonoBehaviour {
 
@@ -20,6 +21,9 @@ public class JackedInPlayer : MonoBehaviour {
   private GameObject jackedInCamera;
 
   private Console motherConsole;
+
+  //This dictionary holds the players' currently usable abilities and their cooresponding activation keys
+  private Dictionary<string, Ability> _usableAbilities = new Dictionary<string, Ability>();
 
   public Console MotherConsole
   {
@@ -46,6 +50,8 @@ public class JackedInPlayer : MonoBehaviour {
 
     //Initial rotation saved, used to clamp min and max rotation
     _baseRotation = jackedInCamera.transform.localRotation;
+
+    InstantiateAbilities();
 	}
 	
 	// Update is called once per frame
@@ -55,12 +61,16 @@ public class JackedInPlayer : MonoBehaviour {
     Screen.lockCursor = true;
     ManageRotation();
     ManageMovement();
+    ManageAbilities();
 
     if (Input.GetKeyDown(KeyCode.Q))
     {
       motherConsole.DeleteSpawn();
     }
 	}
+
+
+  #region Managers
 
   private void ManageMovement()
   {
@@ -95,5 +105,44 @@ public class JackedInPlayer : MonoBehaviour {
       jackedInCamera.transform.localRotation = previousRotation;
     }
 
+  }
+
+
+  private void ManageAbilities()
+  {
+    foreach (KeyValuePair<string, Ability> ability in _usableAbilities)
+    {
+
+      if (Input.GetButtonUp(ability.Key))
+      {
+        ability.Value.KeyUp(ability.Key);
+        continue;
+      }
+
+      if (Input.GetButtonDown(ability.Key))
+      {
+        ability.Value.KeyDown(ability.Key);
+        continue;
+      }
+
+    }
+  }
+
+  #endregion
+
+  /// <summary>
+  /// Adds an ability to the player that can be activated by the specified key
+  /// Will override other abilities that use the specified key
+  /// </summary>
+  public void AddAbility(string key, Ability ability)
+  {
+    _usableAbilities[key] = ability;
+  }
+
+  public void InstantiateAbilities()
+  {
+    Camera playerCamera = this.GetComponentInChildren<Camera>();
+
+    _usableAbilities.Add("Fire1", new AbilityActivateActivatable(playerCamera));
   }
 }
