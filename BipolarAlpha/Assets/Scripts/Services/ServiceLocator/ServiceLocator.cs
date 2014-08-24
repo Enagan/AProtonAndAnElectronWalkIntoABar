@@ -23,6 +23,8 @@ public class ServiceLocator
 	
   private static HUDSystem _HUDSystem;
 
+  private static PlayerController _playerController;
+
   private static StringRetrievalSystem _stringSystem = new StringRetrievalSystem();
 
   private static CheckPointSystem _checkpointSystem= new CheckPointSystem();
@@ -111,7 +113,13 @@ public class ServiceLocator
     return _cutsceneManager;
   }
 
-
+  /// <summary>
+  /// Returns the current implementation of the Player Controller
+  /// </summary>
+  public static PlayerController GetPlayerController()
+  {
+    return _playerController;
+  }
 
   #endregion
 
@@ -196,6 +204,14 @@ public class ServiceLocator
   public static void ProvideCutsceneManager(CutsceneManager cutsceneManager)
   {
     _cutsceneManager = cutsceneManager;
+  }
+
+  /// <summary>
+  /// Changes the current implementation of the Player Controller to the specified/provided implementation
+  /// </summary>
+  public static void ProvidePlayerController(PlayerController playerController)
+  {
+    _playerController = playerController;
   }
 
   #endregion
