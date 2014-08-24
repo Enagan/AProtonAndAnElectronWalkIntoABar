@@ -3,26 +3,18 @@ using System.Collections;
 
 public class Console : MonoBehaviour {
 
-  private GameObject _realPlayer;
+  public GameObject _realPlayer;
   private GameObject _jackedInPlayer = null;
   private float _playerMass;
 
   [SerializeField]
   private float waitingTime = 2.0f;
 
-  void OnCollisionEnter(Collision col)
-  {
-    if (col.gameObject.tag == "Player" && _jackedInPlayer == null)
-    {
-      _realPlayer = col.gameObject;
-      ActivateJackedIn();
-    }
-  }
-
   /// <summary>
   /// Activates jacked in mode, the player is deactivated and a JackedInPlayer prefab is created
   /// </summary>
-  private void ActivateJackedIn() {
+  public void ActivateJackedIn() {
+    _realPlayer = GameObject.Find("Player");
     _realPlayer.rigidbody.velocity = Vector3.zero;
     PlayerActivation(false);
     PlayInAnimation();

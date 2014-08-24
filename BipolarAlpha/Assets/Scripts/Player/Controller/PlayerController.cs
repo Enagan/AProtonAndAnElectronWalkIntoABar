@@ -60,6 +60,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private bool _spike = false;
 
+
+  [SerializeField]
+  private bool _jackedIn = false;
+
   #endregion
   #region Player State Variables
   private Quaternion _baseRotation = Quaternion.identity;
@@ -289,6 +293,12 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     {
       addStickyMagnetAbilities();
     }
+
+    if (_jackedIn)
+    {
+      _usableAbilities.Add("Console", new AbilityJackedIn(playerCamera));
+    }
+
     _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
     _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
 
