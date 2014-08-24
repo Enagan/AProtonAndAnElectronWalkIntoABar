@@ -33,7 +33,7 @@ public class ActivatorController : JackedInRemoteController
   {
     foreach (Activator t in _activatables)
     {
-      t.Activate();
+      t.Deactivate();
     }
   }
 }

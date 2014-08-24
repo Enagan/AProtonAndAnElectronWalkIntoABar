@@ -144,5 +144,6 @@ public class JackedInPlayer : MonoBehaviour {
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
     _usableAbilities.Add("Fire1", new AbilityActivateActivatable(playerCamera));
+    _usableAbilities.Add("Fire2", _usableAbilities["Fire1"]);
   }
 }
