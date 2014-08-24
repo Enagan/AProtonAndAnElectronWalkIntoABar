@@ -17,7 +17,7 @@ public class HUDCrosshair : HUDObject {
   private float _textureHeight;
 
   //Raycast mask to gnore objects in layer 8 (Magnetic Force) and layer 15 (Magnetic Blockers)
-  private int _raycastMask = ~((1 << 8) | ( 1 << 15)); 
+  private int _raycastMask = ~((1 << 8) | ( 1 << 15) | (1 << 17)); 
 	
   //Camera attached to the player	
   private GameObject _camera;
