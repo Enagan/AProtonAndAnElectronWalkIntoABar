@@ -26,6 +26,7 @@ public class Console : MonoBehaviour {
     _realPlayer.rigidbody.velocity = Vector3.zero;
     PlayerActivation(false);
     PlayInAnimation();
+    this.transform.Find("Boundary").gameObject.SetActive(true);
     _jackedInPlayer = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/JackedIn/JackedInPlayer", this.transform.position);
     _jackedInPlayer.GetComponent<JackedInPlayer>().MotherConsole = this;
     _jackedInPlayer.transform.forward = -1.0f * _realPlayer.transform.forward;
@@ -72,6 +73,7 @@ public class Console : MonoBehaviour {
     PlayerActivation(true);
     GameObject.Destroy(_jackedInPlayer);
     _jackedInPlayer = null;
+    this.transform.Find("Boundary").gameObject.SetActive(false);
 
   }
 
