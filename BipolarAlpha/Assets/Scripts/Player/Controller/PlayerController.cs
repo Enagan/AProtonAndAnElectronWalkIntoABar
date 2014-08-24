@@ -2,6 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum SecurityLevels
+{
+    Level1,
+    Level2,
+    Level3,
+    Level4,
+    Level5
+}
 
 public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPauseListener
 {
@@ -48,10 +56,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private float _maximumVerticalRotation = 0f;
 
-
   [SerializeField]
   private float _movementLimiter = 7.0f;
-
 
   //Abilities
   [SerializeField]
@@ -60,7 +66,9 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private bool _spike = false;
 
-
+  //Angle cutoff to check if player is colliding with the ground
+  [SerializeField]
+  private SecurityLevels _playerSecurityAccess = SecurityLevels.Level1;
   [SerializeField]
   private bool _jackedIn = false;
 
@@ -118,6 +126,14 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     }
   }
 
+  public SecurityLevels playerSecurityProtocol
+  {
+    get
+    {
+      return _playerSecurityAccess;
+    }
+  }
+
   public Camera getPlayerCamera()
   {
      return this.GetComponentInChildren<Camera>();
@@ -167,6 +183,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     instantiateAbilities();
     ServiceLocator.GetEventHandlerSystem().RegisterPlayerAbilityObtainListener(this);
     ServiceLocator.GetEventHandlerSystem().RegisterPauseListener(this);
+
+    ServiceLocator.ProvidePlayerController(this);
   }
 
   /// <summary>
