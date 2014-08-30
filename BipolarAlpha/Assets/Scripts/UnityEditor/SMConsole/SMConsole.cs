@@ -14,6 +14,7 @@ using System;
 public class SMConsole : EditorWindow
 {
 
+  // Console components
   SMConsoleHeaderBar _headerBar;
   SMConsoleTopSection _topSection;
   SMConsoleSplitWindow _splitWindow;
@@ -22,11 +23,11 @@ public class SMConsole : EditorWindow
   [MenuItem("Window/SM Console")]
   public static void ShowWindow()
   {
+    
     //Show existing window instance. If one doesn't exist, make one.
     EditorWindow.GetWindow(typeof(SMConsole));
+    
 
-    Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
-    Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
   }
 
   public void OnEnable()
@@ -34,24 +35,12 @@ public class SMConsole : EditorWindow
     // Create the singleton and intialize
     SMConsoleData.Instance.currentScrollViewHeight = this.position.height / 2;
 
-    // Init components
+     // Init components
     _headerBar = new SMConsoleHeaderBar();
     _topSection = new SMConsoleTopSection();
     _splitWindow = new SMConsoleSplitWindow();
     _botSection = new SMConsoleBotSection();
-
-    SMConsole.Log("HelloWorld", "A");
-    SMConsole.Log("HelloWorld", "A");
-    SMConsole.Log("HelloWorld", "B");
-    SMConsole.Log("HelloWorld", "C",SMLogType.WARNING);
-    SMConsole.Log("HelloWorld", "C", SMLogType.NORMAL);
-    SMConsole.Log("HelloWorld", "C", SMLogType.ERROR);
-    SMConsole.Log("HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld\nHelloWorldHelloWorldHelloWorldHelloWorld\n", "E", SMLogType.ERROR);
-
-    //Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
-  
-
-    Debug.Log("The system is working");
+      
   }
 
   void OnDisable()
@@ -60,31 +49,16 @@ public class SMConsole : EditorWindow
     Application.RegisterLogCallbackThreaded(null);
   }
 
-
-
-  // RegisterLogCallback has a bug that only allows it to be registered from the second frame onwards
-  private int frameCount = 0;
-  private const int MIN_REGISTER_FRAME = 3;
-  void registerDebugHandler()
-  {
-    if(frameCount > MIN_REGISTER_FRAME)
-      return;
-    else if (frameCount == MIN_REGISTER_FRAME)
-      Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
-    else if (frameCount < MIN_REGISTER_FRAME)
-      frameCount++;
-  }
-
   // Draw Editor
-  void OnGUI()
+  public void OnGUI()
   {
-    
-    //registerDebugHandler();
+    Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
+    Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
 
-    if (frameCount < MIN_REGISTER_FRAME)
-      return;
-
+    EditorGUILayout.BeginVertical();
     title = "SM Console";
+
+    EditorGUILayout.EndVertical();
 
     // HEADER
     _headerBar.drawHeaderBar();
@@ -105,7 +79,7 @@ public class SMConsole : EditorWindow
     GUILayout.EndHorizontal();
     
     GUILayout.EndVertical();
-
+    
    }
 
   #region static Log functions

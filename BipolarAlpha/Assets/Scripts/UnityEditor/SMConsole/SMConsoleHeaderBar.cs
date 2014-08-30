@@ -10,17 +10,18 @@ public class SMConsoleHeaderBar {
   const int SEARCH_WIDTH = 300;
   const int SEARCH_MARGIN = 10;
 
+  bool _isFirstOnPlayClearCheck;
+
   SMConsoleData _data;
 
   public SMConsoleHeaderBar()
   {
     _data = SMConsoleData.Instance;
+    _isFirstOnPlayClearCheck = true;
   }
 
   public void drawHeaderBar()
   {
-
-    Color c = GUI.backgroundColor; // store value
 
     GUILayout.BeginHorizontal();
 
@@ -52,8 +53,9 @@ public class SMConsoleHeaderBar {
 
     if (GUILayout.Button("X", EditorStyles.toolbarButton, new GUILayoutOption[1] { GUILayout.Width(20) }))
       clearSearchButton();
+    
+    
     // Buttons
-
     GUILayout.Space(SEARCH_MARGIN * 2);
 
     if (GUILayout.Button("Clear", EditorStyles.toolbarButton, new GUILayoutOption[1] { GUILayout.Width(50) }))
@@ -67,8 +69,12 @@ public class SMConsoleHeaderBar {
     if (_data.canCollapse = GUILayout.Toggle(_data.canCollapse, "Collapse", "ToolbarButton", new GUILayoutOption[1] { GUILayout.Width(80) }))
       collapseButton();
 
-    if (_data.canClearOnPlay = GUILayout.Toggle(_data.canClearOnPlay, "Clear on Play", "ToolbarButton", new GUILayoutOption[1] { GUILayout.Width(80) }))
+    _data.canClearOnPlay = GUILayout.Toggle(_data.canClearOnPlay, "Clear on Play", "ToolbarButton", new GUILayoutOption[1] { GUILayout.Width(80) });
+    if (_data.canClearOnPlay && _isFirstOnPlayClearCheck && Application.isPlaying)
+    {
+      _isFirstOnPlayClearCheck = false;
       clearOnPlayButton();
+    }
 
     GUILayout.Space(SEARCH_MARGIN * 2);
 
@@ -92,7 +98,9 @@ public class SMConsoleHeaderBar {
 
     GUILayout.EndHorizontal();
 
-    GUI.backgroundColor = c; // reset to old value
+    // reset check for clear on play
+    if (!_isFirstOnPlayClearCheck && !Application.isPlaying)
+      _isFirstOnPlayClearCheck = true;
   }
 
   void clearSearchButton()
@@ -139,7 +147,7 @@ public class SMConsoleHeaderBar {
 
   void clearOnPlayButton()
   {
-
+    clearButton();
   }
 
   void clearButton()

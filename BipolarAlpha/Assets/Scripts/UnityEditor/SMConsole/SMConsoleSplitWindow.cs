@@ -16,6 +16,7 @@ public class SMConsoleSplitWindow
     
   }
 
+  // Texture of the bar
   private void createSplitTex()
   {
     splitTex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -23,6 +24,7 @@ public class SMConsoleSplitWindow
     splitTex.Apply();
   }
 
+  // draws the texture
   public void drawWindow(float width)
   {
     if (splitTex == null)
@@ -34,6 +36,7 @@ public class SMConsoleSplitWindow
 
   }
 
+  // Detects input to resize area
   private void ResizeScrollView()
   {
 

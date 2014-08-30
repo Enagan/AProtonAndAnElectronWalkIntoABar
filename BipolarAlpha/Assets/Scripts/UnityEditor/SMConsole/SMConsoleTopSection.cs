@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SMConsoleTopSection : MonoBehaviour {
+public class SMConsoleTopSection {
 
 
   SMConsoleData _data;
@@ -11,21 +11,21 @@ public class SMConsoleTopSection : MonoBehaviour {
   GUISkin _buttonSkin2;
   GUISkin _selectedButtonSkin;
   Texture2D _logTex;
-  Texture _warningTex;
-  Texture _errorTex;
+  Texture2D _warningTex;
+  Texture2D _errorTex;
   float _labelWidth;
   
 
   public SMConsoleTopSection()
   {
 
-
-    
+    // create skins for buttons
     _data = SMConsoleData.Instance;
     _buttonSkin = Resources.Load("GUI/Skins/SMConsoleSkin") as GUISkin;
     _buttonSkin2 = Resources.Load("GUI/Skins/SMConsoleSkin2") as GUISkin;
     _selectedButtonSkin = Resources.Load("GUI/Skins/SMConsoleSkin3") as GUISkin;
 
+    // create textures for icons
     _logTex = (Texture2D)Resources.Load("GUI/Sprites/log", typeof(Texture2D));
     _warningTex = (Texture2D)Resources.Load("GUI/Sprites/warning", typeof(Texture2D));
     _errorTex = (Texture2D)Resources.Load("GUI/Sprites/error", typeof(Texture2D));
@@ -58,11 +58,13 @@ public class SMConsoleTopSection : MonoBehaviour {
 
   Vector2 _tagWindowScroll;
 
+  // draws tags
   void drawTagWindow()
   {
     foreach (string tag in _data.tags)
     {
 
+      // if selected message is not visible reset it
       if (tag == _data.selectedLogMessage.tag && !_data.canCollapse && !_data.selectedTags.Contains(tag))
       {
         _data.selectedLogMessage = new LogMessage();
@@ -72,9 +74,11 @@ public class SMConsoleTopSection : MonoBehaviour {
         _data.selectedCollapsedMessage = new CollapsedMessage(new LogMessage());
       }
 
+      // check if tag is selected and create toggle button
       bool isSelected = _data.selectedTags.Contains(tag);
       isSelected = GUILayout.Toggle(isSelected, tag, "ToolbarButton");
 
+      // Add or remove message according to tag being selected
       if (!isSelected && _data.selectedTags.Contains(tag))
       {
         _data.selectedTags.Remove(tag);
@@ -93,7 +97,7 @@ public class SMConsoleTopSection : MonoBehaviour {
   void drawLogWindow()
   {
     int logCount = 0;
-    if (!_data.canCollapse)
+    if (!_data.canCollapse) // Draw normal messages
     {
       foreach (LogMessage message in _data.showingLogs)
       {
@@ -111,9 +115,9 @@ public class SMConsoleTopSection : MonoBehaviour {
         }
       }
     }
-    else
+    else // Draw collapsed messages
     {
-      foreach (KeyValuePair<string, CollapsedMessage> entry in _data.collapsedHash)
+      foreach (KeyValuePair<string, CollapsedMessage> entry in _data.collapsedHash) 
       {
         LogMessage message = entry.Value.message;
         bool canDisplay = isMessageTypeAvailable(message.type) && isMessageTagAvailable(message.tag);
@@ -134,11 +138,13 @@ public class SMConsoleTopSection : MonoBehaviour {
 
   }
 
-
-    bool isMessageTagAvailable(string tag)
+  // returns true if the tag is available to display
+  bool isMessageTagAvailable(string tag)
   {
     return _data.selectedTags.Contains(tag);
   }
+
+  // returns true if the type (normal, warning , error) is available to display
   bool isMessageTypeAvailable(SMLogType type)
   {
     bool isAvailable = false;
@@ -159,6 +165,7 @@ public class SMConsoleTopSection : MonoBehaviour {
     return isAvailable;
   }
 
+  // Displays a collapsed message with a specific button skin
   void displayCollapsedMessage(CollapsedMessage cmessage, GUISkin skin)
   {
     LogMessage message = cmessage.message;
@@ -181,10 +188,10 @@ public class SMConsoleTopSection : MonoBehaviour {
 
     skin.button.alignment = TextAnchor.UpperLeft;
 
-    if(selected)
+    if(selected) 
     {
       if (_data.selectedCollapsedMessage.message.hashKey() == cmessage.message.hashKey())
-        goToSelectedLog(cmessage.message);
+        _data.goToSelectedLog(cmessage.message); // Jump to Line
       else
         _data.selectedCollapsedMessage = cmessage;
     }
@@ -192,6 +199,7 @@ public class SMConsoleTopSection : MonoBehaviour {
     GUILayout.EndHorizontal();
   }
 
+  // Displays a normal message
   void displayMessage(LogMessage message, GUISkin skin)
   {
 
@@ -214,7 +222,7 @@ public class SMConsoleTopSection : MonoBehaviour {
     if (selected)
     {
       if (_data.selectedLogMessage.isEqualTo(message))
-        goToSelectedLog(message);
+        _data.goToSelectedLog(message);
       else
         _data.selectedLogMessage = message;
     }
@@ -223,6 +231,7 @@ public class SMConsoleTopSection : MonoBehaviour {
 
  }
 
+  // Draws icon of message type
   bool drawIconLabel(SMLogType type, GUISkin skin)
   {
     Texture texture = _logTex;
@@ -246,40 +255,7 @@ public class SMConsoleTopSection : MonoBehaviour {
     return GUILayout.Button(texture, skin.button, GUILayout.Height(texture.height), GUILayout.Width(texture.width+5));
   }
 
-  const string ASSET_START_TOKEN = "Asset";
-  const string LINE_START_TOKEN = ":line ";
-  void goToSelectedLog(LogMessage selected)
-  {
-    if(_data.canCollapse)
-      selected = _data.selectedCollapsedMessage.message;
-    else
-      selected = _data.selectedLogMessage;
-
-    string[] stackTraces = _data.selectedLogMessage.stackTrace.Split('\n');
-    string lineEntry = stackTraces[stackTraces.Length - 1];
-
-    int pathStart = lineEntry.IndexOf(ASSET_START_TOKEN);
-    int pathEnd = lineEntry.IndexOf(LINE_START_TOKEN);
-    int lineStart = lineEntry.IndexOf(LINE_START_TOKEN) + LINE_START_TOKEN.Length;
-    int lineEnd = lineEntry.Length;
-    if (pathStart < 0 || pathEnd < 0 || lineStart < 0 || lineEnd < 0)
-    {
-      SMConsole.Log("Incorrectly opening entry " + lineEntry, "SM Error", SMLogType.ERROR);
-      return;
-    }
-
-    string path = lineEntry.Substring(pathStart, pathEnd - pathStart);
-    int line = int.Parse(lineEntry.Substring(lineStart, lineEnd - lineStart));
-    
-    if(path != null && line > 0)
-    {
-     UnityEngine.Object script = Resources.LoadAssetAtPath(path, typeof(UnityEngine.Object));
-     if (script != null)
-     {
-       AssetDatabase.OpenAsset(script.GetInstanceID(), line);
-     }
-    }
-  }
+ 
 
 
 
