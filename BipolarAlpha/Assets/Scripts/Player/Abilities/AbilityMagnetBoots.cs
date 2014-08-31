@@ -27,7 +27,7 @@ public class AbilityMagnetBoots : Ability
   }
 
 
-  public void Use(PlayerController caller, string key = null)
+  public void Use(string key = null)
   {
     //Does this every Update when pressing the ability button
     MagneticForce force = _magnetBoots.FireRayCast(_playerCamera.transform.position);
@@ -35,10 +35,10 @@ public class AbilityMagnetBoots : Ability
     //Apply force on player
     if (force != null)
     {
-      force.ApplyOtherMagnetsForces(caller.rigidbody);
+      force.ApplyOtherMagnetsForces(_player.rigidbody);
     }
 
-    }
+   }
 
   public void KeyUp(string key = null)
   {

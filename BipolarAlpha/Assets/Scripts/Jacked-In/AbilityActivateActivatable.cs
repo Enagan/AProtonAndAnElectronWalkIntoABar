@@ -7,15 +7,17 @@ public class AbilityActivateActivatable : MonoBehaviour, Ability
   private int _raycastMask = ((1 << 0) | (1 << 17)); //Only consider objects in layer 0 (Default) and 17 (Jacked-In)
 
   private Camera _jackedInCamera;
+  private JackedInPlayer _jackedInPlayer;
 
-  public AbilityActivateActivatable(Camera cam)
+  public AbilityActivateActivatable(JackedInPlayer jackedInPlayer,Camera cam)
   {
     _jackedInCamera = cam;
+    _jackedInPlayer = jackedInPlayer;
   }
 
-  public void Use(PlayerController player, string key)
+  public void Use(string key)
   {
-
+    FireRayCast(_jackedInCamera.transform.position, _jackedInCamera.transform.forward, key); 
   }
 
   public void KeyUp(string key)
@@ -25,7 +27,7 @@ public class AbilityActivateActivatable : MonoBehaviour, Ability
 
   public void KeyDown(string key)
   {
-    FireRayCast(_jackedInCamera.transform.position, _jackedInCamera.transform.forward, key);
+
   }
 
   public void FireRayCast(Vector3 start, Vector3 direction, string key)
