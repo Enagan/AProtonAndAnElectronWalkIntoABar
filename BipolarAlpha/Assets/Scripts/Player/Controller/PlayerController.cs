@@ -507,7 +507,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       // Uses the Input.GetButton method to read keys currently pressed, be careful due to its continuous reading
       if (Input.GetButton(ability.Key))
       {
-        ability.Value.Use(this, ability.Key);
+        ability.Value.Use(ability.Key);
       }
     }
   }

@@ -9,9 +9,9 @@ using System.Collections;
 public interface Ability{
 
   /// <summary>
-  /// Triggers the abilities' effect on it's caller
+  /// Continuosly Triggers the abilities' effect
   /// </summary>
-  void Use(PlayerController caller, string key = null);
+  void Use(string key = null);
 	
   /// <summary>
   /// The key that activates the ability has been pressed down

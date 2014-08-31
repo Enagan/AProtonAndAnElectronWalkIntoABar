@@ -11,7 +11,7 @@ public class AbilityScan: Ability {
   /// <summary>
   /// Scans the area sending an Event to all ScanObjets
   /// </summary>
-  public void Use(PlayerController caller, string key = null)
+  public void Use(string key = null)
   {    
   }
 

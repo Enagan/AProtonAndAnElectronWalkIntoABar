@@ -125,6 +125,12 @@ public class JackedInPlayer : MonoBehaviour {
         continue;
       }
 
+      // Uses the Input.GetButton method to read keys currently pressed, be careful due to its continuous reading
+      if (Input.GetButton(ability.Key))
+      {
+        ability.Value.Use(ability.Key);
+      }
+
     }
   }
 
@@ -143,7 +149,7 @@ public class JackedInPlayer : MonoBehaviour {
   {
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
-    _usableAbilities.Add("Fire1", new AbilityActivateActivatable(playerCamera));
+    _usableAbilities.Add("Fire1", new AbilityActivateActivatable(this,playerCamera));
     _usableAbilities.Add("Fire2", _usableAbilities["Fire1"]);
   }
 }

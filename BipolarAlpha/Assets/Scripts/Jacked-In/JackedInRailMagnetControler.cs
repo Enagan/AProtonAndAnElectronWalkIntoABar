@@ -3,7 +3,8 @@ using System.Collections;
 
 public class JackedInRailMagnetControler : JackedInRemoteController {
 
-  private const float RAIL_SPEED = 10f;
+  [SerializeField]
+  private float _railSpeed = 10f;
 
   public override void Left()
   {
@@ -24,11 +25,11 @@ public class JackedInRailMagnetControler : JackedInRemoteController {
 
   private void MoveFoward(GameObject go)
   {
-    go.transform.position += go.transform.forward * RAIL_SPEED * Time.deltaTime;
+    go.transform.position += go.transform.forward * _railSpeed * Time.deltaTime;
   }
 
   private void MoveBackwards(GameObject go)
   {
-   go.transform.position -= go.transform.forward * RAIL_SPEED * Time.deltaTime;
+    go.transform.position -= go.transform.forward * _railSpeed * Time.deltaTime;
   }
 }
