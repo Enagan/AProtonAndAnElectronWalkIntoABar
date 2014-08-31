@@ -32,7 +32,7 @@ public class GatewayTriggerScript : MonoBehaviour {
     {
 
       ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z_audio_cephlon-majlis_al_jinn");
-      ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(transform.parent.name);
+      ServiceLocator.GetEventHandlerSystem().SendPlayerRoomChangeEvent(connectsTo);
     }
     else if (other.tag == "MovableObject")
     {
