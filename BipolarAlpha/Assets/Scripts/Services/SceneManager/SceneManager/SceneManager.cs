@@ -14,20 +14,20 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 {
   // Adjacent rooms instancing depth
   [SerializeField]
-  private int _adjacentInstancingDepth = 5;
+  private int _adjacentInstancingDepth = 1;
 
   private RoomDefinition _activeRoom;
   private List<RoomDefinition> _currentlyCreatedRooms = new List<RoomDefinition>();
   private Dictionary<string,RoomDefinition> _allRooms = new Dictionary<string,RoomDefinition>();
   private List<RoomDefinition> _roomInQueueToDeletion = new List<RoomDefinition>();
 
-  //#if UNITY_PRO_LICENSE
-  //  private RoomFactoryAsync _roomFactory = new RoomFactoryAsync();
-  //#else
-  //  private RoomFactory _roomFactory = new RoomFactory();
-  //#endif 
+  #if UNITY_PRO_LICENSE
+    private RoomFactoryAsync _roomFactory = new RoomFactoryAsync();
+  #else
+    private RoomFactory _roomFactory = new RoomFactory();
+  #endif 
 
-  private RoomFactory _roomFactory = new RoomFactory();
+  //private RoomFactory _roomFactory = new RoomFactory();
 
 	private void Start () 
   {
@@ -99,10 +99,8 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 #endif
     RoomDefinition roomToCreate;
     //Search for room in the loaded rooms Dictionary
-    Debug.Log (roomName);
-    if ((roomToCreate = _allRooms[roomName]) == null)
-    {
-      Debug.Log("Error: room " + roomName + " does not exist in knowledgebase.");
+    if (!_allRooms.TryGetValue (roomName, out roomToCreate)) {
+      Debug.LogError("Error: room " + roomName + " does not exist in knowledgebase.");
       //TODO should throw exception
       return;
     }
@@ -202,6 +200,9 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     //If we haven't reached the current depth, create all adjacent rooms to current root
     if (currentDepth < _adjacentInstancingDepth)
     {
+#if LOG_SCENE_MANAGER
+      Debug.Log("[SCENE MANAGER]   This room " + root.roomName + " has  " + root.gateways.Count + " gateways.");
+#endif
       foreach (RoomObjectGatewayDefinition gate in root.gateways)
       {
         if (_allRooms.ContainsKey(gate.connectedToRoom))
