@@ -18,7 +18,7 @@ public class RotaryBridgeMagnetism : MagneticForce
   {
     base.Start();
     rotationDrag = 30000.0f;
-    rotationBoost = 100000.0f;
+    rotationBoost = 10000.0f;
     if (parentToAffect == this.transform.parent.gameObject)
     {
       parentToAffect = this.transform.parent.transform.parent.gameObject;
@@ -55,10 +55,8 @@ public class RotaryBridgeMagnetism : MagneticForce
         !float.IsNaN(localTorque.x)
         && !float.IsNaN(localTorque.y)
          && !float.IsNaN(localTorque.z) && rotationDrag != 0)
-        magnetBody.AddTorque(localTorque / rotationDrag * rotationBoost); // apply torque only on the local z axis of the rotary bridge
+        parentToAffect.rigidbody.AddTorque(localTorque / rotationDrag * rotationBoost); // apply torque only on the local y axis of the rotary bridge
 
-
-      Debug.Log(localTorque / rotationDrag * rotationBoost);
     }
   }
 }
