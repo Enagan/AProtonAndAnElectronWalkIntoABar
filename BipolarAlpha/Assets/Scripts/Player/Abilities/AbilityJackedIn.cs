@@ -4,6 +4,7 @@ using System.Collections;
 public class AbilityJackedIn : Ability
 {
 
+  private const float MAX_DISTANCE_FROM_CONSOLE_TO_ACTIVATE = 3.0f;
   protected Camera _playerCamera;
   private int _raycastMask = ~((1 << 8) | (1 << 13) | (1 << 15) | (1 << 17));  //Ignore objects in layer 8 (Magnetic Force) and 13 (Triggers) and 15 (Magnetic Blockers)
 
@@ -13,17 +14,15 @@ public class AbilityJackedIn : Ability
   }
   public void KeyUp(string key = null) { }
 
-  public void Use(PlayerController caller, string key = null) { }
+  public void Use(string key = null) { }
 
 
   public void KeyDown(string key = null)
   {
     RaycastHit hit;
-    if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Console"))
+    if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out hit, MAX_DISTANCE_FROM_CONSOLE_TO_ACTIVATE, _raycastMask) && hit.collider.CompareTag("Console"))
     {
-      if((Vector3.Distance(_playerCamera.transform.position, hit.transform.position) < 3.0f)){
-       hit.collider.gameObject.GetComponent<Console>().ActivateJackedIn();
-      }
+      hit.collider.gameObject.GetComponent<Console>().ActivateJackedIn();
     }
   }
 }

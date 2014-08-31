@@ -14,7 +14,7 @@ public class AbilityPauseGame : Ability
   /// <summary>
   /// PauseController
   /// </summary>
-  public void Use(PlayerController caller, string key = null)
+  public void Use(string key = null)
   {
    
   }

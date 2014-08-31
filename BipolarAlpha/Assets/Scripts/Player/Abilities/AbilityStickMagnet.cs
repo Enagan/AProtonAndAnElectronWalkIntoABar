@@ -44,7 +44,7 @@ public class AbilityStickMagnet : AbilityUseMagnet
 
   #region Ability methods
 
-  public override void Use(PlayerController caller, string key=null)
+  public override void Use( string key=null)
   {
     //For first use defines which arm abillity reffers to
     setArm(key);
@@ -55,7 +55,7 @@ public class AbilityStickMagnet : AbilityUseMagnet
       if (_isStuck)
       {
         //Release Player From Magnet
-        unstickPlayerFromMagnet(caller);
+        unstickPlayerFromMagnet(_player);
         
       }
       else  if (_magnetStuckToArm != null)
@@ -73,7 +73,7 @@ public class AbilityStickMagnet : AbilityUseMagnet
     //Apply Forces if not holding anything
     MagneticForce force = null;
 
-    force = ApplyForces(caller, _playerCamera.transform.forward);
+    force = ApplyForces(_player, _playerCamera.transform.forward);
 
     // if the player is repeling the magnet it's holding
     if (force != null && force.transform.parent.gameObject == _magnetStuckToArm && force.charge == this._playerMagnet.charge)
@@ -89,19 +89,19 @@ public class AbilityStickMagnet : AbilityUseMagnet
     if (force != null)
     {
       //Check if player is colliding with a magnet with opposite charge (mutual attraction)
-      if (caller.magnetColliding &&
-       _playerMagnet.charge != caller.magnetCollidingWith.charge)
+      if (_player.magnetColliding &&
+          _playerMagnet.charge != _player.magnetCollidingWith.charge)
       {
-        if (caller.magnetCollidingWith.isHoldable)
+        if (_player.magnetCollidingWith.isHoldable)
         {
           //Player Holds Magnets
-          stickMagnetToPlayer(caller, caller.magnetCollidingWith);
+          stickMagnetToPlayer(_player, _player.magnetCollidingWith);
 
         }
         else
         {
           //Magnets Hold Player
-          stickPlayerToMagnet(caller, caller.magnetCollidingWith);
+          stickPlayerToMagnet(_player, _player.magnetCollidingWith);
         }
         stickAnimation();
       }

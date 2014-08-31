@@ -55,10 +55,10 @@ public class AbilityUseMagnet : Ability
   /// <summary>
   /// Activates the associated directional Magnet with the forward direction of the player's camera
   /// </summary> 
-  public virtual void Use(PlayerController caller, string key = null)
+  public virtual void Use( string key = null)
   {
     //Applies magnetic forces
-    ApplyForces(caller, _playerCamera.transform.forward);
+    ApplyForces(_player, _playerCamera.transform.forward);
   }
 
   public virtual void KeyUp(string key = null)
