@@ -87,6 +87,12 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private bool _magnetColliding = false;
   private MagneticForce _magnetCollidingWith = null;
 
+  // Debug flags
+
+  [SerializeField]
+  private bool _isRightActive = false;
+  [SerializeField]
+  private bool _isLeftActive = false;
 
   #endregion
 
@@ -156,6 +162,11 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   [SerializeField]
   private PlayerMagnet _rightMagnet;
 
+  [SerializeField]
+  private GameObject _leftArm;
+  [SerializeField]
+  private GameObject _rightArm;
+
   #endregion
 
 
@@ -197,6 +208,9 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     Screen.showCursor = false;
     Screen.lockCursor = true;
 
+#if UNITY_EDITOR
+    ManageEditorOptions();
+#endif
     ManageMovement();
     ManageRotation();
     ManageAbilities();
@@ -276,13 +290,71 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   public void addStickyMagnetAbilities()
   {
     Camera playerCamera = this.GetComponentInChildren<Camera>();
-    if(_usableAbilities.ContainsKey("Fire1"))
+    if (_usableAbilities.ContainsKey("Fire1"))
+    {
       _usableAbilities.Remove("Fire1");
-    if(_usableAbilities.ContainsKey("Fire2"))
+      _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
+      _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
+    }
+        
+    if (_usableAbilities.ContainsKey("Fire2"))
+    {
       _usableAbilities.Remove("Fire2");
-    _usableAbilities.Add("Fire1", new AbilityStickMagnet(_leftMagnet, playerCamera, this));
-    _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
+      _usableAbilities.Add("Fire2", new AbilityStickMagnet(_rightMagnet, playerCamera, this));
+      _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
+    }
   }
+
+  public void addRightArmMagnetAbility()
+  {
+    _isRightActive = true;
+    addArmMagnetAbility(_rightArm, _rightMagnet, "Fire2");
+  }
+
+  public void addLeftArmMagnetAbility()
+  {
+    _isLeftActive = true;
+    addArmMagnetAbility(_leftArm, _leftMagnet, "Fire1");
+  }
+
+  public void removeLeftArmMagnetAbility()
+  {
+    _isLeftActive = false;
+    removeArmMagnetAbility(_leftArm, "Fire1");
+  }
+
+  public void removeRightArmMagnetAbility()
+  {
+    _isRightActive = false;
+    removeArmMagnetAbility(_rightArm, "Fire2");
+  }
+
+
+  private void addArmMagnetAbility(GameObject arm, PlayerMagnet _magnet, string abilityKey)
+  {
+    if (arm != null && !arm.activeInHierarchy)
+    {
+
+      arm.SetActive(true);
+      if (!_usableAbilities.ContainsKey(abilityKey))
+      {
+        Camera playerCamera = this.GetComponentInChildren<Camera>();
+        _usableAbilities.Add(abilityKey, new AbilityUseMagnet(_magnet, playerCamera, this));
+      }
+    }
+  }
+
+  private void removeArmMagnetAbility(GameObject arm, string abilityKey)
+  {
+    if (arm != null && arm.activeInHierarchy)
+    {
+      arm.SetActive(false);
+      _usableAbilities.Remove(abilityKey);
+    }
+  }
+    
+
+
 
   #region Players' Private Methods
 
@@ -296,8 +368,21 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     Camera playerCamera = this.GetComponentInChildren<Camera>();
 
     //_usableAbilities.Add("Jump", new AbilityJump());
-    _usableAbilities.Add("Fire1", new AbilityUseMagnet(_leftMagnet, playerCamera, this));
-    _usableAbilities.Add("Fire2", new AbilityUseMagnet(_rightMagnet, playerCamera, this));
+
+    // Add or remove arms, make sure they are removed properly
+    if (_isLeftActive)
+    {
+      addLeftArmMagnetAbility();
+    }
+    else
+      removeLeftArmMagnetAbility();
+
+    if (_isRightActive)
+    {
+      addRightArmMagnetAbility();
+    }
+    else
+      removeRightArmMagnetAbility();
 
     // To test sticky ability, comment the two above AbilityUseMagnet and uncomment the following ability adding
 
@@ -310,6 +395,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     if (_spike)
     {
       addStickyMagnetAbilities();
+      
     }
 
     if (_jackedIn)
@@ -317,8 +403,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
       _usableAbilities.Add("Console", new AbilityJackedIn(playerCamera));
     }
 
-    _usableAbilities.Add("Release1", _usableAbilities["Fire1"]);
-    _usableAbilities.Add("Release2", _usableAbilities["Fire2"]);
 
     // To test scan ability
     _usableAbilities.Add("Scan", new AbilityScan());
@@ -380,6 +464,24 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   #endregion
 
   #region Player SubSystem Managers
+
+
+  /// <summary>
+  /// For activating and deactivating editor flags during runtime
+  /// </summary>
+  private void ManageEditorOptions()
+  {
+    if (_isRightActive && !_rightArm.activeInHierarchy)
+      addRightArmMagnetAbility();
+    else if (!_isRightActive && _rightArm.activeInHierarchy)
+      removeRightArmMagnetAbility();
+
+    if (_isLeftActive && !_leftArm.activeInHierarchy)
+       addLeftArmMagnetAbility();
+    else if (!_isLeftActive && _leftArm.activeInHierarchy)
+       removeLeftArmMagnetAbility();
+  }
+
 
   /// <summary>
   /// Checks if any of the players' currently usable abilities have been triggered

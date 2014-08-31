@@ -8,6 +8,9 @@ using System.Collections;
 /// </summary>
 public abstract class AwardPlayerAbility : MonoBehaviour {
 
+  // If should deactivate self on pickup
+  protected bool _destroyOnPickup = true;
+
 	// When collided with player adds him an ability using the awardAbility method
  void OnTriggerEnter(Collider other)
  {
@@ -17,7 +20,8 @@ public abstract class AwardPlayerAbility : MonoBehaviour {
        Debug.Log("Collided with player");
        PlayerController player = other.GetComponent<PlayerController>();
        awardAbility(player);
-       gameObject.SetActive(false);
+       if(_destroyOnPickup)
+        gameObject.SetActive(false);
      }
   }
 
