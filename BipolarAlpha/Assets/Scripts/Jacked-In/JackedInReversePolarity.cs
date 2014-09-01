@@ -13,18 +13,18 @@ public class JackedInReversePolarity : JackedInRemoteController
   {
     if (Time.time > _lastTimer + _multiClickPreventionTimer)
     {
-      this.transform.parent.GetComponentInChildren<MagneticForce>().RevertCharge();
+
+      foreach (GameObject obj in _activatableObjects)
+      {
+        obj.GetComponent<MagneticForce>().RevertCharge();
+      }
       _lastTimer = Time.time;
     }
   }
 
   public override void Right()
   {
-    if (Time.time > _lastTimer + _multiClickPreventionTimer)
-    {
-      this.transform.parent.GetComponentInChildren<MagneticForce>().RevertCharge();
-      _lastTimer = Time.time;
-    }
+    Left();
   }
 
 
