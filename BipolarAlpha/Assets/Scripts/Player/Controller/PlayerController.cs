@@ -138,6 +138,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     {
       return _playerSecurityAccess;
     }
+    set
+    {
+      _playerSecurityAccess = value;
+    }
   }
 
   public Camera getPlayerCamera()

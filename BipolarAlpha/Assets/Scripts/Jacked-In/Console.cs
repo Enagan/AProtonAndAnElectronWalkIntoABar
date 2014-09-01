@@ -4,6 +4,7 @@ using System.Collections;
 public class Console : MonoBehaviour {
 
   public GameObject _realPlayer;
+  public GameObject _jackedInSpawnPoint = null;
   private GameObject _jackedInPlayer = null;
   private float _playerMass;
 
@@ -19,7 +20,9 @@ public class Console : MonoBehaviour {
     PlayerActivation(false);
     PlayInAnimation();
     this.transform.Find("Boundary").gameObject.SetActive(true);
-    _jackedInPlayer = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/JackedIn/JackedInPlayer", this.transform.position);
+    _jackedInPlayer = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/JackedIn/JackedInPlayer", _jackedInSpawnPoint != null ? 
+                                                                                                              _jackedInSpawnPoint.transform.position :
+                                                                                                              this.transform.position);
     _jackedInPlayer.GetComponent<JackedInPlayer>().MotherConsole = this;
     _jackedInPlayer.transform.forward = -1.0f * _realPlayer.transform.forward;
   }
