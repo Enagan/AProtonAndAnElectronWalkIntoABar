@@ -207,7 +207,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       {
         if (_allRooms.ContainsKey(gate.connectedToRoom))
         {
-          Debug.Log ("creating room" + gate.connectedToRoom);
+          SMConsole.Log(tag: "[SCENE MANAGER]", log: "creating room" + gate.connectedToRoom);
           CreateRoomTree(_allRooms[gate.connectedToRoom], currentDepth + 1, root);
         }
         else
