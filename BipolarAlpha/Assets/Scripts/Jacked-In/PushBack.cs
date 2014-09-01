@@ -9,7 +9,6 @@ public class PushBack: MonoBehaviour{
   private GameObject player;
 
   public void OnTriggerExit(Collider col){
-    Debug.Log("Pushing");
     if (col.gameObject.tag == "Player")
     {
       player = col.gameObject; 
