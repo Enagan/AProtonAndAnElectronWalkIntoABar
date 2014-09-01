@@ -14,10 +14,9 @@ public abstract class AwardPlayerAbility : MonoBehaviour {
 	// When collided with player adds him an ability using the awardAbility method
  void OnTriggerEnter(Collider other)
  {
-    Debug.Log("Collided");
      if(other.tag == "Player")
      {
-       Debug.Log("Collided with player");
+       Debug.Log("[AWARD PLAYER ABILITY] Collided with player");
        PlayerController player = other.GetComponent<PlayerController>();
        awardAbility(player);
        if(_destroyOnPickup)
