@@ -95,12 +95,12 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   private void setActiveRoom(string roomName)
   {
 #if LOG_SCENE_MANAGER
-    Debug.Log("[SCENE MANAGER] Setting room " + roomName + " as active");
+    SMConsole.Log(tag:"[SCENE MANAGER]",log:"[SCENE MANAGER] Setting room " + roomName + " as active");
 #endif
     RoomDefinition roomToCreate;
     //Search for room in the loaded rooms Dictionary
     if (!_allRooms.TryGetValue (roomName, out roomToCreate)) {
-      Debug.LogError("Error: room " + roomName + " does not exist in knowledgebase.");
+      SMConsole.Log(tag: "[SCENE MANAGER]", log:"Error: room " + roomName + " does not exist in knowledgebase.", type: SMLogType.ERROR);
       //TODO should throw exception
       return;
     }
@@ -111,13 +111,13 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
     //Order room creation starting in roomToCreate
 #if LOG_SCENE_MANAGER
-    Debug.Log("[SCENE MANAGER]------- Beggining new room instancing tree ---------");
+    SMConsole.Log(tag: "[SCENE MANAGER]", log:"[SCENE MANAGER]------- Beggining new room instancing tree ---------");
 #endif
 
     CreateRoomTree(roomToCreate);
 
 #if LOG_SCENE_MANAGER
-    Debug.Log("[SCENE MANAGER]---------- Room tree finished instancing -----------");
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]---------- Room tree finished instancing -----------");
 #endif
 
     //Set room as active
@@ -153,7 +153,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
         _allRooms[updatedDef.roomName] = updatedDef;
 
 #if LOG_SCENE_MANAGER
-        Debug.Log("[SCENE MANAGER] Deleting out of range room " + oldRoomDef.roomName);
+        SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Deleting out of range room " + oldRoomDef.roomName);
 #endif
 
         //Destroy the room if it's not in construction
@@ -181,7 +181,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     if (parent == null)
     {
 #if LOG_SCENE_MANAGER
-      Debug.Log("[SCENE MANAGER]   Creating ROOT room " + root.roomName);
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]   Creating ROOT room " + root.roomName);
 #endif
       _roomFactory.CreateRoom(root);
       _currentlyCreatedRooms.Add(root);
@@ -191,7 +191,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     {
           
 #if LOG_SCENE_MANAGER
-      Debug.Log("[SCENE MANAGER]   Creating ADJACENT room " + root.roomName + " adjacent to " + parent.roomName);
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]   Creating ADJACENT room " + root.roomName + " adjacent to " + parent.roomName);
 #endif
       _roomInQueueToDeletion.Remove(root);
       _roomFactory.CreateRoom(root, parent);
@@ -201,7 +201,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     if (currentDepth < _adjacentInstancingDepth)
     {
 #if LOG_SCENE_MANAGER
-      Debug.Log("[SCENE MANAGER]   This room " + root.roomName + " has  " + root.gateways.Count + " gateways.");
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]   This room " + root.roomName + " has  " + root.gateways.Count + " gateways.");
 #endif
       foreach (RoomObjectGatewayDefinition gate in root.gateways)
       {
@@ -212,7 +212,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
         }
         else
         {
-          Debug.Log("Room " + gate.connectedToRoom + " not found in Save State Definition");
+          SMConsole.Log(tag: "[SCENE MANAGER]", log: "Room " + gate.connectedToRoom + " not found in Save State Definition");
         }
       }
     }
@@ -231,7 +231,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     foreach(RoomDefinition room in _allRooms.Values)
     {
 #if LOG_SCENE_MANAGER
-      Debug.Log("[SCENE MANAGER] Saving Room state for " + room.roomName );
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Saving Room state for " + room.roomName);
 #endif
       roomToSave = _roomFactory.UpdateRoomDefinition(room);
       if(roomToSave == null)
@@ -258,7 +258,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     foreach(RoomDefinition room in loadedState.Value)
     {
 #if LOG_SCENE_MANAGER
-      Debug.Log("[SCENE MANAGER] Loading Room state for " + room.roomName);
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Loading Room state for " + room.roomName);
 #endif
       oldRooms.Add(_allRooms[room.roomName]);
       _allRooms[room.roomName] = room;
@@ -285,7 +285,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   public void ListenPlayerRoomChange(string newRoomName)
   {
 #if LOG_SCENE_MANAGER
-    Debug.Log("[SCENE MANAGER] Player room changed to " + newRoomName + " updating instanced room tree");
+    SMConsole.Log(tag:"[SCENE MANAGER]",log:"[SCENE MANAGER] Player room changed to " + newRoomName + " updating instanced room tree");
 #endif
     if (newRoomName != _activeRoom.roomName)
     {
@@ -301,7 +301,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   public void ListenObjectRoomChange(string  prevRoomName, string newRoomName, GameObject objectChangedRoom)
   {
 #if LOG_SCENE_MANAGER
-    Debug.Log("[SCENE MANAGER] Movable object" + objectChangedRoom.name + " room changed from " + prevRoomName + " to " + newRoomName + " updating object definition");
+    SMConsole.Log(tag:"[SCENE MANAGER]",log:"[SCENE MANAGER] Movable object" + objectChangedRoom.name + " room changed from " + prevRoomName + " to " + newRoomName + " updating object definition");
 #endif
     if (newRoomName != _activeRoom.roomName)
     {
