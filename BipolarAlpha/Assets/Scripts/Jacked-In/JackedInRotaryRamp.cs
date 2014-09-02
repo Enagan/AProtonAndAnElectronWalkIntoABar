@@ -6,7 +6,7 @@ public class JackedInRotaryRamp : JackedInRemoteController
   enum Lock {top, bottom};
 
   [SerializeField]
-  Lock _currentLock = Lock.bottom;
+  Lock _nextLock = Lock.bottom;
 
   [SerializeField]
   float _multiClickPreventionTimer = 1.0f;
@@ -26,14 +26,14 @@ public class JackedInRotaryRamp : JackedInRemoteController
   GameObject _rampMagnet = null;
 
   Quaternion _from, _to;
+  Vector3 _middlePosition;
 
-  bool _onlyOnce = true;
   
   public void Start()
   {
     _from = Quaternion.identity;
     _to = Quaternion.identity;
-    
+    _middlePosition = _rampMagnet.transform.position;
     Left();
   }
 
@@ -76,36 +76,44 @@ public class JackedInRotaryRamp : JackedInRemoteController
   {
     float hypotenuse;
     float opposite;
-    float angle = 0.0f;
-
+    float halfAngle1 = 0.0f;
+    float halfAngle2 = 0.0f;
+    float result = 0.0f;
     if (_topMagnet == null || _bottomMagnet == null || _rampMagnet == null)
     {
       Debug.Log("ERROR: Put the damn magnets on the script!");
-      return angle;
+      return result;
     }
 
-    if (_currentLock == Lock.bottom)
+    if (_nextLock == Lock.bottom)
     {
-      _currentLock = Lock.top;
+      _nextLock = Lock.top;
+
+      hypotenuse = Vector3.Distance(pivot.transform.position, _rampMagnet.transform.position);
+      opposite = Mathf.Abs(_rampMagnet.transform.position.y - _middlePosition.y);
+      halfAngle1 = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+
       hypotenuse = Vector3.Distance(pivot.transform.position, _bottomMagnet.transform.position);
-      opposite = _bottomMagnet.transform.position.y - _rampMagnet.transform.position.y;
-      angle = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+      opposite = Mathf.Abs(_middlePosition.y - _bottomMagnet.transform.position.y);
+      halfAngle2 = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+
+      result = -1.0f *(halfAngle1 + halfAngle2);
     }
     else
     {
-      _currentLock = Lock.bottom;
-     hypotenuse = Vector3.Distance(pivot.transform.position, _topMagnet.transform.position);
-     opposite = _topMagnet.transform.position.y - _rampMagnet.transform.position.y;
-     angle = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+      _nextLock = Lock.bottom;
 
+      hypotenuse = Vector3.Distance(pivot.transform.position, _rampMagnet.transform.position);
+      opposite = Mathf.Abs(_rampMagnet.transform.position.y - _middlePosition.y);
+      halfAngle1 = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+
+      hypotenuse = Vector3.Distance(pivot.transform.position, _topMagnet.transform.position);
+      opposite = Mathf.Abs(_middlePosition.y - _topMagnet.transform.position.y);
+      halfAngle2 =  Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+
+      result = halfAngle1 + halfAngle2;
     }
 
-    if (_onlyOnce)
-    {
-      _onlyOnce = false;
-      return angle;
-    }
-    return angle > 0 ? angle - 2.0f : angle + 2.0f;   // overshooting fix
-
+    return result;
   }
 }
