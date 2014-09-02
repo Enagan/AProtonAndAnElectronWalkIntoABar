@@ -85,13 +85,14 @@ public class JackedInRotaryRamp : JackedInRemoteController
       return result;
     }
 
+    hypotenuse = Vector3.Distance(pivot.transform.position, _rampMagnet.transform.position);
+    opposite = Mathf.Abs(_rampMagnet.transform.position.y - _middlePosition.y);
+    halfAngle1 = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
+
+
     if (_nextLock == Lock.bottom)
     {
       _nextLock = Lock.top;
-
-      hypotenuse = Vector3.Distance(pivot.transform.position, _rampMagnet.transform.position);
-      opposite = Mathf.Abs(_rampMagnet.transform.position.y - _middlePosition.y);
-      halfAngle1 = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
 
       hypotenuse = Vector3.Distance(pivot.transform.position, _bottomMagnet.transform.position);
       opposite = Mathf.Abs(_middlePosition.y - _bottomMagnet.transform.position.y);
@@ -102,10 +103,6 @@ public class JackedInRotaryRamp : JackedInRemoteController
     else
     {
       _nextLock = Lock.bottom;
-
-      hypotenuse = Vector3.Distance(pivot.transform.position, _rampMagnet.transform.position);
-      opposite = Mathf.Abs(_rampMagnet.transform.position.y - _middlePosition.y);
-      halfAngle1 = Mathf.Rad2Deg * Mathf.Asin(opposite / hypotenuse);
 
       hypotenuse = Vector3.Distance(pivot.transform.position, _topMagnet.transform.position);
       opposite = Mathf.Abs(_middlePosition.y - _topMagnet.transform.position.y);
