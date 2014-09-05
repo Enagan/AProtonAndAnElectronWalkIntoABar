@@ -46,27 +46,27 @@ public class JackedInElevatorControler : JackedInRemoteController {
   {
     if (_activeMode == ElevatorMode.MOVE)
     {
-      foreach (GameObject go in _activatableObjects)
+      foreach (GameObject obj in _activatableObjects)
       {
-        Check();
-        Move(go);
+        Move(obj);
+        Check(obj);
       }
     }
   }
 
-  private void Move(GameObject go)
+  private void Move(GameObject obj)
   {
-    go.transform.position += go.transform.up * _elevatorSpeed * Time.deltaTime;
+    obj.transform.Translate(obj.transform.up * _elevatorSpeed * Time.deltaTime);
   }
 
-  private void Check()
+  private void Check(GameObject obj)
   {
-    if (this.transform.position.y <= _elevatorBottom.transform.position.y)
+    if (obj.transform.position.y <= _elevatorBottom.transform.position.y)
     {
       _activeMode = ElevatorMode.AT_BOTTOM;
       this.transform.position = new Vector3(this.transform.position.x, _elevatorBottom.transform.position.y, this.transform.position.z);
     }
-    else if (this.transform.position.y >= _elevatorTop.transform.position.y)
+    else if (obj.transform.position.y >= _elevatorTop.transform.position.y)
     {
       _activeMode = ElevatorMode.AT_TOP;
       this.transform.position = new Vector3(this.transform.position.x, _elevatorTop.transform.position.y, this.transform.position.z);
@@ -75,7 +75,7 @@ public class JackedInElevatorControler : JackedInRemoteController {
     {
       foreach (GameObject floor in _elevatorFloors)
       {
-        if (this.transform.position.y == floor.transform.position.y)
+        if (obj.transform.position.y == floor.transform.position.y)
         {
           _activeMode = ElevatorMode.STOP;
         }
