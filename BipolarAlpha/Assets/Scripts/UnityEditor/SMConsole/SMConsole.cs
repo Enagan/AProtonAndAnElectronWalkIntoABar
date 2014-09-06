@@ -26,7 +26,7 @@ public class SMConsole : EditorWindow
     
     //Show existing window instance. If one doesn't exist, make one.
     EditorWindow.GetWindow(typeof(SMConsole));
-    
+   
 
   }
 
@@ -40,13 +40,14 @@ public class SMConsole : EditorWindow
     _topSection = new SMConsoleTopSection();
     _splitWindow = new SMConsoleSplitWindow();
     _botSection = new SMConsoleBotSection();
-      
+    SMConsole.Log("HAY");
   }
 
   void OnDisable()
   {
-    Application.RegisterLogCallback(null);
-    Application.RegisterLogCallbackThreaded(null);
+      Application.RegisterLogCallback(null);
+      Application.RegisterLogCallbackThreaded(null);
+
   }
 
   // Draw Editor
@@ -59,15 +60,22 @@ public class SMConsole : EditorWindow
     title = "SM Console";
 
     EditorGUILayout.EndVertical();
-
-    // HEADER
+      
     _headerBar.drawHeaderBar();
+    // HEADER
 
     // TOP
     GUILayout.BeginVertical();
 
-    _topSection.drawTopSection(this.position.width);
+    _topSection.drawTopSection(this.position.width, this.position.height);
 
+      
+      SMConsoleData data = SMConsoleData.Instance;
+      if((!data.canCollapse && data.selectedLogMessage.hashKey() != new LogMessage().hashKey())
+          || (data.canCollapse && data.selectedCollapsedMessage.message.hashKey() != new LogMessage().hashKey()))
+      {
+
+      
     // MID
     _splitWindow.drawWindow(this.position.width);
 
@@ -75,10 +83,11 @@ public class SMConsole : EditorWindow
     GUILayout.BeginHorizontal();
 
     _botSection.drawBotSection(this.position.width, this.position.height);
-
-    GUILayout.EndHorizontal();
-    
+          
+             GUILayout.EndHorizontal();
+        }
     GUILayout.EndVertical();
+
     
    }
 

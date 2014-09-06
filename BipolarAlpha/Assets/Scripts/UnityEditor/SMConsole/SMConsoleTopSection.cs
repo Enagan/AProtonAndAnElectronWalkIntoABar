@@ -32,22 +32,25 @@ public class SMConsoleTopSection {
     
   }
   
-  public void drawTopSection(float width)
+  public void drawTopSection(float width, float height)
   {
 
-
+     
     _labelWidth = (width * 0.8f +3) - _logTex.width*2;
-    
+    float areaHeight = _data.canCollapse ?
+        (_data.selectedLogMessage.hashKey() != new LogMessage().hashKey() ? _data.currentScrollViewHeight : height) :
+        (_data.selectedCollapsedMessage.message.hashKey() != new LogMessage().hashKey() ? _data.currentScrollViewHeight : height);
+
     // Upper section
     GUILayout.BeginHorizontal();
 
     // Log Scroll
-    _logWindowScroll = GUILayout.BeginScrollView(_logWindowScroll, GUILayout.MaxHeight(_data.currentScrollViewHeight - 16), GUILayout.Width(width * 0.8f + 3));
+    _logWindowScroll = GUILayout.BeginScrollView(_logWindowScroll, GUILayout.MaxHeight(areaHeight - 16), GUILayout.Width(width * 0.8f + 3));
     drawLogWindow();
     GUILayout.EndScrollView();
 
     // Tag Scroll
-    _tagWindowScroll = GUILayout.BeginScrollView(_tagWindowScroll, GUILayout.MaxHeight(_data.currentScrollViewHeight - 16));
+    _tagWindowScroll = GUILayout.BeginScrollView(_tagWindowScroll, GUILayout.MaxHeight(areaHeight - 16));
     drawTagWindow();
     GUILayout.EndScrollView();
 

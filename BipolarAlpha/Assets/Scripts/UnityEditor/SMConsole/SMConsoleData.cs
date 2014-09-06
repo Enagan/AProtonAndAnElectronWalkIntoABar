@@ -18,7 +18,7 @@ public class SMConsoleData
 
   public LogMessage selectedLogMessage; // The selected Log message
   public CollapsedMessage selectedCollapsedMessage; // The collapsed log message
-
+  
   //  Tags
   public ArrayList tags;
   public ArrayList selectedTags;

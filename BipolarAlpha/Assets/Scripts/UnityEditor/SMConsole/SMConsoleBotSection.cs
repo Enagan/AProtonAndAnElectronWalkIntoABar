@@ -69,9 +69,12 @@ public class SMConsoleBotSection {
       string[] stackTraces = stackTrace.Split('\n');
       foreach (string trace in stackTraces)
       {
+          string lineEntry = stackTraces[stackTraces.Length - 1];
+          if (lineEntry.Contains("SMConsole.Log"))
+              continue;
+
         GUILayout.BeginHorizontal();
 
-        string lineEntry = stackTraces[stackTraces.Length - 1];
         if (_data.isEntryJumpable(trace))
         {
           if (GUILayout.Button(_warpTex, GUILayout.Width(32), GUILayout.Height(32))) 
