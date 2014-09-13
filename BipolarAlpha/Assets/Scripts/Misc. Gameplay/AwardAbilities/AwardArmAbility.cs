@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AwardLeftArmAbility : AwardPlayerAbility {
+public class AwardArmAbility : AwardPlayerAbility {
 
-  public AwardLeftArmAbility()
+    [SerializeField]
+    private bool _awardLeftArm;
+
+  public AwardArmAbility()
   {
     _destroyOnPickup = false;
   }
@@ -13,7 +16,11 @@ public class AwardLeftArmAbility : AwardPlayerAbility {
   public override void awardAbility(PlayerController player)
   {
       SMConsole.Log("Awarding Left Arm Ability" + player,"Player");
-        player.addLeftArmMagnetAbility();
+
+      if(_awardLeftArm)
+          player.addLeftArmMagnetAbility();
+      else
+          player.addRightArmMagnetAbility();
   }
 
 }
