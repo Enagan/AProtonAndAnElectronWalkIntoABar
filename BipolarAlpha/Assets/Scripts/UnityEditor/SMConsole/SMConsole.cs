@@ -106,11 +106,12 @@ public class SMConsole : EditorWindow
   public static void Log(string log, string tag, SMLogType type)
   {
     Log(log, tag, type, SMConsoleData.EMPTY_STACK_TRACE);
-    Debug.Log(log);
   }
 
   private static void Log(string log, string tag, SMLogType type, string stackTrace)
   {
+    Debug.Log(log);
+
     LogMessage message;
     SMConsoleData _data = SMConsoleData.Instance;
 
