@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   private bool _magnetColliding = false;
   private MagneticForce _magnetCollidingWith = null;
 
+  private float _playerMass;
+
+  private bool _playerEnabled = true;
+
   // Debug flags
 
   [SerializeField]
@@ -97,6 +101,9 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   #endregion
 
   private GameObject mainCamera;
+
+
+  
 
 
   //This dictionary holds the players' currently usable abilities and their cooresponding activation keys
@@ -185,7 +192,19 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     Screen.lockCursor = true;
     Screen.showCursor = true;
     Screen.showCursor = false;
-    if ((mainCamera = GameObject.Find("Camera")) == null)
+
+    _playerMass = GetComponent<Rigidbody>().mass;
+    foreach (Camera cam in GetComponentsInChildren<Camera>())
+    {
+        if (cam.tag == "MainCamera")
+        {
+            mainCamera = cam.gameObject;
+        }
+    }
+
+     
+        
+    if (mainCamera  == null)
       throw new BipolarExceptionComponentNotFound("Camera component not found");
 
     //Initial rotation saved, used to clamp min and max rotation
@@ -200,6 +219,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     ServiceLocator.GetEventHandlerSystem().RegisterPauseListener(this);
 
     ServiceLocator.ProvidePlayerController(this);
+
   }
 
   /// <summary>
@@ -207,10 +227,14 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void Update()
   {
+      if (!_playerEnabled)
+          return;
 
     //This is for centering the mouse on the editor after pressing escape
     Screen.showCursor = false;
     Screen.lockCursor = true;
+
+
 
 #if UNITY_EDITOR
     ManageEditorOptions();
@@ -523,6 +547,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void ManageMovement()
   {
+
     //Check for the values in the Vertical and Horizontal Axis
     //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
     //Values range from 1 to -1
@@ -692,6 +717,52 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     return Mathf.Clamp(force, 0, _snapContinuousForce);
   }
 
+  public void toggleSoundListenerTo(bool shouldEnable)
+  {
+      foreach (AudioListener audio in GetComponentsInChildren<AudioListener>())
+      {
+          audio.enabled = shouldEnable;
+      }
+  }
+
+  public void toggleCameraTo(bool shouldEnable)
+  {
+
+      foreach (Camera cam in GetComponentsInChildren<Camera>())
+      {
+          cam.enabled = shouldEnable;
+      }
+  }
+
+  /// <summary>
+  /// Enables or Disables all the components in the player that can't co-exist with the JackedInPlayer
+  /// </summary>
+  /// <param name="state"></param>
+  public void PlayerActivation(bool state)
+  {
+      enabled = state;
+      
+      toggleSoundListenerTo(state);
+
+      toggleCameraTo(state);
+
+      if(!state)
+      {
+          rigidbody.velocity = new Vector3(0, 0, 0);
+      }
+
+      /// this mass managemente is so the Player won't get pushed around by the JackedInPlayer
+      if (_playerMass == 0)
+          _playerMass = GetComponent<Rigidbody>().mass;
+      if (!state)
+      {
+          GetComponent<Rigidbody>().mass = 1000.0f;
+      }
+      else
+      {
+          GetComponent<Rigidbody>().mass = _playerMass;
+      }
+  }
   #endregion
 
   #region Event Listeners
