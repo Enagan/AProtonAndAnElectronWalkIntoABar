@@ -315,7 +315,9 @@ public class SceneManagerWindow : EditorWindow
       foreach (object thisObject in allObjects)
       {
         GameObject castObject = ((GameObject)thisObject);
-        if (castObject.activeInHierarchy && castObject.transform.parent == null && BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
+        if (castObject.activeInHierarchy && 
+          (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject" + _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2))) && 
+          BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
         {
           Gateways.Add(castObject);
         }

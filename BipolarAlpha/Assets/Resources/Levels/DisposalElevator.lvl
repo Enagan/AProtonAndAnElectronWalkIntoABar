@@ -5,9 +5,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>-2.74712062</x>
-        <y>-23.67823</y>
-        <z>-4.156895</z>
+        <x>-8.789794</x>
+        <y>24.59161</y>
+        <z>5.0730834</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -32,9 +32,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-7.9388504</x>
-        <y>-47.59875</y>
-        <z>-8.959899</z>
+        <x>-13.9815235</x>
+        <y>0.6710892</y>
+        <z>0.2700796</z>
       </position>
       <scale>
         <x>0.753458738</x>
@@ -50,7 +50,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>2</magnetForce>
           <magnetCharge>1</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -58,9 +58,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</objectPrefabPath>
       <position>
-        <x>-1.73660278</x>
-        <y>-0.475724965</y>
-        <z>1.04684436</z>
+        <x>-7.77927637</x>
+        <y>47.794117</y>
+        <z>10.276823</z>
       </position>
       <scale>
         <x>1</x>
@@ -90,9 +90,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>-2.74712062</x>
-        <y>-10.4968433</y>
-        <z>-4.156895</z>
+        <x>-8.789794</x>
+        <y>37.772995</y>
+        <z>5.0730834</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -117,9 +117,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-10.83868</x>
-        <y>-33.7572479</y>
-        <z>-3.900753</z>
+        <x>-16.8813534</x>
+        <y>14.5125923</y>
+        <z>5.32922554</z>
       </position>
       <scale>
         <x>0.753458738</x>
@@ -135,7 +135,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -143,9 +143,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-7.857635</x>
-        <y>-19.9335823</y>
-        <z>0.622667</z>
+        <x>-13.9003086</x>
+        <y>28.3362579</y>
+        <z>9.852646</z>
       </position>
       <scale>
         <x>0.753458738</x>
@@ -169,13 +169,13 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/DisposalElevator/WasteDisposalAccessElevatorRoom</objectPrefabPath>
       <position>
-        <x>-5.36688662</x>
-        <y>-26.8644314</y>
-        <z>-4.10796833</z>
+        <x>-11.40956</x>
+        <y>21.4054089</y>
+        <z>5.12201</z>
       </position>
       <scale>
         <x>298.041229</x>
-        <y>298.041229</y>
+        <y>298.0413</y>
         <z>2993.91138</z>
       </scale>
       <eulerAngles>
@@ -188,9 +188,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>-2.74712062</x>
-        <y>-17.0801678</y>
-        <z>-4.156895</z>
+        <x>-8.789794</x>
+        <y>31.1896725</y>
+        <z>5.0730834</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -215,9 +215,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>-2.74712062</x>
-        <y>-36.8670845</y>
-        <z>-4.156895</z>
+        <x>-8.789794</x>
+        <y>11.4027557</y>
+        <z>5.0730834</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -242,9 +242,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>-2.74712062</x>
-        <y>-43.5206375</y>
-        <z>-4.156895</z>
+        <x>-8.789794</x>
+        <y>4.74920273</y>
+        <z>5.0730834</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -269,9 +269,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
       <position>
-        <x>-2.710789</x>
-        <y>-56.82724</y>
-        <z>-8.939962</z>
+        <x>-8.753463</x>
+        <y>-8.5574</y>
+        <z>0.290016174</z>
       </position>
       <scale>
         <x>0.753458738</x>
@@ -287,7 +287,7 @@
         <ComplexState xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
-          <magnetForce>3</magnetForce>
+          <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
         </ComplexState>
       </complexStates>
@@ -295,9 +295,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/DisposalElevator/Lights</objectPrefabPath>
       <position>
-        <x>-5.34730768</x>
-        <y>-5.38993454</y>
-        <z>-4.31483841</z>
+        <x>-11.3899813</x>
+        <y>42.8799057</y>
+        <z>4.91514</z>
       </position>
       <scale>
         <x>1</x>
@@ -314,9 +314,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>-2.74712062</x>
-        <y>-30.2422581</y>
-        <z>-4.156895</z>
+        <x>-8.789794</x>
+        <y>18.0275822</y>
+        <z>5.0730834</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -343,9 +343,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>15.3271122</x>
-        <y>-5.286871</y>
-        <z>-4.133934</z>
+        <x>9.284439</x>
+        <y>42.98297</y>
+        <z>5.09604454</z>
       </position>
       <scale>
         <x>1.07</x>
@@ -363,9 +363,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>5.436045</x>
-        <y>-51.51696</y>
-        <z>-4.14567661</z>
+        <x>-0.6066284</x>
+        <y>-3.24712</y>
+        <z>5.084302</z>
       </position>
       <scale>
         <x>1.07</x>

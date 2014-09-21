@@ -158,6 +158,7 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in room.gateways)
     {
       GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
+      instancedObject.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
@@ -212,7 +213,7 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in newRoom.gateways)
     {
       GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, newRoomGate.position);
-
+      instancedObject.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
       _instancedObjects.RegisterObjectInRoom(newRoom, gate, instancedObject);
     }
 

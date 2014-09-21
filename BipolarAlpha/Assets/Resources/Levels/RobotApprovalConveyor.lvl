@@ -5,9 +5,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
       <position>
-        <x>37.10437</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>25.1855125</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -31,9 +31,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorScanner</objectPrefabPath>
       <position>
-        <x>6.648343</x>
-        <y>12.277153</y>
-        <z>7.167786</z>
+        <x>-5.27051353</x>
+        <y>1.55032134</y>
+        <z>0.547873259</z>
       </position>
       <scale>
         <x>160</x>
@@ -50,9 +50,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
       <position>
-        <x>16.915144</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>4.99628639</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -76,9 +76,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
       <position>
-        <x>29.4459648</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>17.5271072</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -102,9 +102,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRoom</objectPrefabPath>
       <position>
-        <x>6.87435341</x>
-        <y>14.5992746</y>
-        <z>4.08217</z>
+        <x>-5.044504</x>
+        <y>3.87244415</y>
+        <z>-2.53772664</z>
       </position>
       <scale>
         <x>160</x>
@@ -121,9 +121,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRejectionHatch</objectPrefabPath>
       <position>
-        <x>6.69512939</x>
-        <y>8.325827</y>
-        <z>4.083149</z>
+        <x>-5.223728</x>
+        <y>-2.40099669</y>
+        <z>-2.53675</z>
       </position>
       <scale>
         <x>160</x>
@@ -140,14 +140,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
       <position>
-        <x>-0.37472707</x>
-        <y>8.812104</y>
-        <z>3.99644279</z>
+        <x>-12.2935848</x>
+        <y>-1.91472</y>
+        <z>-2.623481</z>
       </position>
       <scale>
-        <x>160</x>
+        <x>160.000031</x>
         <y>160</y>
-        <z>160</z>
+        <z>159.999969</z>
       </scale>
       <eulerAngles>
         <x>10.3599825</x>
@@ -166,9 +166,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
       <position>
-        <x>11.7197</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>-0.199157715</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -192,9 +192,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderRed</objectPrefabPath>
       <position>
-        <x>2.85025215</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>-9.068605</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -218,9 +218,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/Lights/RobotApprovalConveyorRoomLights</objectPrefabPath>
       <position>
-        <x>14.4606905</x>
-        <y>13.6256313</y>
-        <z>0.241000652</z>
+        <x>2.541833</x>
+        <y>2.8988018</y>
+        <z>-6.37891</z>
       </position>
       <scale>
         <x>1</x>
@@ -237,14 +237,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
       <position>
-        <x>14.33512</x>
-        <y>8.766117</y>
-        <z>4.11485</z>
+        <x>2.41626263</x>
+        <y>-1.96070814</y>
+        <z>-2.50507283</z>
       </position>
       <scale>
         <x>160</x>
-        <y>160</y>
-        <z>160</z>
+        <y>159.999969</y>
+        <z>160.000015</z>
       </scale>
       <eulerAngles>
         <x>6.92811346</x>
@@ -263,9 +263,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
       <position>
-        <x>23.0803185</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>11.1614609</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -289,9 +289,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/RobotApprovalConveyorRoom/RobotApprovalConveyorRobotHolderBlue</objectPrefabPath>
       <position>
-        <x>-7.402114</x>
-        <y>14.5594988</y>
-        <z>4.084864</z>
+        <x>-19.3209724</x>
+        <y>3.8326683</y>
+        <z>-2.535041</z>
       </position>
       <scale>
         <x>160</x>
@@ -317,9 +317,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>37.21786</x>
-        <y>12.3120632</y>
-        <z>4.121772</z>
+        <x>25.2990036</x>
+        <y>1.58523345</y>
+        <z>-2.49814534</z>
       </position>
       <scale>
         <x>2.14</x>
@@ -337,9 +337,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>6.52795172</x>
-        <y>8.889541</y>
-        <z>-3.79353571</z>
+        <x>-5.39090538</x>
+        <y>-1.83728361</y>
+        <z>-10.413456</z>
       </position>
       <scale>
         <x>2.14</x>
