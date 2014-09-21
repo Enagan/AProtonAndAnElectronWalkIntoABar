@@ -21,7 +21,6 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
  //   private static float HIGH_FORCE_FACTOR = 700.0f;
  //   private static float VERY_HIGH_FORCE_FACTOR = 1500.0f;
 
-
        private static float VERY_LOW_FORCE_FACTOR = 30.0f;
        private static float LOW_FORCE_FACTOR = 50.0f;
        private static float MEDIUM_FORCE_FACTOR = 80.0f;
@@ -87,7 +86,6 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
                 NoLongerAffectingMagnets();
             _isActivated = value;
         }
-
     }
 
     public bool isMoveable

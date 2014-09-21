@@ -3,6 +3,44 @@
   <roomName>QA-UNIT02Test1</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
+      <objectPrefabPath>PlayerPrefab/Player</objectPrefabPath>
+      <position>
+        <x>24.7397232</x>
+        <y>2.89409518</y>
+        <z>-1.60483539</z>
+      </position>
+      <scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </scale>
+      <eulerAngles>
+        <x>0</x>
+        <y>94.7086</y>
+        <z>0</z>
+      </eulerAngles>
+      <complexStates>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Camera/Left Player Magnet/Left Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>1</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>Camera/Right Player Magnet/Right Magnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+        <ComplexState xsi:type="MagneticForceComplexState">
+          <objectNameInHierarchy>MagnetBoots/BootsMagnetism</objectNameInHierarchy>
+          <isActive>false</isActive>
+          <magnetForce>2</magnetForce>
+          <magnetCharge>0</magnetCharge>
+        </ComplexState>
+      </complexStates>
+    </RoomObjectDefinition>
+    <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test1/QA-UNIT02Test1</objectPrefabPath>
       <position>
         <x>0</x>

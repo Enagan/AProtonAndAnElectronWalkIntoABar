@@ -21,13 +21,13 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   private Dictionary<string,RoomDefinition> _allRooms = new Dictionary<string,RoomDefinition>();
   private List<RoomDefinition> _roomInQueueToDeletion = new List<RoomDefinition>();
 
-  /*#if UNITY_PRO_LICENSE
+  #if UNITY_PRO_LICENSE
     private RoomFactoryAsync _roomFactory = new RoomFactoryAsync();
   #else
     private RoomFactory _roomFactory = new RoomFactory();
-  #endif */
+  #endif 
 
-  private RoomFactory _roomFactory = new RoomFactory();
+//  private RoomFactory _roomFactory = new RoomFactory();
 
 	private void Start () 
   {

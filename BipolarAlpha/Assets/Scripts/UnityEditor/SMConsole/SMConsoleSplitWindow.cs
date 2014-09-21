@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using UnityEditor;
 
 // Creates an adjustable bar
@@ -56,3 +58,5 @@ public class SMConsoleSplitWindow
       resize = false;
   }
 }
+
+#endif
