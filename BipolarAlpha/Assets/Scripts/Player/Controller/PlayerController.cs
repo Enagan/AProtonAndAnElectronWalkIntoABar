@@ -362,7 +362,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   {
     if (arm != null && !arm.activeInHierarchy)
     {
-
       arm.SetActive(true);
       if (!_usableAbilities.ContainsKey(abilityKey))
       {
@@ -400,6 +399,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     // Add or remove arms, make sure they are removed properly
     if (_isLeftActive)
     {
+      removeLeftArmMagnetAbility();
       addLeftArmMagnetAbility();
     }
     else
@@ -407,6 +407,7 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
     if (_isRightActive)
     {
+      removeRightArmMagnetAbility();
       addRightArmMagnetAbility();
     }
     else
