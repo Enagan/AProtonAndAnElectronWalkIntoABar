@@ -210,8 +210,13 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     //Initial rotation saved, used to clamp min and max rotation
     _baseRotation = mainCamera.transform.localRotation;
 
-    _leftMagnet = GameObject.Find("Left Player Magnet").transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
-    _rightMagnet = GameObject.Find("Right Player Magnet").transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
+    
+    GameObject tempLeftSearch = GameObject.Find("Left Player Magnet");
+    GameObject tempRightSearch = GameObject.Find("Right Player Magnet");
+    if(tempLeftSearch != null)
+        _leftMagnet = tempLeftSearch.transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
+    if (tempRightSearch != null)
+        _rightMagnet = tempRightSearch.transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
 
     //add initial abilities
     instantiateAbilities();
