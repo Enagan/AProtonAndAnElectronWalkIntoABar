@@ -6,6 +6,9 @@ public class Spawner : MonoBehaviour {
 
     Camera _camera;
 
+    PlayerController _originalPlayer = null;
+    PlayerController _spawnedPlayer = null;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -23,12 +26,28 @@ public class Spawner : MonoBehaviour {
     public void spawnPlayer(PlayerController player)
     {
         //player.GetComponentInChildren<Camera>().transform.LookAt(_camera.transform.forward);
-        PlayerController player2 = (PlayerController)Object.Instantiate(player);
-        player.PlayerActivation(false);
-        player2.transform.position = transform.position;
-        player2.PlayerActivation(true);
-     //   player2.transform.rotation = transform.rotation;
-        //player2.transform.rotation = transform.rotation;
+        if (_originalPlayer == null)
+        {
+          _originalPlayer = player;
+          _spawnedPlayer = (PlayerController)Object.Instantiate(player);
+          _originalPlayer.PlayerActivation(false);
+          _spawnedPlayer.transform.position = transform.position;
+          _spawnedPlayer.PlayerActivation(true);
+        }
+    }
+
+    public void returnPlayer()
+    {
+        if(_originalPlayer != null)
+        {
+
+            _spawnedPlayer.PlayerActivation(false);
+            _originalPlayer.PlayerActivation(true);
+            _originalPlayer.transform.position = transform.position; // temporary
+            Destroy(_spawnedPlayer.gameObject);
+            _originalPlayer = null;
+            _spawnedPlayer = null;
+        }
     }
 
 }
