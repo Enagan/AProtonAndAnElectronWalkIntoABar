@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Enum designed to be used only inside the system to ease in archiving and registering listners
 /// </summary>
-enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger, PauseGame, CheckPoint }
+enum BipolarEvent { PlayerRoomChange, ObjectRoomChange, PlayerAbilityObtain, PlayerAbilityScan, TutorialMessageTrigger, PauseGame, CheckPoint, JackedInActivation }
 
 /// <summary>
 /// System designed to handle events specific to bipolar, in situations where a lot of different
@@ -75,6 +75,14 @@ public class BipolarEventHandlerSystem
     RegisterEventListner(BipolarEvent.CheckPoint, listener);
   }
 
+
+  /// <summary>
+  /// Registers a new listener for Jacked-In mode activation events
+  /// </summary>
+  public void RegisterJackedInActivationListener(IJackedInActivationListener listener)
+  {
+    RegisterEventListner(BipolarEvent.JackedInActivation, listener);
+  }
  
 
   /// <summary>
@@ -195,6 +203,37 @@ public class BipolarEventHandlerSystem
     foreach (ICheckPointRegisterListener listener in _listners[BipolarEvent.CheckPoint])
     {
       listener.ListenCheckPointChange(checkpoint);
+    }
+  }
+
+
+  /// <summary>
+  /// Sends a Jacked-In mode activation event
+  /// </summary>
+  public void SendJackedInActivationEvent(Camera camera)
+  {
+    if (!_listners.ContainsKey(BipolarEvent.PauseGame))
+    {
+      return;
+    }
+    foreach (IJackedInActivationListener listener in _listners[BipolarEvent.JackedInActivation])
+    {
+      listener.ListenJackedInActivation(camera);
+    }
+  }
+
+  /// <summary>
+  /// Sends a Jacked-In mode deactivation event
+  /// </summary>
+  public void SendJackedInDeactivationEvent()
+  {
+    if (!_listners.ContainsKey(BipolarEvent.PauseGame))
+    {
+      return;
+    }
+    foreach (IJackedInActivationListener listener in _listners[BipolarEvent.JackedInActivation])
+    {
+      listener.ListenJackedInDeactivation();
     }
   }
   #endregion
