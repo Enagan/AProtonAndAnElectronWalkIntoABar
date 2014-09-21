@@ -19,6 +19,7 @@ public class VirtualWorldArrivalPoint : MonoBehaviour
     public void spawnPlayerCopy(PlayerController player, bool destroyPrevious)
     {
           PlayerController spawnedPlayer = (PlayerController)Object.Instantiate(player);
+          spawnedPlayer.rigidbody.useGravity = true;
           player.PlayerActivation(false);
           spawnedPlayer.transform.position = transform.position;
           spawnedPlayer.PlayerActivation(true);
