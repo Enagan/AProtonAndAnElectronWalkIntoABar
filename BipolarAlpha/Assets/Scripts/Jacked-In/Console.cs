@@ -25,6 +25,8 @@ public class Console : MonoBehaviour {
                                                                                                               this.transform.position);
     _jackedInPlayer.GetComponent<JackedInPlayer>().MotherConsole = this;
     _jackedInPlayer.transform.forward = -1.0f * _realPlayer.transform.forward;
+
+    ServiceLocator.GetEventHandlerSystem().SendJackedInActivationEvent(_jackedInPlayer.GetComponentInChildren<Camera>());
   }
 
 
@@ -70,6 +72,7 @@ public class Console : MonoBehaviour {
     _jackedInPlayer = null;
     this.transform.Find("Boundary").gameObject.SetActive(false);
 
+    ServiceLocator.GetEventHandlerSystem().SendJackedInDeactivationEvent();
   }
 
 
