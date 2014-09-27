@@ -31,7 +31,7 @@ public class CutsceneLocalHandler : AnimationLocalHandler
   #endregion
 
   #region  monobehavior methods
-  void Start()
+  protected override void Start()
   {
     base.Start();
     _camera = GetComponentInChildren<CutsceneCamera>();

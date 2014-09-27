@@ -8,7 +8,7 @@ public class BillboardController : JackedInRemoteController
   [SerializeField]
   private List<Billboard> _billboards = new List<Billboard>();
 
-  public void Start()
+  public override void Start()
   {
     // Deactivates all associated billboards at the beginning
     Right();

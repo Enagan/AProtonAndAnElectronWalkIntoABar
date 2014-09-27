@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour {
   {
     if (Input.GetKeyDown(KeyCode.Return))
     {
-      GameObject.Find("EnterText").active = false;
+      GameObject.Find("EnterText").SetActive(false);
       GameObject.Find("Main Camera").animation.Play();
       Invoke("ChangeScene", 1.5f);
     }

@@ -36,13 +36,13 @@ public class QAUnit01LightCircuit : Circuit
      return isOpen;
    }
 
-   public void Activate()
+   public override void Activate()
    {
      if(_mesh)
       _mesh.material.SetColor("_Color", new Color(0, 0, 255));
    }
 
-   public void Deactivate()
+   public override void Deactivate()
    {
      if(_mesh)
      _mesh.material.SetColor("_Color", new Color(255, 0, 0));

@@ -33,7 +33,6 @@ public class XMLSerializer
       if (_extraTypes.Count <= 0)
       {
         /// Fecthing subtypes of complex state to allow polymorphic serialization of complex state subclasses
-        Type baseType = typeof(ComplexState);
         Assembly assembly = typeof(ComplexState).Assembly;
 
         foreach (Type possibleType in assembly.GetTypes())
@@ -81,7 +80,6 @@ public class XMLSerializer
       if (_extraTypes.Count <= 0)
       {
         /// Fecthing subtypes of complex state to allow polymorphic serialization of complex state subclasses
-        Type baseType = typeof(ComplexState);
         Assembly assembly = typeof(ComplexState).Assembly;
 
         foreach (Type possibleType in assembly.GetTypes())

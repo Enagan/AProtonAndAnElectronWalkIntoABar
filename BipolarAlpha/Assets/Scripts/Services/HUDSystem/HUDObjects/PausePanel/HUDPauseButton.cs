@@ -13,6 +13,7 @@ public class HUDPauseButton : HUDObject {
   // Text style elements
 
   //labels for available buttons, to add more buttons add label here and enum in HUDPausePanel
+  #pragma warning disable 414
   private static string[] labels = { "Resume Game", "Quit" };
 
   // Style for buttons

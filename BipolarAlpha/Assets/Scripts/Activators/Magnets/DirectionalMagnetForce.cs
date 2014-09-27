@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RailMagnet : MonoBehaviour {
+public class DirectionalMagnetForce : MagneticForce {
 
 	// Use this for initialization
 	void Start () {

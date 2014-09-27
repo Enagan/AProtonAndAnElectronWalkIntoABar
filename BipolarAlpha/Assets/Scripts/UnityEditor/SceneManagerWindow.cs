@@ -42,9 +42,6 @@ public class SceneManagerWindow : EditorWindow
   Vector2 _gatewaysScrollPosition;
   Vector2 _roomsToLoadIntoGameScrollPosition;
 
-  // Popup Positions
-  int _gameStateStartRoomPopup = 0;
-
   GameObject _instacedRoomDefCreator = null;
 
   // Add menu item named "My Window" to the Window menu
@@ -238,7 +235,7 @@ public class SceneManagerWindow : EditorWindow
         }
       }
 
-      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
+//      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
 
       int popUpPosition = filteredRoomList.IndexOf(_currentlyPressed);

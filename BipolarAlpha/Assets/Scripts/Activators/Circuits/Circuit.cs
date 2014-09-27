@@ -23,6 +23,7 @@ public abstract class Circuit : MonoBehaviour, Activator
   [SerializeField]
   private List<Circuit> _outputs;
 
+#pragma warning disable 28,414
   // The circuit unique identifier, used to propagate the state
   private int _identifier;
 

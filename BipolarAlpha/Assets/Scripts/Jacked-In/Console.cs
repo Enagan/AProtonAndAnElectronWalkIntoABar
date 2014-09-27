@@ -8,8 +8,6 @@ public class Console : MonoBehaviour {
   private GameObject _jackedInPlayer = null;
   private float _playerMass;
 
-  [SerializeField]
-  private float waitingTime = 2.0f;
 
   /// <summary>
   /// Activates jacked in mode, the player is deactivated and a JackedInPlayer prefab is created

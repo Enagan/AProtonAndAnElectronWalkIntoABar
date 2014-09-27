@@ -38,12 +38,12 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 
   private Rigidbody _rigidBody;
 
-  private bool enabled;
+  private bool _enabled;
   #region monobehavior methods
   // Use this for initialization
 	void Start () {
 
-    enabled = false;
+    _enabled = false;
     _rigidBody = GetComponent<Rigidbody>();
     
     _hasPlayer = false;
@@ -103,7 +103,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
     }
     */
 
-    if (!enabled)
+    if (!_enabled)
       return;
 
     if (_hasPlayer && transform.position.y > _floorHeight) // has player goes down
@@ -155,7 +155,6 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 
       }
 
-      float oriSpeed = _speed;
 
       if (nearingEnd || !normalCase)
         _speed = _speed - dir * _acceleration/2;
@@ -261,6 +260,6 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 
   public void AnimationDescendEvent()
   {
-    enabled = true;
+    _enabled = true;
   }
 }

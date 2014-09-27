@@ -29,9 +29,9 @@ public class SMConsoleHeaderBar {
 
     // Search Field
 
-    Vector2 cursorPos = Input.compositionCursorPos;
+  //  Vector2 cursorPos = Input.compositionCursorPos;
 
-    Rect searchFilterRect = new Rect(SEARCH_MARGIN, 1, SEARCH_WIDTH, 14);
+   // Rect searchFilterRect = new Rect(SEARCH_MARGIN, 1, SEARCH_WIDTH, 14);
 
     string prevSearch = _data.searchFilter;
     _data.searchFilter = GUILayout.TextField(_data.searchFilter, EditorStyles.textField, GUILayout.MaxWidth(SEARCH_WIDTH));

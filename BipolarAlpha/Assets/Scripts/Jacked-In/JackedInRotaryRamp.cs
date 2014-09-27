@@ -29,7 +29,7 @@ public class JackedInRotaryRamp : JackedInRemoteController
   Vector3 _middlePosition;
 
   
-  public void Start()
+  public override void Start()
   {
     _from = Quaternion.identity;
     _to = Quaternion.identity;
