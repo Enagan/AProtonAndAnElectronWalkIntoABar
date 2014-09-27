@@ -49,7 +49,7 @@ public class AnimationLocalHandler : MonoBehaviour, IHasComplexState
   #endregion
 
   #region  monobehavior methods
-  protected void Start()
+  protected virtual void Start()
   {
     _script = GetComponent<CutsceneScript>();
 

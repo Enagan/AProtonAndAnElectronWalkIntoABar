@@ -57,8 +57,6 @@ public class RoomDefinitionCreator : MonoBehaviour
   private RoomDefinition createRoomDefinition(string roomName, List<GameObject> objectsInRoom)
   {
     RoomDefinition roomDef = new RoomDefinition(roomName);
-    List<GameObject> objectsExceptCircuits = new List<GameObject>();
-
     List<GameObject> createdCircuitSystems = new List<GameObject>();
 
     foreach (GameObject obj in objectsInRoom)

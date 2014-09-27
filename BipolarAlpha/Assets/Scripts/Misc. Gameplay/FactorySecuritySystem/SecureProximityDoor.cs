@@ -57,7 +57,7 @@ public class SecureProximityDoor : MonoBehaviour {
   public void refreshLights()
   {
     float g = 52f / 255f;
-    float b = 174f / 255f;
+   // float b = 174f / 255f;
     if (_lightParent == null)
     {
       Transform parentTransformLights = this.transform.parent.FindChild("MagnetLights");

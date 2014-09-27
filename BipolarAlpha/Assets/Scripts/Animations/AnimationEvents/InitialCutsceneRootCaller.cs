@@ -10,6 +10,8 @@ public class InitialCutsceneRootCaller : MonoBehaviour {
 
   private AnimationRootHandler _roomHandler;
   private AnimationRootHandler _handler;
+ 
+  #pragma warning disable 414
   private Animation _anim;
   
   void Start()

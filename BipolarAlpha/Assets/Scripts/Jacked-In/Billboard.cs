@@ -31,7 +31,7 @@ class Billboard : MonoBehaviour, IJackedInActivationListener
     }
     else
     {      
-      _jackedInCamera = Camera.mainCamera;
+      _jackedInCamera = UnityEngine.Camera.main;
     }
 
     ServiceLocator.GetEventHandlerSystem().RegisterJackedInActivationListener(this);

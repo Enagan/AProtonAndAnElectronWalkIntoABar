@@ -72,7 +72,7 @@ public class HUDCrosshair : HUDObject {
   private bool fireRaycast()
   {
     RaycastHit hit;
-    if (_camera!=null && _camera.gameObject.active)
+    if (_camera!=null && _camera.gameObject.activeSelf)
     {
       if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _raycastMask) && hit.collider.CompareTag("Magnet"))
       {

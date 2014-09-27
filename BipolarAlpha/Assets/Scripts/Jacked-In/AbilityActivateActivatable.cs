@@ -7,6 +7,7 @@ public class AbilityActivateActivatable : MonoBehaviour, Ability
   private int _raycastMask = ((1 << 0) | (1 << 17)); //Only consider objects in layer 0 (Default) and 17 (Jacked-In)
 
   private Camera _jackedInCamera;
+  #pragma warning disable 414
   private JackedInPlayer _jackedInPlayer;
   private GameObject _motherConsole;
 

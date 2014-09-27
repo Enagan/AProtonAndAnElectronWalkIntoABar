@@ -8,7 +8,7 @@ public class RoomFactoryAsync : RoomFactory {
   private Dictionary<RoomDefinition, Dictionary<string, GameObject>> _gatewayRegistry = new Dictionary<RoomDefinition, Dictionary<string, GameObject>>();
   private Dictionary<RoomDefinition, GameObject> _instancedRoomsRegistry = new Dictionary<RoomDefinition, GameObject>();
 
-  public void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
+  public override void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
     if (!_instancedObjects.RoomIsRegistered(newRoom))
     {
@@ -86,18 +86,18 @@ public class RoomFactoryAsync : RoomFactory {
       Debug.Log("CREATING ADJ ROOM IN ASYNC -" + newRoom.roomName);
       newRoom.inConstruction = true;
 
-      RoomObjectGatewayDefinition fromGate;
-      RoomObjectGatewayDefinition newRoomGate;
+      RoomObjectGatewayDefinition fromGate = from.GetGatewayTo(newRoom);
+      RoomObjectGatewayDefinition newRoomGate = newRoom.GetGatewayTo(from);
 
       //Retrives the gateways between rooms.
       //TODO Exceptioning
-      if ((fromGate = from.GetGatewayTo(newRoom)) == null)
+      if (fromGate  == null)
       {
         Debug.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found");
         yield break;
         //return;
       }
-      if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
+      if (newRoomGate == null)
       {
         Debug.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found");
         yield break;
@@ -135,9 +135,9 @@ public class RoomFactoryAsync : RoomFactory {
 
       //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
       Vector3 fromGateWorldPosition = _gatewayRegistry[from][newRoom.roomName].transform.position;
-      Vector3 fromGateWorldRotation = _gatewayRegistry[from][newRoom.roomName].transform.eulerAngles;
+   //   Vector3 fromGateWorldRotation = _gatewayRegistry[from][newRoom.roomName].transform.eulerAngles;
       Vector3 newGateLocalPosition = _gatewayRegistry[newRoom][from.roomName].transform.localPosition;
-      Vector3 newGateWorldRotation = _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
+    //  Vector3 newGateWorldRotation = _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
 
       //Positions and orients the parent object to match and connect with the from room gateway
 
@@ -156,12 +156,12 @@ public class RoomFactoryAsync : RoomFactory {
     }
   }
 
-  public RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
+  public override RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
   {
     return roomDef;
   }
 
-  public void DestroyRoom(RoomDefinition roomDef)
+  public override void DestroyRoom(RoomDefinition roomDef)
   {
     if (_instancedObjects.RoomIsRegistered(roomDef))
     {
