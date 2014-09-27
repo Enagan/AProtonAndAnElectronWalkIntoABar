@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// HUDCrosshair handles rendering the player crosshair in the middle of the screen 
 /// </summary>
-public class HUDCrosshair : HUDObject {
+public class HUDCrosshair : HUDObject, IPlayerChangedListener {
   
   #region private variables
 	
@@ -41,6 +41,8 @@ public class HUDCrosshair : HUDObject {
                              Screen.height - _textureHeight,
                              _textureWidth,
                              _textureHeight);
+    ServiceLocator.GetEventHandlerSystem().RegisterPlayerChangedListener(this);
+
   }
   /// <summary>
   /// Overriden DrawHUD method, chooses correct crosshair texture and places it in the center of the screen
@@ -83,4 +85,11 @@ public class HUDCrosshair : HUDObject {
 
   }
   #endregion
+
+    #region IPlayerChangedListener implementation
+    public void ListenPlayerChange(PlayerController newPlayer)
+  {
+      _camera = newPlayer.getPlayerCamera().gameObject;
+  }
+    #endregion
 }

@@ -773,6 +773,14 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
           GetComponent<Rigidbody>().mass = _playerMass;
       }
   }
+
+    public void swapPlayer(PlayerController otherPlayer)
+    {
+        PlayerActivation(false);
+        otherPlayer.PlayerActivation(true);
+        ServiceLocator.GetEventHandlerSystem().SendPlayerChangedEvent(otherPlayer);
+
+    }
   #endregion
 
   #region Event Listeners

@@ -20,9 +20,8 @@ public class VirtualWorldArrivalPoint : MonoBehaviour
     {
           PlayerController spawnedPlayer = (PlayerController)Object.Instantiate(player);
           spawnedPlayer.rigidbody.useGravity = true;
-          player.PlayerActivation(false);
+          player.swapPlayer(spawnedPlayer);
           spawnedPlayer.transform.position = transform.position;
-          spawnedPlayer.PlayerActivation(true);
 
           if(destroyPrevious)
           {

@@ -20,14 +20,11 @@ public class VirtualWorldEntryPoint : VirtualWorldArrivalPoint
         if (_originalPlayer == null)
         {
           _originalPlayer = player;
-          _originalPlayer.enabled = false; // so player's arms in special camera cannot be seen
           _arrival.spawnPlayerCopy(player, false);
         }
         else
         {
-            player.PlayerActivation(false);
-            _originalPlayer.enabled = true;
-            _originalPlayer.PlayerActivation(true);
+            player.swapPlayer(_originalPlayer);
             Destroy(player.gameObject);
             _originalPlayer = null;
         }
