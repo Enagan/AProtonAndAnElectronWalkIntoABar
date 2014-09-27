@@ -8,6 +8,8 @@ public class RoomFactoryAsync : RoomFactory {
   private Dictionary<RoomDefinition, Dictionary<string, GameObject>> _gatewayRegistry = new Dictionary<RoomDefinition, Dictionary<string, GameObject>>();
   private Dictionary<RoomDefinition, GameObject> _instancedRoomsRegistry = new Dictionary<RoomDefinition, GameObject>();
 
+  private List<RoomDefinition> _roomsMidInstancing = new List<RoomDefinition>();
+
   public void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
     if (!_instancedObjects.RoomIsRegistered(newRoom))
@@ -29,17 +31,19 @@ public class RoomFactoryAsync : RoomFactory {
 	
   private IEnumerator CreateFirstRoom(RoomDefinition room)
   {
-    if (_instancedRoomsRegistry.ContainsKey(room))
+    if (_instancedRoomsRegistry.ContainsKey(room) || _roomsMidInstancing.Contains(room))
     {
       Debug.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping");
     }
     else
     {
+      _roomsMidInstancing.Add(room);
+
       string roomParentObjectName = ROOM_PARENT_OBJECT_PREFIX + room.roomName;
       BipolarConsole.AllLog(roomParentObjectName);
       GameObject player = GameObject.Find("Player");
       player.SetActive(false);
-      AsyncOperation op = Application.LoadLevelAdditiveAsync(room.roomName + " - Copy");
+      AsyncOperation op = Application.LoadLevelAdditiveAsync(room.roomName);
       yield return op;
       player.SetActive(true);
       GameObject roomParentObject = GameObject.Find(roomParentObjectName);
@@ -77,12 +81,14 @@ public class RoomFactoryAsync : RoomFactory {
 
   private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
   {
-    if (_instancedRoomsRegistry.ContainsKey(newRoom))
+    if (_instancedRoomsRegistry.ContainsKey(newRoom) || _roomsMidInstancing.Contains(newRoom))
     {
       Debug.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping");
     }
     else
     {
+      _roomsMidInstancing.Add(newRoom);
+
       Debug.Log("CREATING ADJ ROOM IN ASYNC -" + newRoom.roomName);
       newRoom.inConstruction = true;
 
@@ -104,7 +110,7 @@ public class RoomFactoryAsync : RoomFactory {
         //return;
       }
 
-      AsyncOperation roomConstructionOperation = Application.LoadLevelAdditiveAsync(newRoom.roomName + " - Copy");
+      AsyncOperation roomConstructionOperation = Application.LoadLevelAdditiveAsync(newRoom.roomName);
       yield return roomConstructionOperation; //wait for operation to finish
 
       //Finds the room parent object
@@ -123,13 +129,11 @@ public class RoomFactoryAsync : RoomFactory {
 
       _instancedRoomsRegistry.Add(newRoom, roomParentObject);
 
-      ////Instances all gateways in the room definition
+      //Instances all gateways in the room definition
       //foreach (RoomObjectGatewayDefinition gate in newRoom.gateways)
       //{
       //  GameObject instancedObject = InstanceObject(gate);
-
       //  _instancedObjects.RegisterObjectInRoom(newRoom, gate, instancedObject);
-
       //  instancedObject.SetActive(false);
       //}
 
@@ -147,7 +151,7 @@ public class RoomFactoryAsync : RoomFactory {
 
       //roomParentObject.transform.position -= fromGateRelativePositionToNewRoom;
 
-      //roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
+      roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation) - _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
 
 
 
@@ -163,11 +167,11 @@ public class RoomFactoryAsync : RoomFactory {
 
   public void DestroyRoom(RoomDefinition roomDef)
   {
-    if (_instancedObjects.RoomIsRegistered(roomDef))
+    if (_instancedRoomsRegistry.ContainsKey(roomDef))
     {
       string roomParentObjectName = ROOM_PARENT_OBJECT_PREFIX + roomDef.roomName;
       GameObject toDestroy = GameObject.Find(roomParentObjectName);
-      _instancedObjects.RemoveRoomFromRegistry(roomDef);
+      _instancedRoomsRegistry.Remove(roomDef);
       roomDef.colliders.Clear();
       roomDef.renderers.Clear();
       roomDef.maxDepth = 0;
