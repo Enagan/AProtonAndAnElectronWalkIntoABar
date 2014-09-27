@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+enum ArmSideToAward { LeftArm, RightArm}
+
 public class AwardArmAbility : AwardPlayerAbility {
 
     [SerializeField]
-    private bool _awardLeftArm;
+  private ArmSideToAward _awardArm;
 
   public AwardArmAbility()
   {
@@ -17,7 +19,7 @@ public class AwardArmAbility : AwardPlayerAbility {
   {
       SMConsole.Log("Awarding Left Arm Ability" + player,"Player");
 
-      if(_awardLeftArm)
+      if (_awardArm == ArmSideToAward.LeftArm)
           player.addLeftArmMagnetAbility();
       else
           player.addRightArmMagnetAbility();

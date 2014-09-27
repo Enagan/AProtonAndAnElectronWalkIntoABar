@@ -1,9 +1,10 @@
-﻿//#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using System.IO;
 using System;
 
@@ -11,9 +12,14 @@ using System;
  * SMConsole, a cutomized console with multiple functions
  * To Log call the several SMConsole.Log functions
  */
-public class SMConsole : EditorWindow
-{
 
+#if UNITY_EDITOR
+public class SMConsole : EditorWindow
+#else
+public class SMConsole
+#endif
+{
+  #if UNITY_EDITOR
   // Console components
   SMConsoleHeaderBar _headerBar;
   SMConsoleTopSection _topSection;
@@ -91,8 +97,9 @@ public class SMConsole : EditorWindow
     
    }
 
-  #region static Log functions
+ #endif
 
+  #region static Log functions
   public static void Log(string log)
   {
     Log(log, SMConsoleData.EMPTY_TAG);
@@ -111,7 +118,7 @@ public class SMConsole : EditorWindow
   private static void Log(string log, string tag, SMLogType type, string stackTrace)
   {
     Debug.Log(log);
-
+#if UNITY_EDITOR
     LogMessage message;
     SMConsoleData _data = SMConsoleData.Instance;
 
@@ -162,10 +169,8 @@ public class SMConsole : EditorWindow
            _data.showingLogs.Add(_data.collapsedHash[hashKey]);
        }
     }
+#endif
   }
-
   #endregion
 
 }
-
-//#endif

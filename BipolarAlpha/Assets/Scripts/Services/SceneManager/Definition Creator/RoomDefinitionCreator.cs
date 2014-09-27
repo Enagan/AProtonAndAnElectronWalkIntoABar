@@ -42,8 +42,9 @@ public class RoomDefinitionCreator : MonoBehaviour
     foreach (object thisObject in allObjects)
     {
       GameObject castObject = ((GameObject)thisObject);
-      if (castObject.activeInHierarchy && castObject.transform.parent == null)
+      if (castObject.activeInHierarchy && (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject"+_roomName)))
       {
+        castObject.transform.SetParent(null);
         readObjects.Add(castObject);
       }
     }

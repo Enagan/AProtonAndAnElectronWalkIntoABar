@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -96,6 +100,7 @@ public class SMConsoleData
   // Utils
   public void saveLogs()
   {
+#if UNITY_EDITOR
     string name = "LogDump-" + DateTime.Now.ToLongDateString() + ".txt";
 
     string path = EditorUtility.SaveFilePanel
@@ -108,6 +113,7 @@ public class SMConsoleData
       return;
 
     File.WriteAllLines(path, getLogsForWritting());
+#endif
   }
 
   // returns logs as a string format
@@ -205,6 +211,7 @@ public class SMConsoleData
   // Helper to jump to the script of a stack Entry
   public bool jumpToSelectedScript(string stackEntry)
   {
+#if UNITY_EDITOR
     int pathStart = stackEntry.IndexOf(ASSET_START_TOKEN);
     int pathEnd = stackEntry.IndexOf(LINE_START_TOKEN);
     int lineStart = stackEntry.IndexOf(LINE_START_TOKEN) + LINE_START_TOKEN.Length;
@@ -227,11 +234,10 @@ public class SMConsoleData
         return true;
       }
     }
+    #endif
     return false;
   }
-  
 }
-
 
 #region Types
 
@@ -243,6 +249,7 @@ public enum SMLogType
 }
 
 #endregion
+
 
 #region Message Structures
 
@@ -302,4 +309,3 @@ public struct CollapsedMessage
 }
 
 #endregion
-
