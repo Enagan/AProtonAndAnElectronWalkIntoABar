@@ -168,14 +168,10 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
 
   #region Player Children Entities
 
-  [SerializeField]
   private PlayerMagnet _leftMagnet;
-  [SerializeField]
   private PlayerMagnet _rightMagnet;
 
-  [SerializeField]
   private GameObject _leftArm;
-  [SerializeField]
   private GameObject _rightArm;
 
   #endregion
@@ -210,13 +206,20 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
     //Initial rotation saved, used to clamp min and max rotation
     _baseRotation = mainCamera.transform.localRotation;
 
-    
-    GameObject tempLeftSearch = GameObject.Find("Left Player Magnet");
-    GameObject tempRightSearch = GameObject.Find("Right Player Magnet");
-    if(tempLeftSearch != null)
-        _leftMagnet = tempLeftSearch.transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
-    if (tempRightSearch != null)
-        _rightMagnet = tempRightSearch.transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
+
+    Transform tempLeft = mainCamera.transform.FindChild("Left Player Magnet");
+    Transform tempRight = mainCamera.transform.FindChild("Right Player Magnet");
+
+    if (tempLeft != null)
+    {
+        _leftArm = tempLeft.gameObject;
+        _leftMagnet = _leftArm.transform.FindChild("Left Magnetism").GetComponent<PlayerMagnet>();
+    }
+    if (tempRight != null)
+    {
+        _rightArm = tempRight.gameObject;
+        _rightMagnet = _rightArm.transform.FindChild("Right Magnetism").GetComponent<PlayerMagnet>();
+    }
 
     //add initial abilities
     instantiateAbilities();
@@ -507,12 +510,12 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   {
     if (_isRightActive && !_rightArm.activeInHierarchy)
       addRightArmMagnetAbility();
-    else if (!_isRightActive && _rightArm.activeInHierarchy)
+    else if (!_isRightActive && _rightArm != null && _rightArm.activeInHierarchy)
       removeRightArmMagnetAbility();
 
     if (_isLeftActive && !_leftArm.activeInHierarchy)
        addLeftArmMagnetAbility();
-    else if (!_isLeftActive && _leftArm.activeInHierarchy)
+    else if (!_isLeftActive && _leftArm != null && _leftArm.activeInHierarchy)
        removeLeftArmMagnetAbility();
   }
 
@@ -747,7 +750,8 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   public void PlayerActivation(bool state)
   {
       enabled = state;
-      
+      _playerEnabled = state;
+
       toggleSoundListenerTo(state);
 
       toggleCameraTo(state);
