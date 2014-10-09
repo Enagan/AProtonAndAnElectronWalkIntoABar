@@ -22,6 +22,7 @@ public class VirtualWorldArrivalPoint : MonoBehaviour
           spawnedPlayer.rigidbody.useGravity = true;
           player.swapPlayer(spawnedPlayer);
           spawnedPlayer.transform.position = transform.position;
+          spawnedPlayer.transform.forward = transform.forward;
 
           if(destroyPrevious)
           {

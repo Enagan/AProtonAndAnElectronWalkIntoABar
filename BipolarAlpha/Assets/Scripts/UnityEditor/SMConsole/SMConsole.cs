@@ -41,6 +41,9 @@ public class SMConsole : EditorWindow
     _splitWindow = new SMConsoleSplitWindow();
     _botSection = new SMConsoleBotSection();
     SMConsole.Log("HAY");
+    SMConsole.Log("HAY");
+    SMConsole.Log("HAY","",SMLogType.ERROR);
+    SMConsole.Log("HAY", "", SMLogType.WARNING);
   }
 
   void OnDisable()

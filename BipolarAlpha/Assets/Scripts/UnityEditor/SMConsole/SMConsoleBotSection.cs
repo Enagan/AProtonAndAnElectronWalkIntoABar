@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
-
+using System;
 public class SMConsoleBotSection {
 
 
@@ -66,13 +66,16 @@ public class SMConsoleBotSection {
 
     if (stackTrace != null)
     {
+      int index = 0;
       string[] stackTraces = stackTrace.Split('\n');
+      Array.Reverse(stackTraces);
       foreach (string trace in stackTraces)
       {
-          string lineEntry = stackTraces[stackTraces.Length - 1];
-          if (lineEntry.Contains("SMConsole.Log"))
-              continue;
 
+          string lineEntry = stackTraces[stackTraces.Length - 1];
+          if (trace.Contains("SMConsole.Log") || trace.Contains("get_StackTrace()"))
+              continue;
+          index++;
         GUILayout.BeginHorizontal();
 
         if (_data.isEntryJumpable(trace))
@@ -83,7 +86,16 @@ public class SMConsoleBotSection {
 
         GUIStyle skin = GUI.skin.label;
         skin.wordWrap = true;
-        EditorGUILayout.SelectableLabel(trace, skin, GUILayout.MaxHeight(height - _data.currentScrollViewHeight));
+        string[] readableTraces = trace.Split(new string[] {"AProtonAndAnElectronWalkIntoABar"},System.StringSplitOptions.RemoveEmptyEntries);
+
+        string toPrint = trace;
+        if(readableTraces.Length == 2) // should be using regex
+        {
+          string suffix = readableTraces[1];
+          readableTraces = readableTraces[0].Split(new string[] { "C:\\" }, System.StringSplitOptions.RemoveEmptyEntries);
+          toPrint = readableTraces[0] + "\n" + suffix;
+        }
+        EditorGUILayout.SelectableLabel(" " +index + ". " + toPrint, skin, GUILayout.MaxHeight(height - _data.currentScrollViewHeight));
         GUILayout.EndHorizontal();
       }
     }

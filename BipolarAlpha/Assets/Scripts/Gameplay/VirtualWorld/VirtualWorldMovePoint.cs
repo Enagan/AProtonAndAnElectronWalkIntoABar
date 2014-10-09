@@ -10,10 +10,10 @@ public class VirtualWorldMovePoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
-        other.GetComponent<PlayerController>().PlayerActivation(false);
+        
         if (other.tag == "Player")
         {
+            other.GetComponent<PlayerController>().PlayerActivation(false);
             movePlayer(other.GetComponent <PlayerController>());
         }
     }

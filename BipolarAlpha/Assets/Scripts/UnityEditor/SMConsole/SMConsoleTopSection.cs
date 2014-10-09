@@ -14,6 +14,8 @@ public class SMConsoleTopSection {
   Texture2D _warningTex;
   Texture2D _errorTex;
   float _labelWidth;
+
+  GUISkin _logSkin;
   
 
   public SMConsoleTopSection()
@@ -24,12 +26,14 @@ public class SMConsoleTopSection {
     _buttonSkin = Resources.Load("GUI/Skins/SMConsoleSkin") as GUISkin;
     _buttonSkin2 = Resources.Load("GUI/Skins/SMConsoleSkin2") as GUISkin;
     _selectedButtonSkin = Resources.Load("GUI/Skins/SMConsoleSkin3") as GUISkin;
+    _logSkin = Resources.Load("GUI/Skins/LogButton") as GUISkin;
 
     // create textures for icons
     _logTex = (Texture2D)Resources.Load("GUI/Sprites/log", typeof(Texture2D));
     _warningTex = (Texture2D)Resources.Load("GUI/Sprites/warning", typeof(Texture2D));
     _errorTex = (Texture2D)Resources.Load("GUI/Sprites/error", typeof(Texture2D));
-    
+
+      
   }
   
   public void drawTopSection(float width, float height)
@@ -237,7 +241,7 @@ public class SMConsoleTopSection {
   // Draws icon of message type
   bool drawIconLabel(SMLogType type, GUISkin skin)
   {
-    Texture texture = _logTex;
+    Texture2D texture = _logTex;
 
     switch (type)
     {
@@ -255,7 +259,16 @@ public class SMConsoleTopSection {
 
     }
 
-    return GUILayout.Button(texture, skin.button, GUILayout.Height(texture.height), GUILayout.Width(texture.width+5));
+
+    _logSkin.button.normal.background = texture;
+    _logSkin.button.active.background = texture;
+    _logSkin.button.focused.background = texture;
+    _logSkin.button.hover.background = texture;
+    _logSkin.button.onNormal.background = texture;
+    _logSkin.button.onActive.background = texture;
+    _logSkin.button.onFocused.background = texture;
+    _logSkin.button.onHover.background = texture;
+    return GUILayout.Button("", _logSkin.button, GUILayout.Height(texture.height), GUILayout.Width(texture.width));
   }
 
  
