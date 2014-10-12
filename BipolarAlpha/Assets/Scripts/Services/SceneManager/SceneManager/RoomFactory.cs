@@ -21,7 +21,7 @@ public class RoomFactory
   /// If a "from" room is provided, the new room will be placed connected to the from room
   /// at their shared gateway. In case a gateway doesn't exist between the rooms, the function does nothing.
   /// </summary>
-  public void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
+  public virtual void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
     if (!_instancedObjects.RoomIsRegistered(newRoom))
     {
@@ -43,7 +43,7 @@ public class RoomFactory
   /// of all objects to the current definition
   /// </summary>
   /// ENGANA@TODO savestate, as well as velocity and torque
-  public RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
+  public virtual RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
   {
     if (_instancedObjects.RoomIsRegistered(roomDef))
     {
@@ -116,7 +116,7 @@ public class RoomFactory
   /// <summary>
   /// Destroys an already instanced room. In case the room in non-existant, an error is launched
   /// </summary>
-  public void DestroyRoom(RoomDefinition roomDef)
+  public virtual void DestroyRoom(RoomDefinition roomDef)
   {
     if (_instancedObjects.RoomIsRegistered(roomDef))
     {
@@ -143,7 +143,7 @@ public class RoomFactory
     room.inConstruction = true;
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(room.roomName);
-    roomParentObject.SetActiveRecursively(false);
+    roomParentObject.SetActive(false);
     _instancedObjects.RegisterRoom(room, roomParentObject);
 
     //Instances all objects present in the room definition 
@@ -158,10 +158,11 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in room.gateways)
     {
       GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
+      instancedObject.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
-    roomParentObject.SetActiveRecursively(true);
+    roomParentObject.SetActive(true);
     ActivateCollidersAndRenderers(room);
     room.constructionFinished = true;
     room.inConstruction = false;
@@ -201,7 +202,7 @@ public class RoomFactory
     }
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
-    roomParentObject.SetActiveRecursively(false);
+    roomParentObject.SetActive(false);
     _instancedObjects.RegisterRoom(newRoom, roomParentObject);
 
     //Orients the parent object to the new room gateway, as their centers will coincide
@@ -212,7 +213,7 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in newRoom.gateways)
     {
       GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, newRoomGate.position);
-
+      instancedObject.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
       _instancedObjects.RegisterObjectInRoom(newRoom, gate, instancedObject);
     }
 
@@ -237,7 +238,7 @@ public class RoomFactory
     roomParentObject.transform.position = fromGateWorldPosition;
     roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
 
-    roomParentObject.SetActiveRecursively(true);
+    roomParentObject.SetActive(true);
 
     float lastTime = Time.time;
     float accumulatedTime = 0;
@@ -380,7 +381,6 @@ public class RoomFactory
   /// </summary>
   private void ActivateCollidersAndRenderers(RoomDefinition room)
   {
-    int depth = room.maxDepth;
     for (int i = room.maxDepth; i >= 0; i--)
     {
       List<Collider> cols;

@@ -12,15 +12,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     private const float DUMMY_DISTANCE = 2.0f;
     private const float DUMMY_FORCE = 100.0f;
 
-    private static float DISTANT_FORCE_CUTOFF = 0.5f;
-
-    //ToDo - Needs fine tuning // Change these 3 variables to const
-//    private static float VERY_LOW_FORCE_FACTOR = 50.0f;
- //   private static float LOW_FORCE_FACTOR = 100.0f;
- //   private static float MEDIUM_FORCE_FACTOR = 250.0f;
- //   private static float HIGH_FORCE_FACTOR = 700.0f;
- //   private static float VERY_HIGH_FORCE_FACTOR = 1500.0f;
-
+//    private static float DISTANT_FORCE_CUTOFF = 0.5f;
 
        private static float VERY_LOW_FORCE_FACTOR = 30.0f;
        private static float LOW_FORCE_FACTOR = 50.0f;
@@ -87,7 +79,6 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
                 NoLongerAffectingMagnets();
             _isActivated = value;
         }
-
     }
 
     public bool isMoveable
@@ -173,7 +164,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     public virtual void Start()
     {
         InitLights();
-        SphereCollider collider = this.GetComponent<SphereCollider>();
+//        SphereCollider collider = this.GetComponent<SphereCollider>();
       /*
         //If the magnetic force has a collider attached it is it's interaction area, and this should be scaled to it's strength
         if (collider != null)
@@ -340,11 +331,11 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
             int blockerLayer = 1 << 15; //magnetic block layer, we only want to check for blockers
             RaycastHit[] hits = Physics.RaycastAll(thisPosition, (otherPosition - thisPosition).normalized, Vector3.Distance(thisPosition, otherPosition), blockerLayer);
 
-            foreach (RaycastHit singleHit in hits)  //Checks for magnetic blockers between MagneticForces
+            if (hits.Length > 0)   //Checks for magnetic blockers between MagneticForces
             {
                 magneticBlockerFound = true;
-                break;
             }
+
             if (!magneticBlockerFound)
             {
 

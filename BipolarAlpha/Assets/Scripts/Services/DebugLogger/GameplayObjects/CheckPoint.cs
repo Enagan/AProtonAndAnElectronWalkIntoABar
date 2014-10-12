@@ -14,6 +14,7 @@ public class CheckPoint : MonoBehaviour
   private Vector3 _checkpointedPlayerPosition;
   private Vector3 _checkpointedPlayerRotation;
 
+  #pragma warning disable 414
   //For quick modifiability should contains a transform helper
   private Transform _transformComponent;
 
@@ -64,10 +65,7 @@ public class CheckPoint : MonoBehaviour
     _transformComponent = GetComponent<Transform>();
 
     // Find Dummy Player used to set respawn position and direction
-    Transform[] trans = GetComponentsInChildren(typeof(Transform), true) as Transform[];
-
     Transform child = transform.FindChild("PlayerDummy");
-
     if (child != null)
     {
         _checkpointedPlayerPosition = child.position;

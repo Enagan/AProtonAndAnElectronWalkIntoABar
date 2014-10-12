@@ -7,7 +7,7 @@ public class ActivatorController : JackedInRemoteController
   // List of Activators located in the activatable game objects
   private List<Activator> _activatables = new List<Activator>();
 
-  public void Start()
+  public override void Start()
   {
     List<Activator> temp;
     // Visits each intended activatable game object

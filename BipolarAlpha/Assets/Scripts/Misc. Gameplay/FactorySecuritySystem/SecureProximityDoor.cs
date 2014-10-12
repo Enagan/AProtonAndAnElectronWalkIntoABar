@@ -5,6 +5,7 @@ public class SecureProximityDoor : MonoBehaviour {
 
   public GameObject door = null;
   public SecurityLevels _minimumLevelNeeded = SecurityLevels.Level1;
+  public GameObject _lightParent = null;
 
   DummyDoor dummyDoor = null;
 
@@ -13,6 +14,7 @@ public class SecureProximityDoor : MonoBehaviour {
   public void Start()
   {
     dummyDoor = door.GetComponent<DummyDoor>();
+    refreshLights();
   }
 
 	public void OnTriggerEnter(Collider other)
@@ -39,6 +41,7 @@ public class SecureProximityDoor : MonoBehaviour {
       _doorUnlocked = false;
       Debug.Log("[SECURE DOOR] System Key invalid");
     }
+    refreshLights();
   }
 
   public void lockDoor(SecurityLevels unlockerWithPermissions)
@@ -47,6 +50,35 @@ public class SecureProximityDoor : MonoBehaviour {
     { 
       _doorUnlocked = false;
       Debug.Log("[SECURE DOOR] Door Locked!");
+    }
+    refreshLights();
+  }
+
+  public void refreshLights()
+  {
+    float g = 52f / 255f;
+   // float b = 174f / 255f;
+    if (_lightParent == null)
+    {
+      Transform parentTransformLights = this.transform.parent.FindChild("MagnetLights");
+      if (parentTransformLights != null)
+      {
+        _lightParent = parentTransformLights.gameObject;
+      }
+    }
+    if (_lightParent != null)
+    {
+      foreach (Light light in _lightParent.GetComponentsInChildren<Light>())
+      {
+        if (_doorUnlocked)
+        {
+          light.color = new Color(0, g, 0);
+        }
+        else
+        {
+          light.color = Color.red;
+        }
+      }
     }
   }
 }

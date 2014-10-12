@@ -8,7 +8,7 @@ public abstract class JackedInRemoteController : MonoBehaviour
   [SerializeField]
   protected List<GameObject> _activatableObjects = new List<GameObject>();
 
-  public void Start()
+  public virtual void Start()
   {
   }
 

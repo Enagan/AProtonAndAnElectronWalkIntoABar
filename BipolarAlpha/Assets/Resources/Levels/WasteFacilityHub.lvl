@@ -5,14 +5,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>17.7637444</x>
-        <y>-0.5389112</y>
-        <z>-12.2539549</z>
+        <x>7.0875845</x>
+        <y>0.121785462</y>
+        <z>-12.5548983</z>
       </position>
       <scale>
-        <x>0.46077925</x>
+        <x>0.4607792</x>
         <y>0.4787271</y>
-        <z>0.461455584</z>
+        <z>0.461455554</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -32,9 +32,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/Lights/WasteDisposalLights</objectPrefabPath>
       <position>
-        <x>11.7044468</x>
-        <y>-3.994729</y>
-        <z>1.98859215</z>
+        <x>1.02828693</x>
+        <y>-3.3340323</y>
+        <z>1.687649</z>
       </position>
       <scale>
         <x>1</x>
@@ -51,9 +51,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/LevelScenery/WasteFacilityHub/WasteDisposalHub</objectPrefabPath>
       <position>
-        <x>10.6761608</x>
-        <y>-0.660696745</y>
-        <z>0.300943136</z>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
       </position>
       <scale>
         <x>200</x>
@@ -70,9 +70,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>25.2223</x>
-        <y>-0.5389112</y>
-        <z>0.4405893</z>
+        <x>14.54614</x>
+        <y>0.121785462</y>
+        <z>0.1396462</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -97,9 +97,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>3.43075514</x>
-        <y>-0.5389112</y>
-        <z>-12.2663527</z>
+        <x>-7.24540472</x>
+        <y>0.121785462</y>
+        <z>-12.567296</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -124,14 +124,14 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>17.875946</x>
-        <y>-0.5389112</y>
-        <z>12.9575558</z>
+        <x>7.199786</x>
+        <y>0.121785462</y>
+        <z>12.6566124</z>
       </position>
       <scale>
         <x>0.46077925</x>
         <y>0.4787271</y>
-        <z>0.461455584</z>
+        <z>0.461455643</z>
       </scale>
       <eulerAngles>
         <x>0</x>
@@ -151,9 +151,9 @@
     <RoomObjectDefinition>
       <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
       <position>
-        <x>3.40806</x>
-        <y>-0.5389112</y>
-        <z>12.8980551</z>
+        <x>-7.2681</x>
+        <y>0.121785462</y>
+        <z>12.5971117</z>
       </position>
       <scale>
         <x>0.46077925</x>
@@ -180,9 +180,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>-4.03758526</x>
-        <y>-2.36637425</y>
-        <z>0.36961174</z>
+        <x>-14.7137451</x>
+        <y>-1.70567751</y>
+        <z>0.06866863</z>
       </position>
       <scale>
         <x>2.14</x>
@@ -200,9 +200,9 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>20.94209</x>
-        <y>-2.13981223</y>
-        <z>0.3325205</z>
+        <x>10.2659292</x>
+        <y>-1.47911549</y>
+        <z>0.03157741</z>
       </position>
       <scale>
         <x>2.14</x>

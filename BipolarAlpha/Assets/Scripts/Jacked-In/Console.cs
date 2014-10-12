@@ -8,8 +8,6 @@ public class Console : MonoBehaviour {
   private GameObject _jackedInPlayer = null;
   private float _playerMass;
 
-  [SerializeField]
-  private float waitingTime = 2.0f;
 
   /// <summary>
   /// Activates jacked in mode, the player is deactivated and a JackedInPlayer prefab is created
@@ -25,6 +23,8 @@ public class Console : MonoBehaviour {
                                                                                                               this.transform.position);
     _jackedInPlayer.GetComponent<JackedInPlayer>().MotherConsole = this;
     _jackedInPlayer.transform.forward = -1.0f * _realPlayer.transform.forward;
+
+    ServiceLocator.GetEventHandlerSystem().SendJackedInActivationEvent(_jackedInPlayer.GetComponentInChildren<Camera>());
   }
 
 
@@ -41,6 +41,7 @@ public class Console : MonoBehaviour {
     _jackedInPlayer = null;
     this.transform.Find("Boundary").gameObject.SetActive(false);
 
+    ServiceLocator.GetEventHandlerSystem().SendJackedInDeactivationEvent();
   }
 
 

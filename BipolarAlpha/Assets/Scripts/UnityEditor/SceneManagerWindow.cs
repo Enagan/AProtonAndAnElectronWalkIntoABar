@@ -42,9 +42,6 @@ public class SceneManagerWindow : EditorWindow
   Vector2 _gatewaysScrollPosition;
   Vector2 _roomsToLoadIntoGameScrollPosition;
 
-  // Popup Positions
-  int _gameStateStartRoomPopup = 0;
-
   GameObject _instacedRoomDefCreator = null;
 
   // Add menu item named "My Window" to the Window menu
@@ -238,7 +235,7 @@ public class SceneManagerWindow : EditorWindow
         }
       }
 
-      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
+//      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
 
       int popUpPosition = filteredRoomList.IndexOf(_currentlyPressed);
@@ -315,7 +312,9 @@ public class SceneManagerWindow : EditorWindow
       foreach (object thisObject in allObjects)
       {
         GameObject castObject = ((GameObject)thisObject);
-        if (castObject.activeInHierarchy && castObject.transform.parent == null && BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
+        if (castObject.activeInHierarchy && 
+          (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject" + _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2))) && 
+          BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
         {
           Gateways.Add(castObject);
         }

@@ -48,7 +48,7 @@ public class RotaryMagnetPart : MagneticForce
 
             Vector3 localTorque = rotationDir * totalForce * Time.deltaTime * 10.0f;
 
-            if(localTorque != null && 
+            if (localTorque.sqrMagnitude > 0.0f && 
               !float.IsNaN(localTorque.x)  
               &&  !float.IsNaN(localTorque.y) 
                &&  !float.IsNaN(localTorque.z) && rotationDrag!= 0) 
