@@ -81,7 +81,7 @@ public class BipolarEventHandlerSystem
   public void RegisterPlayerChangedListener(IPlayerChangedListener listener)
   {
       RegisterEventListner(BipolarEvent.PlayerChanged, listener);
-
+  }
   /// <summary>
   /// Registers a new listener for Jacked-In mode activation events
   /// </summary>
