@@ -8,6 +8,9 @@ public class SMConsoleSplitWindow
   Rect cursorChangeRect;
   private static Texture2D splitTex;
 
+  private const float minHeight = 83.0f; // Minimum allowed height for split window
+  private const float maxHeight = 330.0f; // Maximum allowed height for split window
+
   SMConsoleData _data;
 
   public SMConsoleSplitWindow()
@@ -49,10 +52,26 @@ public class SMConsoleSplitWindow
     }
     if (resize)
     {
-      _data.currentScrollViewHeight = Event.current.mousePosition.y;
+       float height = Event.current.mousePosition.y;
+       if (height < minHeight)
+           height = minHeight;
+       if (height > maxHeight)
+           height = maxHeight;
+
+       _data.currentScrollViewHeight = height;
+      
       cursorChangeRect.Set(cursorChangeRect.x, _data.currentScrollViewHeight, cursorChangeRect.width, cursorChangeRect.height);
     }
-    if (Event.current.type == EventType.MouseUp)
+
+    _data.repaint = resize; // if actively resizing it should repaint
+
+    // Comes after since it should also repaint on the frame it stops resizing
+    if (Event.current.type == EventType.MouseUp )
+    { 
       resize = false;
+    }
+
+  
   }
+
 }

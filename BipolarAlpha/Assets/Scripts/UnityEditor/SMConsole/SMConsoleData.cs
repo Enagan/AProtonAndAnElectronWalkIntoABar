@@ -38,7 +38,8 @@ public class SMConsoleData
   public bool showLogs;
 
   public string searchFilter;
-
+     
+  public bool repaint = false; // whether onGUI should repaint
 
   // Constants
   public const string DEFAULT_SEARCH_STR = "Search Logs";
@@ -91,6 +92,19 @@ public class SMConsoleData
     showLogs = true;
     searchFilter = DEFAULT_SEARCH_STR;
 
+  }
+
+  // Checks if there is a currently selected message
+  public bool isSelectedEmpty()
+  {
+      if (canCollapse)
+      {
+          return selectedLogMessage.hashKey().CompareTo(new LogMessage().hashKey()) == 0;
+      }
+      else
+      {
+          return selectedCollapsedMessage.message.hashKey().CompareTo(new LogMessage().hashKey()) == 0;
+      }
   }
 
   // Utils

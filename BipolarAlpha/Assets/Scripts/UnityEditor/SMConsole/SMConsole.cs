@@ -19,6 +19,7 @@ public class SMConsole : EditorWindow
   SMConsoleTopSection _topSection;
   SMConsoleSplitWindow _splitWindow;
   SMConsoleBotSection _botSection;
+  SMConsoleData _data;
 
   [MenuItem("Window/SM Console")]
   public static void ShowWindow()
@@ -33,7 +34,8 @@ public class SMConsole : EditorWindow
   public void OnEnable()
   {
     // Create the singleton and intialize
-    SMConsoleData.Instance.currentScrollViewHeight = this.position.height / 2;
+    _data = SMConsoleData.Instance;
+    _data.currentScrollViewHeight = this.position.height / 2;
 
      // Init components
     _headerBar = new SMConsoleHeaderBar();
@@ -77,11 +79,11 @@ public class SMConsole : EditorWindow
       if((!data.canCollapse && data.selectedLogMessage.hashKey() != new LogMessage().hashKey())
           || (data.canCollapse && data.selectedCollapsedMessage.message.hashKey() != new LogMessage().hashKey()))
       {
-
+     
       
     // MID
     _splitWindow.drawWindow(this.position.width);
-
+     
     // BOT
     GUILayout.BeginHorizontal();
 
@@ -91,7 +93,10 @@ public class SMConsole : EditorWindow
         }
     GUILayout.EndVertical();
 
-    
+    if (_data.repaint)
+        Repaint();
+      
+ 
    }
 
   #region static Log functions

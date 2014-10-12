@@ -41,9 +41,7 @@ public class SMConsoleTopSection {
 
      
     _labelWidth = (width * 0.8f +3) - _logTex.width*2;
-    float areaHeight = _data.canCollapse ?
-        (_data.selectedLogMessage.hashKey() != new LogMessage().hashKey() ? _data.currentScrollViewHeight : height) :
-        (_data.selectedCollapsedMessage.message.hashKey() != new LogMessage().hashKey() ? _data.currentScrollViewHeight : height);
+    float areaHeight = _data.isSelectedEmpty() ? _data.currentScrollViewHeight : height;
 
     // Upper section
     GUILayout.BeginHorizontal();
