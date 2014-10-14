@@ -48,9 +48,6 @@ public class SMConsoleData
   // Constants
   public const string DEFAULT_SEARCH_STR = "Search Logs";
   public const string EMPTY_TAG = "-";
-  public const string EMPTY_STACK_TRACE = "";
-  const string ASSET_START_TOKEN = "Asset";
-  const string LINE_START_TOKEN = ":line ";
 
   private static SMConsoleData instance;
 
@@ -202,55 +199,21 @@ public class SMConsoleData
     else
       selected = selectedLogMessage;
 
-    string[] stackTraces = selectedLogMessage.stackTrace.Split('\n');
-    string lineEntry = stackTraces[stackTraces.Length - 1];
-    this.jumpToSelectedScript(lineEntry);
+    StackTraceEntry[] entries = selected.stackTrace;
+    // Iterate in reverse to jump to deepest entry
+    int len = entries.Length;
+    for (int i = len - 1; i >= 0; i--)
+    {
+        StackTraceEntry entry = entries[i];
+
+        if (entry.isEntryJumpable())
+        {
+            entry.jumpToPath();
+            break;
+        }
+    }
   }
 
-  // Helper to know if stack entry allows jumping
-  public bool isEntryJumpable(string stackEntry)
-  {
-    int pathStart = stackEntry.IndexOf(ASSET_START_TOKEN);
-    int pathEnd = stackEntry.IndexOf(LINE_START_TOKEN);
-    int lineStart = stackEntry.IndexOf(LINE_START_TOKEN) + LINE_START_TOKEN.Length;
-    int lineEnd = stackEntry.Length;
-
-    if (pathStart < 0 || pathEnd < 0 || lineStart < 0 || lineEnd < 0)
-    {
-      return false;
-    }
-    return true;
-  }
-
-  // Helper to jump to the script of a stack Entry
-  public bool jumpToSelectedScript(string stackEntry)
-  {
-#if UNITY_EDITOR
-    int pathStart = stackEntry.IndexOf(ASSET_START_TOKEN);
-    int pathEnd = stackEntry.IndexOf(LINE_START_TOKEN);
-    int lineStart = stackEntry.IndexOf(LINE_START_TOKEN) + LINE_START_TOKEN.Length;
-    int lineEnd = stackEntry.Length;
-
-    if (pathStart < 0 || pathEnd < 0 || lineStart < 0 || lineEnd < 0)
-    {
-      return false;
-    }
-
-    string path = stackEntry.Substring(pathStart, pathEnd - pathStart);
-    int line = int.Parse(stackEntry.Substring(lineStart, lineEnd - lineStart));
-
-    if (path != null && line > 0)
-    {
-      UnityEngine.Object script = Resources.LoadAssetAtPath(path, typeof(UnityEngine.Object));
-      if (script != null)
-      {
-        AssetDatabase.OpenAsset(script.GetInstanceID(), line);
-        return true;
-      }
-    }
-    #endif
-    return false;
-  }
 }
 
 #region Types
@@ -272,7 +235,7 @@ public struct LogMessage
 {
   public string log;
   public string tag;
-  public string stackTrace;
+  public StackTraceEntry[] stackTrace;
   public SMLogType type;
   public DateTime stamp;
   public int messageID;
@@ -285,13 +248,37 @@ public struct LogMessage
     this.tag = tag;
     this.type = type;
     this.stamp = DateTime.Now;
-    this.stackTrace = stack;
     this.messageID = ++IDCounter;
+
+    string[] stackTraces = stack.Split('\n');
+    int len = stackTraces.Length;
+    stackTrace = new StackTraceEntry[len];
+    Array.Reverse(stackTraces);
+
+    int toAssign = 0;
+    foreach (string trace in stackTraces)
+    {
+        if (trace.Contains("SMConsole.Log") || trace.Contains("get_StackTrace()"))
+            continue;
+        stackTrace[toAssign] = new StackTraceEntry(trace, toAssign + 1);
+        toAssign++;
+    }
+
+    if(toAssign < len) // copy into smaller array
+    {
+        StackTraceEntry[] arr = new StackTraceEntry[toAssign];
+        for(int i = 0; i < toAssign;i ++)
+        {
+            arr [i] = stackTrace[i];
+        }
+        stackTrace = arr; 
+    }
+     
+ 
   }
 
   public override string ToString()
   {
-
     return "[" + base.ToString() + "]";
   }
 
@@ -322,4 +309,90 @@ public struct CollapsedMessage
   }
 }
 
+public struct StackTraceEntry
+{
+    public const string EMPTY_STACK_TRACE = "EMPTY_STACK_TRACE";
+    private const string EMPTY_PATH = "EMPTY_PATH";
+    const string ASSET_START_TOKEN = "Asset";
+    const string LINE_START_TOKEN = ":line ";
+    const string SYMBOL_START_TOKEN = "at ";
+    const string SYMBOL_END_TOKEN = " in";
+
+    public int num;
+    public string symbolCall;
+    public string filePath;
+    public int line;
+
+
+    public StackTraceEntry(string stack, int traceNum)
+    {
+      num = -1;
+      line = -1;
+      symbolCall = "";
+      filePath = EMPTY_PATH;
+     
+      int pathStart = stack.IndexOf(ASSET_START_TOKEN);
+      int pathEnd = stack.IndexOf(LINE_START_TOKEN);
+      int lineStart = stack.IndexOf(LINE_START_TOKEN) + LINE_START_TOKEN.Length;
+      int lineEnd = stack.Length;
+      int symbolStart = stack.IndexOf(SYMBOL_START_TOKEN);
+      int symbolEnd = stack.IndexOf(SYMBOL_END_TOKEN);
+
+      if (pathStart < 0 || pathEnd < 0 || lineStart < 0 || lineEnd < 0 || symbolStart < 0 || symbolEnd < 0)
+      {
+          return;
+      }
+
+      this.num = traceNum;
+      this.symbolCall = stack.Substring(symbolStart, symbolEnd - symbolStart);
+      this.filePath = stack.Substring(pathStart, pathEnd - pathStart);
+      this.line = int.Parse(stack.Substring(lineStart, lineEnd - lineStart));
+
+  }
+
+    public bool isEmpty()
+    {
+        return ToString().CompareTo(EMPTY_STACK_TRACE) == 0;
+    }
+
+    public override string ToString()
+    {
+        if (num == -1)
+            return EMPTY_STACK_TRACE;
+
+        string entry = num + ". " + symbolCall + " : line " + line + "\n" + filePath;
+        return entry;
+    }
+
+    public bool jumpToPath()
+    {
+#if UNITY_EDITOR
+
+        if (filePath != null && line > 0)
+        {
+            UnityEngine.Object script = Resources.LoadAssetAtPath(filePath, typeof(UnityEngine.Object));
+            if (script != null)
+            {
+                AssetDatabase.OpenAsset(script.GetInstanceID(), line);
+                return true;
+            }
+        }
+#endif
+        return false;
+    }
+
+
+    // Helper to know if stack entry allows jumping
+    public bool isEntryJumpable()
+    {
+
+        if (filePath.CompareTo(EMPTY_PATH) == 0 || line == -1)
+        {
+            return false;
+        }
+        return true;
+    }
+    
+
+}
 #endregion

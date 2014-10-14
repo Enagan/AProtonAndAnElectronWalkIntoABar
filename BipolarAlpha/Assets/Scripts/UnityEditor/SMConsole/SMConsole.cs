@@ -116,7 +116,7 @@ public class SMConsole
 
   public static void Log(string log, string tag, SMLogType type)
   {
-    Log(log, tag, type, SMConsoleData.EMPTY_STACK_TRACE);
+      Log(log, tag, type, StackTraceEntry.EMPTY_STACK_TRACE);
   }
 
   private static void Log(string log, string tag, SMLogType type, string stackTrace)
@@ -126,7 +126,7 @@ public class SMConsole
     LogMessage message;
     SMConsoleData _data = SMConsoleData.Instance;
 
-    if (stackTrace == SMConsoleData.EMPTY_STACK_TRACE)
+    if (stackTrace == StackTraceEntry.EMPTY_STACK_TRACE)
       message = new LogMessage(log, tag, type,Environment.StackTrace);
     else
       message = new LogMessage(log, tag, type, stackTrace);

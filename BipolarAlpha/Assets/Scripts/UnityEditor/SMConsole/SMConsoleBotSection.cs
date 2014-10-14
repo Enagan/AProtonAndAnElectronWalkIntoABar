@@ -56,7 +56,7 @@ public class SMConsoleBotSection {
   // displays the stack trace of selected message
   void displayStackTrace(float height)
   {
-    string stackTrace;
+    StackTraceEntry[] stackTrace;
     if (!_data.canCollapse)
     {
       stackTrace = _data.selectedLogMessage.stackTrace;
@@ -68,36 +68,23 @@ public class SMConsoleBotSection {
 
     if (stackTrace != null)
     {
-      int index = 0;
-      string[] stackTraces = stackTrace.Split('\n');
-      Array.Reverse(stackTraces);
-      foreach (string trace in stackTraces)
+      foreach (StackTraceEntry trace in stackTrace)
       {
 
-          string lineEntry = stackTraces[stackTraces.Length - 1];
-          if (trace.Contains("SMConsole.Log") || trace.Contains("get_StackTrace()"))
-              continue;
-          index++;
-        GUILayout.BeginHorizontal();
+        //string lineEntry = stackTraces[stackTraces.Length - 1];
 
-        if (_data.isEntryJumpable(trace))
+        GUILayout.BeginHorizontal(GUILayout.Height(32));
+
+        if (trace.isEntryJumpable())
         {
-          if (GUILayout.Button(_warpTex, GUILayout.Width(32), GUILayout.Height(32))) 
-            _data.jumpToSelectedScript(trace);
+          if (GUILayout.Button(_warpTex, GUILayout.Width(32), GUILayout.Height(32)))
+              trace.jumpToPath();
         }
 
         GUIStyle skin = GUI.skin.label;
         skin.wordWrap = true;
-        string[] readableTraces = trace.Split(new string[] {"AProtonAndAnElectronWalkIntoABar"},System.StringSplitOptions.RemoveEmptyEntries);
 
-        string toPrint = trace;
-        if(readableTraces.Length == 2) // should be using regex
-        {
-          string suffix = readableTraces[1];
-          readableTraces = readableTraces[0].Split(new string[] { "C:\\" }, System.StringSplitOptions.RemoveEmptyEntries);
-          toPrint = readableTraces[0] + "\n" + suffix;
-        }
-        EditorGUILayout.SelectableLabel(" " +index + ". " + toPrint, skin, GUILayout.MaxHeight(height - _data.currentScrollViewHeight));
+        EditorGUILayout.SelectableLabel(trace.ToString(), skin, GUILayout.Height(32), GUILayout.MaxHeight(height - _data.currentScrollViewHeight));
         GUILayout.EndHorizontal();
       }
     }
