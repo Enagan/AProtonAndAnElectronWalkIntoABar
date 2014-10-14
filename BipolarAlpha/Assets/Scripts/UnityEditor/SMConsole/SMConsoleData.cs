@@ -200,11 +200,9 @@ public class SMConsoleData
       selected = selectedLogMessage;
 
     StackTraceEntry[] entries = selected.stackTrace;
-    // Iterate in reverse to jump to deepest entry
-    int len = entries.Length;
-    for (int i = len - 1; i >= 0; i--)
+
+    foreach (StackTraceEntry entry in entries)
     {
-        StackTraceEntry entry = entries[i];
 
         if (entry.isEntryJumpable())
         {
@@ -253,7 +251,6 @@ public struct LogMessage
     string[] stackTraces = stack.Split('\n');
     int len = stackTraces.Length;
     stackTrace = new StackTraceEntry[len];
-    Array.Reverse(stackTraces);
 
     int toAssign = 0;
     foreach (string trace in stackTraces)
