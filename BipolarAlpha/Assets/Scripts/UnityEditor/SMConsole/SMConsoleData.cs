@@ -27,6 +27,9 @@ public class SMConsoleData
   public ArrayList tags;
   public ArrayList selectedTags;
 
+  // Needed to refresh logs
+  public SMConsole mainEditorConsole;
+
   //  SplitWindow 
   public float currentScrollViewHeight; // Height of the split window
 
@@ -68,6 +71,7 @@ public class SMConsoleData
          return instance;
       }
    }
+
 
   private void init()
   {

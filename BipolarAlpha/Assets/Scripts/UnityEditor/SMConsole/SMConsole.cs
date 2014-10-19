@@ -42,6 +42,7 @@ public class SMConsole
     // Create the singleton and intialize
     _data = SMConsoleData.Instance;
     _data.currentScrollViewHeight = this.position.height / 2;
+    _data.mainEditorConsole = this;
 
      // Init components
     _headerBar = new SMConsoleHeaderBar();
@@ -173,6 +174,11 @@ public class SMConsole
            _data.showingLogs.Add(_data.collapsedHash[hashKey]);
        }
     }
+        if(_data.mainEditorConsole != null)
+        {
+            _data.mainEditorConsole.Repaint();
+        }
+
 #endif
   }
   #endregion
