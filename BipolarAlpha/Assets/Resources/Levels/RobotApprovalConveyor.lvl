@@ -317,13 +317,13 @@
     <RoomObjectGatewayDefinition>
       <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
       <position>
-        <x>25.2990036</x>
-        <y>1.58523345</y>
-        <z>-2.49814534</z>
+        <x>29.788</x>
+        <y>1.5852</y>
+        <z>-2.4981</z>
       </position>
       <scale>
-        <x>2.14</x>
-        <y>1.3</y>
+        <x>1</x>
+        <y>1</y>
         <z>1</z>
       </scale>
       <eulerAngles>
@@ -342,8 +342,8 @@
         <z>-10.413456</z>
       </position>
       <scale>
-        <x>2.14</x>
-        <y>1.3</y>
+        <x>1</x>
+        <y>1</y>
         <z>1</z>
       </scale>
       <eulerAngles>

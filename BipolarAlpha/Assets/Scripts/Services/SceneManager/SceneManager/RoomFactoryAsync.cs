@@ -138,23 +138,29 @@ public class RoomFactoryAsync : RoomFactory {
       //  instancedObject.SetActive(false);
       //}
 
+      yield return from.constructionFinished;
+
       //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
       Vector3 fromGateWorldPosition = _gatewayRegistry[from][newRoom.roomName].transform.position;
       Vector3 fromGateWorldRotation = _gatewayRegistry[from][newRoom.roomName].transform.eulerAngles;
+
       Vector3 newGateLocalPosition = _gatewayRegistry[newRoom][from.roomName].transform.localPosition;
+     
       Vector3 newGateWorldRotation = _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
 
       //Positions and orients the parent object to match and connect with the from room gateway
+      roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation) - newGateWorldRotation;
 
-      roomParentObject.transform.position = fromGateWorldPosition - newGateLocalPosition;
+      Vector3 newGateWorldPosition = _gatewayRegistry[newRoom][from.roomName].transform.position;
+
+
+      roomParentObject.transform.position = fromGateWorldPosition - newGateWorldPosition;
 
       //Vector3 fromGateRelativePositionToNewRoom = roomParentObject.transform.TransformPoint (newRoomGate.position);
 
       //roomParentObject.transform.position -= fromGateRelativePositionToNewRoom;
 
-      roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation) - _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
-
-
+      
 
       newRoom.constructionFinished = true;
       newRoom.inConstruction = false;

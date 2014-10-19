@@ -166,7 +166,7 @@ public class RoomFactory
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
-    roomParentObject.SetActive(true);
+    roomParentObject.SetActiveRecursively(true);
     ActivateCollidersAndRenderers(room);
     room.constructionFinished = true;
     room.inConstruction = false;
@@ -243,7 +243,7 @@ public class RoomFactory
     roomParentObject.transform.position = fromGateWorldPosition;
     roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
 
-    roomParentObject.SetActive(true);
+    roomParentObject.SetActiveRecursively(true);
 
     float lastTime = Time.time;
     float accumulatedTime = 0;
