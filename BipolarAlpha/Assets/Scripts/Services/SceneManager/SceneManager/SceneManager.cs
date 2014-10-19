@@ -187,7 +187,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       _currentlyCreatedRooms.Add(root);
     }
     //Otherwise instance room based in the previous "parent" room
-    else
+    else if (!_currentlyCreatedRooms.Contains(root))
     {
           
 #if LOG_SCENE_MANAGER
@@ -207,7 +207,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       {
         if (_allRooms.ContainsKey(gate.connectedToRoom))
         {
-          SMConsole.Log(tag: "[SCENE MANAGER]", log: "creating room" + gate.connectedToRoom);
+          //SMConsole.Log(tag: "[SCENE MANAGER]", log: "creating room" + gate.connectedToRoom);
           CreateRoomTree(_allRooms[gate.connectedToRoom], currentDepth + 1, root);
         }
         else
