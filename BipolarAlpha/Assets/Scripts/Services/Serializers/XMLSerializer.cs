@@ -61,7 +61,7 @@ public class XMLSerializer
     }
     catch (Exception ex)
     {
-      Debug.Log(ex);
+        SMConsole.Log(""+ex, "XMLSerializer", SMLogType.ERROR);
       return false;
     }
   }
@@ -98,7 +98,7 @@ public class XMLSerializer
     }
     catch (Exception ex)
     {
-      Debug.Log(ex.Message + " In file " + filename);
+        SMConsole.Log(ex.Message + " In file " + filename, "XMLSerializer", SMLogType.ERROR);
       return default(T);
     }
   }

@@ -89,7 +89,7 @@ public class ObjExporter : ScriptableObject
 	{
 		if (Selection.gameObjects.Length == 0)
 		{
-			Debug.Log("Didn't Export Any Meshes; Nothing was selected!");
+            SMConsole.Log("Didn't Export Any Meshes; Nothing was selected!", "ObjExporter", SMLogType.WARNING);
 			return;
 		}
 		
@@ -122,7 +122,7 @@ public class ObjExporter : ScriptableObject
 		t.position = originalPosition;
 		
 		ObjExporterScript.End();
-		Debug.Log("Exported Mesh: " + fileName);
+        SMConsole.Log("Exported Mesh: " + fileName, "ObjExporter", SMLogType.WARNING);
 	}
 	
 	static string processTransform(Transform t, bool makeSubmeshes)

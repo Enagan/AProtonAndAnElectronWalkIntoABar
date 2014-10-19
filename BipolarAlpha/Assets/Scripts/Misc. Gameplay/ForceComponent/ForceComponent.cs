@@ -12,7 +12,8 @@ class ForceComponent : MonoBehaviour
   {
     if(this.rigidbody == null)
     {
-      Debug.Log("ForceComponent not associated with a rigid body.");
+
+        SMConsole.Log("ForceComponent not associated with a rigid body.", "Debug", SMLogType.ERROR);
     }
   }
 

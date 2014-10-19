@@ -61,10 +61,9 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 		if(other.tag == "Player" && !_hasPlayer)
     {
       this.Activate();
-      Debug.Log(gameObject.name);
-
+      SMConsole.Log("WeightPlatform " + gameObject.name, "Debug", SMLogType.NORMAL);
     }
-	}
+  }
   
   
   private void OnTriggerStay(Collider other)
@@ -187,7 +186,8 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
   {
     if (!_hasPlayer)
     {
-       Debug.Log("Found Player");
+       SMConsole.Log("WeightPlatform Found Player", "Debug", SMLogType.NORMAL);
+
         _hasPlayer = true;
         _speed = 0;
     }
@@ -198,8 +198,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
   {
     if (_hasPlayer)
     {
-      
-      Debug.Log("Lost Player");
+      SMConsole.Log("WeightPlatform Lost Player", "Debug", SMLogType.NORMAL);
       _hasPlayer = false;
       _startHeight = transform.position.y;
     }

@@ -34,12 +34,12 @@ public class SecureProximityDoor : MonoBehaviour {
     if (unlockerWithPermissions >= _minimumLevelNeeded)
     {
       _doorUnlocked = true;
-      Debug.Log("[SECURE DOOR] Door Unlocked!");
+      SMConsole.Log("[SECURE DOOR] Door Unlocked!", "Debug", SMLogType.NORMAL);
     }
     else
     {
       _doorUnlocked = false;
-      Debug.Log("[SECURE DOOR] System Key invalid");
+      SMConsole.Log("[SECURE DOOR] Door Unlocked!", "Debug", SMLogType.NORMAL);
     }
     refreshLights();
   }
@@ -49,7 +49,7 @@ public class SecureProximityDoor : MonoBehaviour {
     if (unlockerWithPermissions >= _minimumLevelNeeded)
     { 
       _doorUnlocked = false;
-      Debug.Log("[SECURE DOOR] Door Locked!");
+      SMConsole.Log("[SECURE DOOR] System Key invalid", "Debug", SMLogType.NORMAL);
     }
     refreshLights();
   }

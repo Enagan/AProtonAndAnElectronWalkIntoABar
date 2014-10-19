@@ -141,7 +141,7 @@ public class AnimationRootHandler : AnimationChildHandler
       child.playAnimation(clipName);
     }
     else
-      Debug.Log("Child "+ key + " Not Found in Animation Hierarchy");
+        SMConsole.Log("Child " + key + " Not Found in Animation Hierarchy", "AnimationSystem", SMLogType.WARNING);
   }
 
   // Returns Animation component in child
@@ -181,12 +181,12 @@ public class AnimationRootHandler : AnimationChildHandler
   //Dumps into console all animations in RootHandler and respective children
   private void dumpAnimations()
   {
-    Debug.Log("<Dumping Animations in ROOT:" + childName);
+    SMConsole.Log("<Dumping Animations in ROOT:" + childName, "AnimationSystem", SMLogType.NORMAL);
     foreach (string key in _animChildren.Keys)
     {
-      Debug.Log(key);
+       SMConsole.Log(key, "AnimationSystem", SMLogType.NORMAL);
     }
-    Debug.Log("Dump end>");
+    SMConsole.Log("Dump end>", "AnimationSystem", SMLogType.NORMAL);
   }
 
   #endregion

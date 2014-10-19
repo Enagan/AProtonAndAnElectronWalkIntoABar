@@ -104,7 +104,7 @@ public class PlayerMagnet : MagneticForce
     }
     else 
     {
-      Debug.Log("PlayerMagnet is not child of Player, YOU ARE DOING IT WRONG");
+        SMConsole.Log("PlayerMagnet is not child of Player, YOU ARE DOING IT WRONG", "Abilities", SMLogType.ERROR);
     }
   }
 

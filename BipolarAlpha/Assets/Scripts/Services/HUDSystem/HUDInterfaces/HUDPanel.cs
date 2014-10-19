@@ -77,12 +77,14 @@ public abstract class HUDPanel : HUDObject {
   public void dumpHUDObjects()
   {
     int i = 0;
-    Debug.Log("Dumping HUDPanel");
+    SMConsole.Log("Dumping HUDPanel", "HUD", SMLogType.NORMAL);
+  
     foreach (HUDObject obj in _HUDObjects)
     {
       if (obj != null)
       {
-        Debug.Log(i+":"+obj);
+          SMConsole.Log(i + ":" + obj, "HUD", SMLogType.NORMAL);
+  
       }
     }
   }

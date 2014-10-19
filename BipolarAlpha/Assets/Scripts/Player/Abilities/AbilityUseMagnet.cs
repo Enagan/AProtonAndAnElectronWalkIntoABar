@@ -41,7 +41,7 @@ public class AbilityUseMagnet : Ability
 
   public AbilityUseMagnet(PlayerMagnet playerMagnet, Camera playerCamera, PlayerController player)
   {
-    if (_playerMagnet) Debug.Log("Its not null!");
+    if (_playerMagnet) SMConsole.Log("Its not null!", "Debug", SMLogType.ERROR);
        this._playerMagnet = playerMagnet;
     this._playerCamera = playerCamera;
     this._player = player;
@@ -58,6 +58,7 @@ public class AbilityUseMagnet : Ability
   public virtual void Use( string key = null)
   {
     //Applies magnetic forces
+      SMConsole.Log("YUP");
     ApplyForces(_player, _playerCamera.transform.forward);
   }
 

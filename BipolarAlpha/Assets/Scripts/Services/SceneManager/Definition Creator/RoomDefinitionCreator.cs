@@ -20,7 +20,7 @@ public class RoomDefinitionCreator : MonoBehaviour
   {
     SerializeRoom();
     EditorApplication.isPlaying = false;
-    Debug.Log("Room " + _roomName + " Successefully serialized");
+    SMConsole.Log("Room " + _roomName + " Successefully serialized", "SceneSystem", SMLogType.NORMAL);
 	}
 
   public void SerializeRoom()
@@ -99,7 +99,7 @@ public class RoomDefinitionCreator : MonoBehaviour
               temp.Add(circuitObj);
             }
             else
-              Debug.Log("Am i rejecting stuff?");
+                SMConsole.Log("Am i rejecting stuff?", "SceneSystem", SMLogType.WARNING);
           }
           circuitSystemObjects = temp;
 

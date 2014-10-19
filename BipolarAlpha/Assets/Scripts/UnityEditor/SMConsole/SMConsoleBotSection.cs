@@ -70,6 +70,8 @@ public class SMConsoleBotSection {
     {
       foreach (StackTraceEntry trace in stackTrace)
       {
+          if (trace.isEmpty())
+              continue;
 
         //string lineEntry = stackTraces[stackTraces.Length - 1];
 

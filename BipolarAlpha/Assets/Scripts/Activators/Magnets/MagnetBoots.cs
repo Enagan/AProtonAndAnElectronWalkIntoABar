@@ -99,7 +99,7 @@ public class MagnetBoots : MagneticForce
     }
     else
     {
-      Debug.Log("MagnetBoots is not child of Player, YOU ARE DOING IT WRONG");
+        SMConsole.Log("MagnetBoots is not child of Player, YOU ARE DOING IT WRONG", "Abilities", SMLogType.ERROR);
     }
   }
 

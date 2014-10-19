@@ -65,13 +65,15 @@ public class RoomFactory
             }
             else
             {
-              Debug.Log("[ROOM FACTORY] Error on room" + roomDef.roomName + ": Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+                SMConsole.Log("[ROOM FACTORY] Error on room" + roomDef.roomName + ": Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState, "SceneSystem", SMLogType.ERROR);
+             
             }
 
           }
           else
           {
-            Debug.Log("[ROOM FACTORY] Error on room " + roomDef.roomName +  ": Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy");
+              SMConsole.Log("[ROOM FACTORY] Error on room " + roomDef.roomName + ": Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy", "SceneSystem", SMLogType.ERROR);
+            
           }
         }
 
@@ -96,7 +98,8 @@ public class RoomFactory
     }
     else
     {
-      Debug.Log("Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.NORMAL);
+
       return null;
     }
   }
@@ -129,7 +132,8 @@ public class RoomFactory
     }
     else
     {
-      Debug.Log("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
+
     }
   }
   #endregion
@@ -162,7 +166,7 @@ public class RoomFactory
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
     }
 
-    roomParentObject.SetActive(true);
+    roomParentObject.SetActiveRecursively(true);
     ActivateCollidersAndRenderers(room);
     room.constructionFinished = true;
     room.inConstruction = false;
@@ -185,13 +189,14 @@ public class RoomFactory
     //TODO Exceptioning
     if ((fromGate = from.GetGatewayTo(newRoom)) == null)
     {
-      Debug.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found");
+        SMConsole.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found", "SceneSystem", SMLogType.ERROR);
+ 
       yield break;
       //return;
     }
     if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
     {
-      Debug.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found");
+        SMConsole.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found", "SceneSystem", SMLogType.ERROR);
       yield break;
       //return;
     }
@@ -238,7 +243,7 @@ public class RoomFactory
     roomParentObject.transform.position = fromGateWorldPosition;
     roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation);
 
-    roomParentObject.SetActive(true);
+    roomParentObject.SetActiveRecursively(true);
 
     float lastTime = Time.time;
     float accumulatedTime = 0;

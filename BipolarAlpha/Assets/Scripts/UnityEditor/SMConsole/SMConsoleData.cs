@@ -27,6 +27,9 @@ public class SMConsoleData
   public ArrayList tags;
   public ArrayList selectedTags;
 
+  // Needed to refresh logs
+  public SMConsole mainEditorConsole;
+
   //  SplitWindow 
   public float currentScrollViewHeight; // Height of the split window
 
@@ -37,6 +40,7 @@ public class SMConsoleData
   // Flags for header buttons
   public bool canCollapse;
   public bool canClearOnPlay;
+  public bool hasClearedOnPlay; // For clearing on pla
   public bool showWarnings;
   public bool showErrors;
   public bool showLogs;
@@ -257,8 +261,12 @@ public struct LogMessage
     {
         if (trace.Contains("SMConsole.Log") || trace.Contains("get_StackTrace()"))
             continue;
-        stackTrace[toAssign] = new StackTraceEntry(trace, toAssign + 1);
-        toAssign++;
+        StackTraceEntry entry =new StackTraceEntry(trace, toAssign + 1);
+        if(!entry.isEmpty())
+        {
+            stackTrace[toAssign] = entry;
+            toAssign++;
+        }
     }
 
     if(toAssign < len) // copy into smaller array
