@@ -44,6 +44,9 @@ public class SMConsole
     _data.currentScrollViewHeight = this.position.height / 2;
     _data.mainEditorConsole = this;
 
+    Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
+    Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
+
      // Init components
     _headerBar = new SMConsoleHeaderBar();
     _topSection = new SMConsoleTopSection();
@@ -61,8 +64,6 @@ public class SMConsole
   // Draw Editor
   public void OnGUI()
   {
-    Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
-    Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
 
     EditorGUILayout.BeginVertical();
     title = "SM Console";

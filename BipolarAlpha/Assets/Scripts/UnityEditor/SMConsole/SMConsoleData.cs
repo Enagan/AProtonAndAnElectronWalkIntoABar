@@ -40,6 +40,7 @@ public class SMConsoleData
   // Flags for header buttons
   public bool canCollapse;
   public bool canClearOnPlay;
+  public bool hasClearedOnPlay; // For clearing on pla
   public bool showWarnings;
   public bool showErrors;
   public bool showLogs;
@@ -71,7 +72,6 @@ public class SMConsoleData
          return instance;
       }
    }
-
 
   private void init()
   {
