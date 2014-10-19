@@ -17,7 +17,10 @@ public class Console : MonoBehaviour {
     _realPlayer.rigidbody.velocity = Vector3.zero;
     _realPlayer.GetComponent<PlayerController>().PlayerActivation(false);
     PlayInAnimation();
-    this.transform.Find("Boundary").gameObject.SetActive(true);
+    this.transform.Find("Pushy Boundary").gameObject.SetActive(true);
+    this.transform.Find("Visual Boundary").gameObject.SetActive(true);
+    this.transform.Find("SafeGuard Boundary").gameObject.SetActive(true);
+
     _jackedInPlayer = ServiceLocator.GetResourceSystem().InstanceOf("Prefabs/JackedIn/JackedInPlayer", _jackedInSpawnPoint != null ? 
                                                                                                               _jackedInSpawnPoint.transform.position :
                                                                                                               this.transform.position);
@@ -39,8 +42,9 @@ public class Console : MonoBehaviour {
     _realPlayer.GetComponent<PlayerController>().PlayerActivation(true);
     GameObject.Destroy(_jackedInPlayer);
     _jackedInPlayer = null;
-    this.transform.Find("Boundary").gameObject.SetActive(false);
-
+    this.transform.Find("Pushy Boundary").gameObject.SetActive(false);
+    this.transform.Find("Visual Boundary").gameObject.SetActive(false);
+    this.transform.Find("SafeGuard Boundary").gameObject.SetActive(false);
     ServiceLocator.GetEventHandlerSystem().SendJackedInDeactivationEvent();
   }
 

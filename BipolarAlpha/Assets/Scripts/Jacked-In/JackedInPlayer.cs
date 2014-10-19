@@ -25,6 +25,7 @@ public class JackedInPlayer : MonoBehaviour {
   //This dictionary holds the players' currently usable abilities and their cooresponding activation keys
   private Dictionary<string, Ability> _usableAbilities = new Dictionary<string, Ability>();
 
+  private bool canMove = true;
   public Console MotherConsole
   {
     get
@@ -74,15 +75,17 @@ public class JackedInPlayer : MonoBehaviour {
 
   private void ManageMovement()
   {
-    //Check for the values in the Vertical and Horizontal Axis
-    //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
-    //Values range from 1 to -1
-    float fowardMovement = Input.GetAxis("Vertical");
-    float sideMovement = Input.GetAxis("Horizontal");
+    if (canMove)
+    {
+      //Check for the values in the Vertical and Horizontal Axis
+      //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
+      //Values range from 1 to -1
+      float fowardMovement = Input.GetAxis("Vertical");
+      float sideMovement = Input.GetAxis("Horizontal");
 
-    this.transform.position += fowardMovement * _movementSpeed * jackedInCamera.transform.forward * Time.deltaTime;
-    this.transform.position += sideMovement * _movementSpeed * jackedInCamera.transform.right * Time.deltaTime;
-
+      this.transform.position += fowardMovement * _movementSpeed * jackedInCamera.transform.forward * Time.deltaTime;
+      this.transform.position += sideMovement * _movementSpeed * jackedInCamera.transform.right * Time.deltaTime;
+    }
   }
 
 
@@ -144,7 +147,15 @@ public class JackedInPlayer : MonoBehaviour {
   {
     _usableAbilities[key] = ability;
   }
+  public void PreventPlayerControl()
+  {
+    canMove = false;
+  }
 
+  public void AllowPlayerControl()
+  {
+    canMove = true;
+  }
   public void InstantiateAbilities()
   {
     Camera playerCamera = this.GetComponentInChildren<Camera>();

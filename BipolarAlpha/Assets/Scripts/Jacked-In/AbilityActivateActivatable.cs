@@ -43,9 +43,10 @@ public class AbilityActivateActivatable : MonoBehaviour, Ability
       Vector3 boundaryConsoleScale = Vector3.zero;
 
       foreach(Transform t in _motherConsole.GetComponentInChildren<Transform>()){
-        if(t.gameObject.name == "Boundary"){
+        if(t.gameObject.name == "Visual Boundary"){
               boundaryGameObject = t.gameObject;
               boundaryConsoleScale = t.localScale;
+              break;
         }
       }
 
