@@ -28,7 +28,7 @@ public class ScanShaderAuxScript : MonoBehaviour, IPlayerAbilityScanListener
 
   public void ListenPlayerScan(bool isScanning)
   {
-    Debug.Log("SCANNING");
+    SMConsole.Log("SCANNING", "Shader", SMLogType.NORMAL);
     if (isScanning)
       renderer.material = _ScanMat;
     else

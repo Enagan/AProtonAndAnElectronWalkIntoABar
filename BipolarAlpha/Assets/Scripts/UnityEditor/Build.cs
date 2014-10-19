@@ -19,7 +19,8 @@ public class ScriptBatch : MonoBehaviour
     {
       return;
     }
-    UnityEngine.Debug.Log(Application.dataPath);
+    SMConsole.Log(Application.dataPath, "Build", SMLogType.NORMAL);
+
     //Deletes any existing instances OffMeshLink the FileShare to Behaviour copied, for any fresh instalation
     FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.dll");
     FileUtil.DeleteFileOrDirectory(path + "/Managed/I18N.West.dll");
@@ -41,7 +42,7 @@ public class ScriptBatch : MonoBehaviour
     string replaced = text.Replace("Assets/Resources", path);
     File.WriteAllText(path + "/Levels/SaveState.lvl", replaced);
 
-    UnityEngine.Debug.Log("Project Successfully Built!");
+    SMConsole.Log("Project Successfully Built!", "Build", SMLogType.NORMAL);
 
     /*
     string[] levels = {"Main.unity"};
@@ -62,11 +63,11 @@ public class ScriptBatch : MonoBehaviour
   [PostProcessBuild]
   public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
   {
-    UnityEngine.Debug.Log("Running post build script");
+    SMConsole.Log("Running post build script", "Build", SMLogType.NORMAL);
 
     string curatedPath = pathToBuiltProject.Remove(pathToBuiltProject.LastIndexOf(".")) + "_Data";
 
-    UnityEngine.Debug.Log(curatedPath);
+    SMConsole.Log(""+curatedPath, "Build", SMLogType.NORMAL);
 
     //Deletes any existing instances OffMeshLink the FileShare to Behaviour copied, for any fresh instalation
     FileUtil.DeleteFileOrDirectory(curatedPath + "/Managed/I18N.dll");
@@ -89,7 +90,7 @@ public class ScriptBatch : MonoBehaviour
     string replaced = text.Replace("Assets/Resources", curatedPath);
     File.WriteAllText(curatedPath + "/Levels/SaveState.lvl", replaced);
 
-    UnityEngine.Debug.Log("Project Successfully Built!");
+    SMConsole.Log("Project Successfully Built!", "Build", SMLogType.NORMAL);
   }
 #endif
 }

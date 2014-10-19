@@ -13,7 +13,7 @@ public class AwardSpikeAbility : AwardPlayerAbility
   /// </summary>
   public override void awardAbility(PlayerController player)
   {
-    BipolarConsole.AllLog("Awarding Spike Ability");
+      SMConsole.Log("Awarding Spike Ability","Abillities");
     player.addStickyMagnetAbilities();
 
   }

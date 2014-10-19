@@ -165,7 +165,6 @@ public abstract class Circuit : MonoBehaviour, Activator
   /// </summary>
   public bool Input(bool state, Circuit inputCircuit)
   {
-    //BipolarConsole.IvoLog(CircuitName() + _identifier + " Input:" + state + " sent by " + inputID);
     //Add input to dictionary
     _inputs[inputCircuit] = state;
 	 

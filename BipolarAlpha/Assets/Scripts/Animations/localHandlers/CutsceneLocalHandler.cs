@@ -49,7 +49,8 @@ public class CutsceneLocalHandler : AnimationLocalHandler
 
       if (other.tag == "Player") // check if collided entity is player
       {
-        Debug.Log("Player in cutscene");
+          SMConsole.Log("Player in cutscene", "Cutscene", SMLogType.NORMAL);
+        
         this.GetComponent<Collider>().enabled = false; // stop future collisions
 
 

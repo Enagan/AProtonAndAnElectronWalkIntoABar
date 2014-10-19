@@ -50,7 +50,7 @@ public class AbilityActivateActivatable : MonoBehaviour, Ability
       }
 
       if(boundaryGameObject == null){
-        Debug.Log("Boundary missing, fix it!");
+          SMConsole.Log("Boundary missing, fix it!", "Shader", SMLogType.ERROR);
         return;
       }
 

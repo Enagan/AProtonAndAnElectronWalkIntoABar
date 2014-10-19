@@ -33,14 +33,15 @@ public class RoomFactoryAsync : RoomFactory {
   {
     if (_instancedRoomsRegistry.ContainsKey(room) || _roomsMidInstancing.Contains(room))
     {
-      Debug.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping");
+        SMConsole.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping", "SceneSystem", SMLogType.NORMAL);
     }
     else
     {
       _roomsMidInstancing.Add(room);
 
       string roomParentObjectName = ROOM_PARENT_OBJECT_PREFIX + room.roomName;
-      BipolarConsole.AllLog(roomParentObjectName);
+      
+      SMConsole.Log(""+roomParentObjectName, "SceneSystem");
       GameObject player = GameObject.Find("Player");
       player.SetActive(false);
       AsyncOperation op = Application.LoadLevelAdditiveAsync(room.roomName);
@@ -83,13 +84,13 @@ public class RoomFactoryAsync : RoomFactory {
   {
     if (_instancedRoomsRegistry.ContainsKey(newRoom) || _roomsMidInstancing.Contains(newRoom))
     {
-      Debug.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping");
+        SMConsole.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping", "SceneSystem", SMLogType.NORMAL);
     }
     else
     {
       _roomsMidInstancing.Add(newRoom);
 
-      Debug.Log("CREATING ADJ ROOM IN ASYNC -" + newRoom.roomName);
+      SMConsole.Log("CREATING ADJ ROOM IN ASYNC -" + newRoom.roomName, "SceneSystem", SMLogType.NORMAL);
       newRoom.inConstruction = true;
 
       RoomObjectGatewayDefinition fromGate;
@@ -99,13 +100,13 @@ public class RoomFactoryAsync : RoomFactory {
       //TODO Exceptioning
       if ((fromGate = from.GetGatewayTo(newRoom)) == null)
       {
-        Debug.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found");
+          SMConsole.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found", "SceneSystem", SMLogType.ERROR);
         yield break;
         //return;
       }
       if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
       {
-        Debug.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found");
+          SMConsole.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found", "SceneSystem", SMLogType.ERROR);
         yield break;
         //return;
       }
@@ -179,7 +180,7 @@ public class RoomFactoryAsync : RoomFactory {
     }
     else
     {
-      Debug.Log("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
     }
   }
 }

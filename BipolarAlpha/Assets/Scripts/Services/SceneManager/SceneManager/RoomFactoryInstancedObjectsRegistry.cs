@@ -22,7 +22,7 @@ public class RoomFactoryInstancedObjectsRegistry
   {
     if(_instancedRegistry.ContainsKey(room))
     {
-      Debug.Log("Error: Room " + room.roomName + " already registered in the registry. Perhaps a room is not being cleaned on deletion?");
+        SMConsole.Log("Error: Room " + room.roomName + " already registered in the registry. Perhaps a room is not being cleaned on deletion?", "SceneSystem", SMLogType.ERROR);
       return;
     }
     _instancedRegistry.Add(room,
@@ -42,7 +42,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      Debug.Log("Error: Object addition to room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Object addition to room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
     }
   }
 
@@ -57,7 +57,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      Debug.Log("Error: Removal of room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Removal of room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
     }
   }
   /// <summary>
@@ -71,7 +71,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      Debug.Log("Error: Removal of object " + objectDef.objectPrefabPath + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Removal of object " + objectDef.objectPrefabPath + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
     }
   }
   #endregion
@@ -87,8 +87,8 @@ public class RoomFactoryInstancedObjectsRegistry
       return _instancedRegistry[roomDef].Value[objDef];
     }
     else
-    {
-      Debug.Log("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
+   {
+       SMConsole.Log("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
       return null;
     }
   }
@@ -110,10 +110,12 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      Debug.Log("Error: Object Definition retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Object Definition retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
+      
       return null;
     }
-    Debug.Log("Error: Could not find object definition in registry");
+    SMConsole.Log("Error: Could not find object definition in registry", "SceneSystem", SMLogType.ERROR);
+    
     return null;
   }
 
@@ -128,7 +130,7 @@ public class RoomFactoryInstancedObjectsRegistry
     }
     else
     {
-      Debug.Log("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry");
+        SMConsole.Log("Error: Object retrieval in room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
       return null;
     }
   }

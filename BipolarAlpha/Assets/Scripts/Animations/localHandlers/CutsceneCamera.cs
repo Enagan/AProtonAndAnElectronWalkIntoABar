@@ -42,7 +42,7 @@ public class CutsceneCamera : MonoBehaviour
   // Animation Events are added in the Animation Pane by right clicking above the key's line
   private void finishAnim()
   {
-    Debug.Log("CutsceneEnded");
+      SMConsole.Log("CutsceneEnded", "Cutscene", SMLogType.NORMAL);
     //manager finishes animation and returns control to player
 
     ((CutsceneLocalHandler)transform.parent.GetComponent<CutsceneLocalHandler>()).switchCamera();

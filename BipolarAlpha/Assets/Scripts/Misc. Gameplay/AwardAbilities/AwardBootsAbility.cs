@@ -12,7 +12,8 @@ public class AwardBootsAbility : AwardPlayerAbility {
   /// </summary>
   public override void awardAbility(PlayerController player)
   {
-    Debug.Log("Awarding Boots Ability");
+      SMConsole.Log("Awarding Boots Ability", "Ability", SMLogType.NORMAL);
+
     player.AddAbility("Boots", new AbilityMagnetBoots(GameObject.Find("BootsMagnetism").GetComponent<MagnetBoots>(), player.getPlayerCamera(), player));
   }
 }

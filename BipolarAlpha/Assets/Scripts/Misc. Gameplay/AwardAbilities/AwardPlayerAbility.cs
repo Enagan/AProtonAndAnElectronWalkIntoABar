@@ -16,7 +16,8 @@ public abstract class AwardPlayerAbility : MonoBehaviour {
  {
      if(other.tag == "Player")
      {
-       Debug.Log("[AWARD PLAYER ABILITY] Collided with player");
+         SMConsole.Log("[AWARD PLAYER ABILITY] Collided with player", "Ability", SMLogType.NORMAL);
+
        PlayerController player = other.GetComponent<PlayerController>();
        awardAbility(player);
        if(_destroyOnPickup)

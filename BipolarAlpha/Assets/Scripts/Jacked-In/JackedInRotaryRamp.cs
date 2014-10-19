@@ -81,7 +81,7 @@ public class JackedInRotaryRamp : JackedInRemoteController
     float result = 0.0f;
     if (_topMagnet == null || _bottomMagnet == null || _rampMagnet == null)
     {
-      Debug.Log("ERROR: Put the damn magnets on the script!");
+      SMConsole.Log("Put the damn magnets on the script!", "Magnet", SMLogType.ERROR);
       return result;
     }
 
