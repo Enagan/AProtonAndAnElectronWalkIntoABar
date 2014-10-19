@@ -24,6 +24,17 @@ public class SMConsoleHeaderBar {
 
   public void drawHeaderBar()
   {
+      // Check for clear on play
+      if (EditorApplication.isPlayingOrWillChangePlaymode && _data.canClearOnPlay && !_data.hasClearedOnPlay)
+      {
+          _data.hasClearedOnPlay = true;
+          clearButton();
+      }
+
+      if (!EditorApplication.isPlayingOrWillChangePlaymode && !EditorApplication.isPaused)
+      {
+          _data.hasClearedOnPlay = false;
+      }
 
     GUILayout.BeginHorizontal();
 
@@ -149,7 +160,7 @@ public class SMConsoleHeaderBar {
 
   void clearOnPlayButton()
   {
-    clearButton();
+      _data.hasClearedOnPlay = false;
   }
 
   void clearButton()
