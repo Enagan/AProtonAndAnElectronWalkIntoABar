@@ -556,7 +556,6 @@ public class PlayerController : MonoBehaviour, IPlayerAbilityObtainListener, IPa
   /// </summary>
   private void ManageMovement()
   {
-      SMConsole.Log("TEST");
     //Check for the values in the Vertical and Horizontal Axis
     //When Using the keyboard, Vertical -> W & S, Horizontal -> A & D
     //Values range from 1 to -1

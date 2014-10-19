@@ -261,8 +261,12 @@ public struct LogMessage
     {
         if (trace.Contains("SMConsole.Log") || trace.Contains("get_StackTrace()"))
             continue;
-        stackTrace[toAssign] = new StackTraceEntry(trace, toAssign + 1);
-        toAssign++;
+        StackTraceEntry entry =new StackTraceEntry(trace, toAssign + 1);
+        if(!entry.isEmpty())
+        {
+            stackTrace[toAssign] = entry;
+            toAssign++;
+        }
     }
 
     if(toAssign < len) // copy into smaller array
