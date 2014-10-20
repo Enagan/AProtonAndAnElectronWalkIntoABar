@@ -102,7 +102,7 @@ public class SMConsoleData
   // Checks if there is a currently selected message
   public bool isSelectedEmpty()
   {
-      if (canCollapse)
+      if (!canCollapse)
       {
           return selectedLogMessage.hashKey().CompareTo(new LogMessage().hashKey()) == 0;
       }
@@ -192,7 +192,7 @@ public class SMConsoleData
         break;
     }
 
-    SMConsole.Log(logString, "Default Console", BPType);
+//    SMConsole.Log(logString, "Default Console", BPType);
   }
 
   // Helper to jump to a Log

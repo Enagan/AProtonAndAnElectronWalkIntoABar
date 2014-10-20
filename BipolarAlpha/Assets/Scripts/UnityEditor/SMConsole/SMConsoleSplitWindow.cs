@@ -10,8 +10,8 @@ public class SMConsoleSplitWindow
   Rect cursorChangeRect;
   private static Texture2D splitTex;
 
-  private const float minHeight = 83.0f; // Minimum allowed height for split window
-  private const float maxHeight = 330.0f; // Maximum allowed height for split window
+  private const float minHeight = 68.0f; // Minimum allowed height for split window
+  private const float maxHeight = 197.0f; // Maximum allowed height for split window
 
   SMConsoleData _data;
 
