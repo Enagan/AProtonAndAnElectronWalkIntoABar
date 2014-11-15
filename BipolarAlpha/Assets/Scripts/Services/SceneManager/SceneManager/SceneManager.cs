@@ -14,7 +14,6 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   private List<RoomDefinition> _currentlyLoadedRooms;
   private Dictionary<string, RoomDefinition> _allRooms;
 
-  // Editable Property, defines the level of depth the manager goes through when instancing rooms
   [SerializeField]
   private int _roomInstancingDepth = 1;
 
@@ -55,12 +54,13 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   public KeyValuePair<string, List<RoomDefinition>> getCurrentWorldStateDefinition()
   {
     List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
+
     RoomDefinition tempUpdatedRoomDef;
     foreach (RoomDefinition roomDef in _allRooms.Values)
     {
       SMConsole.Log(tag: "[SCENE MANAGER]", log: "Saving Room state for " + roomDef.roomName);
-      tempUpdatedRoomDef = _roomFactory.UpdateRoomDefinition(roomDef);
 
+      tempUpdatedRoomDef = _roomFactory.UpdateRoomDefinition(roomDef);
       _allRooms[roomDef.roomName] = tempUpdatedRoomDef != null ? tempUpdatedRoomDef : roomDef;
     }
 
@@ -91,9 +91,6 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
   }
 
-  /// <summary>
-  /// Safely Destroys world state
-  /// </summary>
   public void DeleteAndClearWorldState()
   {
     _activeRoom = null;
@@ -102,6 +99,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   }
   #endregion
 
+  // Defines the level of depth the manager goes through when instancing rooms
   public int roomInstancingDepth
   {
     get
@@ -114,7 +112,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       {
         _roomInstancingDepth = 1;
         SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR,
-          log: "Provided instancing depth" + value + " is not valid (must be greater than 1). roomInstancingDepth defaulted to 1.");
+                      log: "Provided instancing depth" + value + " is not valid (must be greater than 1). roomInstancingDepth defaulted to 1.");
       }
       else
         _roomInstancingDepth = value;
@@ -134,6 +132,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       catch(KeyNotFoundException exception)
       {
         SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
+        throw exception;
       }
     }
   }
@@ -163,20 +162,18 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       throw new KeyNotFoundException("KeyNotFoundException: room " + newActiveRoomName + " does not exist in loaded world state.");
     }
 
-    List<RoomDefinition> previousLoadedRooms = new List<RoomDefinition>(_currentlyLoadedRooms);
+    List<RoomDefinition> previouslyLoadedRooms = new List<RoomDefinition>(_currentlyLoadedRooms);
     _currentlyLoadedRooms.Clear();
 
-    SMConsole.Log(tag: "[SCENE MANAGER]", log:"------- Beggining instancing of room tree, root from " + newActiveRoomName + " ---------");
-
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Beggining instancing of room tree, root from " + newActiveRoomName + " -----------");
     InstanceRoomsFromRoot(newActiveRoomDefinition);
-
     SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Finished Instancing room tree -----------");
 
     _activeRoom = newActiveRoomDefinition;
 
     //Compare newly instanced rooms to the previously loaded rooms, 
     //deletes any that exist in the previous version but not in the new.
-    SaveAndUninstanceRooms(previousLoadedRooms, _currentlyLoadedRooms);
+    SaveAndUninstanceRooms(previouslyLoadedRooms, _currentlyLoadedRooms);
   }
 
   /// <summary>
@@ -202,25 +199,48 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   }
 
   /// <summary>
-  /// Traverses the room tree ordering the instancing of all rooms until it his the depth limit
+  /// Traverses the room tree instancing of all rooms until it hits the depth limit.
+  /// The traversal is done breadth first, as we always want to instance the closest rooms to the player first, to avoid empty space
   /// </summary>
-  private void InstanceRoomsFromRoot(RoomDefinition root, int currentDepth = 0, RoomDefinition parent = null)
+  private void InstanceRoomsFromRoot(RoomDefinition rootRoom,  RoomDefinition parentRoom = null, int currentDepth = 0)
   {
-     SMConsole.Log(tag: "[SCENE MANAGER]", log: "Depth: " + currentDepth + ",   Creating room " + root.roomName + "...");
-     _roomsInQueueToBeDeleted.Remove(root);
-     _roomFactory.CreateRoom(root, parent);
-     _currentlyLoadedRooms.Add(root);
-    //If we haven't reached the current depth, create all adjacent rooms to current root
+    if (!_currentlyLoadedRooms.Contains(rootRoom))
+    {
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth*2) + "Creating room " + rootRoom.roomName + "...");
+      _roomFactory.CreateRoom(rootRoom, parentRoom);
+      _currentlyLoadedRooms.Add(rootRoom);
+    }
+
+    //If we haven't reached the current depth, create all child rooms to current root
     if (currentDepth < _roomInstancingDepth)
     {
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: "Depth: " + currentDepth + ",   This room " + root.roomName + " has  " + root.gateways.Count + " connections.");
-      foreach (RoomObjectGatewayDefinition gate in root.gateways)
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth*4) + "This room " + rootRoom.roomName + " has  " + rootRoom.gateways.Count + " connections.");
+
+      List<RoomDefinition> tempNewlyCreatedChildren = new List<RoomDefinition>();
+      foreach (RoomObjectGatewayDefinition gateToChild in rootRoom.gateways)
       {
-        if (_allRooms.ContainsKey(gate.connectedToRoom))
-          InstanceRoomsFromRoot(_allRooms[gate.connectedToRoom], ++currentDepth, root);
+        if (_allRooms.ContainsKey(gateToChild.connectedToRoom))
+        {
+          if(!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectedToRoom]))
+          {
+            RoomDefinition childRoom = _allRooms[gateToChild.connectedToRoom];
+            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ',(currentDepth+1)*4) + "Creating room " + childRoom.roomName + "...");
+
+            _roomFactory.CreateRoom(childRoom, rootRoom);
+            _currentlyLoadedRooms.Add(childRoom);
+            tempNewlyCreatedChildren.Add(childRoom);
+          }
+          else
+          {
+            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Room " + gateToChild.connectedToRoom + " already exists, skipping");
+          }
+        }
         else
-          SMConsole.Log(tag: "[SCENE MANAGER]", log: "Room " + gate.connectedToRoom + " does not exist in loaded world state.");
+          throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth+1) + ", Room " + gateToChild.connectedToRoom + " does not exist in loaded world state.");
       }
+
+      foreach (RoomDefinition newlyCreated in tempNewlyCreatedChildren)
+        InstanceRoomsFromRoot(newlyCreated, rootRoom, currentDepth + 1);
     }
   }
 
@@ -229,7 +249,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     List<RoomDefinition> deletedRooms = new List<RoomDefinition>();
     foreach (RoomDefinition roomDef in _roomsInQueueToBeDeleted)
     {
-      if (!roomDef.inConstruction)
+      if (!roomDef.inConstruction && !_currentlyLoadedRooms.Contains(roomDef))
       {
         _roomFactory.DestroyRoom(roomDef);
         deletedRooms.Add(roomDef);
