@@ -26,10 +26,7 @@ public class RoomDefinition
   // Gateways possess the name of the room they link to
   private List<RoomObjectGatewayDefinition> _gateways = new List<RoomObjectGatewayDefinition>();
 
-  
-  /// <summary>
-  /// The name of the room
-  /// </summary>
+
   public string roomName
   {
     get
@@ -42,9 +39,6 @@ public class RoomDefinition
     }
   }
 
-  /// <summary>
-  /// List with all the objects in the room
-  /// </summary>
   public List<RoomObjectDefinition> objectsInRoom
   {
     get
@@ -57,9 +51,7 @@ public class RoomDefinition
     }
   }
 
-  /// <summary>
-  /// List with all renderers in the room
-  /// </summary>
+
   [XmlIgnore]
   public List<Renderer> renderers
   {
