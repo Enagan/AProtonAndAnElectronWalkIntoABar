@@ -4,207 +4,198 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Room Factory is a helper class for the Scene Mananger, 
-/// it handles the low level details of instancing new rooms 
-/// and correctly placing them in relation to one another
+/// Room Factory is a helper class for the Scene Mananger, it handles the low level details of instancing new rooms and correctly placing them in relation to one another
+/// It uses the RoomFactoryInstancedObjectsRegistry to keep track of all instanced rooms and objects and their connection to their definition
 /// </summary>
 public class RoomFactory
 {
-  private const float COL_WAIT_TIME = 0.2f;
-  private const float RENDER_WAIT_TIME = 0.05f;
   protected RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
 
+  private const float COLLIDER_ACTIVATION_COOLDOWN = 0.2f;
+  private const float RENDER_WAIT_TIME = 0.05f;
 
-  #region [Public Methods] Room Creation, Destruction and Definition Update
+  #region [Public Methods] Room Instancing, Destruction and Definition Update
   /// <summary>
   /// Instances a new room. In case the room is already instanced, the function does nothing.
-  /// If a "from" room is provided, the new room will be placed connected to the from room
-  /// at their shared gateway. In case a gateway doesn't exist between the rooms, the function does nothing.
+  /// If a "from" room is provided, the new room will be placed connected to the from room at their shared gateway. In case a gateway doesn't exist between the rooms, the function does nothing.
   /// </summary>
-  public virtual void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
+  public virtual void CreateRoomInstance(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
     if (!_instancedObjects.RoomIsRegistered(newRoom))
     {
       if (fromRoom == null)
-      {
-        CreateFirstRoom(newRoom);
-      }
+        // First room cannot run in a coroutine as all following rooms depend on it being created
+        InstanceFirstRoom(newRoom);
       else
-      {
+        // A Coroutine is launched for adjacent rooms as many can be instanced simultaneously
         ServiceLocator.GetSceneManager().StartCoroutine(CreateAdjancentRoom(newRoom, fromRoom));
-
-        //CreateAdjancentRoom(newRoom, fromRoom);
-      }
+    }
+  }
+  /// <summary>
+  /// Destroys an already instanced room. In case the room in non-existant, nothing is done.
+  /// </summary>
+  public virtual void DestroyRoomInstance(RoomDefinition roomToDeleteDef)
+  {
+    if (_instancedObjects.RoomIsRegistered(roomToDeleteDef))
+    {
+      GameObject toDestroy = _instancedObjects.getRoomParentObject(roomToDeleteDef);
+      _instancedObjects.RemoveRoomFromRegistry(roomToDeleteDef);
+      roomToDeleteDef.colliders.Clear();
+      roomToDeleteDef.renderers.Clear();
+      roomToDeleteDef.maxDepth = 0;
+      GameObject.Destroy(toDestroy);
+    }
+    else
+    {
+      SMConsole.Log(tag: "[ROOM FACTORY]", log: "Deletion of room " + roomToDeleteDef.roomName + " failed. Room does not exist in registry");
     }
   }
 
   /// <summary>
-  /// Updates the definition of a specific room, applying the current state
-  /// of all objects to the current definition
+  /// Updates the definition of a specific room, applying the current state of all objects to their definition instance
   /// </summary>
-  /// ENGANA@TODO savestate, as well as velocity and torque
   public virtual RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
   {
     if (_instancedObjects.RoomIsRegistered(roomDef))
     {
-      List<RoomObjectDefinition> updatedDefs = new List<RoomObjectDefinition>();
-      List<RoomObjectGatewayDefinition> updatedGates = new List<RoomObjectGatewayDefinition>();
+      List<RoomObjectDefinition> updatedObjectDefinitions = new List<RoomObjectDefinition>();
+      List<RoomObjectGatewayDefinition> updatedGatewayDefinitions = new List<RoomObjectGatewayDefinition>();
 
-      foreach (KeyValuePair<RoomObjectDefinition, GameObject> objs in _instancedObjects.GetAllGameObjectsFromRoom(roomDef))
+      // Update all Objects & Gateways
+      foreach (KeyValuePair<RoomObjectDefinition, GameObject> objectInRoom in _instancedObjects.GetAllGameObjectsFromRoom(roomDef))
       {
+        RoomObjectDefinition objectInRoomDef = objectInRoom.Key;
+        GameObject objectInRoomGameObject = objectInRoom.Value;
+
+        // Update Base object parameters
+        objectInRoomDef.position = objectInRoomGameObject.transform.position;
+        objectInRoomDef.scale = objectInRoomGameObject.transform.localScale;
+        objectInRoomDef.eulerAngles = objectInRoomGameObject.transform.eulerAngles;
+
+        // Update Complex States inside object
         List<ComplexState> updatedComplexStates = new List<ComplexState>();
-        foreach (ComplexState complexState in objs.Key.complexStates)
+        foreach (ComplexState complexStateInObject in objectInRoomDef.complexStates)
         {
-          Transform objectWithComplexState = objs.Value.transform.Find(complexState.objectNameInHierarchy);
+          Transform objectWithComplexState = objectInRoomGameObject.transform.Find(complexStateInObject.objectNameInHierarchy);
           if (objectWithComplexState)
           {
-            IHasComplexState scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
-            if (!(scriptToLoadComplexState == null))
-            {
-              updatedComplexStates.Add(scriptToLoadComplexState.UpdateComplexState(complexState));
-            }
-            else
-            {
-                SMConsole.Log("[ROOM FACTORY] Error on room" + roomDef.roomName + ": Component with complex state " + complexState.objectNameInHierarchy + " could not be found in object " + objectWithComplexState, "SceneSystem", SMLogType.ERROR);
-             
-            }
+            IHasComplexState instanceContainingComplexState = (objectWithComplexState.GetComponent(complexStateInObject.GetComplexStateName()) as IHasComplexState);
 
+            if (!(instanceContainingComplexState == null))
+              updatedComplexStates.Add(instanceContainingComplexState.UpdateComplexState(complexStateInObject));
+            else
+              SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR,
+                            log: "Error: On room" + roomDef.roomName + ": Component with complex state " + complexStateInObject.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
           }
           else
           {
-              SMConsole.Log("[ROOM FACTORY] Error on room " + roomDef.roomName + ": Complex state " + complexState.objectNameInHierarchy + " could not be found in hierarchy", "SceneSystem", SMLogType.ERROR);
-            
+            SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR,
+                          log: "Error on room " + roomDef.roomName + ": Complex state " + complexStateInObject.objectNameInHierarchy + " could not be found in hierarchy");
           }
+          objectInRoomDef.complexStates = updatedComplexStates;
+
         }
 
-        objs.Key.position = objs.Value.transform.position;
-        objs.Key.eulerAngles = objs.Value.transform.eulerAngles;
-        objs.Key.complexStates = updatedComplexStates;
-
-        if (!(objs.Key is RoomObjectGatewayDefinition))
-        {
-          updatedDefs.Add(objs.Key);
-        }
+        //Add updated definition to List
+        if (!(objectInRoomDef is RoomObjectGatewayDefinition))
+          updatedObjectDefinitions.Add(objectInRoomDef);
         else
-        {
-          updatedGates.Add(objs.Key as RoomObjectGatewayDefinition);
-        }
+          updatedGatewayDefinitions.Add(objectInRoomDef as RoomObjectGatewayDefinition);
       }
 
-      roomDef.objectsInRoom = updatedDefs;
-      roomDef.gateways = updatedGates;
+      //Update Room Def lists
+      roomDef.objectsInRoom = updatedObjectDefinitions;
+      roomDef.gateways = updatedGatewayDefinitions;
 
       return roomDef;
     }
     else
     {
-        SMConsole.Log("Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.NORMAL);
-
+      SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
       return null;
     }
   }
 
   /// <summary>
-  /// Changes an objects parent room in the current registry while updating transform.parent as well
+  /// When a movable object changes rooms, we need to update his definition as well as the room definition that object is tied too
   /// </summary>
-  public void ChangeObjectRoom(RoomDefinition prevRoom, RoomDefinition newRoom, GameObject objectChangedRoom)
+  public void ChangeObjectRoom(RoomDefinition prevRoom, RoomDefinition newRoom, GameObject objectThatChangedRooms)
   {
-    objectChangedRoom.transform.parent = _instancedObjects.getRoomParentObject(newRoom).transform;
+    objectThatChangedRooms.transform.parent = _instancedObjects.getRoomParentObject(newRoom).transform;
 
-    RoomObjectDefinition objectDef = _instancedObjects.GetDefinitionFromGameObject(prevRoom, objectChangedRoom);
+    RoomObjectDefinition objectDef = _instancedObjects.GetDefinitionFromGameObject(prevRoom, objectThatChangedRooms);
+
     _instancedObjects.UnregisterObjectFromRoom(prevRoom, objectDef);
-    _instancedObjects.RegisterObjectInRoom(newRoom, objectDef, objectChangedRoom);
-  }
-
-  /// <summary>
-  /// Destroys an already instanced room. In case the room in non-existant, an error is launched
-  /// </summary>
-  public virtual void DestroyRoom(RoomDefinition roomDef)
-  {
-    if (_instancedObjects.RoomIsRegistered(roomDef))
-    {
-      GameObject toDestroy = _instancedObjects.getRoomParentObject(roomDef);
-      _instancedObjects.RemoveRoomFromRegistry(roomDef);
-      roomDef.colliders.Clear();
-      roomDef.renderers.Clear();
-      roomDef.maxDepth = 0;
-      GameObject.Destroy(toDestroy);
-    }
-    else
-    {
-        SMConsole.Log("Error: Deletion of room " + roomDef.roomName + " failed. Room does not exist in registry", "SceneSystem", SMLogType.ERROR);
-
-    }
+    _instancedObjects.RegisterObjectInRoom(newRoom, objectDef, objectThatChangedRooms);
   }
   #endregion
 
   #region [Private] Room Creation Auxiliary functions
   /// <summary>
-  /// Creates room as the original room, centered at the world origin
+  /// Creates room as the origin point room, centered at the world origin
   /// </summary>
-  private void CreateFirstRoom(RoomDefinition room)
+  private void InstanceFirstRoom(RoomDefinition room)
   {
     room.inConstruction = true;
-    //Creates the room parent object
+
+    //Prepares the room parent object
     GameObject roomParentObject = new GameObject(room.roomName);
     roomParentObject.SetActive(false);
+
     _instancedObjects.RegisterRoom(room, roomParentObject);
 
     //Instances all objects present in the room definition 
-    foreach (RoomObjectDefinition obj in room.objectsInRoom)
+    foreach (RoomObjectDefinition objectInRoom in room.objectsInRoom)
     {
-      GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, Vector3.zero);
+      GameObject instancedObject = InstanceObject(objectInRoom, roomParentObject.transform, Vector3.zero);
       FindCollidersAndRenderers(room, instancedObject);
-      _instancedObjects.RegisterObjectInRoom(room, obj, instancedObject);
+
+      _instancedObjects.RegisterObjectInRoom(room, objectInRoom, instancedObject);
     }
 
     //Instances all gateways in the room definition
     foreach (RoomObjectGatewayDefinition gate in room.gateways)
     {
-      GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
-      instancedObject.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
-      _instancedObjects.RegisterObjectInRoom(room, gate, instancedObject);
+      GameObject instancedGateway = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
+      instancedGateway.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
+
+      _instancedObjects.RegisterObjectInRoom(room, gate, instancedGateway);
     }
 
     roomParentObject.SetActiveRecursively(true);
     ActivateCollidersAndRenderers(room);
-    room.constructionFinished = true;
+
     room.inConstruction = false;
   }
 
   /// <summary>
-  /// Creates new room adjacent to the "from" room.
-  /// Rooms will be connected via their respective gateways to each other.
+  /// Creates new room adjacent to the "from" room. Rooms will be connected and oriented by their respective gateways.
   /// Execution will halt in case a connection does not exist.
   /// </summary>
-  private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
+  private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition fromRoom)
   {
-    
     newRoom.inConstruction = true;
 
     RoomObjectGatewayDefinition fromGate;
     RoomObjectGatewayDefinition newRoomGate;
 
     //Retrives the gateways between rooms.
-    //TODO Exceptioning
-    if ((fromGate = from.GetGatewayTo(newRoom)) == null)
+    if ((fromGate = fromRoom.GetGatewayTo(newRoom)) == null)
     {
-        SMConsole.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found", "SceneSystem", SMLogType.ERROR);
- 
-      yield break;
-      //return;
+      SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Gateway between rooms " + fromRoom.roomName + " and " + newRoom.roomName + " not found");
+      throw new RoomFactoryExceptionCantInstanceRoomNoConnectionFound("Error: Gateway between rooms " + fromRoom.roomName + " and " + newRoom.roomName + " not found");
     }
-    if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
+    if ((newRoomGate = newRoom.GetGatewayTo(fromRoom)) == null)
     {
-        SMConsole.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found", "SceneSystem", SMLogType.ERROR);
-      yield break;
-      //return;
+      SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Gateway between rooms " + newRoom.roomName + " and " + fromRoom.roomName + " not found");
+      throw new RoomFactoryExceptionCantInstanceRoomNoConnectionFound("Error: Gateway between rooms " + newRoom.roomName + " and " + fromRoom.roomName + " not found");
     }
 
-    while (!from.constructionFinished)
+    while (fromRoom.inConstruction)
     {
       yield return new WaitForSeconds(0.5f);
     }
+
     //Creates the room parent object
     GameObject roomParentObject = new GameObject(newRoom.roomName);
     roomParentObject.SetActive(false);
@@ -213,31 +204,33 @@ public class RoomFactory
     //Orients the parent object to the new room gateway, as their centers will coincide
     roomParentObject.transform.eulerAngles = newRoomGate.eulerAngles;
 
-    //Instances all gateways in room definition, in a position relative 
-    //to the newRoomGate (The local origin)
-    foreach (RoomObjectGatewayDefinition gate in newRoom.gateways)
+    //Instances all gateways in room definition, in a position relative to the newRoomGate (The local origin)
+    foreach (RoomObjectGatewayDefinition gateDefinition in newRoom.gateways)
     {
-      GameObject instancedObject = InstanceObject(gate, roomParentObject.transform, newRoomGate.position);
-      instancedObject.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
-      _instancedObjects.RegisterObjectInRoom(newRoom, gate, instancedObject);
+      GameObject instancedGateway = InstanceObject(gateDefinition, roomParentObject.transform, newRoomGate.position);
+      instancedGateway.GetComponent<GatewayTriggerScript>().connectsTo = gateDefinition.connectedToRoom;
+
+      _instancedObjects.RegisterObjectInRoom(newRoom, gateDefinition, instancedGateway);
     }
 
     //Clear previous meshes colliders
     newRoom.colliders.Clear();
 
-    //Instances all objects in room definition, in a position relative 
-    //to the newRoomGate (The local origin)
-    foreach (RoomObjectDefinition obj in newRoom.objectsInRoom)
+    //Instances all objects in room definition, in a position relative to the newRoomGate (The local origin)
+    foreach (RoomObjectDefinition objectDefinition in newRoom.objectsInRoom)
     {
-      GameObject instancedObject = InstanceObject(obj, roomParentObject.transform, newRoomGate.position);
+      GameObject instancedObject = InstanceObject(objectDefinition, roomParentObject.transform, newRoomGate.position);
       FindCollidersAndRenderers(newRoom, instancedObject);
-      _instancedObjects.RegisterObjectInRoom(newRoom, obj, instancedObject);
-      yield return new WaitForSeconds(0.25f);
+
+      _instancedObjects.RegisterObjectInRoom(newRoom, objectDefinition, instancedObject);
+
+      //We yield from object creation to allow other co-routines to run
+      yield return new WaitForSeconds(0.05f);
     }
 
-    //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
-    Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.position;
-    Vector3 fromGateWorldRotation = _instancedObjects.GetGameObjectFromDefinition(from, fromGate).transform.eulerAngles;
+    //Retrive the "from" rooms' gate position and rotation, as these will be the starting parameters of the new room
+    Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(fromRoom, fromGate).transform.position;
+    Vector3 fromGateWorldRotation = _instancedObjects.GetGameObjectFromDefinition(fromRoom, fromGate).transform.eulerAngles;
 
     //Positions and orients the parent object to match and connect with the from room gateway
     roomParentObject.transform.position = fromGateWorldPosition;
@@ -262,12 +255,12 @@ public class RoomFactory
         if (accumulatedTime <= 0)
         {
           lastTime = Time.time;
-          yield return new WaitForSeconds(COL_WAIT_TIME);
+          yield return new WaitForSeconds(COLLIDER_ACTIVATION_COOLDOWN);
           accumulatedTime = Time.time - lastTime;
         }
         else
         {
-          accumulatedTime -= COL_WAIT_TIME;
+          accumulatedTime -= COLLIDER_ACTIVATION_COOLDOWN;
         }
       }
     }
@@ -290,59 +283,55 @@ public class RoomFactory
       }
     }
 
-    newRoom.constructionFinished = true;
     newRoom.inConstruction = false;
   }
 
   /// <summary>
-  /// Instances an object from an object definition, assigning him a parent and positioning 
-  /// him relative to the relativeOrigin provided, in case these arguments are used
+  /// Instances an object from an object definition, assigning him a parent and positioning him relative to the relativeOrigin provided
   /// </summary>
-  protected GameObject InstanceObject(RoomObjectDefinition obj, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
+  protected GameObject InstanceObject(RoomObjectDefinition objectDefinition, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
+    // Instances the object using the Resource System, which caches instances for use and re-use
+    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(objectDefinition.objectPrefabPath, active: false);
 
-    GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(obj.objectPrefabPath, active: false);
-
-    instancedObject.transform.localPosition = WorldPositionInRelationTo(obj.position, relativeOrigin);
-    instancedObject.transform.localScale = obj.scale;
-    instancedObject.transform.localEulerAngles = obj.eulerAngles;
+    // Base properties
+    instancedObject.transform.localPosition = WorldPositionInRelationTo(objectDefinition.position, relativeOrigin);
+    instancedObject.transform.localScale = objectDefinition.scale;
+    instancedObject.transform.localEulerAngles = objectDefinition.eulerAngles;
 
     instancedObject.transform.parent = parentTransform;
 
-    foreach (ComplexState complexState in obj.complexStates)
+    // Complex States
+    foreach (ComplexState complexStateInObject in objectDefinition.complexStates)
     {
-      string stateName = complexState.GetComplexStateName();
-
-
-      IHasComplexState scriptToLoadComplexState = ((instancedObject.transform).GetComponent(stateName) as IHasComplexState);
-      if (scriptToLoadComplexState == null) // then its in his children
+      string stateName = complexStateInObject.GetComplexStateName();
+      Transform objectWithComplexState = instancedObject.transform.Find(complexStateInObject.objectNameInHierarchy);
+      if (objectWithComplexState)
       {
-        Transform objectWithComplexState = instancedObject.transform.Find(complexState.objectNameInHierarchy);
-        scriptToLoadComplexState = (objectWithComplexState.GetComponent(complexState.GetComplexStateName()) as IHasComplexState);
+        IHasComplexState instanceContainingComplexState = (objectWithComplexState.GetComponent(complexStateInObject.GetComplexStateName()) as IHasComplexState);
+        instanceContainingComplexState.LoadComplexState(complexStateInObject);
       }
-
-      scriptToLoadComplexState.LoadComplexState(complexState);
-
+      else
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR,
+                      log: "Error applying complex state to instanced object " + objectDefinition.objectPrefabPath + ": Complex state " + complexStateInObject.objectNameInHierarchy + " could not be found in object");
+      }
     }
-
     return instancedObject;
   }
 
-  /// <summary>
-  /// Returns a position in relation of another position
-  /// </summary>
-  protected Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition,
-    Vector3 localRelationalObjectPositon)
+  #region Room Factory Utils
+  protected Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition, Vector3 newOrigin)
   {
-    return (originalObjectPosition - localRelationalObjectPositon);
+    return (originalObjectPosition - newOrigin);
   }
 
   /// <summary>
-  /// Returns the opposite vector, keeping the up vector intact
+  /// Returns the opposite vector in x and z, maintaining the "up vector" intact
   /// </summary>
-  protected Vector3 OppositeVector(Vector3 vec)
+  protected Vector3 OppositeVector(Vector3 vector)
   {
-    return new Vector3(-vec.x, vec.y + 180, -vec.z);
+    return new Vector3(-vector.x, vector.y + 180, -vector.z);
   }
 
   /// <summary>
@@ -398,6 +387,8 @@ public class RoomFactory
 
     room.renderers.ForEach(renderer => renderer.enabled = true);
   }
+  #endregion
+
   #endregion
 
 

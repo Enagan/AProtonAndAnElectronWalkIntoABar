@@ -1,312 +1,261 @@
-// Made by: Engana
-#define LOG_SCENE_MANAGER
+// Written by: Pedro Engana
 
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// The Scene Manager class is responsible to instance the various rooms the game has, as well as their connections
-/// By using it's RoomFactory, the scene manager dynamically loads and unloads rooms as the player walks through the world
-/// Giving the illusion of an open world.
+/// The Scene Manager class is responsible for dynamically creating the game world, as the player traverses it
+/// By using it's assigned RoomFactory, the scene manager is capable of instancing new rooms, without a loading screen, giving the illusion of an open world.
 /// </summary>
-public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoomChangeListner
+public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoomChangeListner
 {
-  // Adjacent rooms instancing depth
-  [SerializeField]
-  private int _adjacentInstancingDepth = 1;
-
   private RoomDefinition _activeRoom;
-  private List<RoomDefinition> _currentlyCreatedRooms = new List<RoomDefinition>();
-  private Dictionary<string,RoomDefinition> _allRooms = new Dictionary<string,RoomDefinition>();
-  private List<RoomDefinition> _roomInQueueToDeletion = new List<RoomDefinition>();
+  private List<RoomDefinition> _currentlyLoadedRooms;
+  private Dictionary<string, RoomDefinition> _allRooms;
 
-#if UNITY_PRO_LICENSE
-  private RoomFactoryAsync _roomFactory = new RoomFactoryAsync();
-#else
-  private RoomFactory _roomFactory = new RoomFactory();
-#endif
+  [SerializeField]
+  private int _roomInstancingDepth = 1;
 
-  //  private RoomFactory _roomFactory = new RoomFactory();
+  //Delegate in charge of instancing all objects in a room and correctly placing them according to a specific world state
+  private RoomFactory _roomFactory;
 
-	private void Start () 
+  private List<RoomDefinition> _roomsInQueueToBeDeleted;
+
+  private void Start()
   {
     ServiceLocator.ProvideSceneMananger(this);
     ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
     ServiceLocator.GetEventHandlerSystem().RegisterObjectRoomChangeListner(this);
 
-    //TODO@Engana Ask Save Manager
-    //Loads room definitions from files.
-   /* RoomDefinition firstRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/1stRoom.lvl");
-    RoomDefinition furnaceRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/FurnaceRoom.lvl");
-    RoomDefinition testingFacilityHub = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/TestingFacilityHub.lvl");
-    RoomDefinition secondRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/2ndRoom.lvl");
-    RoomDefinition thirdRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/3rdRoom.lvl");
-    RoomDefinition fourthRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/4thRoom.lvl");
-    RoomDefinition fifthRoom = XMLSerializer.Deserialize<RoomDefinition>("Assets/Levels/5thRoom.lvl");
+    //#if UNITY_PRO_LICENSE
+    //  _roomFactory = new RoomFactoryAsync();
+    //#else
+    _roomFactory = new RoomFactory();
+    //#endif
 
-    _allRooms.Add(firstRoom.roomName, firstRoom);
-    _allRooms.Add(secondRoom.roomName, secondRoom);
-    _allRooms.Add(thirdRoom.roomName, thirdRoom);
-    _allRooms.Add(fourthRoom.roomName, fourthRoom);
-    _allRooms.Add(fifthRoom.roomName, fifthRoom);
-    _allRooms.Add(furnaceRoom.roomName, furnaceRoom);
-    _allRooms.Add(testingFacilityHub.roomName, testingFacilityHub);
-    */
-    KeyValuePair<string,List<RoomDefinition>> _initState = ServiceLocator.GetSaveSystem().LoadInitialState();
-    
-    foreach (RoomDefinition room in _initState.Value)
+    _currentlyLoadedRooms = new List<RoomDefinition>();
+    _allRooms = new Dictionary<string, RoomDefinition>();
+    _roomsInQueueToBeDeleted = new List<RoomDefinition>();
+
+    WorldStateDefinition initState = ServiceLocator.GetSaveSystem().LoadInitialState();
+    LoadNewWorldState(initState);
+
+    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
+  }
+
+  private void Update()
+  {
+    DeleteScheduledRooms();
+  }
+
+  #region Public - World State Loading and Saving
+  /// <summary>
+  /// Retrieves a definition of the current world state
+  /// </summary>
+  public WorldStateDefinition getCurrentWorldStateDefinition()
+  {
+    List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
+
+    RoomDefinition tempUpdatedRoomDef;
+    foreach (RoomDefinition roomDef in _allRooms.Values)
+    {
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "Saving Room state for " + roomDef.roomName);
+
+      tempUpdatedRoomDef = _roomFactory.UpdateRoomDefinition(roomDef);
+      _allRooms[roomDef.roomName] = tempUpdatedRoomDef != null ? tempUpdatedRoomDef : roomDef;
+    }
+
+    return new WorldStateDefinition(new List<RoomDefinition>(_allRooms.Values), _activeRoom.roomName);
+  }
+
+  /// <summary>
+  /// Loads a new world state. Destroys previously loaded state
+  /// </summary>
+  public void LoadNewWorldState(WorldStateDefinition initState)
+  {
+    DeleteAndClearWorldState();
+
+    foreach (RoomDefinition room in initState.roomsDefinedInState)
     {
       _allRooms.Add(room.roomName, room);
     }
 
-    //instance the first room, temporary
-    setActiveRoom(_initState.Key);
-
-    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
-	}
-
-  private void Update()
-  {
-    RoomDefinition roomToDelete = null;
-    foreach(RoomDefinition roomDef in _roomInQueueToDeletion)
+    try
     {
-      if (!roomDef.inConstruction)
-      {
-        roomToDelete = roomDef;
-      }
+      setActiveRoom(initState.startingRoom);
     }
-
-    if (roomToDelete != null)
+    catch (KeyNotFoundException exception)
     {
-      _roomInQueueToDeletion.Remove(roomToDelete);
-      _roomFactory.DestroyRoom(roomToDelete);
-    }
-
-  }
-
-  #region Room Creation and Deletion
-  /// <summary>
-  /// Receives a room name and orders it to be 
-  /// instanced as well as it's in-range adjacent rooms.
-  /// Deletes previous rooms that may have become out-of-bounds
-  /// Sets the room as the currently active room
-  /// </summary>
-  private void setActiveRoom(string roomName)
-  {
-#if LOG_SCENE_MANAGER
-    SMConsole.Log(tag:"[SCENE MANAGER]",log:"[SCENE MANAGER] Setting room " + roomName + " as active");
-#endif
-    RoomDefinition roomToCreate;
-    //Search for room in the loaded rooms Dictionary
-    if (!_allRooms.TryGetValue (roomName, out roomToCreate)) {
-      SMConsole.Log(tag: "[SCENE MANAGER]", log:"Error: room " + roomName + " does not exist in knowledgebase.", type: SMLogType.ERROR);
-      //TODO should throw exception
-      return;
-    }
-
-    //Backup previously loaded rooms and clear the list for the new rooms
-    List<RoomDefinition> previousCreatedRooms = new List<RoomDefinition>(_currentlyCreatedRooms);
-    _currentlyCreatedRooms.Clear();
-
-    //Order room creation starting in roomToCreate
-#if LOG_SCENE_MANAGER
-    SMConsole.Log(tag: "[SCENE MANAGER]", log:"[SCENE MANAGER]------- Beggining new room instancing tree ---------");
-#endif
-
-    CreateRoomTree(roomToCreate);
-
-#if LOG_SCENE_MANAGER
-    SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]---------- Room tree finished instancing -----------");
-#endif
-
-    //Set room as active
-    _activeRoom = roomToCreate;
-
-    //Compare newly instanced rooms to the previous, 
-    //deletes any that exists in the previous version but not in the new.
-    DeleteOutOfRangeRooms(previousCreatedRooms, _currentlyCreatedRooms);
-  }
-
-  /// <summary>
-  /// Compares two room lists, the old and the new
-  /// Orders deletion on all rooms that exist in the old list but not the new
-  /// </summary>
-  private void DeleteOutOfRangeRooms(List<RoomDefinition> previousRooms, List<RoomDefinition> newRooms)
-  {
-    bool foundMatch;
-    foreach (RoomDefinition oldRoomDef in previousRooms)
-    {
-      foundMatch = false;
-      foreach (RoomDefinition newRoomDef in newRooms)
-      {
-        if (oldRoomDef.Equals(newRoomDef))
-        {
-          foundMatch = true;
-        }
-      }
-      if (!foundMatch)
-      {
-        //Run updateRoomDefinition to receive a RoomDefinition updated to the rooms'
-        //state right before deletion
-        RoomDefinition updatedDef = _roomFactory.UpdateRoomDefinition(oldRoomDef);
-        _allRooms[updatedDef.roomName] = updatedDef;
-
-#if LOG_SCENE_MANAGER
-        SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Deleting out of range room " + oldRoomDef.roomName);
-#endif
-
-        //Destroy the room if it's not in construction
-        if (oldRoomDef.inConstruction)
-        {
-          _roomInQueueToDeletion.Add(oldRoomDef);
-        }
-        else
-        {
-          _roomFactory.DestroyRoom(oldRoomDef);
-        }
-      }
+      SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
     }
   }
 
-  /// <summary>
-  /// Iterative function, starts at a root room, and orders it to be instanced,
-  /// does a limited depth-first search on the room tree and instances all rooms
-  /// under the Adjacent Instancing Depth (class variable)
-  /// </summary>
-  private void CreateRoomTree(RoomDefinition root, int currentDepth = 0, RoomDefinition parent = null)
+  public void DeleteAndClearWorldState()
   {
-
-    //If a parent is not defined, room should be instanced by itself
-    if (parent == null)
-    {
-#if LOG_SCENE_MANAGER
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]   Creating ROOT room " + root.roomName);
-#endif
-      _roomFactory.CreateRoom(root);
-      _currentlyCreatedRooms.Add(root);
-    }
-    //Otherwise instance room based in the previous "parent" room
-    else if (!_currentlyCreatedRooms.Contains(root))
-    {
-          
-#if LOG_SCENE_MANAGER
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]   Creating ADJACENT room " + root.roomName + " adjacent to " + parent.roomName);
-#endif
-      _roomInQueueToDeletion.Remove(root);
-      _roomFactory.CreateRoom(root, parent);
-      _currentlyCreatedRooms.Add(root);
-    }
-    //If we haven't reached the current depth, create all adjacent rooms to current root
-    if (currentDepth < _adjacentInstancingDepth)
-    {
-#if LOG_SCENE_MANAGER
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER]   This room " + root.roomName + " has  " + root.gateways.Count + " gateways.");
-#endif
-      foreach (RoomObjectGatewayDefinition gate in root.gateways)
-      {
-        if (_allRooms.ContainsKey(gate.connectedToRoom))
-        {
-          //SMConsole.Log(tag: "[SCENE MANAGER]", log: "creating room" + gate.connectedToRoom);
-          CreateRoomTree(_allRooms[gate.connectedToRoom], currentDepth + 1, root);
-        }
-        else
-        {
-          SMConsole.Log(tag: "[SCENE MANAGER]", log: "Room " + gate.connectedToRoom + " not found in Save State Definition");
-        }
-      }
-    }
+    _activeRoom = null;
+    SaveAndUninstanceRooms(_currentlyLoadedRooms);
+    _allRooms.Clear();
   }
   #endregion
 
-  #region Room State Saving and Loading
-  /// <summary>
-  /// Sends a pair consisting of the currently active room and the list of room definitions to
-  /// the Save System, to record the current world state.
-  /// </summary>
-  public void SaveRooms()
+  // Defines the level of depth the manager goes through when instancing rooms
+  public int roomInstancingDepth
   {
-    List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
-    RoomDefinition roomToSave;
-    foreach(RoomDefinition room in _allRooms.Values)
+    get
     {
-#if LOG_SCENE_MANAGER
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Saving Room state for " + room.roomName);
-#endif
-      roomToSave = _roomFactory.UpdateRoomDefinition(room);
-      if(roomToSave == null)
+      return _roomInstancingDepth;
+    }
+    set
+    {
+      if (value < 1)
       {
-        roomsToSave.Add(room);
+        _roomInstancingDepth = 1;
+        SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR,
+                      log: "Provided instancing depth" + value + " is not valid (must be greater than 1). roomInstancingDepth defaulted to 1.");
       }
       else
-      {
-        roomsToSave.Add(roomToSave);
-      }
-    }
-
-    ServiceLocator.GetSaveSystem().Save(new KeyValuePair<string, List<RoomDefinition>>(_activeRoom.roomName, roomsToSave));
-  }
-
-  /// <summary>
-  /// Requests the SaveSystem to retrieve the last saved world state.
-  /// </summary>
-  public void LoadRooms()
-  {
-    KeyValuePair<string, List<RoomDefinition>> loadedState = ServiceLocator.GetSaveSystem().LoadSaveState();
-
-    List<RoomDefinition> oldRooms = new List<RoomDefinition>();
-    foreach(RoomDefinition room in loadedState.Value)
-    {
-#if LOG_SCENE_MANAGER
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Loading Room state for " + room.roomName);
-#endif
-      oldRooms.Add(_allRooms[room.roomName]);
-      _allRooms[room.roomName] = room;
-    }
-
-    setActiveRoom(loadedState.Key);
-
-    foreach(RoomDefinition oldRoom in oldRooms)
-    {
-      if(oldRoom != null)
-      {
-        _roomFactory.DestroyRoom(oldRoom);
-      }
+        _roomInstancingDepth = value;
     }
   }
-  #endregion
 
-  #region Event Listners
-  /// <summary>
-  /// Interface Listner implementation
-  /// Receives the event when the player changes rooms, with the name
-  /// of the new room
-  /// </summary>
+  #region Public - Event Listners
   public void ListenPlayerRoomChange(string newRoomName)
   {
-#if LOG_SCENE_MANAGER
-    SMConsole.Log(tag:"[SCENE MANAGER]",log:"[SCENE MANAGER] Player room changed to " + newRoomName + " updating instanced room tree");
-#endif
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Player changed room to " + newRoomName + " updating instanced room tree");
     if (newRoomName != _activeRoom.roomName)
     {
-      setActiveRoom(newRoomName);
+      try
+      {
+        setActiveRoom(newRoomName);
+      }
+      catch (KeyNotFoundException exception)
+      {
+        SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
+        throw exception;
+      }
     }
   }
 
-  /// <summary>
-  /// Interface Listner implementation
-  /// Receives the event when an object changes rooms, with the name
-  /// of the new room, and the object itself
-  /// </summary>
-  public void ListenObjectRoomChange(string  prevRoomName, string newRoomName, GameObject objectChangedRoom)
+  public void ListenObjectRoomChange(string prevRoomName, string newRoomName, GameObject objectChangedRoom)
   {
-#if LOG_SCENE_MANAGER
-    SMConsole.Log(tag:"[SCENE MANAGER]",log:"[SCENE MANAGER] Movable object" + objectChangedRoom.name + " room changed from " + prevRoomName + " to " + newRoomName + " updating object definition");
-#endif
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Movable object" + objectChangedRoom.name + " room changed from " + prevRoomName + " to " + newRoomName + " updating object definition");
     if (newRoomName != _activeRoom.roomName)
     {
       _roomFactory.ChangeObjectRoom(_allRooms[prevRoomName], _allRooms[newRoomName], objectChangedRoom);
     }
+  }
+  #endregion
+
+  #region Private - Room Creation and Deletion
+  /// <summary>
+  /// Defines in which room the player is currently at, and sets it as the origin of the room instancing tree.
+  /// From there, all adjacent rooms are instanced, and in case some rooms have fallen outside the instancing depth, they are deleted safely
+  /// </summary>
+  private void setActiveRoom(string newActiveRoomName)
+  {
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "Setting room " + newActiveRoomName + " as active");
+
+    RoomDefinition newActiveRoomDefinition;
+    if (!_allRooms.TryGetValue(newActiveRoomName, out newActiveRoomDefinition))
+    {
+      throw new KeyNotFoundException("KeyNotFoundException: room " + newActiveRoomName + " does not exist in loaded world state.");
+    }
+
+    List<RoomDefinition> previouslyLoadedRooms = new List<RoomDefinition>(_currentlyLoadedRooms);
+    _currentlyLoadedRooms.Clear();
+
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Beggining instancing of room tree, root from " + newActiveRoomName + " -----------");
+    InstanceRoomsFromRoot(newActiveRoomDefinition);
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Finished Instancing room tree -----------");
+
+    _activeRoom = newActiveRoomDefinition;
+
+    //Compare newly instanced rooms to the previously loaded rooms, 
+    //deletes any that exist in the previous version but not in the new.
+    SaveAndUninstanceRooms(previouslyLoadedRooms, _currentlyLoadedRooms);
+  }
+
+  /// <summary>
+  /// Safely saves and un-instances all rooms. Doesn't un-instance any room present in shouldIgnore
+  /// </summary>
+  private void SaveAndUninstanceRooms(List<RoomDefinition> roomsToDelete, List<RoomDefinition> shouldIgnore = null)
+  {
+    List<RoomDefinition> culledDeletionList = shouldIgnore != null ? roomsToDelete.FindAll(room => !shouldIgnore.Contains(room)) : roomsToDelete;
+
+    foreach (RoomDefinition roomToDelete in culledDeletionList)
+    {
+      //Run updateRoomDefinition to update the definition according to the current world state of the room'
+      RoomDefinition updatedDefinition = _roomFactory.UpdateRoomDefinition(roomToDelete);
+      _allRooms[roomToDelete.roomName] = updatedDefinition;
+
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Deleting room " + roomToDelete.roomName);
+
+      if (!roomToDelete.inConstruction)
+        _roomFactory.DestroyRoomInstance(roomToDelete);
+      else
+        _roomsInQueueToBeDeleted.Add(roomToDelete);
+    }
+  }
+
+  /// <summary>
+  /// Traverses the room tree instancing of all rooms until it hits the depth limit.
+  /// The traversal is done breadth first, as we always want to instance the closest rooms to the player first, to avoid empty space
+  /// </summary>
+  private void InstanceRoomsFromRoot(RoomDefinition rootRoom, RoomDefinition parentRoom = null, int currentDepth = 0)
+  {
+    if (!_currentlyLoadedRooms.Contains(rootRoom))
+    {
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 2) + "Creating room " + rootRoom.roomName + "...");
+      _roomFactory.CreateRoomInstance(rootRoom, parentRoom);
+      _currentlyLoadedRooms.Add(rootRoom);
+    }
+
+    //If we haven't reached the current depth, create all child rooms to current root
+    if (currentDepth < _roomInstancingDepth)
+    {
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 4) + "This room " + rootRoom.roomName + " has  " + rootRoom.gateways.Count + " connections.");
+
+      List<RoomDefinition> tempNewlyCreatedChildren = new List<RoomDefinition>();
+      foreach (RoomObjectGatewayDefinition gateToChild in rootRoom.gateways)
+      {
+        if (_allRooms.ContainsKey(gateToChild.connectedToRoom))
+        {
+          if (!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectedToRoom]))
+          {
+            RoomDefinition childRoom = _allRooms[gateToChild.connectedToRoom];
+            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Creating room " + childRoom.roomName + "...");
+
+            _roomFactory.CreateRoomInstance(childRoom, rootRoom);
+            _currentlyLoadedRooms.Add(childRoom);
+            tempNewlyCreatedChildren.Add(childRoom);
+          }
+          else
+          {
+            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Room " + gateToChild.connectedToRoom + " already exists, skipping");
+          }
+        }
+        else
+          throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectedToRoom + " does not exist in loaded world state.");
+      }
+
+      foreach (RoomDefinition newlyCreated in tempNewlyCreatedChildren)
+        InstanceRoomsFromRoot(newlyCreated, rootRoom, currentDepth + 1);
+    }
+  }
+
+  private void DeleteScheduledRooms()
+  {
+    List<RoomDefinition> deletedRooms = new List<RoomDefinition>();
+    foreach (RoomDefinition roomDef in _roomsInQueueToBeDeleted)
+    {
+      if (!roomDef.inConstruction && !_currentlyLoadedRooms.Contains(roomDef))
+      {
+        _roomFactory.DestroyRoomInstance(roomDef);
+        deletedRooms.Add(roomDef);
+      }
+    }
+    _roomsInQueueToBeDeleted.RemoveAll(room => deletedRooms.Contains(room));
   }
   #endregion
 }

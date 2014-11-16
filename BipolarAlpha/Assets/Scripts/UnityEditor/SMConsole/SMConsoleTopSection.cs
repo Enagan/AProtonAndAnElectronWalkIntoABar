@@ -43,7 +43,7 @@ public class SMConsoleTopSection {
 
      
     _labelWidth = (width * 0.8f +3) - _logTex.width*2;
-    float areaHeight = _data.isSelectedEmpty() ? _data.currentScrollViewHeight : height;
+    float areaHeight = _data.isSelectedEmpty() ? height : _data.currentScrollViewHeight;
 
     // Upper section
     GUILayout.BeginHorizontal();
@@ -114,11 +114,11 @@ public class SMConsoleTopSection {
         if (canDisplay)
         {
           if (_data.selectedLogMessage.isEqualTo(message))
-            displayMessage(message, _selectedButtonSkin);
+            displayMessage(message, _selectedButtonSkin, true);
           else if (logCount % 2 == 0)
-            displayMessage(message, _buttonSkin);
+            displayMessage(message, _buttonSkin,false);
           else
-            displayMessage(message, _buttonSkin2);
+              displayMessage(message, _buttonSkin2, false);
         }
       }
     }
@@ -133,11 +133,11 @@ public class SMConsoleTopSection {
         {
           logCount++;
           if (_data.selectedCollapsedMessage.message.hashKey() == message.hashKey())
-            displayCollapsedMessage(entry.Value, _selectedButtonSkin);
+            displayCollapsedMessage(entry.Value, _selectedButtonSkin,true);
           else if (logCount % 2 == 0)
-            displayCollapsedMessage(entry.Value,_buttonSkin);
+            displayCollapsedMessage(entry.Value,_buttonSkin,false);
           else
-            displayCollapsedMessage(entry.Value, _buttonSkin2);
+            displayCollapsedMessage(entry.Value, _buttonSkin2,false);
           
         }
       }
@@ -173,16 +173,21 @@ public class SMConsoleTopSection {
   }
 
   // Displays a collapsed message with a specific button skin
-  void displayCollapsedMessage(CollapsedMessage cmessage, GUISkin skin)
+  void displayCollapsedMessage(CollapsedMessage cmessage, GUISkin skin, bool isSelected)
   {
     LogMessage message = cmessage.message;
 
     GUILayout.BeginHorizontal();
 
     bool selected = drawIconLabel(cmessage.message.type,skin);
-    
-    // Log
-    selected |= GUILayout.Button(message.log, skin.button, GUILayout.Width(_labelWidth*0.7f), GUILayout.Height(_logTex.height));
+  
+
+    float unselectedWidth = 0.025f;
+    // The Log
+
+
+    selected |= GUILayout.Button(message.log, skin.button, GUILayout.Width(_labelWidth * 0.65f), GUILayout.Height(_logTex.height));
+
 
 
     skin.button.alignment = TextAnchor.MiddleCenter;
@@ -191,7 +196,15 @@ public class SMConsoleTopSection {
     selected |= GUILayout.Button("#"+cmessage.counter, skin.button, GUILayout.Width(_labelWidth * 0.15f), GUILayout.Height(_logTex.height));
     
     // Tag
-    selected |= GUILayout.Button(message.tag, skin.button, GUILayout.Width(_labelWidth * 0.14f), GUILayout.Height(_logTex.height));
+    
+      selected |= GUILayout.Button(message.tag, skin.button, GUILayout.Width(_labelWidth * 0.14f), GUILayout.Height(_logTex.height));
+
+
+    // Unselect
+      if (isSelected && GUILayout.Button("X", skin.button, GUILayout.Width(_labelWidth * unselectedWidth), GUILayout.Height(_logTex.height)))
+    {
+        _data.selectedLogMessage = new LogMessage();
+    }
 
     skin.button.alignment = TextAnchor.UpperLeft;
 
@@ -207,15 +220,18 @@ public class SMConsoleTopSection {
   }
 
   // Displays a normal message
-  void displayMessage(LogMessage message, GUISkin skin)
+  void displayMessage(LogMessage message, GUISkin skin, bool isSelected)
   {
 
     GUILayout.BeginHorizontal();
 
     bool selected = drawIconLabel(message.type, skin);
 
+
+    float unselectedWidth = 0.025f;
     // The Log
-    selected |= GUILayout.Button(message.log, skin.button, GUILayout.Width(_labelWidth * 0.7f), GUILayout.Height(_logTex.height));
+
+    selected |= GUILayout.Button(message.log, skin.button, GUILayout.Width(_labelWidth * 0.65f), GUILayout.Height(_logTex.height));
 
     skin.button.alignment = TextAnchor.MiddleCenter;
     // Timer
@@ -223,6 +239,12 @@ public class SMConsoleTopSection {
 
     // Tag
     selected |= GUILayout.Button(message.tag, skin.button, GUILayout.Width(_labelWidth * 0.14f), GUILayout.Height(_logTex.height));
+
+    // Unselect
+    if (isSelected && GUILayout.Button("X", skin.button, GUILayout.Width(_labelWidth * unselectedWidth), GUILayout.Height(_logTex.height)))
+    {
+        _data.selectedLogMessage = new LogMessage();
+    }
 
     skin.button.alignment = TextAnchor.UpperLeft;
 

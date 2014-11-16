@@ -13,7 +13,6 @@ public class RoomDefinition
 {
   private string _roomName;
 
-  private bool _constructionFinished = false;
   private bool _inConstruction = false;
 
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
@@ -26,10 +25,7 @@ public class RoomDefinition
   // Gateways possess the name of the room they link to
   private List<RoomObjectGatewayDefinition> _gateways = new List<RoomObjectGatewayDefinition>();
 
-  
-  /// <summary>
-  /// The name of the room
-  /// </summary>
+
   public string roomName
   {
     get
@@ -42,9 +38,6 @@ public class RoomDefinition
     }
   }
 
-  /// <summary>
-  /// List with all the objects in the room
-  /// </summary>
   public List<RoomObjectDefinition> objectsInRoom
   {
     get
@@ -57,9 +50,7 @@ public class RoomDefinition
     }
   }
 
-  /// <summary>
-  /// List with all renderers in the room
-  /// </summary>
+
   [XmlIgnore]
   public List<Renderer> renderers
   {
@@ -112,21 +103,6 @@ public class RoomDefinition
     set
     {
       _maxDepth = value;
-    }
-  }
-
-  /// <summary>
-  /// Is the construction done
-  /// </summary>
-  public bool constructionFinished
-  {
-    get
-    {
-      return _constructionFinished;
-    }
-    set
-    {
-      _constructionFinished = value;
     }
   }
 

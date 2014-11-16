@@ -13,15 +13,15 @@ public class SaveSystem : MonoBehaviour
   /// and the player's position and rotation into a SaveState class.
   /// Saves the SaveState class as a .lvl file, in XML format.
   /// </summary>
-  public void Save(KeyValuePair<string, List<RoomDefinition>> rooms)
+  public void Save(WorldStateDefinition worldState)
   {
     SaveState saveState = new SaveState();
 
-    saveState.activeRoom = rooms.Key;
+    saveState.activeRoom = worldState.startingRoom;
 
     List<string> paths = new List<string>();
 
-    foreach(RoomDefinition room in rooms.Value)
+    foreach(RoomDefinition room in worldState.roomsDefinedInState)
     {
       XMLSerializer.Serialize<RoomDefinition>(room, _rootPath + "Saves/" + room.roomName + ".lvl");
       paths.Add(_rootPath + "Saves/" + room.roomName + ".lvl");
@@ -42,7 +42,7 @@ public class SaveSystem : MonoBehaviour
   /// Resets the player's position and rotation and returns what the active room was and the list of room definitions.
   /// </summary>
   /// <returns></returns>
-  private KeyValuePair<string, List<RoomDefinition>> Load(string saveStatePath)
+  private WorldStateDefinition Load(string saveStatePath)
   {
     SaveState saveState = XMLSerializer.Deserialize<SaveState>(saveStatePath);
 
@@ -65,15 +65,15 @@ public class SaveSystem : MonoBehaviour
     player.position = saveState.playerPosition + new Vector3(0, 0.1f, 0);
     player.eulerAngles = saveState.playerRotation;
 
-    return new KeyValuePair<string, List<RoomDefinition>>(saveState.activeRoom, loadedRooms);
+    return new WorldStateDefinition(loadedRooms,saveState.activeRoom);
   }
 
-  public KeyValuePair<string, List<RoomDefinition>> LoadSaveState()
+  public WorldStateDefinition LoadSaveState()
   {
     return Load(_rootPath + "Saves/SaveState.lvl");
   }
 
-  public KeyValuePair<string, List<RoomDefinition>> LoadInitialState()
+  public WorldStateDefinition LoadInitialState()
   {
     return Load(_rootPath + "SaveState.lvl");
   }
@@ -94,7 +94,7 @@ public class SaveSystem : MonoBehaviour
 
   void Update()
   {
-    if (Input.GetKey(KeyCode.End)) { ServiceLocator.GetSceneManager().SaveRooms(); }
-    if (Input.GetKey(KeyCode.Home)) { ServiceLocator.GetSceneManager().LoadRooms(); }
+    //if (Input.GetKey(KeyCode.End)) { ServiceLocator.GetSceneManager().SaveWorldState(); }
+    //if (Input.GetKey(KeyCode.Home)) { ServiceLocator.GetSceneManager().LoadRooms(); }
   }
 }
