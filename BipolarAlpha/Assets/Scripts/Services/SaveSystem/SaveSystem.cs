@@ -22,7 +22,7 @@ public class SaveSystem : MonoBehaviour
 
     List<string> paths = new List<string>();
 
-    foreach(RoomDefinition room in worldState.roomsDefinedInState)
+    foreach (RoomDefinition room in worldState.roomsDefinedInState)
     {
       XMLSerializer.Serialize<RoomDefinition>(room, _rootPath + "Saves/" + room.roomName + ".lvl");
       paths.Add(_rootPath + "Saves/" + room.roomName + ".lvl");
@@ -66,7 +66,7 @@ public class SaveSystem : MonoBehaviour
     player.position = saveState.playerPosition + new Vector3(0, 0.1f, 0);
     player.eulerAngles = saveState.playerRotation;
 
-    return new WorldStateDefinition(loadedRooms,saveState.activeRoom);
+    return new WorldStateDefinition(loadedRooms, saveState.activeRoom);
   }
 
   public WorldStateDefinition LoadSaveState()

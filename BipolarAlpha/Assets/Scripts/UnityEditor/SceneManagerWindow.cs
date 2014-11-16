@@ -1,4 +1,4 @@
-﻿  
+﻿
 #if UNITY_EDITOR
 
 using UnityEngine;
@@ -22,7 +22,7 @@ public class SceneManagerWindow : EditorWindow
 
   string _activeSceneBeforePlayWasPressed = null;
 
-  Dictionary<string, string> _allRooms = new Dictionary<string,string>();
+  Dictionary<string, string> _allRooms = new Dictionary<string, string>();
   Dictionary<string, bool> _roomsSelectedForLoadIntoGame = new Dictionary<string, bool>();
 
   float _bigVariablesUpdateTimeout = 0.0f;
@@ -70,17 +70,17 @@ public class SceneManagerWindow : EditorWindow
     }
 
 
-    if(_bigVariablesUpdateTimeout == 0)
+    if (_bigVariablesUpdateTimeout == 0)
     {
       _allRooms = getAllRooms();
     }
-    _bigVariablesUpdateTimeout += Time.deltaTime*1000;
+    _bigVariablesUpdateTimeout += Time.deltaTime * 1000;
     if (_bigVariablesUpdateTimeout >= TIME_TO_UPDATE_BIG_VARIABLES)
     {
       _bigVariablesUpdateTimeout = 0.0f;
     }
 
-    if(_compilationSuccessLabelTimeOut > 0)
+    if (_compilationSuccessLabelTimeOut > 0)
     {
       _compilationSuccessLabelTimeOut -= Time.deltaTime * 1000;
     }
@@ -110,12 +110,12 @@ public class SceneManagerWindow : EditorWindow
       GUILayout.Label("Scene Manager Editor\n disabled while in play mode.\n\nClick here to refresh\n if you stopped play mode", EditorStyles.boldLabel);
     else
     {
-        GameStartState();
-        EditorGUILayout.Separator();
-        LoadRoomsGUI();
-        EditorGUILayout.Separator();
-        RoomActionsGUI();
-        GatewaysInRoomAction();
+      GameStartState();
+      EditorGUILayout.Separator();
+      LoadRoomsGUI();
+      EditorGUILayout.Separator();
+      RoomActionsGUI();
+      GatewaysInRoomAction();
     }
 
     //EditorGUILayout.EndScrollView();
@@ -143,7 +143,7 @@ public class SceneManagerWindow : EditorWindow
           _roomsToLoadIntoGameScrollPosition = EditorGUILayout.BeginScrollView(_roomsToLoadIntoGameScrollPosition, GUILayout.MaxHeight(maxHeight), GUILayout.Width(position.width));
 
           Dictionary<string, bool> tempDict = new Dictionary<string, bool>();
-          foreach (KeyValuePair<string,bool> roomSelected in _roomsSelectedForLoadIntoGame)
+          foreach (KeyValuePair<string, bool> roomSelected in _roomsSelectedForLoadIntoGame)
           {
             bool isSelected = EditorGUILayout.ToggleLeft(roomSelected.Key, roomSelected.Value);
             tempDict.Add(roomSelected.Key, isSelected);
@@ -175,7 +175,7 @@ public class SceneManagerWindow : EditorWindow
 
         popUpPosition = EditorGUILayout.Popup(popUpPosition, presentableFoldoutStrings.ToArray());
 
-        if(loadableFoldoutStrings.Count > 0)
+        if (loadableFoldoutStrings.Count > 0)
           _initialWorldState.activeRoom = loadableFoldoutStrings[popUpPosition];
 
         GUILayout.EndHorizontal();
@@ -236,7 +236,7 @@ public class SceneManagerWindow : EditorWindow
         }
       }
 
-//      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
+      //      float maxHeight = Mathf.Min(filteredRoomList.Count * SIZE_OF_ELEMENT_IN_LIST, 300);
 
 
       int popUpPosition = filteredRoomList.IndexOf(_currentlyPressed);
@@ -285,9 +285,9 @@ public class SceneManagerWindow : EditorWindow
     else
       _roomActionFoldoutStatus = true;
     EditorGUILayout.Foldout(_roomActionFoldoutStatus, "Loaded Room: " + _currentlyLoadedRoom);
-    if(_roomActionFoldoutStatus)
+    if (_roomActionFoldoutStatus)
     {
-      if(_compilationSuccessLabelTimeOut>0)
+      if (_compilationSuccessLabelTimeOut > 0)
         GUILayout.Label("Serialization Success!", EditorStyles.boldLabel);
 
       if (GUILayout.Button("Serialize Current Room", GUILayout.Width(Mathf.Max(position.width - 10, 100))))
@@ -313,8 +313,8 @@ public class SceneManagerWindow : EditorWindow
       foreach (object thisObject in allObjects)
       {
         GameObject castObject = ((GameObject)thisObject);
-        if (castObject.activeInHierarchy && 
-          (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject" + _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2))) && 
+        if (castObject.activeInHierarchy &&
+          (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject" + _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2))) &&
           BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
         {
           Gateways.Add(castObject);
@@ -322,7 +322,7 @@ public class SceneManagerWindow : EditorWindow
       }
 
       float maxHeight = Mathf.Min(Gateways.Count * 2 * SIZE_OF_ELEMENT_IN_LIST, 20 * SIZE_OF_ELEMENT_IN_LIST);
-      _gatewaysScrollPosition = EditorGUILayout.BeginScrollView(_gatewaysScrollPosition, GUILayout.MaxHeight(maxHeight+20), GUILayout.Width(position.width));
+      _gatewaysScrollPosition = EditorGUILayout.BeginScrollView(_gatewaysScrollPosition, GUILayout.MaxHeight(maxHeight + 20), GUILayout.Width(position.width));
 
       foreach (GameObject gate in Gateways)
       {
@@ -391,7 +391,7 @@ public class SceneManagerWindow : EditorWindow
     }
   }
 
-#endregion
+  #endregion
   #region Actuators
   bool SerializeCurrentRoom()
   {
@@ -418,7 +418,7 @@ public class SceneManagerWindow : EditorWindow
 
   void OnHierarchyChange()
   {
-    if (_currentlyLoadedRoom.Equals("<No valid room is loaded>") || 
+    if (_currentlyLoadedRoom.Equals("<No valid room is loaded>") ||
       (_allRooms.ContainsKey(_currentlyLoadedRoom) && !_allRooms[_currentlyLoadedRoom].Equals(EditorApplication.currentScene)))
     {
       if (_allRooms.ContainsValue(EditorApplication.currentScene))
@@ -440,16 +440,16 @@ public class SceneManagerWindow : EditorWindow
     }
   }
 
-  Dictionary<string,string> getAllRooms()
+  Dictionary<string, string> getAllRooms()
   {
     Dictionary<string, string> resultDict = new Dictionary<string, string>();
     string[] files = Directory.GetFiles("Assets/Scenes/Levels", "*.unity", System.IO.SearchOption.AllDirectories);
     foreach (string f in files)
-    { 
-      string key = ((f.Replace("Assets/Scenes/Levels\\", "")).Replace("\\"," : ")).Replace(".unity","");
-      resultDict.Add(key, f.Replace("\\","/"));
+    {
+      string key = ((f.Replace("Assets/Scenes/Levels\\", "")).Replace("\\", " : ")).Replace(".unity", "");
+      resultDict.Add(key, f.Replace("\\", "/"));
     }
-      
+
     return resultDict;
   }
 
@@ -483,7 +483,7 @@ public class SceneManagerWindow : EditorWindow
   void saveGameState()
   {
     _initialWorldState.roomPaths.Clear();
-    foreach (KeyValuePair<string,bool> roomSelected in _roomsSelectedForLoadIntoGame)
+    foreach (KeyValuePair<string, bool> roomSelected in _roomsSelectedForLoadIntoGame)
     {
       if (roomSelected.Value)
       {

@@ -134,6 +134,5 @@ namespace SMSceneManagerSystem
     {
       return roomName == roomDef.roomName;
     }
-
   }
 }

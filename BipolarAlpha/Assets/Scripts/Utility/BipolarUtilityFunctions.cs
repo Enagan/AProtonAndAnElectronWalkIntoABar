@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BPUtil 
+public class BPUtil
 {
   /// <summary>
   /// Returns all Components of type T in the entire hierarchy going down from root
@@ -33,7 +33,7 @@ public class BPUtil
 
     foreach (Transform childTransform in parentObject.GetComponentsInChildren<Transform>())
     {
-      if(childTransform.parent == parentObject.transform && childTransform.parent != null)
+      if (childTransform.parent == parentObject.transform && childTransform.parent != null)
         children.Add(childTransform.gameObject);
     }
 
@@ -65,5 +65,4 @@ public class BPUtil
   {
     return new Vector3(-vector.x, vector.y + 180, -vector.z);
   }
-	
 }
