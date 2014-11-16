@@ -8,7 +8,7 @@ namespace SMSceneManagerSystem
 {
   /// <summary>
   /// The Scene Manager class is responsible for dynamically creating the game world, as the player traverses it
-  /// By using it's assigned RoomFactory, the scene manager is capable of instancing new rooms, without a loading screen, giving the illusion of an open world.
+  /// By using its assigned RoomFactory, the scene manager is capable of instancing new rooms, without a loading screen, giving the illusion of an open world.
   /// </summary>
   public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoomChangeListner
   {
@@ -99,7 +99,7 @@ namespace SMSceneManagerSystem
       SaveAndUninstanceRooms(_currentlyLoadedRooms);
       _allRooms.Clear();
     }
-    #endregion
+    
 
     // Defines the level of depth the manager goes through when instancing rooms
     public int roomInstancingDepth
@@ -120,6 +120,7 @@ namespace SMSceneManagerSystem
           _roomInstancingDepth = value;
       }
     }
+    #endregion
 
     #region Public - Event Listners
     public void ListenPlayerRoomChange(string newRoomName)
@@ -243,7 +244,7 @@ namespace SMSceneManagerSystem
             throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectsToRoom + " does not exist in loaded world state.");
         }
 
-        //Create the grandchild rooms, in order
+        //Instances the grandchild rooms
         foreach (RoomDefinition newlyCreated in tempNewlyCreatedChildren)
           InstanceRoomsFromRoot(newlyCreated, rootRoom, currentDepth + 1);
       }

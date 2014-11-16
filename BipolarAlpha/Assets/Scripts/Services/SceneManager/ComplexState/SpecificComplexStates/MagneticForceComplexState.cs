@@ -58,10 +58,6 @@ public class MagneticForceComplexState : ComplexStateDefinition
       return "MagneticForce";
   }
 
- /// <summary>
- /// Use GameObject Constructor to save you a lot of pain setting paths.
- /// This constructor is for seralization. HANDS OFF
- /// </summary>
   public MagneticForceComplexState() : base() { }
 
   public MagneticForceComplexState(GameObject complexStateSourceObject) : base(complexStateSourceObject) { }
