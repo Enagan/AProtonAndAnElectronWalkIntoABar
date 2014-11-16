@@ -13,7 +13,6 @@ public class RoomDefinition
 {
   private string _roomName;
 
-  private bool _constructionFinished = false;
   private bool _inConstruction = false;
 
   private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
@@ -104,21 +103,6 @@ public class RoomDefinition
     set
     {
       _maxDepth = value;
-    }
-  }
-
-  /// <summary>
-  /// Is the construction done
-  /// </summary>
-  public bool constructionFinished
-  {
-    get
-    {
-      return _constructionFinished;
-    }
-    set
-    {
-      _constructionFinished = value;
     }
   }
 

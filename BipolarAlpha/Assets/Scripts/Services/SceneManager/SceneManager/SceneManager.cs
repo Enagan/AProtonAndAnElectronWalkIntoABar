@@ -22,7 +22,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
   private List<RoomDefinition> _roomsInQueueToBeDeleted;
 
-	private void Start () 
+	private void Start() 
   {
     ServiceLocator.ProvideSceneMananger(this);
     ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
@@ -38,8 +38,10 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     _allRooms = new Dictionary<string, RoomDefinition>();
     _roomsInQueueToBeDeleted = new List<RoomDefinition>();
 
-    KeyValuePair<string,List<RoomDefinition>> initState = ServiceLocator.GetSaveSystem().LoadInitialState();
+    WorldStateDefinition initState = ServiceLocator.GetSaveSystem().LoadInitialState();
     LoadNewWorldState(initState);
+
+    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
 	}
 
   private void Update()
@@ -51,7 +53,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// <summary>
   /// Retrieves a definition of the current world state
   /// </summary>
-  public KeyValuePair<string, List<RoomDefinition>> getCurrentWorldStateDefinition()
+  public WorldStateDefinition getCurrentWorldStateDefinition()
   {
     List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
 
@@ -64,31 +66,29 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       _allRooms[roomDef.roomName] = tempUpdatedRoomDef != null ? tempUpdatedRoomDef : roomDef;
     }
 
-    return new KeyValuePair<string, List<RoomDefinition>>(_activeRoom.roomName, new List<RoomDefinition>(_allRooms.Values));
+    return new WorldStateDefinition(new List<RoomDefinition>(_allRooms.Values), _activeRoom.roomName);
   }
 
   /// <summary>
   /// Loads a new world state. Destroys previously loaded state
   /// </summary>
-  public void LoadNewWorldState(KeyValuePair<string, List<RoomDefinition>> initState)
+  public void LoadNewWorldState(WorldStateDefinition initState)
   {
     DeleteAndClearWorldState();
 
-    foreach (RoomDefinition room in initState.Value)
+    foreach (RoomDefinition room in initState.roomsDefinedInState)
     {
       _allRooms.Add(room.roomName, room);
     }
 
     try
     {
-      setActiveRoom(initState.Key);
+      setActiveRoom(initState.startingRoom);
     }
     catch(KeyNotFoundException exception)
     {
       SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
     }
-
-    ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
   }
 
   public void DeleteAndClearWorldState()
@@ -192,7 +192,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Deleting room " + roomToDelete.roomName);
 
       if (!roomToDelete.inConstruction)
-        _roomFactory.DestroyRoom(roomToDelete);
+        _roomFactory.DestroyRoomInstance(roomToDelete);
       else
         _roomsInQueueToBeDeleted.Add(roomToDelete);
     }
@@ -207,7 +207,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     if (!_currentlyLoadedRooms.Contains(rootRoom))
     {
       SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth*2) + "Creating room " + rootRoom.roomName + "...");
-      _roomFactory.CreateRoom(rootRoom, parentRoom);
+      _roomFactory.CreateRoomInstance(rootRoom, parentRoom);
       _currentlyLoadedRooms.Add(rootRoom);
     }
 
@@ -226,7 +226,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
             RoomDefinition childRoom = _allRooms[gateToChild.connectedToRoom];
             SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ',(currentDepth+1)*4) + "Creating room " + childRoom.roomName + "...");
 
-            _roomFactory.CreateRoom(childRoom, rootRoom);
+            _roomFactory.CreateRoomInstance(childRoom, rootRoom);
             _currentlyLoadedRooms.Add(childRoom);
             tempNewlyCreatedChildren.Add(childRoom);
           }
@@ -251,7 +251,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     {
       if (!roomDef.inConstruction && !_currentlyLoadedRooms.Contains(roomDef))
       {
-        _roomFactory.DestroyRoom(roomDef);
+        _roomFactory.DestroyRoomInstance(roomDef);
         deletedRooms.Add(roomDef);
       }
     }
