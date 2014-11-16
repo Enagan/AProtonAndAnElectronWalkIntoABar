@@ -200,12 +200,12 @@ namespace SMSceneManagerSystem
       if ((fromGateDef = fromRoomDef.GetDefinitionOfGatewayToRoom(newRoomDef)) == null)
       {
         SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Gateway between rooms " + fromRoomDef.roomName + " and " + newRoomDef.roomName + " not found");
-        throw new RoomFactoryExceptionCantInstanceRoomNoConnectionFound("Error: Gateway between rooms " + fromRoomDef.roomName + " and " + newRoomDef.roomName + " not found");
+        throw new SMSceneManagerSystemExceptionCantInstanceRoom("Error: Gateway between rooms " + fromRoomDef.roomName + " and " + newRoomDef.roomName + " not found");
       }
       if ((newRoomGateDef = newRoomDef.GetDefinitionOfGatewayToRoom(fromRoomDef)) == null)
       {
         SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Gateway between rooms " + newRoomDef.roomName + " and " + fromRoomDef.roomName + " not found");
-        throw new RoomFactoryExceptionCantInstanceRoomNoConnectionFound("Error: Gateway between rooms " + newRoomDef.roomName + " and " + fromRoomDef.roomName + " not found");
+        throw new SMSceneManagerSystemExceptionCantInstanceRoom("Error: Gateway between rooms " + newRoomDef.roomName + " and " + fromRoomDef.roomName + " not found");
       }
 
       while (IsRoomUnderConstruction(fromRoomDef))

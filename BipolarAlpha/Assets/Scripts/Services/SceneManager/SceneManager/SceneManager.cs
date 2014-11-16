@@ -13,8 +13,8 @@ namespace SMSceneManagerSystem
   public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoomChangeListner
   {
     private RoomDefinition _activeRoom;
-    private List<RoomDefinition> _currentlyLoadedRooms;
-    private Dictionary<string, RoomDefinition> _allRooms;
+    private List<RoomDefinition> _currentlyInstancedRooms;
+    private Dictionary<string, RoomDefinition> _allLoadedRooms;
 
     [SerializeField]
     private int _roomInstancingDepthLimit = 1;
@@ -36,8 +36,10 @@ namespace SMSceneManagerSystem
       _roomFactory = new RoomFactory();
       //#endif
 
-      _currentlyLoadedRooms = new List<RoomDefinition>();
-      _allRooms = new Dictionary<string, RoomDefinition>();
+      _activeRoom = null;
+      _allLoadedRooms = new Dictionary<string, RoomDefinition>();
+
+      _currentlyInstancedRooms = new List<RoomDefinition>();
       _roomsInQueueToBeDeleted = new List<RoomDefinition>();
 
       WorldStateDefinition initState = ServiceLocator.GetSaveSystem().LoadInitialState();
@@ -57,18 +59,23 @@ namespace SMSceneManagerSystem
     /// </summary>
     public WorldStateDefinition getCurrentWorldStateDefinition()
     {
+      if(_activeRoom == null || _allLoadedRooms.Count == 0)
+      {
+        SMConsole.Log(tag: "[SCENE MANAGER]", type:SMLogType.ERROR, log: "Error: cannot get current world state. No world state is loaded. Returning null");
+        return null;
+      }
       List<RoomDefinition> roomsToSave = new List<RoomDefinition>();
 
       RoomDefinition tempUpdatedRoomDef;
-      foreach (RoomDefinition roomDef in _allRooms.Values)
+      foreach (RoomDefinition roomDef in _allLoadedRooms.Values)
       {
         SMConsole.Log(tag: "[SCENE MANAGER]", log: "Saving Room state for " + roomDef.roomName);
 
         tempUpdatedRoomDef = _roomFactory.UpdateRoomDefinition(roomDef);
-        _allRooms[roomDef.roomName] = tempUpdatedRoomDef != null ? tempUpdatedRoomDef : roomDef;
+        _allLoadedRooms[roomDef.roomName] = tempUpdatedRoomDef != null ? tempUpdatedRoomDef : roomDef;
       }
 
-      return new WorldStateDefinition(new List<RoomDefinition>(_allRooms.Values), _activeRoom.roomName);
+      return new WorldStateDefinition(new List<RoomDefinition>(_allLoadedRooms.Values), _activeRoom.roomName);
     }
 
     /// <summary>
@@ -80,24 +87,25 @@ namespace SMSceneManagerSystem
 
       foreach (RoomDefinition room in initState.roomsDefinedInState)
       {
-        _allRooms.Add(room.roomName, room);
+        _allLoadedRooms.Add(room.roomName, room);
       }
 
       try
       {
         setActiveRoom(initState.startingRoom);
       }
-      catch (KeyNotFoundException exception)
+      catch (SMSceneManagerSystemExceptionCantInstanceRoom exception)
       {
         SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
+        throw exception;
       }
     }
 
     public void DeleteAndClearWorldState()
     {
       _activeRoom = null;
-      SaveAndUninstanceRooms(_currentlyLoadedRooms);
-      _allRooms.Clear();
+      SaveAndUninstanceRooms(_currentlyInstancedRooms);
+      _allLoadedRooms.Clear();
     }
     
 
@@ -125,6 +133,12 @@ namespace SMSceneManagerSystem
     #region Public - Event Listners
     public void ListenPlayerRoomChange(string newRoomName)
     {
+      if (_activeRoom == null || _allLoadedRooms.Count == 0)
+      {
+        SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: "Error: cannot change active room to " + newRoomName + ". No world state is loaded.");
+        throw new SMSceneManagerSystemExceptionNoWorldStateLoaded("Error: cannot change active room to " + newRoomName + ". No world state is loaded.");
+      }
+
       SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Player changed room to " + newRoomName + " updating instanced room graph");
       if (newRoomName != _activeRoom.roomName)
       {
@@ -132,7 +146,7 @@ namespace SMSceneManagerSystem
         {
           setActiveRoom(newRoomName);
         }
-        catch (KeyNotFoundException exception)
+        catch (SMSceneManagerSystemExceptionCantInstanceRoom exception)
         {
           SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
           throw exception;
@@ -142,10 +156,16 @@ namespace SMSceneManagerSystem
 
     public void ListenObjectRoomChange(string prevRoomName, string newRoomName, GameObject objectChangedRoom)
     {
+      if (_activeRoom == null || _allLoadedRooms.Count == 0)
+      {
+        SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: "Error: cannot change room of object " + objectChangedRoom.name + ". No world state is loaded.");
+        throw new SMSceneManagerSystemExceptionNoWorldStateLoaded("Error: cannot change room of object " + objectChangedRoom.name + ". No world state is loaded.");
+      }
+
       SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Movable object" + objectChangedRoom.name + " room changed from " + prevRoomName + " to " + newRoomName + " updating object definition");
       if (newRoomName != _activeRoom.roomName)
       {
-        _roomFactory.ChangeObjectRoom(_allRooms[prevRoomName], _allRooms[newRoomName], objectChangedRoom);
+        _roomFactory.ChangeObjectRoom(_allLoadedRooms[prevRoomName], _allLoadedRooms[newRoomName], objectChangedRoom);
       }
     }
     #endregion
@@ -160,13 +180,13 @@ namespace SMSceneManagerSystem
       SMConsole.Log(tag: "[SCENE MANAGER]", log: "Setting room " + newActiveRoomName + " as active");
 
       RoomDefinition newActiveRoomDefinition;
-      if (!_allRooms.TryGetValue(newActiveRoomName, out newActiveRoomDefinition))
+      if (!_allLoadedRooms.TryGetValue(newActiveRoomName, out newActiveRoomDefinition))
       {
-        throw new KeyNotFoundException("KeyNotFoundException: room " + newActiveRoomName + " does not exist in loaded world state.");
+        throw new SMSceneManagerSystemExceptionCantInstanceRoom("Error: room " + newActiveRoomName + " does not exist in loaded world state.");
       }
 
-      List<RoomDefinition> previouslyLoadedRooms = new List<RoomDefinition>(_currentlyLoadedRooms);
-      _currentlyLoadedRooms.Clear();
+      List<RoomDefinition> previouslyLoadedRooms = new List<RoomDefinition>(_currentlyInstancedRooms);
+      _currentlyInstancedRooms.Clear();
 
       SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Beggining instancing of room graph, root from " + newActiveRoomName + " -----------");
       InstanceRoomsFromRoot(newActiveRoomDefinition);
@@ -176,7 +196,7 @@ namespace SMSceneManagerSystem
 
       //Compare newly instanced rooms to the previously loaded rooms, 
       //deletes any that exist in the previous version but not in the new.
-      SaveAndUninstanceRooms(previouslyLoadedRooms, _currentlyLoadedRooms);
+      SaveAndUninstanceRooms(previouslyLoadedRooms, _currentlyInstancedRooms);
     }
 
     /// <summary>
@@ -190,7 +210,7 @@ namespace SMSceneManagerSystem
       {
         //Run updateRoomDefinition to update the definition according to the current world state of the room'
         RoomDefinition updatedDefinition = _roomFactory.UpdateRoomDefinition(roomToDelete);
-        _allRooms[roomToDelete.roomName] = updatedDefinition;
+        _allLoadedRooms[roomToDelete.roomName] = updatedDefinition;
 
         SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Deleting room " + roomToDelete.roomName);
 
@@ -207,11 +227,11 @@ namespace SMSceneManagerSystem
     /// </summary>
     private void InstanceRoomsFromRoot(RoomDefinition rootRoom, RoomDefinition parentRoom = null, int currentDepth = 0)
     {
-      if (!_currentlyLoadedRooms.Contains(rootRoom))
+      if (!_currentlyInstancedRooms.Contains(rootRoom))
       {
         SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 2) + "Creating room " + rootRoom.roomName + "...");
         _roomFactory.CreateRoomInstance(rootRoom, parentRoom);
-        _currentlyLoadedRooms.Add(rootRoom);
+        _currentlyInstancedRooms.Add(rootRoom);
       }
 
       //If we haven't reached the nstancing depth limit, create all child rooms to current root
@@ -224,15 +244,15 @@ namespace SMSceneManagerSystem
         //Create all Child Rooms
         foreach (RoomObjectGatewayDefinition gateToChild in rootRoom.gateways)
         {
-          if (_allRooms.ContainsKey(gateToChild.connectsToRoom))
+          if (_allLoadedRooms.ContainsKey(gateToChild.connectsToRoom))
           {
-            if (!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectsToRoom]))
+            if (!_currentlyInstancedRooms.Contains(_allLoadedRooms[gateToChild.connectsToRoom]))
             {
-              RoomDefinition childRoom = _allRooms[gateToChild.connectsToRoom];
+              RoomDefinition childRoom = _allLoadedRooms[gateToChild.connectsToRoom];
               SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Creating room " + childRoom.roomName + "...");
 
               _roomFactory.CreateRoomInstance(childRoom, rootRoom);
-              _currentlyLoadedRooms.Add(childRoom);
+              _currentlyInstancedRooms.Add(childRoom);
               tempNewlyCreatedChildren.Add(childRoom);
             }
             else
@@ -241,7 +261,7 @@ namespace SMSceneManagerSystem
             }
           }
           else
-            throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectsToRoom + " does not exist in loaded world state.");
+            throw new SMSceneManagerSystemExceptionCantInstanceRoom("Error: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectsToRoom + " does not exist in loaded world state.");
         }
 
         //Instances the grandchild rooms
@@ -255,7 +275,7 @@ namespace SMSceneManagerSystem
       List<RoomDefinition> deletedRooms = new List<RoomDefinition>();
       foreach (RoomDefinition roomDef in _roomsInQueueToBeDeleted)
       {
-        if (!_roomFactory.IsRoomUnderConstruction(roomDef) && !_currentlyLoadedRooms.Contains(roomDef))
+        if (!_roomFactory.IsRoomUnderConstruction(roomDef) && !_currentlyInstancedRooms.Contains(roomDef))
         {
           _roomFactory.DestroyRoomInstance(roomDef);
           deletedRooms.Add(roomDef);
