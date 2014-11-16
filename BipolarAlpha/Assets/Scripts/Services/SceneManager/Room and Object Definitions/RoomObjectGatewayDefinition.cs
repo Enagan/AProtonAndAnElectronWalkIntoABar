@@ -7,20 +7,20 @@ using System.Collections;
 /// </summary>
 public class RoomObjectGatewayDefinition : RoomObjectDefinition 
 {
-  private string _roomConnected;
+  private string _connectsToRoom;
 
   /// <summary>
   /// Name of the room this gateway connects to
   /// </summary>
-  public string connectedToRoom
+  public string connectsToRoom
   {
     get
     {
-      return _roomConnected;
+      return _connectsToRoom;
     }
     set
     {
-      _roomConnected = value;
+      _connectsToRoom = value;
     }
   }
 
@@ -31,7 +31,7 @@ public class RoomObjectGatewayDefinition : RoomObjectDefinition
     Vector3 position, Vector3 scale, Vector3 eulerAngles)
     : base(prefabPath, position, scale, eulerAngles)
   {
-    _roomConnected = roomConnectedTo;
+    _connectsToRoom = roomConnectedTo;
   }
 	
 }

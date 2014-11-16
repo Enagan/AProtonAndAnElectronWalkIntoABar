@@ -1,4 +1,4 @@
-//Made By: Engana
+//Made By: Pedro Engana
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,10 +9,15 @@ using System.Collections.Generic;
 /// </summary>
 public class RoomFactory
 {
-  protected RoomFactoryInstancedObjectsRegistry _instancedObjects = new RoomFactoryInstancedObjectsRegistry();
-
   private const float COLLIDER_ACTIVATION_COOLDOWN = 0.2f;
   private const float RENDER_WAIT_TIME = 0.05f;
+
+  protected RoomFactoryRegistry _instancedObjects;
+
+  public RoomFactory()
+  {
+    _instancedObjects = new RoomFactoryRegistry();
+  }
 
   #region [Public Methods] Room Instancing, Destruction and Definition Update
   /// <summary>
@@ -21,7 +26,7 @@ public class RoomFactory
   /// </summary>
   public virtual void CreateRoomInstance(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
-    if (!_instancedObjects.RoomIsRegistered(newRoom))
+    if (!_instancedObjects.IsRoomRegistered(newRoom))
     {
       if (fromRoom == null)
         // First room cannot run in a co-routine as all following rooms depend on it being created
@@ -36,10 +41,10 @@ public class RoomFactory
   /// </summary>
   public virtual void DestroyRoomInstance(RoomDefinition roomToDeleteDef)
   {
-    if (_instancedObjects.RoomIsRegistered(roomToDeleteDef))
+    if (_instancedObjects.IsRoomRegistered(roomToDeleteDef))
     {
-      GameObject toDestroy = _instancedObjects.getRoomParentObject(roomToDeleteDef);
-      _instancedObjects.RemoveRoomFromRegistry(roomToDeleteDef);
+      GameObject toDestroy = _instancedObjects.GetParentObjectForRoom(roomToDeleteDef);
+      _instancedObjects.UnregisterRoom(roomToDeleteDef);
       roomToDeleteDef.colliders.Clear();
       roomToDeleteDef.renderers.Clear();
       roomToDeleteDef.maxDepth = 0;
@@ -56,7 +61,7 @@ public class RoomFactory
   /// </summary>
   public virtual RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
   {
-    if (_instancedObjects.RoomIsRegistered(roomDef))
+    if (_instancedObjects.IsRoomRegistered(roomDef))
     {
       List<RoomObjectDefinition> updatedObjectDefinitions = new List<RoomObjectDefinition>();
       List<RoomObjectGatewayDefinition> updatedGatewayDefinitions = new List<RoomObjectGatewayDefinition>();
@@ -74,7 +79,7 @@ public class RoomFactory
 
         // Update Complex States inside object
         // Objects sometimes have other parameters we need to save, so for that we use complex states.
-        // We find each sub-object that declared a complex state, and we ask them to update those values in the definition, according to their current state.
+        // We find each sub-object that declared a complex state, and we ask them to update those values in the definition, according to their current simulation state.
         List<ComplexState> updatedComplexStates = new List<ComplexState>();
         foreach (ComplexState complexStateInObject in objectInRoomDef.complexStates)
         {
@@ -122,9 +127,9 @@ public class RoomFactory
   /// </summary>
   public void ChangeObjectRoom(RoomDefinition prevRoom, RoomDefinition newRoom, GameObject objectThatChangedRooms)
   {
-    objectThatChangedRooms.transform.parent = _instancedObjects.getRoomParentObject(newRoom).transform;
+    objectThatChangedRooms.transform.parent = _instancedObjects.GetParentObjectForRoom(newRoom).transform;
 
-    RoomObjectDefinition objectDef = _instancedObjects.GetDefinitionFromGameObject(prevRoom, objectThatChangedRooms);
+    RoomObjectDefinition objectDef = _instancedObjects.GetObjectDefinitionInRoomFromGameObject(prevRoom, objectThatChangedRooms);
 
     _instancedObjects.UnregisterObjectFromRoom(prevRoom, objectDef);
     _instancedObjects.RegisterObjectInRoom(newRoom, objectDef, objectThatChangedRooms);
@@ -158,7 +163,7 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gate in room.gateways)
     {
       GameObject instancedGateway = InstanceObject(gate, roomParentObject.transform, Vector3.zero);
-      instancedGateway.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectedToRoom;
+      instancedGateway.GetComponent<GatewayTriggerScript>().connectsTo = gate.connectsToRoom;
 
       _instancedObjects.RegisterObjectInRoom(room, gate, instancedGateway);
     }
@@ -210,7 +215,7 @@ public class RoomFactory
     foreach (RoomObjectGatewayDefinition gateDefinition in newRoom.gateways)
     {
       GameObject instancedGateway = InstanceObject(gateDefinition, roomParentObject.transform, newRoomGate.position);
-      instancedGateway.GetComponent<GatewayTriggerScript>().connectsTo = gateDefinition.connectedToRoom;
+      instancedGateway.GetComponent<GatewayTriggerScript>().connectsTo = gateDefinition.connectsToRoom;
 
       _instancedObjects.RegisterObjectInRoom(newRoom, gateDefinition, instancedGateway);
     }
@@ -231,8 +236,8 @@ public class RoomFactory
     }
 
     //Retrive the "from" rooms' gate position and rotation, as these will be the starting parameters of the new room
-    Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectFromDefinition(fromRoom, fromGate).transform.position;
-    Vector3 fromGateWorldRotation = _instancedObjects.GetGameObjectFromDefinition(fromRoom, fromGate).transform.eulerAngles;
+    Vector3 fromGateWorldPosition = _instancedObjects.GetGameObjectInRoomFromDefinition(fromRoom, fromGate).transform.position;
+    Vector3 fromGateWorldRotation = _instancedObjects.GetGameObjectInRoomFromDefinition(fromRoom, fromGate).transform.eulerAngles;
 
     //Positions and orients the parent object to match and connect with the from room gateway
     roomParentObject.transform.position = fromGateWorldPosition;
@@ -305,7 +310,7 @@ public class RoomFactory
 
     // Complex States
     // Objects sometimes have other parameters we need to save and load, so for that we use complex states.
-    // After loading the complex states from the definition, we find their respective sub-object and we pass him the complex state for him to load into himself
+    // After fetching the complex states from the definition, we find their respective sub-object, in the object hierarchy, and we pass it the complex state definition for it to load the values into himself
     foreach (ComplexState complexStateInObject in objectDefinition.complexStates)
     {
       string stateName = complexStateInObject.GetComplexStateName();

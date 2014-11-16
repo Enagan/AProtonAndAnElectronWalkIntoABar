@@ -221,11 +221,11 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
       //Create all Child Rooms
       foreach (RoomObjectGatewayDefinition gateToChild in rootRoom.gateways)
       {
-        if (_allRooms.ContainsKey(gateToChild.connectedToRoom))
+        if (_allRooms.ContainsKey(gateToChild.connectsToRoom))
         {
-          if (!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectedToRoom]))
+          if (!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectsToRoom]))
           {
-            RoomDefinition childRoom = _allRooms[gateToChild.connectedToRoom];
+            RoomDefinition childRoom = _allRooms[gateToChild.connectsToRoom];
             SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Creating room " + childRoom.roomName + "...");
 
             _roomFactory.CreateRoomInstance(childRoom, rootRoom);
@@ -234,11 +234,11 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
           }
           else
           {
-            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Room " + gateToChild.connectedToRoom + " already exists, skipping");
+            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Room " + gateToChild.connectsToRoom + " already exists, skipping");
           }
         }
         else
-          throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectedToRoom + " does not exist in loaded world state.");
+          throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectsToRoom + " does not exist in loaded world state.");
       }
 
       //Create the grandchild rooms, in order

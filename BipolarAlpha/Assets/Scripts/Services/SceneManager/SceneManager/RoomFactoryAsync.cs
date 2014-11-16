@@ -12,7 +12,7 @@ public class RoomFactoryAsync : RoomFactory {
 
   public void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
-    if (!_instancedObjects.RoomIsRegistered(newRoom))
+    if (!_instancedObjects.IsRoomRegistered(newRoom))
     {
       if (fromRoom == null)
       {

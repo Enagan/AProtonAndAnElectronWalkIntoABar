@@ -147,7 +147,7 @@ public class RoomDefinition
   {
     foreach (RoomObjectGatewayDefinition gate in _gateways)
     {
-      if (gate.connectedToRoom == destinationRoom)
+      if (gate.connectsToRoom == destinationRoom)
       {
         return gate;
       }
