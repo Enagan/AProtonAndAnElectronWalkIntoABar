@@ -122,7 +122,7 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
   #region Public - Event Listners
   public void ListenPlayerRoomChange(string newRoomName)
   {
-    SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Player changed room to " + newRoomName + " updating instanced room tree");
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "[SCENE MANAGER] Player changed room to " + newRoomName + " updating instanced room graph");
     if (newRoomName != _activeRoom.roomName)
     {
       try
@@ -149,7 +149,7 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
 
   #region Private - Room Creation and Deletion
   /// <summary>
-  /// Defines in which room the player is currently at, and sets it as the origin of the room instancing tree.
+  /// Defines in which room the player is currently at, and sets it as the origin of the room instancing graph.
   /// From there, all adjacent rooms are instanced, and in case some rooms have fallen outside the instancing depth, they are deleted safely
   /// </summary>
   private void setActiveRoom(string newActiveRoomName)
@@ -165,9 +165,9 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
     List<RoomDefinition> previouslyLoadedRooms = new List<RoomDefinition>(_currentlyLoadedRooms);
     _currentlyLoadedRooms.Clear();
 
-    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Beggining instancing of room tree, root from " + newActiveRoomName + " -----------");
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Beggining instancing of room graph, root from " + newActiveRoomName + " -----------");
     InstanceRoomsFromRoot(newActiveRoomDefinition);
-    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Finished Instancing room tree -----------");
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "---------- Finished Instancing room graph -----------");
 
     _activeRoom = newActiveRoomDefinition;
 
@@ -199,7 +199,7 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
   }
 
   /// <summary>
-  /// Traverses the room tree instancing of all rooms until it hits the depth limit.
+  /// Traverses the room graph instancing of all rooms until it hits the depth limit.
   /// The traversal is done breadth first, as we always want to instance the closest rooms to the player first, to avoid empty space
   /// </summary>
   private void InstanceRoomsFromRoot(RoomDefinition rootRoom, RoomDefinition parentRoom = null, int currentDepth = 0)
@@ -217,6 +217,8 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
       SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 4) + "This room " + rootRoom.roomName + " has  " + rootRoom.gateways.Count + " connections.");
 
       List<RoomDefinition> tempNewlyCreatedChildren = new List<RoomDefinition>();
+
+      //Create all Child Rooms
       foreach (RoomObjectGatewayDefinition gateToChild in rootRoom.gateways)
       {
         if (_allRooms.ContainsKey(gateToChild.connectedToRoom))
@@ -239,6 +241,7 @@ public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoom
           throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectedToRoom + " does not exist in loaded world state.");
       }
 
+      //Create the grandchild rooms, in order
       foreach (RoomDefinition newlyCreated in tempNewlyCreatedChildren)
         InstanceRoomsFromRoot(newlyCreated, rootRoom, currentDepth + 1);
     }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Room Factory is a helper class for the Scene Mananger, it handles the low level details of instancing new rooms and correctly placing them in relation to one another
-/// It uses the RoomFactoryInstancedObjectsRegistry to keep track of all instanced rooms and objects and their connection to their definition
+/// It uses the RoomFactoryInstancedObjectsRegistry to keep track of all instanced rooms and their definitions
 /// </summary>
 public class RoomFactory
 {
@@ -17,17 +17,17 @@ public class RoomFactory
   #region [Public Methods] Room Instancing, Destruction and Definition Update
   /// <summary>
   /// Instances a new room. In case the room is already instanced, the function does nothing.
-  /// If a "from" room is provided, the new room will be placed connected to the from room at their shared gateway. In case a gateway doesn't exist between the rooms, the function does nothing.
+  /// If a 'from' room is provided, the new room will be placed connected to the 'from' room at their shared gateway. In case a gateway doesn't exist between the rooms, the function does nothing.
   /// </summary>
   public virtual void CreateRoomInstance(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
     if (!_instancedObjects.RoomIsRegistered(newRoom))
     {
       if (fromRoom == null)
-        // First room cannot run in a coroutine as all following rooms depend on it being created
+        // First room cannot run in a co-routine as all following rooms depend on it being created
         InstanceFirstRoom(newRoom);
       else
-        // A Coroutine is launched for adjacent rooms as many can be instanced simultaneously
+        // A Co-routine is launched for adjacent rooms as many can be instanced simultaneously
         ServiceLocator.GetSceneManager().StartCoroutine(CreateAdjancentRoom(newRoom, fromRoom));
     }
   }
@@ -76,16 +76,16 @@ public class RoomFactory
         List<ComplexState> updatedComplexStates = new List<ComplexState>();
         foreach (ComplexState complexStateInObject in objectInRoomDef.complexStates)
         {
-          Transform objectWithComplexState = objectInRoomGameObject.transform.Find(complexStateInObject.objectNameInHierarchy);
-          if (objectWithComplexState)
+          Transform childObjectWithComplexState = objectInRoomGameObject.transform.Find(complexStateInObject.objectNameInHierarchy);
+          if (childObjectWithComplexState)
           {
-            IHasComplexState instanceContainingComplexState = (objectWithComplexState.GetComponent(complexStateInObject.GetComplexStateName()) as IHasComplexState);
+            IHasComplexState instanceContainingComplexState = (childObjectWithComplexState.GetComponent(complexStateInObject.GetComplexStateName()) as IHasComplexState);
 
             if (!(instanceContainingComplexState == null))
               updatedComplexStates.Add(instanceContainingComplexState.UpdateComplexState(complexStateInObject));
             else
               SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR,
-                            log: "Error: On room" + roomDef.roomName + ": Component with complex state " + complexStateInObject.objectNameInHierarchy + " could not be found in object " + objectWithComplexState);
+                            log: "Error: On room" + roomDef.roomName + ": Component with complex state " + complexStateInObject.objectNameInHierarchy + " could not be found in object " + childObjectWithComplexState);
           }
           else
           {
@@ -93,7 +93,6 @@ public class RoomFactory
                           log: "Error on room " + roomDef.roomName + ": Complex state " + complexStateInObject.objectNameInHierarchy + " could not be found in hierarchy");
           }
           objectInRoomDef.complexStates = updatedComplexStates;
-
         }
 
         //Add updated definition to List
@@ -193,6 +192,7 @@ public class RoomFactory
 
     while (fromRoom.inConstruction)
     {
+      // If "fromRoom" is still in construction, wait a bit.
       yield return new WaitForSeconds(0.5f);
     }
 
@@ -224,7 +224,7 @@ public class RoomFactory
 
       _instancedObjects.RegisterObjectInRoom(newRoom, objectDefinition, instancedObject);
 
-      //We yield from object creation to allow other co-routines to run
+      //We yield from object creation to allow other co-routines to run, this allows rooms with a smaller bject count to end up instanced first
       yield return new WaitForSeconds(0.05f);
     }
 
@@ -291,7 +291,7 @@ public class RoomFactory
   /// </summary>
   protected GameObject InstanceObject(RoomObjectDefinition objectDefinition, Transform parentTransform = null, Vector3 relativeOrigin = default(Vector3))
   {
-    // Instances the object using the Resource System, which caches instances for use and re-use
+    // Instances the prefab using the Resource System, which caches instances for use and re-use
     GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(objectDefinition.objectPrefabPath, active: false);
 
     // Base properties
@@ -305,10 +305,10 @@ public class RoomFactory
     foreach (ComplexState complexStateInObject in objectDefinition.complexStates)
     {
       string stateName = complexStateInObject.GetComplexStateName();
-      Transform objectWithComplexState = instancedObject.transform.Find(complexStateInObject.objectNameInHierarchy);
-      if (objectWithComplexState)
+      Transform childObjectWithComplexState = instancedObject.transform.Find(complexStateInObject.objectNameInHierarchy);
+      if (childObjectWithComplexState)
       {
-        IHasComplexState instanceContainingComplexState = (objectWithComplexState.GetComponent(complexStateInObject.GetComplexStateName()) as IHasComplexState);
+        IHasComplexState instanceContainingComplexState = (childObjectWithComplexState.GetComponent(complexStateInObject.GetComplexStateName()) as IHasComplexState);
         instanceContainingComplexState.LoadComplexState(complexStateInObject);
       }
       else

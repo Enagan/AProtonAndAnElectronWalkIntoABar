@@ -75,7 +75,6 @@ public class RoomFactoryAsync : RoomFactory {
       //  instancedObject.SetActive(false);
       //}
 
-      room.constructionFinished = true;
       room.inConstruction = false;
     }
   }
@@ -138,7 +137,7 @@ public class RoomFactoryAsync : RoomFactory {
       //  instancedObject.SetActive(false);
       //}
 
-      yield return from.constructionFinished;
+      yield return !from.inConstruction;
 
       //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
       Vector3 fromGateWorldPosition = _gatewayRegistry[from][newRoom.roomName].transform.position;
@@ -160,9 +159,6 @@ public class RoomFactoryAsync : RoomFactory {
 
       //roomParentObject.transform.position -= fromGateRelativePositionToNewRoom;
 
-      
-
-      newRoom.constructionFinished = true;
       newRoom.inConstruction = false;
     }
   }
