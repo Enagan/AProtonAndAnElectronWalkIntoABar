@@ -45,7 +45,12 @@ namespace SMSceneManagerSystem
     /// </summary>
     public virtual void DestroyRoomInstance(RoomDefinition roomToDeleteDef)
     {
-      if (_instancedObjects.IsRoomRegistered(roomToDeleteDef))
+      if (!_instancedObjects.IsRoomRegistered(roomToDeleteDef))
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", log: "Deletion of room " + roomToDeleteDef.roomName + " failed. Room does not exist in registry");
+        return;
+      }
+      else
       {
         GameObject toDestroy = _instancedObjects.GetParentObjectForRoom(roomToDeleteDef);
         _instancedObjects.UnregisterRoom(roomToDeleteDef);
@@ -53,10 +58,6 @@ namespace SMSceneManagerSystem
         roomToDeleteDef.renderers.Clear();
         roomToDeleteDef.maxDepth = 0;
         GameObject.Destroy(toDestroy);
-      }
-      else
-      {
-        SMConsole.Log(tag: "[ROOM FACTORY]", log: "Deletion of room " + roomToDeleteDef.roomName + " failed. Room does not exist in registry");
       }
     }
 
@@ -70,7 +71,12 @@ namespace SMSceneManagerSystem
     /// </summary>
     public virtual RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
     {
-      if (_instancedObjects.IsRoomRegistered(roomDef))
+      if (!_instancedObjects.IsRoomRegistered(roomDef))
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
+        return null;
+      }
+      else
       {
         List<RoomObjectDefinition> updatedObjectDefinitions = new List<RoomObjectDefinition>();
         List<RoomObjectGatewayDefinition> updatedGatewayDefinitions = new List<RoomObjectGatewayDefinition>();
@@ -124,11 +130,6 @@ namespace SMSceneManagerSystem
 
         return roomDef;
       }
-      else
-      {
-        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating room " + roomDef.roomName + " failed. Room does not exist in registry");
-        return null;
-      }
     }
 
     /// <summary>
@@ -136,6 +137,22 @@ namespace SMSceneManagerSystem
     /// </summary>
     public void ChangeObjectRoom(RoomDefinition prevRoom, RoomDefinition newRoom, GameObject objectThatChangedRooms)
     {
+      if (!_instancedObjects.IsRoomRegistered(prevRoom))
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating objects parent room. Previous room" + prevRoom.roomName + " does not exist in registry");
+        return;
+      }
+      if (!_instancedObjects.IsRoomRegistered(newRoom))
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating objects parent room. New room" + prevRoom.roomName + " does not exist in registry");
+        return;
+      }
+      if (objectThatChangedRooms == null)
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating objects parent room. Object is null");
+        return;
+      }
+
       objectThatChangedRooms.transform.parent = _instancedObjects.GetParentObjectForRoom(newRoom).transform;
 
       RoomObjectDefinition objectDef = _instancedObjects.GetObjectDefinitionInRoomFromGameObject(prevRoom, objectThatChangedRooms);
