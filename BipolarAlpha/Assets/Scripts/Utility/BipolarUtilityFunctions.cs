@@ -52,5 +52,18 @@ public class BPUtil
 
     return children;
   }
+
+  public static Vector3 WorldPositionInRelationTo(Vector3 originalObjectPosition, Vector3 newOrigin)
+  {
+    return (originalObjectPosition - newOrigin);
+  }
+
+  /// <summary>
+  /// Returns the opposite vector in x and z, maintaining the "up vector" intact
+  /// </summary>
+  public static Vector3 OppositeVector(Vector3 vector)
+  {
+    return new Vector3(-vector.x, vector.y + 180, -vector.z);
+  }
 	
 }

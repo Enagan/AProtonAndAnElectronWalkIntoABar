@@ -148,7 +148,7 @@ public class RoomFactoryAsync : RoomFactory {
       Vector3 newGateWorldRotation = _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
 
       //Positions and orients the parent object to match and connect with the from room gateway
-      roomParentObject.transform.eulerAngles = OppositeVector(fromGateWorldRotation) - newGateWorldRotation;
+      roomParentObject.transform.eulerAngles = BPUtil.OppositeVector(fromGateWorldRotation) - newGateWorldRotation;
 
       Vector3 newGateWorldPosition = _gatewayRegistry[newRoom][from.roomName].transform.position;
 
