@@ -17,7 +17,7 @@ namespace SMSceneManagerSystem
     private Dictionary<string, RoomDefinition> _allRooms;
 
     [SerializeField]
-    private int _roomInstancingDepth = 1;
+    private int _roomInstancingDepthLimit = 1;
 
     //Delegate in charge of instancing all objects in a room and correctly placing them according to a specific world state
     private RoomFactory _roomFactory;
@@ -102,22 +102,22 @@ namespace SMSceneManagerSystem
     
 
     // Defines the level of depth the manager goes through when instancing rooms
-    public int roomInstancingDepth
+    public int roomInstancingDepthLimit
     {
       get
       {
-        return _roomInstancingDepth;
+        return _roomInstancingDepthLimit;
       }
       set
       {
         if (value < 1)
         {
-          _roomInstancingDepth = 1;
+          _roomInstancingDepthLimit = 1;
           SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR,
                         log: "Provided instancing depth" + value + " is not valid (must be greater than 1). roomInstancingDepth defaulted to 1.");
         }
         else
-          _roomInstancingDepth = value;
+          _roomInstancingDepthLimit = value;
       }
     }
     #endregion
@@ -214,8 +214,8 @@ namespace SMSceneManagerSystem
         _currentlyLoadedRooms.Add(rootRoom);
       }
 
-      //If we haven't reached the current depth, create all child rooms to current root
-      if (currentDepth < _roomInstancingDepth)
+      //If we haven't reached the nstancing depth limit, create all child rooms to current root
+      if (currentDepth < _roomInstancingDepthLimit)
       {
         SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 4) + "This room " + rootRoom.roomName + " has  " + rootRoom.gateways.Count + " connections.");
 
