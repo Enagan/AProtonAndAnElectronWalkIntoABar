@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SMSceneManagerSystem;
 
 /// <summary>
 /// Service Locator provides a global point of access to services or systems.

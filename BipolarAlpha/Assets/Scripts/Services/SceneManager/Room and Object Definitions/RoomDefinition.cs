@@ -1,175 +1,139 @@
-//Made By: Engana
+//Made By: Pedro Engana
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Xml.Serialization;
 
-/// <summary>
-/// Room definition represents a room.
-/// A Room is defined with a name and a set of objects and gateways
-/// </summary>
-public class RoomDefinition
+namespace SMSceneManagerSystem
 {
-  private string _roomName;
-
-  private bool _inConstruction = false;
-
-  private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
-
-  private Dictionary<int, List<Collider>> _colliders = new Dictionary<int, List<Collider>>();
-  private List<Renderer> _renderers = new List<Renderer>();
-  private int _maxDepth = 0;
-
-  // Gateways are treated like special objects because they are in charge of transitioning between rooms
-  // Gateways possess the name of the room they link to
-  private List<RoomObjectGatewayDefinition> _gateways = new List<RoomObjectGatewayDefinition>();
-
-
-  public string roomName
-  {
-    get
-    {
-      return _roomName;
-    }
-    set
-    {
-      _roomName = value;
-    }
-  }
-
-  public List<RoomObjectDefinition> objectsInRoom
-  {
-    get
-    {
-      return _objectsInRoom;
-    }
-    set
-    {
-      _objectsInRoom = value;
-    }
-  }
-
-
-  [XmlIgnore]
-  public List<Renderer> renderers
-  {
-    get
-    {
-      return _renderers;
-    }
-    set
-    {
-      _renderers = value;
-    }
-  }
-
   /// <summary>
-  /// List with all gateways in the room
+  /// Room definition represents the DNA of how to build the room in the state it was previously saved.
+  /// A Room is defined with a name and a set of object and gateway definitions that fully define the state of everything inside the room
+  /// Gateways represent the borders of a room, and it's through them that we define how and where a room connects to other rooms
   /// </summary>
-  public List<RoomObjectGatewayDefinition> gateways
+  public class RoomDefinition
   {
-    get
+    private string _roomName;
+    private List<RoomObjectDefinition> _objectsInRoom = new List<RoomObjectDefinition>();
+    private List<RoomObjectGatewayDefinition> _gateways = new List<RoomObjectGatewayDefinition>();
+
+
+    private Dictionary<int, List<Collider>> _colliders = new Dictionary<int, List<Collider>>();
+    private List<Renderer> _renderers = new List<Renderer>();
+    private int _maxDepth = 0;
+
+    public RoomDefinition() { }
+
+    public RoomDefinition(string name)
     {
-      return _gateways;
+      _roomName = name;
     }
-    set
+
+    public string roomName
     {
-      _gateways = value;
-    }
-  }
-
-  /// <summary>
-  /// All the mesh colliders in a room
-  /// </summary>
-  [XmlIgnore]
-  public Dictionary<int, List<Collider>> colliders
-  {
-    get
-    {
-      return _colliders;
-    }
-  }
-
-  /// <summary>
-  /// Max Children depth with mesh colliders
-  /// </summary>
-  public int maxDepth
-  {
-    get
-    {
-      return _maxDepth;
-    }
-    set
-    {
-      _maxDepth = value;
-    }
-  }
-
-  /// <summary>
-  /// Is currently in construction
-  /// </summary>
-  public bool inConstruction
-  {
-    get
-    {
-      return _inConstruction;
-    }
-    set
-    {
-      _inConstruction = value;
-    }
-  }
-
-  // Needed for Serialization to work
-  public RoomDefinition() { }
-
-  public RoomDefinition(string name) 
-  { 
-    _roomName = name; 
-  }
-
-  public void AddObject(RoomObjectDefinition obj)
-  {
-    _objectsInRoom.Add(obj);
-  }
-
-  public void AddGateway(RoomObjectGatewayDefinition gateway)
-  {
-    _gateways.Add(gateway);
-  }
-
-  /// <summary>
-  /// Retrieves a gateway that connects to the given room
-  /// returns null in case such a gateway does not exist
-  /// </summary>
-  public RoomObjectGatewayDefinition GetGatewayTo(string destinationRoom)
-  {
-    foreach (RoomObjectGatewayDefinition gate in _gateways)
-    {
-      if (gate.connectsToRoom == destinationRoom)
+      get
       {
-        return gate;
+        return _roomName;
+      }
+      set
+      {
+        _roomName = value;
       }
     }
-    return null;
-  }
 
-  /// <summary>
-  /// Retrieves a gateway that connects to the given room
-  /// returns null in case such a gateway does not exist
-  /// </summary>
-  public RoomObjectGatewayDefinition GetGatewayTo(RoomDefinition roomDef)
-  {
-    return GetGatewayTo(roomDef.roomName);
-  }
+    public List<RoomObjectDefinition> objectsInRoom
+    {
+      get
+      {
+        return _objectsInRoom;
+      }
+      set
+      {
+        _objectsInRoom = value;
+      }
+    }
 
-  /// <summary>
-  /// Compares this room with the given room
-  /// </summary>
-  public bool Equals(RoomDefinition roomDef)
-  {
-    return roomName == roomDef.roomName;
+    public List<RoomObjectGatewayDefinition> gateways
+    {
+      get
+      {
+        return _gateways;
+      }
+      set
+      {
+        _gateways = value;
+      }
+    }
+
+
+    [XmlIgnore]
+    public List<Renderer> renderers
+    {
+      get
+      {
+        return _renderers;
+      }
+      set
+      {
+        _renderers = value;
+      }
+    }
+
+    /// <summary>
+    /// All the mesh colliders in a room
+    /// </summary>
+    [XmlIgnore]
+    public Dictionary<int, List<Collider>> colliders
+    {
+      get
+      {
+        return _colliders;
+      }
+    }
+
+    /// <summary>
+    /// Max Children depth with mesh colliders
+    /// </summary>
+    public int maxDepth
+    {
+      get
+      {
+        return _maxDepth;
+      }
+      set
+      {
+        _maxDepth = value;
+      }
+    }
+
+    public void AddObjectDefinition(RoomObjectDefinition obj)
+    {
+      _objectsInRoom.Add(obj);
+    }
+
+    public void AddGatewayDefinition(RoomObjectGatewayDefinition gateway)
+    {
+      _gateways.Add(gateway);
+    }
+
+    /// <summary>
+    /// Retrieves a gateway that connects to the given room, returns null in case such a gateway does not exist
+    /// </summary>
+    public RoomObjectGatewayDefinition GetDefinitionOfGatewayToRoom(RoomDefinition roomDef)
+    {
+      return GetDefinitionOfGatewayToRoom(roomDef.roomName);
+    }
+
+    public RoomObjectGatewayDefinition GetDefinitionOfGatewayToRoom(string destinationRoom)
+    {
+      return _gateways.Find(gatewayDefinition => gatewayDefinition.connectsToRoom == destinationRoom);
+    }
+
+    public bool Equals(RoomDefinition roomDef)
+    {
+      return roomName == roomDef.roomName;
+    }
+
   }
-  
 }

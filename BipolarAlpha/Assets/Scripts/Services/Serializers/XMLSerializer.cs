@@ -8,6 +8,7 @@ using System;
 using System.Security.AccessControl;
 using System.Reflection;
 using System.Collections.Generic;
+using SMSceneManagerSystem;
 
 #pragma warning disable 0168
 
@@ -33,11 +34,11 @@ public class XMLSerializer
       if (_extraTypes.Count <= 0)
       {
         /// Fecthing subtypes of complex state to allow polymorphic serialization of complex state subclasses
-        Assembly assembly = typeof(ComplexState).Assembly;
+        Assembly assembly = typeof(ComplexStateDefinition).Assembly;
 
         foreach (Type possibleType in assembly.GetTypes())
         {
-          if (possibleType.BaseType == typeof(ComplexState))
+          if (possibleType.BaseType == typeof(ComplexStateDefinition))
           {
             _extraTypes.Add(possibleType);
           }
@@ -80,11 +81,11 @@ public class XMLSerializer
       if (_extraTypes.Count <= 0)
       {
         /// Fecthing subtypes of complex state to allow polymorphic serialization of complex state subclasses
-        Assembly assembly = typeof(ComplexState).Assembly;
+        Assembly assembly = typeof(ComplexStateDefinition).Assembly;
 
         foreach (Type possibleType in assembly.GetTypes())
         {
-          if (possibleType.BaseType == typeof(ComplexState))
+          if (possibleType.BaseType == typeof(ComplexStateDefinition))
           {
             _extraTypes.Add(possibleType);
           }

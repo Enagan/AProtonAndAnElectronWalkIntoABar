@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SMSceneManagerSystem;
 
 public class RoomFactoryAsync : RoomFactory {
 
@@ -8,7 +9,7 @@ public class RoomFactoryAsync : RoomFactory {
   private Dictionary<RoomDefinition, Dictionary<string, GameObject>> _gatewayRegistry = new Dictionary<RoomDefinition, Dictionary<string, GameObject>>();
   private Dictionary<RoomDefinition, GameObject> _instancedRoomsRegistry = new Dictionary<RoomDefinition, GameObject>();
 
-  private List<RoomDefinition> _roomsMidInstancing = new List<RoomDefinition>();
+  //private List<RoomDefinition> _roomsMidInstancing = new List<RoomDefinition>();
 
   public void CreateRoom(RoomDefinition newRoom, RoomDefinition fromRoom = null)
   {
@@ -31,13 +32,13 @@ public class RoomFactoryAsync : RoomFactory {
 	
   private IEnumerator CreateFirstRoom(RoomDefinition room)
   {
-    if (_instancedRoomsRegistry.ContainsKey(room) || _roomsMidInstancing.Contains(room))
+    if (_instancedRoomsRegistry.ContainsKey(room) || _roomsUnderConstruction.Contains(room))
     {
         SMConsole.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping", "SceneSystem", SMLogType.NORMAL);
     }
     else
     {
-      _roomsMidInstancing.Add(room);
+      _roomsUnderConstruction.Add(room);
 
       string roomParentObjectName = ROOM_PARENT_OBJECT_PREFIX + room.roomName;
       
@@ -74,36 +75,32 @@ public class RoomFactoryAsync : RoomFactory {
 
       //  instancedObject.SetActive(false);
       //}
-
-      room.inConstruction = false;
     }
   }
 
   private IEnumerator CreateAdjancentRoom(RoomDefinition newRoom, RoomDefinition from)
   {
-    if (_instancedRoomsRegistry.ContainsKey(newRoom) || _roomsMidInstancing.Contains(newRoom))
+    if (_instancedRoomsRegistry.ContainsKey(newRoom) || _roomsUnderConstruction.Contains(newRoom))
     {
         SMConsole.Log("[ROOM FACTORY ASYNC] Room already instanced, skipping", "SceneSystem", SMLogType.NORMAL);
     }
     else
     {
-      _roomsMidInstancing.Add(newRoom);
+      _roomsUnderConstruction.Add(newRoom);
 
       SMConsole.Log("CREATING ADJ ROOM IN ASYNC -" + newRoom.roomName, "SceneSystem", SMLogType.NORMAL);
-      newRoom.inConstruction = true;
-
       RoomObjectGatewayDefinition fromGate;
       RoomObjectGatewayDefinition newRoomGate;
 
       //Retrives the gateways between rooms.
       //TODO Exceptioning
-      if ((fromGate = from.GetGatewayTo(newRoom)) == null)
+      if ((fromGate = from.GetDefinitionOfGatewayToRoom(newRoom)) == null)
       {
           SMConsole.Log("Error: Gateway between rooms " + from.roomName + " and " + newRoom.roomName + " not found", "SceneSystem", SMLogType.ERROR);
         yield break;
         //return;
       }
-      if ((newRoomGate = newRoom.GetGatewayTo(from)) == null)
+      if ((newRoomGate = newRoom.GetDefinitionOfGatewayToRoom(from)) == null)
       {
           SMConsole.Log("Error: Gateway between rooms " + newRoom.roomName + " and " + from.roomName + " not found", "SceneSystem", SMLogType.ERROR);
         yield break;
@@ -137,7 +134,7 @@ public class RoomFactoryAsync : RoomFactory {
       //  instancedObject.SetActive(false);
       //}
 
-      yield return !from.inConstruction;
+      yield return !_roomsUnderConstruction.Contains(from);
 
       //Retrive the "from" rooms' gate position and rotation, as these will be the starting position of the new room
       Vector3 fromGateWorldPosition = _gatewayRegistry[from][newRoom.roomName].transform.position;
@@ -159,7 +156,7 @@ public class RoomFactoryAsync : RoomFactory {
 
       //roomParentObject.transform.position -= fromGateRelativePositionToNewRoom;
 
-      newRoom.inConstruction = false;
+      _roomsUnderConstruction.Remove(newRoom);
     }
   }
 

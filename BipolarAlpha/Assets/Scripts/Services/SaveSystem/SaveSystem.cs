@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using SMSceneManagerSystem;
 
 // Class that processes the saving and loading the state of the world
 public class SaveSystem : MonoBehaviour

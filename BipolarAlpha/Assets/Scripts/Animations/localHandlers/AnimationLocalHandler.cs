@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SMSceneManagerSystem;
 
 /// <summary>
 /// AnimationLocalHandler is the root class of a set of animations
@@ -106,7 +107,7 @@ public class AnimationLocalHandler : MonoBehaviour, IHasComplexState
   #region Complex State methods
 
   // Complex state write
-  public ComplexState WriteComplexState()
+  public ComplexStateDefinition WriteComplexStateDefinition()
   {
     // saves this instance cutsceneName
     AnimationLocalHandlerComplexState state = new AnimationLocalHandlerComplexState(this.gameObject);
@@ -116,7 +117,7 @@ public class AnimationLocalHandler : MonoBehaviour, IHasComplexState
     return state;
   }
 
-  public void LoadComplexState(ComplexState state)
+  public void LoadComplexStateDefinition(ComplexStateDefinition state)
   {
     if (!(state is AnimationLocalHandlerComplexState))
     {
@@ -132,7 +133,7 @@ public class AnimationLocalHandler : MonoBehaviour, IHasComplexState
 
   }
 
-  public ComplexState UpdateComplexState(ComplexState state)
+  public ComplexStateDefinition UpdateComplexStateDefinition(ComplexStateDefinition state)
   {
     if (!(state is AnimationLocalHandlerComplexState))
     {

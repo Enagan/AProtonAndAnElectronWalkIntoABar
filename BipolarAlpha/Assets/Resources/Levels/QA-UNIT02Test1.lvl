@@ -3,7 +3,7 @@
   <roomName>QA-UNIT02Test1</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test1/QA-UNIT02Test1</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/QA-UNIT02Test1/QA-UNIT02Test1</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>3.61496162</y>
@@ -22,7 +22,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Cutscenes/AnimationTriggerHandler</prefabPathForInstancing>
       <position>
         <x>-1.37647772</x>
         <y>9.086659</y>
@@ -39,15 +39,15 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="AnimationLocalHandlerComplexState">
+        <ComplexStateDefinition xsi:type="AnimationLocalHandlerComplexState">
           <objectNameInHierarchy>AnimationTriggerHandler</objectNameInHierarchy>
           <cutsceneName>QATest1DoorExit</cutsceneName>
           <collisionRadius>6</collisionRadius>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/HexagonDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/HexagonDoor</prefabPathForInstancing>
       <position>
         <x>0.216432676</x>
         <y>2.30349779</y>
@@ -64,7 +64,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>HexagonDoor</objectNameInHierarchy>
           <animationNames>
             <string>HexDoor2Open</string>
@@ -76,11 +76,11 @@
             <string />
           </optionalChilds>
           <cutsceneName>QATest1Door</cutsceneName>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/Lights/QA-Unit02Test1</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/Lights/QA-Unit02Test1</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>16.9860516</y>
@@ -99,7 +99,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GlassPanel</prefabPathForInstancing>
       <position>
         <x>-4.184938</x>
         <y>3.944416</y>
@@ -118,7 +118,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>2.52942133</x>
         <y>17.6956673</y>
@@ -135,16 +135,16 @@
         <z>180.000015</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>4</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GlassPanel</prefabPathForInstancing>
       <position>
         <x>0.007128015</x>
         <y>14.0243244</y>
@@ -163,7 +163,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/HexagonDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/HexagonDoor</prefabPathForInstancing>
       <position>
         <x>0.1267083</x>
         <y>10.90453</y>
@@ -180,7 +180,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>HexagonDoor2</objectNameInHierarchy>
           <animationNames>
             <string>HexDoor2Open</string>
@@ -192,11 +192,11 @@
             <string />
           </optionalChilds>
           <cutsceneName>QATest1DoorExit</cutsceneName>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test1/Platforms</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/QA-UNIT02Test1/Platforms</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -213,7 +213,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>Platforms</objectNameInHierarchy>
           <animationNames>
             <string>PlatformsStart</string>
@@ -225,68 +225,68 @@
             <string />
           </optionalChilds>
           <cutsceneName>QATest1Door</cutsceneName>
-        </ComplexState>
-        <ComplexState xsi:type="WeightPlatformComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform2</objectNameInHierarchy>
           <startHeight>68</startHeight>
           <floorHeight>53.5</floorHeight>
           <restingHeight>60</restingHeight>
           <acceleration>0.01</acceleration>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform2/QA02-Test1-MagneticPlatform2/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>false</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform2/QA02-Test1-MagneticPlatform2/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="WeightPlatformComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform3</objectNameInHierarchy>
           <startHeight>70</startHeight>
           <floorHeight>53.5</floorHeight>
           <restingHeight>60</restingHeight>
           <acceleration>0.01</acceleration>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform3/QA02-Test1-MagneticPlatform3/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform3/QA02-Test1-MagneticPlatform3/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>false</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="WeightPlatformComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="WeightPlatformComplexState">
           <objectNameInHierarchy>WeightPlatform4</objectNameInHierarchy>
           <startHeight>70</startHeight>
           <floorHeight>53.5</floorHeight>
           <restingHeight>62</restingHeight>
           <acceleration>0.01</acceleration>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform4/QA02-Test1-MagneticPlatform/LowerMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>false</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>WeightPlatform4/QA02-Test1-MagneticPlatform/UpperMagneticPlaque/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GlassPanel</prefabPathForInstancing>
       <position>
         <x>4.685439</x>
         <y>3.944416</y>
@@ -305,7 +305,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Cutscenes/AnimationTriggerHandler</prefabPathForInstancing>
       <position>
         <x>-1.37647772</x>
         <y>0.569366</y>
@@ -322,25 +322,25 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="AnimationLocalHandlerComplexState">
+        <ComplexStateDefinition xsi:type="AnimationLocalHandlerComplexState">
           <objectNameInHierarchy>AnimationTriggerHandler</objectNameInHierarchy>
           <cutsceneName>QATest1Door</cutsceneName>
           <collisionRadius>0.5</collisionRadius>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>0.431715429</x>
         <y>8.201586</y>
         <z>-49.3525352</z>
       </position>
       <scale>
-        <x>2.14</x>
-        <y>1.3</y>
+        <x>1</x>
+        <y>1</y>
         <z>1</z>
       </scale>
       <eulerAngles>
@@ -349,18 +349,18 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>QA-UNIT02Test2</connectedToRoom>
+      <connectsToRoom>QA-UNIT02Test2</connectsToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>-0.407945633</x>
         <y>0.0918362141</y>
         <z>36.2776756</z>
       </position>
       <scale>
-        <x>2.14</x>
-        <y>1.3</y>
+        <x>1</x>
+        <y>1</y>
         <z>1</z>
       </scale>
       <eulerAngles>
@@ -369,10 +369,8 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>SPAAAACE</connectedToRoom>
+      <connectsToRoom>SPAAAACE</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>

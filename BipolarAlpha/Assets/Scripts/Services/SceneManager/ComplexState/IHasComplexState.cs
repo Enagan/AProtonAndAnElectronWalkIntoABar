@@ -1,26 +1,28 @@
-﻿// By: Engana
+﻿// By: Pedro Engana
 
 using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// Interface that declares a specific scripts needs to save a complexState when its definition is serialized
-/// </summary>
-public interface IHasComplexState {
+namespace SMSceneManagerSystem
+{
   /// <summary>
-  /// Creates a Complex State from the ground up, stating every variable worth saving
+  /// Interface that declares that a specific class needs to be able to save a complex state definition representing its variables
   /// </summary>
-	ComplexState WriteComplexState();
+  public interface IHasComplexState
+  {
+    /// <summary>
+    /// Needs to return a subclass of a ComplexState, which encapsulates the desired variables that must the saved for the object in question
+    /// </summary>
+    ComplexStateDefinition WriteComplexStateDefinition();
 
-  /// <summary>
-  /// Loads into the scritp the ComplexState saved variables given by "state"
-  /// </summary>
-  void LoadComplexState(ComplexState state);
+    /// <summary>
+    /// Loads a complex state into the object, reading it's properties and applying them to the gameobject itself
+    /// </summary>
+    void LoadComplexStateDefinition(ComplexStateDefinition state);
 
-  /// <summary>
-  /// Updates a ComplexState definition with the current runtime values, without having to create a new ComplexState instance
-  /// </summary>
-  /// <param name="state"></param>
-  /// <returns></returns>
-  ComplexState UpdateComplexState(ComplexState state);
+    /// <summary>
+    /// Updates the complex state definition properties with the up to date values in the gameobject
+    /// </summary>
+    ComplexStateDefinition UpdateComplexStateDefinition(ComplexStateDefinition state);
+  }
 }

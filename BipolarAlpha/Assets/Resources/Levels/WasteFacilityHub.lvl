@@ -3,7 +3,7 @@
   <roomName>WasteFacilityHub</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>7.0875845</x>
         <y>0.121785462</y>
@@ -20,17 +20,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/Lights/WasteDisposalLights</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/Lights/WasteDisposalLights</prefabPathForInstancing>
       <position>
         <x>1.02828693</x>
         <y>-3.3340323</y>
@@ -49,7 +49,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/WasteFacilityHub/WasteDisposalHub</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/WasteFacilityHub/WasteDisposalHub</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -68,7 +68,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>14.54614</x>
         <y>0.121785462</y>
@@ -85,17 +85,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-7.24540472</x>
         <y>0.121785462</y>
@@ -112,17 +112,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>7.199786</x>
         <y>0.121785462</y>
@@ -139,17 +139,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-7.2681</x>
         <y>0.121785462</y>
@@ -166,19 +166,19 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>-14.7137451</x>
         <y>-1.70567751</y>
@@ -195,10 +195,10 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>GarbageBinRoom</connectedToRoom>
+      <connectsToRoom>GarbageBinRoom</connectsToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>10.2659292</x>
         <y>-1.47911549</y>
@@ -215,10 +215,8 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>DisposalElevator</connectedToRoom>
+      <connectsToRoom>DisposalElevator</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>

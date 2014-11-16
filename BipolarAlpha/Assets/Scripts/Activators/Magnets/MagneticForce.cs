@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SMSceneManagerSystem;
 /// <summary>
 /// The MagneticForce script is used to allow objects to interact with one another on a magnetic level
 /// each object using this script must be on the magnetic layer and have a trigger collider
@@ -502,7 +503,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
     #endregion
 
     #region Complex State Save, Load and Update
-    public ComplexState WriteComplexState()
+    public ComplexStateDefinition WriteComplexStateDefinition()
     {
         MagneticForceComplexState state = new MagneticForceComplexState(this.gameObject);
         state.isActive = _isActivated;
@@ -532,7 +533,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         return state;
     }
 
-    public void LoadComplexState(ComplexState state)
+    public void LoadComplexStateDefinition(ComplexStateDefinition state)
     {
         if (!(state is MagneticForceComplexState))
         {
@@ -569,7 +570,7 @@ public class MagneticForce : MonoBehaviour, Activator, IHasComplexState
         InitLights();
     }
 
-    public ComplexState UpdateComplexState(ComplexState state)
+    public ComplexStateDefinition UpdateComplexStateDefinition(ComplexStateDefinition state)
     {
         if (!(state is MagneticForceComplexState))
         {

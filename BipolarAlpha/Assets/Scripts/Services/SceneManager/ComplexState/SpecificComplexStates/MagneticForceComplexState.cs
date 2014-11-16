@@ -1,11 +1,12 @@
-﻿// By: Engana
+﻿// By: Pedro Engana
 using UnityEngine;
 using System.Collections;
+using SMSceneManagerSystem;
 
 /// <summary>
 /// Complex State of the MagneticForce Class
 /// </summary>
-public class MagneticForceComplexState : ComplexState 
+public class MagneticForceComplexState : ComplexStateDefinition 
 {
   private bool _isActivated;
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SMSceneManagerSystem;
 
 public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 {
@@ -212,7 +213,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
   #region Complex State methods
 
   // Complex state write
-  public ComplexState WriteComplexState()
+  public ComplexStateDefinition WriteComplexStateDefinition()
   {
     // saves this instance cutsceneName
     WeightPlatformComplexState state = new WeightPlatformComplexState(this.gameObject);
@@ -223,7 +224,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
     return state;
   }
 
-  public void LoadComplexState(ComplexState state)
+  public void LoadComplexStateDefinition(ComplexStateDefinition state)
   {
     if (!(state is WeightPlatformComplexState))
     {
@@ -240,7 +241,7 @@ public class WeightPlatform : MonoBehaviour, Activator, IHasComplexState
 
   }
 
-  public ComplexState UpdateComplexState(ComplexState state)
+  public ComplexStateDefinition UpdateComplexStateDefinition(ComplexStateDefinition state)
   {
     if (!(state is WeightPlatformComplexState))
     {

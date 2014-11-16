@@ -6,6 +6,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using SMSceneManagerSystem;
 
 
 public class SceneManagerWindow : EditorWindow

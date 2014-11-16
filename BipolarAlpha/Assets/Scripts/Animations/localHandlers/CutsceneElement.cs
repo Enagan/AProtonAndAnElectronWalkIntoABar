@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SMSceneManagerSystem;
+
 /// <summary>
 /// CutsceneElement stores information necessary to link Animations to a cutscene
 /// This is achieved by the IHasComplexState and the CutsceneManager, registration is handled automatically
@@ -53,7 +55,7 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
   #region Complex State methods
 
   // Complex state write
-  public ComplexState WriteComplexState()
+  public ComplexStateDefinition WriteComplexStateDefinition()
   {
     // saves this instance cutsceneName
     CutsceneElementComplexState state = new CutsceneElementComplexState(this.gameObject);
@@ -65,7 +67,7 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
     return state;
   }
 
-  public void LoadComplexState(ComplexState state)
+  public void LoadComplexStateDefinition(ComplexStateDefinition state)
   {
     if (!(state is CutsceneElementComplexState))
     {
@@ -82,7 +84,7 @@ public class CutsceneElement : MonoBehaviour, IHasComplexState
     _childNames = elementState.optionalChilds;
   }
 
-  public ComplexState UpdateComplexState(ComplexState state)
+  public ComplexStateDefinition UpdateComplexStateDefinition(ComplexStateDefinition state)
   {
     if (!(state is CutsceneElementComplexState))
     {

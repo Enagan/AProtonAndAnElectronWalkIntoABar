@@ -3,7 +3,7 @@
   <roomName>RailgunRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/RailgunRoom/RailgunRoom</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/RailgunRoom/RailgunRoom</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -22,7 +22,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/RailgunRoom/Forcefield</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/RailgunRoom/Forcefield</prefabPathForInstancing>
       <position>
         <x>21.8973827</x>
         <y>-0.5697082</y>
@@ -41,7 +41,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/RailgunRoom/SceneChanger</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/RailgunRoom/SceneChanger</prefabPathForInstancing>
       <position>
         <x>101.2708</x>
         <y>-2.543673</y>
@@ -60,7 +60,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GlassPanel</prefabPathForInstancing>
       <position>
         <x>-13.7851925</x>
         <y>12.735774</y>
@@ -79,7 +79,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GlassPanel</prefabPathForInstancing>
       <position>
         <x>-9.58155</x>
         <y>12.7357759</y>
@@ -98,7 +98,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GlassPanel</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GlassPanel</prefabPathForInstancing>
       <position>
         <x>-13.7916784</x>
         <y>12.735774</y>
@@ -117,7 +117,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/HexagonDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/HexagonDoor</prefabPathForInstancing>
       <position>
         <x>13.5536633</x>
         <y>-0.7830472</y>
@@ -134,7 +134,7 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>HexagonDoor</objectNameInHierarchy>
           <animationNames>
             <string>HexDoor2Open</string>
@@ -146,11 +146,11 @@
             <string />
           </optionalChilds>
           <cutsceneName>QATest1DoorExit</cutsceneName>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/RailgunRoomCircuitSystem-0</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/CircuitSystems/RailgunRoomCircuitSystem-0</prefabPathForInstancing>
       <position>
         <x>-11.3814545</x>
         <y>11.0885143</y>
@@ -167,22 +167,22 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/Lights/RailgunRoom</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/Lights/RailgunRoom</prefabPathForInstancing>
       <position>
         <x>0.3750925</x>
         <y>2.99084044</y>
@@ -201,7 +201,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-18.0086823</x>
         <y>-3.72355485</y>
@@ -218,18 +218,18 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>14.0143538</x>
         <y>-3.03666425</y>
@@ -246,10 +246,8 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>QA-UNIT02Test3</connectedToRoom>
+      <connectsToRoom>QA-UNIT02Test3</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>

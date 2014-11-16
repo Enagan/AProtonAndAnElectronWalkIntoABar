@@ -1,64 +1,66 @@
-﻿// by Ivo
+﻿// by Ivo Capelo
 using UnityEngine;
 using System.Collections;
+using SMSceneManagerSystem;
 
-/// <summary>
-/// Complex State of the CutsceneLocalHandler Class
-/// </summary>
-public class AnimationLocalHandlerComplexState : ComplexState
-{
-  #region private fields
-  
-  // Name of Cutscene
-  private string _cutsceneName;
 
-  // Radius for Sphere Collision
-  private float _collisionRadius;
-
-  #endregion
-
-  #region property getters/setters
-
-  public string cutsceneName
+  /// <summary>
+  /// Complex State of the CutsceneLocalHandler Class
+  /// </summary>
+  public class AnimationLocalHandlerComplexState : ComplexStateDefinition
   {
-    get
+    #region private fields
+
+    // Name of Cutscene
+    private string _cutsceneName;
+
+    // Radius for Sphere Collision
+    private float _collisionRadius;
+
+    #endregion
+
+    #region property getters/setters
+
+    public string cutsceneName
     {
-      return _cutsceneName;
+      get
+      {
+        return _cutsceneName;
+      }
+      set
+      {
+        _cutsceneName = value;
+      }
     }
-    set
+
+    public float collisionRadius
     {
-      _cutsceneName = value;
+      get
+      {
+        return _collisionRadius;
+      }
+      set
+      {
+        _collisionRadius = value;
+      }
     }
+    #endregion
+
+    #region complex state methods
+
+    public override string GetComplexStateName()
+    {
+
+      return "AnimationLocalHandler";
+    }
+
+    /// <summary>
+    /// Use GameObject Constructor to save you a lot of pain setting paths.
+    /// This constructor is for seralization. HANDS OFF
+    /// </summary>
+    public AnimationLocalHandlerComplexState() : base() { }
+
+    public AnimationLocalHandlerComplexState(GameObject complexStateSourceObject) : base(complexStateSourceObject) { }
+
+    #endregion
   }
-
-  public float collisionRadius
-  {
-    get
-    {
-      return _collisionRadius;
-    }
-    set
-    {
-      _collisionRadius = value;
-    }
-  }
-  #endregion
-
-  #region complex state methods
-
-  public override string GetComplexStateName()
-  {
-
-    return "AnimationLocalHandler";
-  }
-
- /// <summary>
- /// Use GameObject Constructor to save you a lot of pain setting paths.
- /// This constructor is for seralization. HANDS OFF
- /// </summary>
-  public AnimationLocalHandlerComplexState() : base() { }
-
-  public AnimationLocalHandlerComplexState(GameObject complexStateSourceObject) : base(complexStateSourceObject) { }
-
-  #endregion
-}

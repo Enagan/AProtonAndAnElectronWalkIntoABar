@@ -1,12 +1,13 @@
-﻿// by Ivo
+﻿// by Ivo Capelo
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SMSceneManagerSystem;
 
 /// <summary>
 /// Complex State of the CutsceneElement Class
 /// </summary>
-public class CutsceneElementComplexState : ComplexState
+public class CutsceneElementComplexState : ComplexStateDefinition
 {
 
   #region private variables

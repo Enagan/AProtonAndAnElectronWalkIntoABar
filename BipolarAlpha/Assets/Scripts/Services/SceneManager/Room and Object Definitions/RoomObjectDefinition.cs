@@ -1,122 +1,115 @@
-//Made By: Engana
+//Made By: Pedro Engana
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// Represents an object within a room
-/// </summary>
-public class RoomObjectDefinition
+namespace SMSceneManagerSystem
 {
-  private string _prefabPath;
-
-  private Vector3 _position;
-  private Vector3 _scale;
-  private Vector3 _eulerAngles;
-
-  private List<ComplexState> _complexStates = new List<ComplexState>();
-
   /// <summary>
-  /// Prefab path in the file structure that cooresponds to this object
+  /// A room object definition contains all the information necessary to build an object in the state it was previously saved at.
+  /// Here we define basic properties such as position scale and angles, as well as the unity prefab that represents the object.
+  /// In case an object is a bitmore complex, we use the Complex States, for every sub-object that wishes to declare additional properties.
+  /// The Complex States are containers for these specific properties and can be loaded and saved from their originating objects by use of a kind of visitor pattern.
   /// </summary>
-  public string objectPrefabPath
+  public class RoomObjectDefinition
   {
-    get
-    {
-      return _prefabPath;
-    }
-    set
-    {
-      _prefabPath = value;
-    }
-  }
+    private string _prefabPathForInstancing;
 
-  /// <summary>
-  /// Objects position in the room
-  /// </summary>
-  public Vector3 position
-  {
-    get
-    {
-      return _position;
-    }
-    set
-    {
-      _position = value;
-    }
-  }
+    private Vector3 _position;
+    private Vector3 _scale;
+    private Vector3 _eulerAngles;
 
-  /// <summary>
-  /// Objects scale in the room
-  /// </summary>
-  public Vector3 scale
-  {
-    get
-    {
-      return _scale;
-    }
-    set
-    {
-      _scale = value;
-    }
-  }
+    private List<ComplexStateDefinition> _complexStates = new List<ComplexStateDefinition>();
 
-  /// <summary>
-  /// Objects rotation in the room
-  /// </summary>
-  public Vector3 eulerAngles
-  {
-    get
+    public string prefabPathForInstancing
     {
-      return _eulerAngles;
-    }
-    set
-    {
-      _eulerAngles = value;
-    }
-  }
-
-  /// <summary>
-  /// ComplexStates attached to this object
-  /// </summary>
-  public List<ComplexState> complexStates
-  {
-    get
-    {
-      return _complexStates;
-    }
-    set
-    {
-      _complexStates = value;
-    }
-  }
-
-  // Needed for Serialization
-  public RoomObjectDefinition() { }
-
-  public RoomObjectDefinition(string prefabPath, Vector3 position, Vector3 scale, Vector3 eulerAngles)
-  {
-    _prefabPath = prefabPath;
-    _position = position;
-    _scale = scale;
-    _eulerAngles = eulerAngles;
-  }
-
-  /// <summary>
-  /// Attach a new Complex State to be saved by this object
-  /// </summary>
-  public void AddComplexState(ComplexState state)
-  {
-    foreach (ComplexState previouslyAddedState in _complexStates)
-    {
-      if (previouslyAddedState.objectNameInHierarchy.Equals(state.objectNameInHierarchy))
+      get
       {
-        throw new BipolarExceptionSamePathInHierarchyAsAnotherComplexState("Complex state: " + state.GetComplexStateName() +
-                                                                      " in path " + state.objectNameInHierarchy + 
-                                                                      " is invalid. Another Object with an equal path already registered in this object");
+        return _prefabPathForInstancing;
+      }
+      set
+      {
+        _prefabPathForInstancing = value;
       }
     }
-    _complexStates.Add(state);
+
+    public Vector3 position
+    {
+      get
+      {
+        return _position;
+      }
+      set
+      {
+        _position = value;
+      }
+    }
+
+    public Vector3 scale
+    {
+      get
+      {
+        return _scale;
+      }
+      set
+      {
+        _scale = value;
+      }
+    }
+
+    public Vector3 eulerAngles
+    {
+      get
+      {
+        return _eulerAngles;
+      }
+      set
+      {
+        _eulerAngles = value;
+      }
+    }
+
+    public List<ComplexStateDefinition> complexStates
+    {
+      get
+      {
+        return _complexStates;
+      }
+      set
+      {
+        _complexStates = value;
+      }
+    }
+
+    public RoomObjectDefinition() { }
+
+    public RoomObjectDefinition(string prefabPath, Vector3 position, Vector3 scale, Vector3 eulerAngles)
+    {
+      _prefabPathForInstancing = prefabPath;
+      _position = position;
+      _scale = scale;
+      _eulerAngles = eulerAngles;
+    }
+
+    /// <summary>
+    /// Attach a new Complex State to be saved in this object
+    /// </summary>
+    public void AddComplexState(ComplexStateDefinition state)
+    {
+      // Check if this complex state conflicts with another added before
+      // A conflict happens when we try to add 2 complex states refrencing the same sub-object
+      foreach (ComplexStateDefinition previouslyAddedState in _complexStates)
+      {
+        if (previouslyAddedState.objectNameInHierarchy.Equals(state.objectNameInHierarchy))
+        {
+          throw new BipolarExceptionSamePathInHierarchyAsAnotherComplexState("Complex state: " + state.GetComplexStateName() +
+                                                                              " in path " + state.objectNameInHierarchy +
+                                                                              " is invalid. Another Object with an equal path already registered in this object");
+        }
+      }
+      _complexStates.Add(state);
+    }
+
   }
 
 }

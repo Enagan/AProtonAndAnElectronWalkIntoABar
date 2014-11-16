@@ -5,252 +5,254 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 
-/// <summary>
-/// The Room definition creator creates and serializes to a file all the prefab objects present in the scene where it's placed
-/// </summary>
-public class RoomDefinitionCreator : MonoBehaviour
+namespace SMSceneManagerSystem
 {
-  [SerializeField]
-  public string _roomName = "";
-  private int circuitSystemCounter = 0;
-
-  private List<GameObject> _objectsInRoom = new List<GameObject>();
-
-	private void Start () 
-  {
-    SerializeRoom();
-    EditorApplication.isPlaying = false;
-    SMConsole.Log("Room " + _roomName + " Successefully serialized", "SceneSystem", SMLogType.NORMAL);
-	}
-
-  public void SerializeRoom()
-  {
-    _objectsInRoom = ReadScene();
-    RoomDefinition roomDef = createRoomDefinition(_roomName, _objectsInRoom);
-    XMLSerializer.Serialize<RoomDefinition>(roomDef, "Assets/Resources/Levels/" + roomDef.roomName + ".lvl");
-  }
-
   /// <summary>
-  /// Reads the current scene and returns all currently instanced parent objects.
+  /// The Room definition creator creates and serializes to a file all the prefab objects present in the scene where it's placed
   /// </summary>
-  private List<GameObject> ReadScene()
+  public class RoomDefinitionCreator : MonoBehaviour
   {
-    List<GameObject> readObjects = new List<GameObject>();
+    [SerializeField]
+    public string _roomName = "";
+    private int circuitSystemCounter = 0;
 
-    object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
+    private List<GameObject> _objectsInRoom = new List<GameObject>();
 
-    foreach (object thisObject in allObjects)
+    private void Start()
     {
-      GameObject castObject = ((GameObject)thisObject);
-      if (castObject.activeInHierarchy && (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject"+_roomName)))
-      {
-        castObject.transform.SetParent(null);
-        readObjects.Add(castObject);
-      }
+      SerializeRoom();
+      EditorApplication.isPlaying = false;
+      SMConsole.Log("Room " + _roomName + " Successefully serialized", "SceneSystem", SMLogType.NORMAL);
     }
-    return readObjects;
-  }
 
-  /// <summary>
-  /// Creates the room definition, complete with all its objects which are instanceable prefabs
-  /// </summary>
-  private RoomDefinition createRoomDefinition(string roomName, List<GameObject> objectsInRoom)
-  {
-    RoomDefinition roomDef = new RoomDefinition(roomName);
-    List<GameObject> createdCircuitSystems = new List<GameObject>();
-
-    foreach (GameObject obj in objectsInRoom)
+    public void SerializeRoom()
     {
-      //Does not add non-prefab objects to the room definition, as these cannot be instanced in the game scene
-      Object prefabParent = PrefabUtility.GetPrefabParent(obj);
-      if (prefabParent == null)
-      {
-        continue;
-      }
+      _objectsInRoom = ReadScene();
+      RoomDefinition roomDef = createRoomDefinition(_roomName, _objectsInRoom);
+      XMLSerializer.Serialize<RoomDefinition>(roomDef, "Assets/Resources/Levels/" + roomDef.roomName + ".lvl");
+    }
 
-      //Doesn't consider objects that might have previously been inserted into a Circuit System
-      if (obj.transform.parent != null && createdCircuitSystems.Contains(obj.transform.parent.gameObject))
-      {
-        continue;
-      }
+    /// <summary>
+    /// Reads the current scene and returns all currently instanced parent objects.
+    /// </summary>
+    private List<GameObject> ReadScene()
+    {
+      List<GameObject> readObjects = new List<GameObject>();
 
-      //Retrieved the prefab path and trims it for instancer usage
-      string path = AssetDatabase.GetAssetPath(prefabParent);
-      path = path.Replace(".prefab", "");
-      path = path.Replace("Assets/Resources/", "");
+      object[] allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
 
-      //Checks if the current object has any circuits in its hierarchy
-      if(BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform).Count > 0)
+      foreach (object thisObject in allObjects)
       {
-        //Check if any of those is a generator. In case it is, we need to generate a circuit system prefab to keep the circuit connections
-        List<CircuitGenerator> checkForGenerators = BPUtil.GetComponentsInHierarchy<CircuitGenerator>(obj.transform);
-        if (checkForGenerators.Count > 0)
+        GameObject castObject = ((GameObject)thisObject);
+        if (castObject.activeInHierarchy && (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject" + _roomName)))
         {
-          //List of objects which are part of the current circuit system tree
-          List<GameObject> circuitSystemObjects = new List<GameObject>();
+          castObject.transform.SetParent(null);
+          readObjects.Add(castObject);
+        }
+      }
+      return readObjects;
+    }
 
-          circuitSystemObjects = CircuitSystemNetworkBuilder(checkForGenerators[0]);
+    /// <summary>
+    /// Creates the room definition, complete with all its objects which are instanceable prefabs
+    /// </summary>
+    private RoomDefinition createRoomDefinition(string roomName, List<GameObject> objectsInRoom)
+    {
+      RoomDefinition roomDef = new RoomDefinition(roomName);
+      List<GameObject> createdCircuitSystems = new List<GameObject>();
 
-          List<GameObject> temp = new List<GameObject>();
-          foreach (GameObject circuitObj in circuitSystemObjects)
+      foreach (GameObject obj in objectsInRoom)
+      {
+        //Does not add non-prefab objects to the room definition, as these cannot be instanced in the game scene
+        Object prefabParent = PrefabUtility.GetPrefabParent(obj);
+        if (prefabParent == null)
+        {
+          continue;
+        }
+
+        //Doesn't consider objects that might have previously been inserted into a Circuit System
+        if (obj.transform.parent != null && createdCircuitSystems.Contains(obj.transform.parent.gameObject))
+        {
+          continue;
+        }
+
+        //Retrieved the prefab path and trims it for instancer usage
+        string path = AssetDatabase.GetAssetPath(prefabParent);
+        path = path.Replace(".prefab", "");
+        path = path.Replace("Assets/Resources/", "");
+
+        //Checks if the current object has any circuits in its hierarchy
+        if (BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform).Count > 0)
+        {
+          //Check if any of those is a generator. In case it is, we need to generate a circuit system prefab to keep the circuit connections
+          List<CircuitGenerator> checkForGenerators = BPUtil.GetComponentsInHierarchy<CircuitGenerator>(obj.transform);
+          if (checkForGenerators.Count > 0)
           {
-            if (!createdCircuitSystems.Contains(circuitObj))
+            //List of objects which are part of the current circuit system tree
+            List<GameObject> circuitSystemObjects = new List<GameObject>();
+
+            circuitSystemObjects = CircuitSystemNetworkBuilder(checkForGenerators[0]);
+
+            List<GameObject> temp = new List<GameObject>();
+            foreach (GameObject circuitObj in circuitSystemObjects)
             {
-              temp.Add(circuitObj);
-            }
-            else
+              if (!createdCircuitSystems.Contains(circuitObj))
+              {
+                temp.Add(circuitObj);
+              }
+              else
                 SMConsole.Log("Am i rejecting stuff?", "SceneSystem", SMLogType.WARNING);
+            }
+            circuitSystemObjects = temp;
+
+            //Creates an empty parent to be the prefab head
+            GameObject circuitsParent = new GameObject(roomName + "CircuitSystem-" + circuitSystemCounter++);
+            circuitsParent.transform.position = circuitSystemObjects[0].transform.position;
+
+            //Adds all objects of discovered circuit tree as childs of the circuit parent.
+
+            foreach (GameObject circuitObjects in circuitSystemObjects)
+            {
+              circuitObjects.transform.parent = circuitsParent.transform;
+            }
+
+            //Marks the circuit as having been created for future exclusion of its parts from this cycle
+            createdCircuitSystems.Add(circuitsParent);
+
+            //Creates the prefab
+            PrefabUtility.CreatePrefab("Assets/Resources/Prefabs/CircuitSystems/" + circuitsParent.name + ".prefab", circuitsParent);
+
+            path = "Prefabs/CircuitSystems/" + circuitsParent.name;
+
+            //Adds the object to the room definition
+            roomDef = AddNewObjectDefinitionToRoom(roomDef, circuitsParent, path);
           }
-          circuitSystemObjects = temp;
-
-          //Creates an empty parent to be the prefab head
-          GameObject circuitsParent = new GameObject(roomName + "CircuitSystem-" + circuitSystemCounter++);
-          circuitsParent.transform.position = circuitSystemObjects[0].transform.position;
-
-          //Adds all objects of discovered circuit tree as childs of the circuit parent.
-          
-          foreach(GameObject circuitObjects in circuitSystemObjects)
+          else
           {
-            circuitObjects.transform.parent = circuitsParent.transform;
+            //In case there is no generator, we check if the circuits are disabled, because if they are, the object used might be just for scenery
+            bool allInactive = true;
+            foreach (Circuit c in BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform))
+            {
+              if (c.enabled)
+              {
+                allInactive = false;
+              }
+            }
+            if (allInactive)
+            {
+              roomDef = AddNewObjectDefinitionToRoom(roomDef, obj, path);
+            }
+
           }
-
-          //Marks the circuit as having been created for future exclusion of its parts from this cycle
-          createdCircuitSystems.Add(circuitsParent);
-        
-          //Creates the prefab
-          PrefabUtility.CreatePrefab("Assets/Resources/Prefabs/CircuitSystems/"+circuitsParent.name+".prefab", circuitsParent);
-
-          path = "Prefabs/CircuitSystems/" + circuitsParent.name;
-
-          //Adds the object to the room definition
-          roomDef = AddNewObjectDefinitionToRoom(roomDef, circuitsParent, path);
         }
         else
         {
-          //In case there is no generator, we check if the circuits are disabled, because if they are, the object used might be just for scenery
-          bool allInactive = true;
-          foreach(Circuit c in BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform))
+          //If the object is a gateway, we must retrieve it's connection from the gateway script
+          if (obj.tag == "Gateway")
           {
-            if(c.enabled)
-            {
-              allInactive = false;
-            }
+            string gatewayConnection = obj.GetComponent<GatewayTriggerScript>().connectsTo;
+            roomDef.AddGatewayDefinition(new RoomObjectGatewayDefinition(gatewayConnection,
+                                      path,
+                                      obj.transform.position,
+                                      obj.transform.localScale,
+                                      obj.transform.eulerAngles));
           }
-          if(allInactive)
+          else
           {
             roomDef = AddNewObjectDefinitionToRoom(roomDef, obj, path);
           }
-
         }
+
+      }
+
+      // Cleanup created circuit systems
+      foreach (GameObject obj in createdCircuitSystems)
+      {
+        foreach (GameObject children in BPUtil.GetDirectChildren(obj))
+        {
+          children.transform.parent = null;
+        }
+        GameObject.DestroyImmediate(obj);
+      }
+
+      return roomDef;
+    }
+
+    /// <summary>
+    /// Adds a new game object (building its RoomObjectDefinition to a given room) with its prefab path being "path", returns the updated room definition
+    /// </summary>
+    private RoomDefinition AddNewObjectDefinitionToRoom(RoomDefinition room, GameObject obj, string path)
+    {
+      RoomObjectDefinition def = new RoomObjectDefinition(path,
+                                      obj.transform.position,
+                                      obj.transform.localScale,
+                                      obj.transform.eulerAngles);
+
+      ///Gets all instances of IHasComplexState Scripts in the given object's Hierarchy tree and generates their complex state definitions
+      foreach (IHasComplexState hasComplexState in BPUtil.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
+      {
+        def.AddComplexState(hasComplexState.WriteComplexStateDefinition());
+      }
+      room.AddObjectDefinition(def);
+      return room;
+    }
+
+    /// <summary>
+    /// Traverses a circuit tree, registering all GameObjects part of that circuit system. Returns the list of all objects in that tree
+    /// </summary>
+    private List<GameObject> CircuitSystemNetworkBuilder(Circuit root, List<GameObject> registeredCircuits = null, Circuit rootParent = null)
+    {
+      root.PropagateToOutputs();
+
+      if (registeredCircuits == null)
+      {
+        registeredCircuits = new List<GameObject>();
+      }
+      //List<GameObject> circuitSystem = new List<GameObject>();
+      Transform currentTransform;
+
+      for (currentTransform = root.transform;
+        currentTransform.parent != null;
+        currentTransform = currentTransform.parent) { }
+
+      GameObject circuitParent = currentTransform.gameObject;
+      if (!registeredCircuits.Contains(circuitParent))
+      {
+        registeredCircuits.Add(circuitParent);
       }
       else
       {
-        //If the object is a gateway, we must retrieve it's connection from the gateway script
-        if (obj.tag == "Gateway")
-        {
-          string gatewayConnection = obj.GetComponent<GatewayTriggerScript>().connectsTo;
-          roomDef.AddGateway(new RoomObjectGatewayDefinition(gatewayConnection,
-                                    path,
-                                    obj.transform.position,
-                                    obj.transform.localScale,
-                                    obj.transform.eulerAngles));
-        }
-        else
-        {
-          roomDef = AddNewObjectDefinitionToRoom(roomDef,obj,path);
-        }
+        return registeredCircuits;
       }
 
-    }   
- 
-    // Cleanup created circuit systems
-    foreach (GameObject obj in createdCircuitSystems)
-    {
-      foreach (GameObject children in BPUtil.GetDirectChildren(obj))
+      foreach (Circuit c in root.outputs)
       {
-        children.transform.parent = null;
+        registeredCircuits = CircuitSystemNetworkBuilder(c, registeredCircuits);
       }
-      GameObject.DestroyImmediate(obj);
-    }
-
-    return roomDef;
-  }
-
-  /// <summary>
-  /// Adds a new game object (building its RoomObjectDefinition to a given room) with its prefab path being "path", returns the updated room definition
-  /// </summary>
-  private RoomDefinition AddNewObjectDefinitionToRoom(RoomDefinition room, GameObject obj, string path)
-  {
-    RoomObjectDefinition def = new RoomObjectDefinition(path,
-                                    obj.transform.position,
-                                    obj.transform.localScale,
-                                    obj.transform.eulerAngles);
-
-    ///Gets all instances of IHasComplexState Scripts in the given object's Hierarchy tree and generates their complex state definitions
-    foreach (IHasComplexState hasComplexState in BPUtil.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
-    {
-      def.AddComplexState(hasComplexState.WriteComplexState());
-    }
-    room.AddObject(def);
-    return room;
-  }
-
-  /// <summary>
-  /// Traverses a circuit tree, registering all GameObjects part of that circuit system. Returns the list of all objects in that tree
-  /// </summary>
-  private List<GameObject> CircuitSystemNetworkBuilder(Circuit root, List<GameObject> registeredCircuits = null, Circuit rootParent = null)
-  {
-    root.PropagateToOutputs();
-
-    if(registeredCircuits == null)
-    {
-      registeredCircuits = new List<GameObject>();
-    }
-    //List<GameObject> circuitSystem = new List<GameObject>();
-    Transform currentTransform;
-
-    for(currentTransform = root.transform; 
-      currentTransform.parent != null; 
-      currentTransform = currentTransform.parent){}
-
-    GameObject circuitParent = currentTransform.gameObject;
-    if (!registeredCircuits.Contains(circuitParent))
-    {
-      registeredCircuits.Add(circuitParent);
-    }
-    else
-    {
-      return registeredCircuits;
-    }
-
-    foreach(Circuit c in root.outputs)
-    {
-      registeredCircuits = CircuitSystemNetworkBuilder(c, registeredCircuits);
-    }
-    foreach (Circuit c in root.inputs)
-    {
-      registeredCircuits = CircuitSystemNetworkBuilder(c, registeredCircuits);
-    }
-
-    /*
-    foreach (Circuit c in root.inputs)
-    {
-      if (rootParent == null || !c.Equals(rootParent))
+      foreach (Circuit c in root.inputs)
       {
-        foreach (GameObject obj in CircuitSystemNetworkBuilder(c))
+        registeredCircuits = CircuitSystemNetworkBuilder(c, registeredCircuits);
+      }
+
+      /*
+      foreach (Circuit c in root.inputs)
+      {
+        if (rootParent == null || !c.Equals(rootParent))
         {
-          if (!circuitSystem.Contains(obj))
+          foreach (GameObject obj in CircuitSystemNetworkBuilder(c))
           {
-            circuitSystem.Add(obj);
+            if (!circuitSystem.Contains(obj))
+            {
+              circuitSystem.Add(obj);
+            }
           }
         }
       }
+       * */
+
+      return registeredCircuits;
     }
-     * */
 
-    return registeredCircuits;
   }
-
 }
-
 #endif

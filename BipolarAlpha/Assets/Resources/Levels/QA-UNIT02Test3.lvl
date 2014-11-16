@@ -3,7 +3,7 @@
   <roomName>QA-UNIT02Test3</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8156586</x>
         <y>-0.30102244</y>
@@ -20,16 +20,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8909073</x>
         <y>14.24384</y>
@@ -46,16 +46,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3Lights</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3Lights</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -74,7 +74,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/InvisiMagneticBlocker</prefabPathForInstancing>
       <position>
         <x>12.996686</x>
         <y>5.570263</y>
@@ -93,7 +93,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8156586</x>
         <y>-0.142694265</y>
@@ -110,16 +110,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.5879822</x>
         <y>2.473637</y>
@@ -136,16 +136,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8108788</x>
         <y>-3.2029314</y>
@@ -162,16 +162,16 @@
         <z>1.8669336E-05</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>4</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -188,16 +188,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.7489882</x>
         <y>5.73988152</y>
@@ -214,16 +214,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -240,16 +240,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8156586</x>
         <y>11.1911316</y>
@@ -266,16 +266,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/QA-UNIT02Test3/QA2T3</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -294,7 +294,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-12.6117983</x>
         <y>7.805545</y>
@@ -311,16 +311,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticVLPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticVLPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>12.7742147</x>
         <y>9.215814</y>
@@ -337,16 +337,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/Dispenser</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/Dispenser</prefabPathForInstancing>
       <position>
         <x>-10.280777</x>
         <y>-2.1020956</y>
@@ -363,22 +363,22 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>DispenserGenerator/RotatingMagnetAxis/RotatingMagnetSlab1/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>DispenserGenerator/RotatingMagnetAxis/RotatingMagnetSlab/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -395,16 +395,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.75799</x>
         <y>8.176642</y>
@@ -421,16 +421,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.7940435</x>
         <y>-3.27965021</y>
@@ -447,16 +447,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticVLPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticVLPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>12.4850941</x>
         <y>5.463772</y>
@@ -473,16 +473,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/QA-UNIT02Test3CircuitSystem-0</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/CircuitSystems/QA-UNIT02Test3CircuitSystem-0</prefabPathForInstancing>
       <position>
         <x>12.6665983</x>
         <y>12.798501</y>
@@ -499,40 +499,40 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>StaticHighRevMagnet/MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>4</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator2/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -549,16 +549,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/QA-UNIT02Test3/QAT3-Hoop</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/QA-UNIT02Test3/QAT3-Hoop</prefabPathForInstancing>
       <position>
         <x>-0.2008636</x>
         <y>6.4895153</y>
@@ -577,7 +577,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8156586</x>
         <y>11.1911316</y>
@@ -594,16 +594,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.5179977</x>
         <y>-3.242014</y>
@@ -620,16 +620,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -646,16 +646,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8156586</x>
         <y>11.1911316</y>
@@ -672,16 +672,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.75799</x>
         <y>8.176642</y>
@@ -698,16 +698,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>12.481514</x>
         <y>13.70232</y>
@@ -724,16 +724,16 @@
         <z>180.000031</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.2650414</x>
         <y>5.17711449</y>
@@ -750,16 +750,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -776,16 +776,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-12.6117983</x>
         <y>2.67296457</y>
@@ -802,16 +802,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.75799</x>
         <y>-3.27965021</y>
@@ -828,16 +828,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-12.6117983</x>
         <y>-3.16525126</y>
@@ -854,16 +854,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/AbilityObjects/SpikePickUp</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/AbilityObjects/SpikePickUp</prefabPathForInstancing>
       <position>
         <x>0.110773504</x>
         <y>-2.33828545</y>
@@ -882,7 +882,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-12.8077326</x>
         <y>-3.27965021</y>
@@ -899,16 +899,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>13.01744</x>
         <y>14.2328405</y>
@@ -925,16 +925,16 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>0</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/InvisiMagneticBlocker</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/InvisiMagneticBlocker</prefabPathForInstancing>
       <position>
         <x>-12.6973133</x>
         <y>7.0118103</y>
@@ -953,7 +953,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticLowPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-12.6117983</x>
         <y>7.95831156</y>
@@ -970,18 +970,18 @@
         <z>180</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>-0.124660611</x>
         <y>-3.113324</y>
@@ -998,10 +998,10 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>QA-UNIT02Test2</connectedToRoom>
+      <connectsToRoom>QA-UNIT02Test2</connectsToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>0.3402468</x>
         <y>-3.113324</y>
@@ -1018,10 +1018,8 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>RailgunRoom</connectedToRoom>
+      <connectsToRoom>RailgunRoom</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>

@@ -3,7 +3,7 @@
   <roomName>SPAAAACE</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/Sunlight</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Lightning/Sunlight</prefabPathForInstancing>
       <position>
         <x>104.7722</x>
         <y>66.74334</y>
@@ -22,7 +22,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/SPAAAACE/GlassPanels</prefabPathForInstancing>
       <position>
         <x>-2.135207</x>
         <y>0.626198053</y>
@@ -41,7 +41,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/SPAAAACE/GlassPanels</prefabPathForInstancing>
       <position>
         <x>13.9796886</x>
         <y>-30.9092522</y>
@@ -60,7 +60,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/WhiteCeilingLight</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Lightning/WhiteCeilingLight</prefabPathForInstancing>
       <position>
         <x>-0.08650887</x>
         <y>4.70632648</y>
@@ -79,7 +79,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/WhiteCeilingLight</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Lightning/WhiteCeilingLight</prefabPathForInstancing>
       <position>
         <x>-0.08650887</x>
         <y>4.70632648</y>
@@ -98,7 +98,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/SPAAAACE/GlassPanels</prefabPathForInstancing>
       <position>
         <x>-40.8110847</x>
         <y>0.626198053</y>
@@ -117,7 +117,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/SPAAAACE</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/SPAAAACE/SPAAAACE</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -136,7 +136,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/SPAAAACE/GlassPanels</prefabPathForInstancing>
       <position>
         <x>36.2677765</x>
         <y>0.626198053</y>
@@ -155,7 +155,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Lightning/WhiteCeilingLight</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Lightning/WhiteCeilingLight</prefabPathForInstancing>
       <position>
         <x>-0.08650887</x>
         <y>4.70632648</y>
@@ -174,7 +174,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/SPAAAACE/GlassPanels</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/SPAAAACE/GlassPanels</prefabPathForInstancing>
       <position>
         <x>-19.0983829</x>
         <y>-30.9092522</y>
@@ -195,7 +195,7 @@
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>-3.281579</x>
         <y>-0.6473074</y>
@@ -212,10 +212,10 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
+      <connectsToRoom>RobotApprovalConveyor</connectsToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>-0.465837479</x>
         <y>-2.811745</y>
@@ -232,10 +232,8 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>QA-UNIT02Test1</connectedToRoom>
+      <connectsToRoom>QA-UNIT02Test1</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>

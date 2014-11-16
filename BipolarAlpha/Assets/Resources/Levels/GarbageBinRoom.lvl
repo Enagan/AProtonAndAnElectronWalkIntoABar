@@ -3,7 +3,7 @@
   <roomName>GarbageBinRoom</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/BlueCompactor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GarbageBinRoom/BlueCompactor</prefabPathForInstancing>
       <position>
         <x>3.395187</x>
         <y>-1.5029912</y>
@@ -22,7 +22,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/GarbageBinRoom</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GarbageBinRoom/GarbageBinRoom</prefabPathForInstancing>
       <position>
         <x>0</x>
         <y>0</y>
@@ -41,7 +41,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/GarbageBinRoom/RedCompactor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/GarbageBinRoom/RedCompactor</prefabPathForInstancing>
       <position>
         <x>-3.10903215</x>
         <y>-1.50422716</y>
@@ -60,7 +60,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/Lights/GarbageBinRoomLights</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/Lights/GarbageBinRoomLights</prefabPathForInstancing>
       <position>
         <x>-11.1093636</x>
         <y>3.39651442</y>
@@ -79,7 +79,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Cutscenes/AnimationTriggerHandler</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Cutscenes/AnimationTriggerHandler</prefabPathForInstancing>
       <position>
         <x>-1.05834246</x>
         <y>6.055534</y>
@@ -96,15 +96,15 @@
         <z>-8.12418743E-11</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="AnimationLocalHandlerComplexState">
+        <ComplexStateDefinition xsi:type="AnimationLocalHandlerComplexState">
           <objectNameInHierarchy>AnimationTriggerHandler</objectNameInHierarchy>
           <cutsceneName>GarbageBinOpenDoor</cutsceneName>
           <collisionRadius>0.5</collisionRadius>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticHighPositiveMagnet</prefabPathForInstancing>
       <position>
         <x>-0.02503252</x>
         <y>9.066498</y>
@@ -121,16 +121,16 @@
         <z>180.000015</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>7.10060072</x>
         <y>7.490577</y>
@@ -147,7 +147,7 @@
         <z>-8.12418743E-11</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames>
             <string>OpenBarredDoor</string>
@@ -159,13 +159,13 @@
             <string />
           </optionalChilds>
           <cutsceneName>GarbageBinOpenDoor</cutsceneName>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>7.326347</x>
         <y>5.840507</y>
@@ -182,10 +182,8 @@
         <z>1.3961612E-07</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>WasteFacilityHub</connectedToRoom>
+      <connectsToRoom>WasteFacilityHub</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>

@@ -3,7 +3,7 @@
   <roomName>DisposalElevator</roomName>
   <objectsInRoom>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-8.789794</x>
         <y>24.59161</y>
@@ -20,17 +20,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-13.9815235</x>
         <y>0.6710892</y>
@@ -47,16 +47,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/CircuitSystems/DisposalElevatorCircuitSystem-0</prefabPathForInstancing>
       <position>
         <x>-7.77927637</x>
         <y>47.794117</y>
@@ -73,22 +73,22 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabLeft/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        </ComplexStateDefinition>
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>Generator/RotatingMagnetAxis/RotatingMagnetSlabRight/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>1</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-8.789794</x>
         <y>37.772995</y>
@@ -105,17 +105,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-16.8813534</x>
         <y>14.5125923</y>
@@ -132,16 +132,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-13.9003086</x>
         <y>28.3362579</y>
@@ -158,16 +158,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>3</magnetForce>
           <magnetCharge>1</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/DisposalElevator/WasteDisposalAccessElevatorRoom</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/DisposalElevator/WasteDisposalAccessElevatorRoom</prefabPathForInstancing>
       <position>
         <x>-11.40956</x>
         <y>21.4054089</y>
@@ -186,7 +186,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-8.789794</x>
         <y>31.1896725</y>
@@ -203,17 +203,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-8.789794</x>
         <y>11.4027557</y>
@@ -230,17 +230,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-8.789794</x>
         <y>4.74920273</y>
@@ -257,17 +257,17 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Activators/Magnets/StaticMediumNegativeMagnet</prefabPathForInstancing>
       <position>
         <x>-8.753463</x>
         <y>-8.5574</y>
@@ -284,16 +284,16 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="MagneticForceComplexState">
+        <ComplexStateDefinition xsi:type="MagneticForceComplexState">
           <objectNameInHierarchy>MagnetPart/Magnetism</objectNameInHierarchy>
           <isActive>true</isActive>
           <magnetForce>2</magnetForce>
           <magnetCharge>0</magnetCharge>
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/LevelScenery/DisposalElevator/Lights</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/LevelScenery/DisposalElevator/Lights</prefabPathForInstancing>
       <position>
         <x>-11.3899813</x>
         <y>42.8799057</y>
@@ -312,7 +312,7 @@
       <complexStates />
     </RoomObjectDefinition>
     <RoomObjectDefinition>
-      <objectPrefabPath>Prefabs/StaticScenery/BarredDoor</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/StaticScenery/BarredDoor</prefabPathForInstancing>
       <position>
         <x>-8.789794</x>
         <y>18.0275822</y>
@@ -329,19 +329,19 @@
         <z>0</z>
       </eulerAngles>
       <complexStates>
-        <ComplexState xsi:type="CutsceneElementComplexState">
+        <ComplexStateDefinition xsi:type="CutsceneElementComplexState">
           <objectNameInHierarchy>BarredDoor</objectNameInHierarchy>
           <animationNames />
           <delays />
           <optionalChilds />
           <cutsceneName />
-        </ComplexState>
+        </ComplexStateDefinition>
       </complexStates>
     </RoomObjectDefinition>
   </objectsInRoom>
   <gateways>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>9.284439</x>
         <y>42.98297</y>
@@ -358,10 +358,10 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>RobotApprovalConveyor</connectedToRoom>
+      <connectsToRoom>RobotApprovalConveyor</connectsToRoom>
     </RoomObjectGatewayDefinition>
     <RoomObjectGatewayDefinition>
-      <objectPrefabPath>Prefabs/Gateways/InvisiGateway</objectPrefabPath>
+      <prefabPathForInstancing>Prefabs/Gateways/InvisiGateway</prefabPathForInstancing>
       <position>
         <x>-0.6066284</x>
         <y>-3.24712</y>
@@ -378,10 +378,8 @@
         <z>0</z>
       </eulerAngles>
       <complexStates />
-      <connectedToRoom>WasteFacilityHub</connectedToRoom>
+      <connectsToRoom>WasteFacilityHub</connectsToRoom>
     </RoomObjectGatewayDefinition>
   </gateways>
   <maxDepth>0</maxDepth>
-  <constructionFinished>false</constructionFinished>
-  <inConstruction>false</inConstruction>
 </RoomDefinition>
