@@ -8,7 +8,7 @@ using System.Collections.Generic;
 /// The Scene Manager class is responsible for dynamically creating the game world, as the player traverses it
 /// By using it's assigned RoomFactory, the scene manager is capable of instancing new rooms, without a loading screen, giving the illusion of an open world.
 /// </summary>
-public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoomChangeListner
+public class SceneManager : MonoBehaviour, IPlayerRoomChangeListner, IObjectRoomChangeListner
 {
   private RoomDefinition _activeRoom;
   private List<RoomDefinition> _currentlyLoadedRooms;
@@ -22,17 +22,17 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
 
   private List<RoomDefinition> _roomsInQueueToBeDeleted;
 
-	private void Start() 
+  private void Start()
   {
     ServiceLocator.ProvideSceneMananger(this);
     ServiceLocator.GetEventHandlerSystem().RegisterPlayerRoomChangeListner(this);
     ServiceLocator.GetEventHandlerSystem().RegisterObjectRoomChangeListner(this);
 
-    #if UNITY_PRO_LICENSE
-      _roomFactory = new RoomFactoryAsync();
-    #else
-      _roomFactory = new RoomFactory();
-    #endif
+    //#if UNITY_PRO_LICENSE
+    //  _roomFactory = new RoomFactoryAsync();
+    //#else
+    _roomFactory = new RoomFactory();
+    //#endif
 
     _currentlyLoadedRooms = new List<RoomDefinition>();
     _allRooms = new Dictionary<string, RoomDefinition>();
@@ -42,7 +42,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     LoadNewWorldState(initState);
 
     ServiceLocator.GetAudioSystem().PlayMusic("kahvi315z1_lackluster-sina");
-	}
+  }
 
   private void Update()
   {
@@ -85,7 +85,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     {
       setActiveRoom(initState.startingRoom);
     }
-    catch(KeyNotFoundException exception)
+    catch (KeyNotFoundException exception)
     {
       SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
     }
@@ -129,7 +129,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
       {
         setActiveRoom(newRoomName);
       }
-      catch(KeyNotFoundException exception)
+      catch (KeyNotFoundException exception)
       {
         SMConsole.Log(tag: "[SCENE MANAGER]", type: SMLogType.ERROR, log: exception.Message);
         throw exception;
@@ -154,10 +154,10 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// </summary>
   private void setActiveRoom(string newActiveRoomName)
   {
-    SMConsole.Log(tag:"[SCENE MANAGER]", log:"Setting room " + newActiveRoomName + " as active");
+    SMConsole.Log(tag: "[SCENE MANAGER]", log: "Setting room " + newActiveRoomName + " as active");
 
     RoomDefinition newActiveRoomDefinition;
-    if (!_allRooms.TryGetValue (newActiveRoomName, out newActiveRoomDefinition)) 
+    if (!_allRooms.TryGetValue(newActiveRoomName, out newActiveRoomDefinition))
     {
       throw new KeyNotFoundException("KeyNotFoundException: room " + newActiveRoomName + " does not exist in loaded world state.");
     }
@@ -183,7 +183,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   {
     List<RoomDefinition> culledDeletionList = shouldIgnore != null ? roomsToDelete.FindAll(room => !shouldIgnore.Contains(room)) : roomsToDelete;
 
-    foreach(RoomDefinition roomToDelete in culledDeletionList)
+    foreach (RoomDefinition roomToDelete in culledDeletionList)
     {
       //Run updateRoomDefinition to update the definition according to the current world state of the room'
       RoomDefinition updatedDefinition = _roomFactory.UpdateRoomDefinition(roomToDelete);
@@ -202,11 +202,11 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
   /// Traverses the room tree instancing of all rooms until it hits the depth limit.
   /// The traversal is done breadth first, as we always want to instance the closest rooms to the player first, to avoid empty space
   /// </summary>
-  private void InstanceRoomsFromRoot(RoomDefinition rootRoom,  RoomDefinition parentRoom = null, int currentDepth = 0)
+  private void InstanceRoomsFromRoot(RoomDefinition rootRoom, RoomDefinition parentRoom = null, int currentDepth = 0)
   {
     if (!_currentlyLoadedRooms.Contains(rootRoom))
     {
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth*2) + "Creating room " + rootRoom.roomName + "...");
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 2) + "Creating room " + rootRoom.roomName + "...");
       _roomFactory.CreateRoomInstance(rootRoom, parentRoom);
       _currentlyLoadedRooms.Add(rootRoom);
     }
@@ -214,17 +214,17 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
     //If we haven't reached the current depth, create all child rooms to current root
     if (currentDepth < _roomInstancingDepth)
     {
-      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth*4) + "This room " + rootRoom.roomName + " has  " + rootRoom.gateways.Count + " connections.");
+      SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', currentDepth * 4) + "This room " + rootRoom.roomName + " has  " + rootRoom.gateways.Count + " connections.");
 
       List<RoomDefinition> tempNewlyCreatedChildren = new List<RoomDefinition>();
       foreach (RoomObjectGatewayDefinition gateToChild in rootRoom.gateways)
       {
         if (_allRooms.ContainsKey(gateToChild.connectedToRoom))
         {
-          if(!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectedToRoom]))
+          if (!_currentlyLoadedRooms.Contains(_allRooms[gateToChild.connectedToRoom]))
           {
             RoomDefinition childRoom = _allRooms[gateToChild.connectedToRoom];
-            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ',(currentDepth+1)*4) + "Creating room " + childRoom.roomName + "...");
+            SMConsole.Log(tag: "[SCENE MANAGER]", log: new string(' ', (currentDepth + 1) * 4) + "Creating room " + childRoom.roomName + "...");
 
             _roomFactory.CreateRoomInstance(childRoom, rootRoom);
             _currentlyLoadedRooms.Add(childRoom);
@@ -236,7 +236,7 @@ public class SceneManager : MonoBehaviour , IPlayerRoomChangeListner, IObjectRoo
           }
         }
         else
-          throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth+1) + ", Room " + gateToChild.connectedToRoom + " does not exist in loaded world state.");
+          throw new KeyNotFoundException("KeyNotFoundException: Room Instancing at Depth: " + (currentDepth + 1) + ", Room " + gateToChild.connectedToRoom + " does not exist in loaded world state.");
       }
 
       foreach (RoomDefinition newlyCreated in tempNewlyCreatedChildren)
