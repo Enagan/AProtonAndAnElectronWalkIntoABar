@@ -19,6 +19,9 @@ namespace SMSceneManagerSystem
     private Vector3 _scale;
     private Vector3 _eulerAngles;
 
+    // If we're sure the object won't change at all during gameplay
+    private bool _isStatic;
+
     private List<ComplexStateDefinition> _complexStates = new List<ComplexStateDefinition>();
 
     public string prefabPathForInstancing
@@ -69,6 +72,18 @@ namespace SMSceneManagerSystem
       }
     }
 
+    public bool isStatic
+    {
+      get
+      {
+        return _isStatic;
+      }
+      set
+      {
+        _isStatic = value;
+      }
+    }
+
     public List<ComplexStateDefinition> complexStates
     {
       get
@@ -83,12 +98,13 @@ namespace SMSceneManagerSystem
 
     public RoomObjectDefinition() { }
 
-    public RoomObjectDefinition(string prefabPath, Vector3 position, Vector3 scale, Vector3 eulerAngles)
+    public RoomObjectDefinition(string prefabPath, Vector3 position, Vector3 scale, Vector3 eulerAngles, bool isStatic = false)
     {
       _prefabPathForInstancing = prefabPath;
       _position = position;
       _scale = scale;
       _eulerAngles = eulerAngles;
+      _isStatic = isStatic;
     }
 
     /// <summary>

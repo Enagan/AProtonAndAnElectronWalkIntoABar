@@ -82,10 +82,10 @@ namespace SMSceneManagerSystem
         path = path.Replace("Assets/Resources/", "");
 
         //Checks if the current object has any circuits in its hierarchy
-        if (BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform).Count > 0)
+        if (SMUtils.GetComponentsInHierarchy<Circuit>(obj.transform).Count > 0)
         {
           //Check if any of those is a generator. In case it is, we need to generate a circuit system prefab to keep the circuit connections
-          List<CircuitGenerator> checkForGenerators = BPUtil.GetComponentsInHierarchy<CircuitGenerator>(obj.transform);
+          List<CircuitGenerator> checkForGenerators = SMUtils.GetComponentsInHierarchy<CircuitGenerator>(obj.transform);
           if (checkForGenerators.Count > 0)
           {
             //List of objects which are part of the current circuit system tree
@@ -131,7 +131,7 @@ namespace SMSceneManagerSystem
           {
             //In case there is no generator, we check if the circuits are disabled, because if they are, the object used might be just for scenery
             bool allInactive = true;
-            foreach (Circuit c in BPUtil.GetComponentsInHierarchy<Circuit>(obj.transform))
+            foreach (Circuit c in SMUtils.GetComponentsInHierarchy<Circuit>(obj.transform))
             {
               if (c.enabled)
               {
@@ -168,7 +168,7 @@ namespace SMSceneManagerSystem
       // Cleanup created circuit systems
       foreach (GameObject obj in createdCircuitSystems)
       {
-        foreach (GameObject children in BPUtil.GetDirectChildren(obj))
+        foreach (GameObject children in SMUtils.GetDirectChildren(obj))
         {
           children.transform.parent = null;
         }
@@ -189,7 +189,7 @@ namespace SMSceneManagerSystem
                                       obj.transform.eulerAngles);
 
       ///Gets all instances of IHasComplexState Scripts in the given object's Hierarchy tree and generates their complex state definitions
-      foreach (IHasComplexState hasComplexState in BPUtil.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
+      foreach (IHasComplexState hasComplexState in SMUtils.GetComponentsInHierarchy<IHasComplexState>(obj.transform))
       {
         def.AddComplexState(hasComplexState.WriteComplexStateDefinition());
       }

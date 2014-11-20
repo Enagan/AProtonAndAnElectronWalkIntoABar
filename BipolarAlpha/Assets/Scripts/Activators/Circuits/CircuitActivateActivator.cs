@@ -30,7 +30,7 @@ public class CircuitActivateActivator : Circuit
     _state = true;
 
     // Fetches all Activators in the hierarchy of this object
-    List<Activator> actvs = BPUtil.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
+    List<Activator> actvs = SMUtils.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
 
     foreach (Activator act in actvs) {
 
@@ -57,7 +57,7 @@ public class CircuitActivateActivator : Circuit
     _state = false;
 
     // Fetches all Activators in the hierarchy of this object
-    List<Activator> actvs = BPUtil.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
+    List<Activator> actvs = SMUtils.GetComponentsInHierarchy<Activator>(this.gameObject.transform);
 
     foreach (Activator act in actvs)
     {

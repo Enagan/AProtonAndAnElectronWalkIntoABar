@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BPUtil
+public class SMUtils
 {
   /// <summary>
   /// Returns all Components of type T in the entire hierarchy going down from root

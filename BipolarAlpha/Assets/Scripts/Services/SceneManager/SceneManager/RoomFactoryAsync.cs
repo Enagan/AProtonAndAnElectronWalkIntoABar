@@ -58,7 +58,7 @@ public class RoomFactoryAsync : RoomFactory
 
       _gatewayRegistry.Add(room, new Dictionary<string, GameObject>());
 
-      foreach (GatewayTriggerScript gateway in BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(roomParentObject.transform))
+      foreach (GatewayTriggerScript gateway in SMUtils.GetComponentsInHierarchy<GatewayTriggerScript>(roomParentObject.transform))
       {
         _gatewayRegistry[room].Add(gateway.connectsTo, gateway.gameObject);
       }
@@ -120,7 +120,7 @@ public class RoomFactoryAsync : RoomFactory
 
       _gatewayRegistry.Add(newRoom, new Dictionary<string, GameObject>());
 
-      foreach (GatewayTriggerScript gateway in BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(roomParentObject.transform))
+      foreach (GatewayTriggerScript gateway in SMUtils.GetComponentsInHierarchy<GatewayTriggerScript>(roomParentObject.transform))
       {
         _gatewayRegistry[newRoom].Add(gateway.connectsTo, gateway.gameObject);
       }
@@ -146,7 +146,7 @@ public class RoomFactoryAsync : RoomFactory
       Vector3 newGateWorldRotation = _gatewayRegistry[newRoom][from.roomName].transform.eulerAngles;
 
       //Positions and orients the parent object to match and connect with the from room gateway
-      roomParentObject.transform.eulerAngles = BPUtil.OppositeVector(fromGateWorldRotation) - newGateWorldRotation;
+      roomParentObject.transform.eulerAngles = SMUtils.OppositeVector(fromGateWorldRotation) - newGateWorldRotation;
 
       Vector3 newGateWorldPosition = _gatewayRegistry[newRoom][from.roomName].transform.position;
 

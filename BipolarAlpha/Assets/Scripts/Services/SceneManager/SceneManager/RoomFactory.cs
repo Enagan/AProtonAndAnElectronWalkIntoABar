@@ -84,6 +84,10 @@ namespace SMSceneManagerSystem
         // Update all Objects & Gateways
         foreach (KeyValuePair<RoomObjectDefinition, GameObject> objectInRoom in _instancedObjects.GetAllGameObjectsFromRoom(roomDef))
         {
+          //Object is static. Never changes. Skip updating
+          if (objectInRoom.Key.isStatic)
+            continue;
+
           RoomObjectDefinition objectInRoomDef = objectInRoom.Key;
           GameObject objectInRoomGameObject = objectInRoom.Value;
 
@@ -150,6 +154,11 @@ namespace SMSceneManagerSystem
       if (objectThatChangedRooms == null)
       {
         SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating objects parent room. Object is null");
+        return;
+      }
+      if (_instancedObjects.GetObjectDefinitionInRoomFromGameObject(prevRoom, objectThatChangedRooms).isStatic)
+      {
+        SMConsole.Log(tag: "[ROOM FACTORY]", type: SMLogType.ERROR, log: "Error: Updating objects parent room. Static Object shouldn't be moving. Much less changing rooms");
         return;
       }
 
@@ -269,7 +278,7 @@ namespace SMSceneManagerSystem
 
       //Positions and orients the parent object to match and connect with the from room gateway
       roomParentObject.transform.position = fromGateWorldPosition;
-      roomParentObject.transform.eulerAngles = BPUtil.OppositeVector(fromGateWorldRotation);
+      roomParentObject.transform.eulerAngles = SMUtils.OppositeVector(fromGateWorldRotation);
 
       roomParentObject.SetActiveRecursively(true);
 
@@ -330,7 +339,7 @@ namespace SMSceneManagerSystem
       GameObject instancedObject = ServiceLocator.GetResourceSystem().InstanceOf(objectDefinition.prefabPathForInstancing, active: false);
 
       // Base properties
-      instancedObject.transform.localPosition = BPUtil.WorldPositionInRelationTo(objectDefinition.position, relativeOrigin);
+      instancedObject.transform.localPosition = SMUtils.WorldPositionInRelationTo(objectDefinition.position, relativeOrigin);
       instancedObject.transform.localScale = objectDefinition.scale;
       instancedObject.transform.localEulerAngles = objectDefinition.eulerAngles;
 

@@ -14,7 +14,7 @@ public class ActivatorController : JackedInRemoteController
     foreach (GameObject obj in _activatableObjects)
     {
       // Gets all existing Activators in the game object hierarchy and adds them to the list
-      temp = BPUtil.GetComponentsInHierarchy<Activator>(obj.transform);
+      temp = SMUtils.GetComponentsInHierarchy<Activator>(obj.transform);
       foreach(Activator t in temp)
       {
         _activatables.Add(t);

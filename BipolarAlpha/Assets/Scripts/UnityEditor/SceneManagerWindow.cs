@@ -315,7 +315,7 @@ public class SceneManagerWindow : EditorWindow
         GameObject castObject = ((GameObject)thisObject);
         if (castObject.activeInHierarchy &&
           (castObject.transform.parent != null && castObject.transform.parent.name.Equals("ParentObject" + _currentlyLoadedRoom.Substring(_currentlyLoadedRoom.IndexOf(":") + 2))) &&
-          BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
+          SMUtils.GetComponentsInHierarchy<GatewayTriggerScript>(castObject.transform).Count > 0)
         {
           Gateways.Add(castObject);
         }
@@ -328,7 +328,7 @@ public class SceneManagerWindow : EditorWindow
       {
         if (gate != null)
         {
-          GatewayTriggerScript gateTrigger = BPUtil.GetComponentsInHierarchy<GatewayTriggerScript>(gate.transform)[0];
+          GatewayTriggerScript gateTrigger = SMUtils.GetComponentsInHierarchy<GatewayTriggerScript>(gate.transform)[0];
           GUILayout.BeginHorizontal();
 
           GUILayout.Label(" - " + gate.name);

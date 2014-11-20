@@ -9,6 +9,7 @@
     <string>Assets/Resources/Levels/RailgunRoom.lvl</string>
     <string>Assets/Resources/Levels/RobotApprovalConveyor.lvl</string>
     <string>Assets/Resources/Levels/SPAAAACE.lvl</string>
+    <string>Assets/Resources/Levels/WasteFacilityHub.lvl</string>
   </roomPaths>
   <activeRoom>GarbageBinRoom</activeRoom>
   <playerPosition>
