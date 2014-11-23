@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿//---------------------------------------------
+// Squared Muffin
+// Written by: Hugo Gonçalves
+//---------------------------------------------
+
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using SMSceneManagerSystem;

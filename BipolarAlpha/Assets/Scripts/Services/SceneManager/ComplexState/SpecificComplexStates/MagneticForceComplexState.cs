@@ -1,19 +1,23 @@
-﻿// By: Pedro Engana
+﻿//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
 using UnityEngine;
 using System.Collections;
 using SMSceneManagerSystem;
 
 /// <summary>
-/// Complex State of the MagneticForce Class
+/// Complex State for the MagneticForce Class, which represents the magnetic force of a magnet
 /// </summary>
 public class MagneticForceComplexState : ComplexStateDefinition 
 {
   private bool _isActivated;
 
-  /// 0, 1 and 2, representing the cooresponding Enum position
+  /// 0, 1 and 2, representing the cooresponding Enum position in the magnetic force class
   private int _magnetForce;
 
-  /// 0 and 1 representing the cooresponding Enum position
+  /// 0 and 1 representing the cooresponding Enum position in the magnetic force class
   private int _magnetCharge;
 
 

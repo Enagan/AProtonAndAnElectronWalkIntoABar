@@ -1,4 +1,8 @@
-﻿// by Ivo Capelo
+﻿//---------------------------------------------
+// Squared Muffin
+// Written by: Ivo Capelo
+//---------------------------------------------
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

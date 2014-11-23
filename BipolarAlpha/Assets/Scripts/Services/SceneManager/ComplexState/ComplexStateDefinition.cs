@@ -1,18 +1,25 @@
-﻿using UnityEngine;
+﻿//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 
 namespace SMSceneManagerSystem
 {
   /// <summary>
-  /// A ComplexState is a collection of class specific variables that must be saved for the game to correctly behave when saving and loading world states.
-  /// Subclasses should be created as needeed to represent different sets of variables to save
+  /// A ComplexStateDefinition is a collection of class specific variables that must be saved in order for their game objects to be correctly instanced.
+  /// This is the abstract superclass for all Complex State definitions, subclasses should be created as needeed to represent different sets of variables to save.
+  /// All subclasses must use base, serializable variables, so complex data sets must be translated into simpler constructs, or into several different complex states.
   /// </summary>
   public abstract class ComplexStateDefinition
   {
     private string _objectNameInHierarchy = "";
 
     /// <summary>
-    /// Scene Graph Hierarchy path of the object this complex state pertains too
+    /// Scene Graph Hierarchy path of the object this complex state pertains too.
+    /// The complex state might not be at the parent object of a given prefab, sometimes it's deep within it's hierarchy.
     /// WARNING!!! This property is public for seralization sake only. Modifying it otherwise will most likely break things unexpectedly
     /// </summary>
     public string objectNameInHierarchy

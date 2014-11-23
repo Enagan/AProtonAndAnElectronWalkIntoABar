@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,7 +12,7 @@ namespace SMSceneManagerSystem
 {
   /// <summary>
   /// A world state definition holds the entire information needed to dynamically build the world
-  /// We have a list of Rooms definitions which define all the different areas of the world, as well as the starting room, refrencing the origin room
+  /// We have a list of Rooms definitions which define all the different areas of the world, as well as the starting room, referencing the origin room of this world.
   /// </summary>
   public class WorldStateDefinition
   {

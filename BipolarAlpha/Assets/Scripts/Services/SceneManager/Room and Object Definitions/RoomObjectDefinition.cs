@@ -1,4 +1,8 @@
-//Made By: Pedro Engana
+//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

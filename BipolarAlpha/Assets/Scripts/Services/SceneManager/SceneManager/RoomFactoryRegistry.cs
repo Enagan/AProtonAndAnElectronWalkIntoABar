@@ -1,4 +1,8 @@
-//Made by: Pedro Engana
+//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,14 +10,14 @@ using System.Collections.Generic;
 namespace SMSceneManagerSystem
 {
   /// <summary>
-  /// RoomFactoryInstancedObjectsRegistry is used by the RoomFactory to register currently instanced rooms, and their objects.
+  /// RoomFactoryRegistry is used by the RoomFactory to register currently instanced rooms, and their objects.
   /// It also keeps a connection between the instanced objects and their originating definitions
   /// This class serves as a container class for the complex dictionary seen as it's variable. It allows for easy manipulation of it.
   /// </summary>
   public class RoomFactoryRegistry
   {
     // Complex data type, should be seen as:
-    // Key: RoomDef -> Value: { RoomParentObject, { Key:ObjectDef, Value:ObjectInstance } }
+    // { Key:RoomDefinition -> Value:{ RoomParentObject, { Key:ObjectDefinition, Value:ObjectInstance } } }
     private Dictionary<RoomDefinition, KeyValuePair<GameObject, Dictionary<RoomObjectDefinition, GameObject>>> _instancedRegistry;
 
     public RoomFactoryRegistry()

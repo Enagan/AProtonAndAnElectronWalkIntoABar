@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿//---------------------------------------------
+// Squared Muffin
+// Written by: Pedro Engana
+//---------------------------------------------
+
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

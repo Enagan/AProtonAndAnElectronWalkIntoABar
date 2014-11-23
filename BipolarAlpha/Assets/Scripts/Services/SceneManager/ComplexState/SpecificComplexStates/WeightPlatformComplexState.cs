@@ -1,4 +1,8 @@
-﻿// By: Pedro Engana
+﻿//---------------------------------------------
+// Squared Muffin
+// Written by: Ivo Capelo
+//---------------------------------------------
+
 using UnityEngine;
 using System.Collections;
 using SMSceneManagerSystem;

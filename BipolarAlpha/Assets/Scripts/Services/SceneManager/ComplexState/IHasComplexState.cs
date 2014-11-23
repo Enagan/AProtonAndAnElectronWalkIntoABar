@@ -1,4 +1,8 @@
-﻿// By: Pedro Engana
+﻿//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
 
 using UnityEngine;
 using System.Collections;
@@ -6,7 +10,7 @@ using System.Collections;
 namespace SMSceneManagerSystem
 {
   /// <summary>
-  /// Interface that declares that a specific class needs to be able to save a complex state definition representing its variables
+  /// Interface that declares that a specific class needs to be able to save a complex state definition representing its specific variables
   /// </summary>
   public interface IHasComplexState
   {

@@ -1,4 +1,8 @@
-//Made By: Pedro Engana
+//---------------------------------------------
+// Bipolar
+// Written by: Pedro Engana
+//---------------------------------------------
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +11,7 @@ namespace SMSceneManagerSystem
 {
   /// <summary>
   /// Room Factory is a helper class for the Scene Mananger, it handles the low level details of instancing new rooms and correctly placing them in relation to one another
-  /// It uses the RoomFactoryInstancedObjectsRegistry to keep track of all instanced rooms and their definitions
+  /// It uses the RoomFactoryRegistry to keep track of all instanced rooms and their definitions
   /// </summary>
   public class RoomFactory
   {
@@ -26,7 +30,8 @@ namespace SMSceneManagerSystem
     #region [Public Methods] Room Instancing, Destruction and Definition Update
     /// <summary>
     /// Instances a new room. In case the room is already instanced, the function does nothing.
-    /// If a 'from' room is provided, the new room will be placed connected to the 'from' room at their shared gateway. In case a gateway doesn't exist between the rooms, the function does nothing.
+    /// If a 'from' room is provided, the new room will be connected to the 'from' room at their shared gateway. 
+    /// In case a gateway doesn't exist between the rooms, the function does nothing.
     /// </summary>
     public virtual void CreateRoomInstance(RoomDefinition newRoom, RoomDefinition fromRoom = null)
     {
@@ -67,7 +72,7 @@ namespace SMSceneManagerSystem
     }
 
     /// <summary>
-    /// Updates the definition of a specific room, applying the current state of all objects to their definition instance
+    /// Updates the definition of a specific room, applying the current state of all objects to their definitions
     /// </summary>
     public virtual RoomDefinition UpdateRoomDefinition(RoomDefinition roomDef)
     {
@@ -100,6 +105,7 @@ namespace SMSceneManagerSystem
           // Objects sometimes have other parameters we need to save, so for that we use complex states.
           // We find each sub-object that declared a complex state, and we ask them to update those values in the definition, according to their current simulation state.
           List<ComplexStateDefinition> updatedComplexStates = new List<ComplexStateDefinition>();
+
           foreach (ComplexStateDefinition complexStateInObject in objectInRoomDef.complexStates)
           {
             Transform childObjectWithComplexState = objectInRoomGameObject.transform.Find(complexStateInObject.objectNameInHierarchy);
@@ -268,7 +274,7 @@ namespace SMSceneManagerSystem
 
         _instancedObjects.RegisterObjectInRoom(newRoomDef, objectDefinition, instancedObject);
 
-        //We yield from object creation to allow other co-routines to run, this allows rooms with a smaller bject count to end up instanced first
+        //We yield from object creation to allow other co-routines to run, this allows rooms with a smaller object count to end up instanced first
         yield return new WaitForSeconds(0.05f);
       }
 
